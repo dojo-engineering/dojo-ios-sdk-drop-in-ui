@@ -30,10 +30,12 @@ TODO: Add long description of the pod here.
 
   s.ios.deployment_target = '11.0'
 
-  s.source_files = 'Classes/**/*'
-  
+  s.source_files = 'Classes/**/*.{h,m,swift}'
+
+  s.resources = 'Classes/Screens/**/*.{xcassets,xib,strings}'
+
   # s.resource_bundles = {
-  #   'dojo-ios-sdk-drop-in-ui' => ['dojo-ios-sdk-drop-in-ui/Assets/*.png']
+  #   'dojo-ios-sdk-drop-in-ui-resources' => ['Classes/**/*.{xcassets,xib,strings}']
   # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
