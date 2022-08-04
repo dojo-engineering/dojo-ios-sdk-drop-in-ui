@@ -15,17 +15,29 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        dojoUI.startPaymentFlow(controller: self)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func onStartPaymentFlowPress(_ sender: Any) {
+        requestPaymentToken { token in
+            self.dojoUI.startPaymentFlow(token: token,
+                                         isSandbox: false,
+                                         controller: self)
+        }
+    }
+    
+    func requestPaymentToken(completion: ((String) -> Void)?) {
+        let url = URL(string: "http://localhost:3000/token")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let data = data {
+                let token = String(decoding: data, as: UTF8.self)
+                completion?(token)
+            } else if let error = error {
+                print("HTTP Request Failed \(error)")
+            }
+        }
+        task.resume()
     }
 
 }
