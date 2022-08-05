@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol RootCoordinatorDelegate {
+    func userForceClosedFlow()
+    func userFinishedFlow(resultCode: Int)
+}
+
 protocol RootCoordinatorProtocol {
     func showPaymentMethodCheckout()
     func showCardDetailsCheckout()
@@ -26,11 +31,15 @@ class RootCoordinator: RootCoordinatorProtocol {
     let presentationViewController: UIViewController
     let rootNavController: UINavigationController
     let config: ConfigurationManager
+    var delegate: RootCoordinatorDelegate?
     
-    init (presentationViewController: UIViewController, config: ConfigurationManager) {
+    init (presentationViewController: UIViewController,
+          config: ConfigurationManager,
+          delegate: RootCoordinatorDelegate) {
         self.presentationViewController = presentationViewController
         self.rootNavController = UINavigationController()
         self.config = config
+        self.delegate = delegate
     }
     
     func showPaymentMethodCheckout() {
@@ -104,5 +113,13 @@ extension RootCoordinator: CardDetailsCheckoutViewControllerDelegate {
 extension RootCoordinator: PaymentResultViewControllerDelegate {
     func onDonePress() {
         rootNavController.dismiss(animated: true)
+        delegate?.userFinishedFlow(resultCode: 9999)
+    }
+}
+
+extension RootCoordinator: BaseViewControllerDelegate {
+    func onForceClosePress() {
+        rootNavController.dismiss(animated: true)
+        delegate?.userForceClosedFlow()
     }
 }

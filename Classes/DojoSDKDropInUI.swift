@@ -15,13 +15,21 @@ public class DojoSDKDropInUI {
                                  controller: UIViewController) {
         DispatchQueue.main.async {
             self.configurationManager = ConfigurationManager(token: token, isSandbox: isSandbox)
-            self.rootCoordinator = RootCoordinator(presentationViewController: controller, config: self.configurationManager)
+            self.rootCoordinator = RootCoordinator(presentationViewController: controller,
+                                                   config: self.configurationManager,
+                                                   delegate: self)
             self.rootCoordinator?.showPaymentMethodCheckout()
         }
-//        DispatchQueue.main.async {
-//            let cardDetailsController = CardDetailsCheckoutViewController(token: token,
-//                                                                          isSandbox: isSandbox)
-//            controller.present(cardDetailsController, animated: true)
-//        }
+    }
+}
+
+extension DojoSDKDropInUI: RootCoordinatorDelegate {
+    func userForceClosedFlow() {
+     // TODO: notify app about payment result (failed)
+    }
+    
+    func userFinishedFlow(resultCode: Int) {
+        var a = 0
+    // TODO: notify app about payment result (resultCode)
     }
 }

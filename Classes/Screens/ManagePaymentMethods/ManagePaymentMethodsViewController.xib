@@ -22,7 +22,7 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NIU-8V-UnT">
                     <rect key="frame" x="126.5" y="779" width="161" height="31"/>
                     <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="filled" title="Pay using a new card"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Pay using a new card"/>
                     <connections>
                         <action selector="onPayUsingNewCardPress:" destination="-1" eventType="touchUpInside" id="W59-nt-Hbt"/>
                     </connections>

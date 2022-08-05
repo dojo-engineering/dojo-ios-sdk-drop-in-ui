@@ -7,11 +7,11 @@
 
 import UIKit
 
-protocol ManagePaymentMethodsViewControllerDelegate {
+protocol ManagePaymentMethodsViewControllerDelegate: BaseViewControllerDelegate {
     func onPayUsingNewCardPress()
 }
 
-class ManagePaymentMethodsViewController: UIViewController {
+class ManagePaymentMethodsViewController: BaseUIViewController {
     
     var delegate: ManagePaymentMethodsViewControllerDelegate?
     
@@ -20,6 +20,7 @@ class ManagePaymentMethodsViewController: UIViewController {
         let nibName = String(describing: type(of: self))
         let podBundle = Bundle(for: type(of: self))
         super.init(nibName: nibName, bundle: podBundle)
+        self.baseDelegate = delegate
     }
     
     required init?(coder: NSCoder) {

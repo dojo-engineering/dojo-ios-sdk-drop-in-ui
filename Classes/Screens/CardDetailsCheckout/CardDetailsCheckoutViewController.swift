@@ -8,11 +8,11 @@
 import UIKit
 import dojo_ios_sdk
 
-protocol CardDetailsCheckoutViewControllerDelegate {
+protocol CardDetailsCheckoutViewControllerDelegate: BaseViewControllerDelegate {
     func navigateToPaymentResult(result: Int)
 }
 
-class CardDetailsCheckoutViewController: UIViewController {
+class CardDetailsCheckoutViewController: BaseUIViewController {
     
     let viewModel: CardDetailsCheckoutViewModel
     var cardDetails: DojoCardDetails
@@ -28,6 +28,7 @@ class CardDetailsCheckoutViewController: UIViewController {
         let nibName = String(describing: type(of: self))
         let podBundle = Bundle(for: type(of: self))
         super.init(nibName: nibName, bundle: podBundle)
+        self.baseDelegate = delegate
     }
     
     required init?(coder: NSCoder) {

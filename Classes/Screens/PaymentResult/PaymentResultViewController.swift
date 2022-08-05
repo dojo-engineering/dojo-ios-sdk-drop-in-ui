@@ -7,11 +7,11 @@
 
 import UIKit
 
-protocol PaymentResultViewControllerDelegate {
+protocol PaymentResultViewControllerDelegate: BaseViewControllerDelegate {
     func onDonePress()
 }
 
-class PaymentResultViewController: UIViewController {
+class PaymentResultViewController: BaseUIViewController {
 
     @IBOutlet weak var labelMainText: UILabel!
     
@@ -25,6 +25,8 @@ class PaymentResultViewController: UIViewController {
         let nibName = String(describing: type(of: self))
         let podBundle = Bundle(for: type(of: self))
         super.init(nibName: nibName, bundle: podBundle)
+        self.displayCloseButton = false
+        self.displayBackButton = false
     }
     
     required init?(coder: NSCoder) {

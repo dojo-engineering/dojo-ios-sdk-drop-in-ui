@@ -7,11 +7,11 @@
 
 import UIKit
 
-protocol PaymentMethodCheckoutViewControllerDelegate {
+protocol PaymentMethodCheckoutViewControllerDelegate: BaseViewControllerDelegate {
     func navigateToManagePaymentMethods()
 }
 
-class PaymentMethodCheckoutViewController: UIViewController {
+class PaymentMethodCheckoutViewController: BaseUIViewController {
     
     let viewModel: PaymentMethodCheckoutViewModel
     var delegate: PaymentMethodCheckoutViewControllerDelegate?
@@ -23,6 +23,7 @@ class PaymentMethodCheckoutViewController: UIViewController {
         let nibName = String(describing: type(of: self))
         let podBundle = Bundle(for: type(of: self))
         super.init(nibName: nibName, bundle: podBundle)
+        self.baseDelegate = delegate
     }
     
     required init?(coder: NSCoder) {
@@ -32,10 +33,8 @@ class PaymentMethodCheckoutViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
-
+    
     @IBAction func onManagePaymentMethodsPress(_ sender: Any) {
         delegate?.navigateToManagePaymentMethods()
     }
