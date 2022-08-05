@@ -11,6 +11,7 @@ protocol RootCoordinatorProtocol {
     func showPaymentMethodCheckout()
     func showCardDetailsCheckout()
     func showManagePaymentMethods()
+    func showPaymentResult()
 }
 
 class RootCoordinator: RootCoordinatorProtocol {
@@ -19,6 +20,7 @@ class RootCoordinator: RootCoordinatorProtocol {
         case paymentMethodCheckout
         case cardDeailsCheckout
         case managePaymentMethods
+        case paymentResult
     }
     
     let presentationViewController: UIViewController
@@ -36,11 +38,15 @@ class RootCoordinator: RootCoordinatorProtocol {
     }
     
     func showManagePaymentMethods() {
-       
+        pushNewScreenToTheFlow(screenType: .managePaymentMethods, config: config)
     }
     
     func showCardDetailsCheckout() {
         pushNewScreenToTheFlow(screenType: .cardDeailsCheckout, config: config)
+    }
+    
+    func showPaymentResult() {
+        pushNewScreenToTheFlow(screenType: .paymentResult, config: config)
     }
 }
 
@@ -62,12 +68,16 @@ extension RootCoordinator {
         switch screenType {
         case .cardDeailsCheckout:
             let viewModel = CardDetailsCheckoutViewModel(config: config)
-            controller = CardDetailsCheckoutViewController(viewModel: viewModel)
+            controller = CardDetailsCheckoutViewController(viewModel: viewModel, delegate: self)
         case .paymentMethodCheckout:
             let viewModel = PaymentMethodCheckoutViewModel(config: config)
             controller = PaymentMethodCheckoutViewController(viewModel: viewModel, delegate: self)
         case .managePaymentMethods:
+            controller = ManagePaymentMethodsViewController(delegate: self)
             break
+        case .paymentResult:
+            let viewModel = PaymentResultViewModel(config: config, resultCode: 999999) // TODO: get actual value
+            controller = PaymentResultViewController(viewModel: viewModel, delegate: self)
         }
         return controller
     }
@@ -75,6 +85,24 @@ extension RootCoordinator {
 
 extension RootCoordinator: PaymentMethodCheckoutViewControllerDelegate {
     func navigateToManagePaymentMethods() {
+        showManagePaymentMethods()
+    }
+}
+
+extension RootCoordinator: ManagePaymentMethodsViewControllerDelegate {
+    func onPayUsingNewCardPress() {
         showCardDetailsCheckout()
+    }
+}
+
+extension RootCoordinator: CardDetailsCheckoutViewControllerDelegate {
+    func navigateToPaymentResult(result: Int) {
+        showPaymentResult()
+    }
+}
+
+extension RootCoordinator: PaymentResultViewControllerDelegate {
+    func onDonePress() {
+        rootNavController.dismiss(animated: true)
     }
 }

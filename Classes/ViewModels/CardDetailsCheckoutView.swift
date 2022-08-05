@@ -21,12 +21,11 @@ class CardDetailsCheckoutViewModel {
         self.token = config.token
     }
     
-    func processPayment(cardDetails: DojoCardDetails, fromViewControlelr: UIViewController) {
+    func processPayment(cardDetails: DojoCardDetails, fromViewControlelr: UIViewController, completion: ((Int) -> Void)?) {
         let cardPaymentPayload = DojoCardPaymentPayload(cardDetails: cardDetails, isSandbox: isSandbox)
         DojoSDK.executeCardPayment(token: token,
                                     payload: cardPaymentPayload,
-                                    fromViewController: fromViewControlelr) { [weak self] result in
-            print(result)
-        }
+                                    fromViewController: fromViewControlelr,
+                                    completion: completion)
     }
 }

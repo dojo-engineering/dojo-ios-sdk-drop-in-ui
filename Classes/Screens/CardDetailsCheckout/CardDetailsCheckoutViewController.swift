@@ -8,16 +8,23 @@
 import UIKit
 import dojo_ios_sdk
 
+protocol CardDetailsCheckoutViewControllerDelegate {
+    func navigateToPaymentResult(result: Int)
+}
+
 class CardDetailsCheckoutViewController: UIViewController {
     
     let viewModel: CardDetailsCheckoutViewModel
     var cardDetails: DojoCardDetails
+    var delegate: CardDetailsCheckoutViewControllerDelegate?
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    public init(viewModel: CardDetailsCheckoutViewModel) {
+    public init(viewModel: CardDetailsCheckoutViewModel,
+                delegate : CardDetailsCheckoutViewControllerDelegate) {
         self.viewModel = viewModel
         self.cardDetails = viewModel.cardDetails3DS
+        self.delegate = delegate
         let nibName = String(describing: type(of: self))
         let podBundle = Bundle(for: type(of: self))
         super.init(nibName: nibName, bundle: podBundle)
@@ -35,7 +42,9 @@ class CardDetailsCheckoutViewController: UIViewController {
     @IBAction func onPayButtonPress(_ sender: Any) {
         activityIndicator.isHidden = false
         viewModel.processPayment(cardDetails: cardDetails,
-                                 fromViewControlelr: self)
+                                 fromViewControlelr: self) { result in
+            self.delegate?.navigateToPaymentResult(result: result)
+        }
     }
     
     @IBAction func onAutocomplete3DS(_ sender: Any) {

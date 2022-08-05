@@ -14,7 +14,7 @@ protocol PaymentMethodCheckoutViewControllerDelegate {
 class PaymentMethodCheckoutViewController: UIViewController {
     
     let viewModel: PaymentMethodCheckoutViewModel
-    var delegate : PaymentMethodCheckoutViewControllerDelegate?
+    var delegate: PaymentMethodCheckoutViewControllerDelegate?
 
     public init(viewModel: PaymentMethodCheckoutViewModel,
                 delegate: PaymentMethodCheckoutViewControllerDelegate) {
