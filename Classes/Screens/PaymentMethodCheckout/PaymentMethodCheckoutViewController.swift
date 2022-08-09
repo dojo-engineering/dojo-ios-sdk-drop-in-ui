@@ -33,6 +33,7 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Payment Method"
     }
     
     @IBAction func onManagePaymentMethodsPress(_ sender: Any) {

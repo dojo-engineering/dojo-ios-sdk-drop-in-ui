@@ -16,7 +16,6 @@ protocol RootCoordinatorProtocol {
     func showPaymentMethodCheckout()
     func showCardDetailsCheckout()
     func showManagePaymentMethods()
-    func showPaymentResult()
 }
 
 class RootCoordinator: RootCoordinatorProtocol {
@@ -25,7 +24,6 @@ class RootCoordinator: RootCoordinatorProtocol {
         case paymentMethodCheckout
         case cardDeailsCheckout
         case managePaymentMethods
-        case paymentResult
     }
     
     let presentationViewController: UIViewController
@@ -54,8 +52,10 @@ class RootCoordinator: RootCoordinatorProtocol {
         pushNewScreenToTheFlow(screenType: .cardDeailsCheckout, config: config)
     }
     
-    func showPaymentResult() {
-        pushNewScreenToTheFlow(screenType: .paymentResult, config: config)
+    func showPaymentResult(resultCode: Int) {
+        let viewModel = PaymentResultViewModel(config: config, resultCode: resultCode)
+        let controller = PaymentResultViewController(viewModel: viewModel, delegate: self)
+        pushNewViewControllerToTheFlow(controller: controller)
     }
 }
 
@@ -66,7 +66,11 @@ extension RootCoordinator {
             // return an error from the SDK?
             return
         }
-        rootNavController.pushViewController(viewController, animated: true)
+        pushNewViewControllerToTheFlow(controller: viewController)
+    }
+    
+    func pushNewViewControllerToTheFlow(controller: UIViewController) {
+        rootNavController.pushViewController(controller, animated: true)
         if rootNavController.presentingViewController == nil {
             presentationViewController.present(rootNavController, animated: true)
         }
@@ -84,9 +88,6 @@ extension RootCoordinator {
         case .managePaymentMethods:
             controller = ManagePaymentMethodsViewController(delegate: self)
             break
-        case .paymentResult:
-            let viewModel = PaymentResultViewModel(config: config, resultCode: 999999) // TODO: get actual value
-            controller = PaymentResultViewController(viewModel: viewModel, delegate: self)
         }
         return controller
     }
@@ -105,15 +106,15 @@ extension RootCoordinator: ManagePaymentMethodsViewControllerDelegate {
 }
 
 extension RootCoordinator: CardDetailsCheckoutViewControllerDelegate {
-    func navigateToPaymentResult(result: Int) {
-        showPaymentResult()
+    func navigateToPaymentResult(resultCode: Int) {
+        showPaymentResult(resultCode: resultCode)
     }
 }
 
 extension RootCoordinator: PaymentResultViewControllerDelegate {
-    func onDonePress() {
+    func onDonePress(resultCode: Int) {
         rootNavController.dismiss(animated: true)
-        delegate?.userFinishedFlow(resultCode: 9999)
+        delegate?.userFinishedFlow(resultCode: resultCode)
     }
 }
 

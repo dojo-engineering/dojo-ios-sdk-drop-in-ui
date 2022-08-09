@@ -31,12 +31,20 @@ class BaseUIViewController: UIViewController {
 extension BaseUIViewController {
     func setUpCloseButton() {
         guard displayCloseButton == true else { return }
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Close",
-                                                            style: .plain,
-                                                            target: self, action: #selector(onClosePress))
+        let buttonClose = UIBarButtonItem(title: "",
+                                          style: .plain,
+                                          target: self, action: #selector(onClosePress))
+        buttonClose.image = UIImage(named: "icon-button-cross-close", in: Bundle(for: type(of: self)), compatibleWith: nil)
+        navigationItem.rightBarButtonItem = buttonClose
+        
+        // TODO: theme setting
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
     }
     
     func setUpBackButton() {
         navigationItem.hidesBackButton = !displayBackButton
+        
+        // TODO: theme setting
+        navigationController?.navigationBar.tintColor = UIColor.black
     }
 }

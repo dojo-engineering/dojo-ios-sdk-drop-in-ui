@@ -9,7 +9,7 @@ import UIKit
 import dojo_ios_sdk
 
 protocol CardDetailsCheckoutViewControllerDelegate: BaseViewControllerDelegate {
-    func navigateToPaymentResult(result: Int)
+    func navigateToPaymentResult(resultCode: Int)
 }
 
 class CardDetailsCheckoutViewController: BaseUIViewController {
@@ -38,13 +38,14 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.isHidden = true
+        self.title = "Pay with new card"
     }
 
     @IBAction func onPayButtonPress(_ sender: Any) {
         activityIndicator.isHidden = false
         viewModel.processPayment(cardDetails: cardDetails,
                                  fromViewControlelr: self) { result in
-            self.delegate?.navigateToPaymentResult(result: result)
+            self.delegate?.navigateToPaymentResult(resultCode: result)
         }
     }
     

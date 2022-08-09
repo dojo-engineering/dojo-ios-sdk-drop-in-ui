@@ -8,7 +8,7 @@
 import UIKit
 
 protocol PaymentResultViewControllerDelegate: BaseViewControllerDelegate {
-    func onDonePress()
+    func onDonePress(resultCode: Int)
 }
 
 class PaymentResultViewController: BaseUIViewController {
@@ -43,6 +43,6 @@ class PaymentResultViewController: BaseUIViewController {
     }
 
     @IBAction func onDoneButtonPress(_ sender: Any) {
-        delegate?.onDonePress()
+        delegate?.onDonePress(resultCode: viewModel.resultCode)
     }
 }

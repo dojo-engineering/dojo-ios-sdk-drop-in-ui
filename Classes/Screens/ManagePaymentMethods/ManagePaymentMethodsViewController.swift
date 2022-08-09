@@ -29,6 +29,7 @@ class ManagePaymentMethodsViewController: BaseUIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Change payment method"
 
         // Do any additional setup after loading the view.
     }
