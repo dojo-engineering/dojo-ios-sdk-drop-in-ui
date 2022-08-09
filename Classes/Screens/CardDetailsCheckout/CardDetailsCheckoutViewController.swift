@@ -9,7 +9,6 @@ import UIKit
 import dojo_ios_sdk
 
 protocol CardDetailsCheckoutViewControllerDelegate: BaseViewControllerDelegate {
-    func navigateToPaymentResult(resultCode: Int)
 }
 
 class CardDetailsCheckoutViewController: BaseUIViewController {

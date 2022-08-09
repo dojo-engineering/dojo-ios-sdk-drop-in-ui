@@ -18,11 +18,12 @@ class PaymentMethodCheckoutViewModel {
         self.token = config.token
     }
     
-    func processApplePayPayment(fromViewControlelr: UIViewController) {
+    func processApplePayPayment(fromViewControlelr: UIViewController, completion: ((Int) -> Void)?) {
         let paymentIntent = DojoPaymentIntent(connecteToken: token, totalAmount: DojoPaymentIntentAmount(value: 10, currencyCode: "GBP"))
         let applePayload = DojoApplePayPayload(applePayConfig: DojoApplePayConfig(merchantIdentifier: "merchant.com.something"))
-        DojoSDK.executeApplePayPayment(paymentIntent: paymentIntent, payload: applePayload, fromViewController: fromViewControlelr) { result in
-            print(result)
-        }
+        DojoSDK.executeApplePayPayment(paymentIntent: paymentIntent,
+                                       payload: applePayload,
+                                       fromViewController: fromViewControlelr,
+                                       completion: completion)
     }
 }

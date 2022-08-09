@@ -9,4 +9,5 @@ import Foundation
 
 protocol BaseViewControllerDelegate {
     func onForceClosePress() // 'X' icon on the top
+    func navigateToPaymentResult(resultCode: Int)
 }

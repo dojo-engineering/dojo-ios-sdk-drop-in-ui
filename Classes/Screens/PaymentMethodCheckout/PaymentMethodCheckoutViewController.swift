@@ -41,6 +41,8 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
     }
     
     @IBAction func onPayUsingApplePayPress(_ sender: Any) {
-        viewModel.processApplePayPayment(fromViewControlelr: self)
+        viewModel.processApplePayPayment(fromViewControlelr: self) { result in
+            self.delegate?.navigateToPaymentResult(resultCode: result)
+        }
     }
 }
