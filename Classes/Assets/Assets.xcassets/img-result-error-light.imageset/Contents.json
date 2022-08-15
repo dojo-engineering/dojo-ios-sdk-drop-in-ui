@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "img-result-error-light.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

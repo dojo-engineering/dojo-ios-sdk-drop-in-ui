@@ -14,6 +14,13 @@ protocol PaymentResultViewControllerDelegate: BaseViewControllerDelegate {
 class PaymentResultViewController: BaseUIViewController {
 
     @IBOutlet weak var labelMainText: UILabel!
+    @IBOutlet weak var labelSubtitle: UILabel!
+    @IBOutlet weak var labelSubtitle2: UILabel!
+    @IBOutlet weak var buttonDone: UIButton!
+    
+    //TODO: move to an external element
+    @IBOutlet weak var imgViewPoweredBy: UIImageView!
+    @IBOutlet weak var labelPoweredBy: UILabel!
     
     var viewModel: PaymentResultViewModel
     var delegate: PaymentResultViewControllerDelegate?
@@ -34,12 +41,34 @@ class PaymentResultViewController: BaseUIViewController {
     }
     
     override func viewDidLoad() {
+        //TODO: move from here to the base class
+        self.closeButtonTintColor = viewModel.theme.headerButtonTintColor
         super.viewDidLoad()
         updateMainText()
+        setupTheme()
+    }
+    
+    func setupTheme() {
+        self.view.backgroundColor = viewModel.theme.primarySurfaceBackgroundColor
+        labelMainText.textColor = viewModel.theme.primaryLabelTextColor
+        labelSubtitle.textColor = viewModel.theme.primaryLabelTextColor
+        labelSubtitle2.textColor = viewModel.theme.secondaryLabelTextColor
+        
+        //TODO: common style
+        buttonDone.backgroundColor = viewModel.theme.primaryCTAButtonActiveBackgroundColor
+        buttonDone.setTitleColor(viewModel.theme.primaryCTAButtonActiveTextColor, for: .normal)
+        buttonDone.layer.cornerRadius = viewModel.theme.primaryCTAButtonCornerRadius
+        
+        labelPoweredBy.textColor = viewModel.theme.primaryCTAButtonActiveBackgroundColor
+        imgViewPoweredBy.tintColor = viewModel.theme.primaryCTAButtonActiveBackgroundColor //TODO: specific property
     }
     
     func updateMainText() {
-        labelMainText.text = "Result code: \(viewModel.resultCode)"
+        if viewModel.resultCode == 0 {
+            labelMainText.text = "Payment successful"
+        } else {
+            labelMainText.text = "Result code: \(viewModel.resultCode)"
+        }
     }
     
     @objc override func onClosePress() {

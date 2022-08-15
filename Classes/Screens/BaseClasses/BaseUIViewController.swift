@@ -16,6 +16,7 @@ class BaseUIViewController: UIViewController {
     // overwrite them during init of any subclass
     var displayCloseButton: Bool = true // display 'X' (close button) in the header
     var displayBackButton: Bool = true // display '<' (back button) in the header
+    var closeButtonTintColor: UIColor = UIColor.black // TODO make it more generic
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +39,7 @@ extension BaseUIViewController {
         navigationItem.rightBarButtonItem = buttonClose
         
         // TODO: theme setting
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
+        navigationItem.rightBarButtonItem?.tintColor = closeButtonTintColor
     }
     
     func setUpBackButton() {

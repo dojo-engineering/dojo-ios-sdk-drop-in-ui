@@ -11,7 +11,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PaymentResultViewController" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
             <connections>
-                <outlet property="labelMainText" destination="uR0-Kz-vMe" id="Meg-RQ-nvg"/>
+                <outlet property="buttonDone" destination="qw6-82-Sm5" id="W5W-uW-PCR"/>
+                <outlet property="imgViewPoweredBy" destination="YbF-KD-Z6p" id="bTx-L5-3Qn"/>
+                <outlet property="labelMainText" destination="0Pj-Be-ND9" id="D7M-6Z-BaF"/>
+                <outlet property="labelPoweredBy" destination="71g-GP-dSr" id="k6n-WF-BxD"/>
+                <outlet property="labelSubtitle" destination="xaK-9E-AnX" id="HXM-1F-8XS"/>
+                <outlet property="labelSubtitle2" destination="SiX-RT-8wU" id="dwh-ck-LRh"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,33 +25,83 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Result code: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uR0-Kz-vMe">
-                    <rect key="frame" x="152.5" y="437.5" width="109" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qw6-82-Sm5">
-                    <rect key="frame" x="177.5" y="783" width="59" height="31"/>
+                    <rect key="frame" x="16" y="769" width="382" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="NCM-Ng-77m"/>
+                    </constraints>
                     <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" title="Done"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Done">
+                        <fontDescription key="titleFontDescription" type="boldSystem" pointSize="16"/>
+                    </buttonConfiguration>
                     <connections>
                         <action selector="onDoneButtonPress:" destination="-1" eventType="touchUpInside" id="DRl-8u-jT9"/>
                     </connections>
                 </button>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img-result-success-light" translatesAutoresizingMaskIntoConstraints="NO" id="GI8-4z-Q43">
+                    <rect key="frame" x="167" y="308" width="80" height="80"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Payment successful" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Pj-Be-ND9">
+                    <rect key="frame" x="16" y="420" width="382" height="24"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order O-00001" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xaK-9E-AnX">
+                    <rect key="frame" x="16" y="468" width="382" height="24"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A copy of your receipt has been sent to: Elliot.Harvey123@gmail.com" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SiX-RT-8wU">
+                    <rect key="frame" x="40" y="500" width="334" height="38.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <stackView opaque="NO" contentMode="scaleToFill" alignment="lastBaseline" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="Dr7-ne-vim" userLabel="PoweredBy">
+                    <rect key="frame" x="150" y="833" width="114.5" height="17"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Powered by" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="71g-GP-dSr">
+                            <rect key="frame" x="0.0" y="0.0" width="75.5" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img-dojo-logo-small" translatesAutoresizingMaskIntoConstraints="NO" id="YbF-KD-Z6p">
+                            <rect key="frame" x="78.5" y="0.0" width="36" height="17"/>
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </imageView>
+                    </subviews>
+                </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="uR0-Kz-vMe" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="7bf-9X-Fwh"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="qw6-82-Sm5" secondAttribute="bottom" constant="48" id="8KE-wd-KzL"/>
+                <constraint firstItem="Dr7-ne-vim" firstAttribute="top" secondItem="qw6-82-Sm5" secondAttribute="bottom" constant="20" id="7yP-Ai-4Dh"/>
+                <constraint firstItem="SiX-RT-8wU" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="40" id="HeS-aS-Drw"/>
+                <constraint firstItem="xaK-9E-AnX" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="Ihm-sg-Xp4"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="xaK-9E-AnX" secondAttribute="trailing" constant="16" id="L57-Ei-2E7"/>
+                <constraint firstItem="qw6-82-Sm5" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="OqD-Ih-jHM"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="qw6-82-Sm5" secondAttribute="trailing" constant="16" id="TAk-gy-39r"/>
+                <constraint firstItem="0Pj-Be-ND9" firstAttribute="top" secondItem="GI8-4z-Q43" secondAttribute="bottom" constant="32" id="Vg4-kU-KFk"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="SiX-RT-8wU" secondAttribute="trailing" constant="40" id="WEc-ra-nsI"/>
+                <constraint firstItem="xaK-9E-AnX" firstAttribute="top" secondItem="0Pj-Be-ND9" secondAttribute="bottom" constant="24" id="WqL-jU-mSN"/>
+                <constraint firstItem="GI8-4z-Q43" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-100" id="XDI-dC-gSX"/>
+                <constraint firstItem="SiX-RT-8wU" firstAttribute="top" secondItem="xaK-9E-AnX" secondAttribute="bottom" constant="8" id="ZRX-AM-L0a"/>
                 <constraint firstItem="qw6-82-Sm5" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="aQj-qu-Rsd"/>
-                <constraint firstItem="uR0-Kz-vMe" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="xnB-a5-8UK"/>
+                <constraint firstItem="0Pj-Be-ND9" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="aYf-zO-LQ3"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="0Pj-Be-ND9" secondAttribute="trailing" constant="16" id="aZg-is-jRq"/>
+                <constraint firstItem="GI8-4z-Q43" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="nPA-pt-8qx"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Dr7-ne-vim" secondAttribute="bottom" constant="12" id="oYK-lB-cP1"/>
+                <constraint firstItem="Dr7-ne-vim" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="srX-d5-fNm"/>
             </constraints>
-            <point key="canvasLocation" x="132" y="106"/>
+            <point key="canvasLocation" x="131.8840579710145" y="105.80357142857143"/>
         </view>
     </objects>
     <resources>
+        <image name="img-dojo-logo-small" width="36" height="17"/>
+        <image name="img-result-success-light" width="80" height="80"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
