@@ -21,7 +21,9 @@ class ViewController: UIViewController {
         requestPaymentToken { token in
             self.dojoUI.startPaymentFlow(token: token,
                                          isSandbox: false,
-                                         controller: self)
+                                         controller: self) { result in
+                print("SDK result code: \(result)")
+            }
         }
     }
     

@@ -25,7 +25,7 @@ class PaymentResultViewController: BaseUIViewController {
         let nibName = String(describing: type(of: self))
         let podBundle = Bundle(for: type(of: self))
         super.init(nibName: nibName, bundle: podBundle)
-        self.displayCloseButton = false
+        self.displayCloseButton = true
         self.displayBackButton = false
     }
     
@@ -41,8 +41,18 @@ class PaymentResultViewController: BaseUIViewController {
     func updateMainText() {
         labelMainText.text = "Result code: \(viewModel.resultCode)"
     }
+    
+    @objc override func onClosePress() {
+        // close and done button behave the same on this screen (sending the final result to the app)
+        exitFromTheScreen()
+    }
 
     @IBAction func onDoneButtonPress(_ sender: Any) {
+        // close and done button behave the same on this screen (sending the final result to the app)
+        exitFromTheScreen()
+    }
+    
+    private func exitFromTheScreen() {
         delegate?.onDonePress(resultCode: viewModel.resultCode)
     }
 }

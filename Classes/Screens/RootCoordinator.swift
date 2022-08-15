@@ -16,6 +16,7 @@ protocol RootCoordinatorProtocol {
     func showPaymentMethodCheckout()
     func showCardDetailsCheckout()
     func showManagePaymentMethods()
+    func showPaymentResult(resultCode: Int)
 }
 
 class RootCoordinator: RootCoordinatorProtocol {

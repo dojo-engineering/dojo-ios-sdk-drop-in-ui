@@ -5,6 +5,7 @@ public class DojoSDKDropInUI {
     
     var configurationManager: ConfigurationManager
     var rootCoordinator: RootCoordinatorProtocol? //TODO: optional?
+    var completionCallback: ((Int) -> Void)?
     
     public init() {
         configurationManager = ConfigurationManager(token: "", isSandbox: false) // TODO: move to a different place
@@ -12,8 +13,10 @@ public class DojoSDKDropInUI {
     
     public func startPaymentFlow(token: String,
                                  isSandbox: Bool,
-                                 controller: UIViewController) {
+                                 controller: UIViewController,
+                                 completion: ((Int) -> Void)?) {
         DispatchQueue.main.async {
+            self.completionCallback = completion
             self.configurationManager = ConfigurationManager(token: token, isSandbox: isSandbox)
             self.rootCoordinator = RootCoordinator(presentationViewController: controller,
                                                    config: self.configurationManager,
@@ -25,11 +28,10 @@ public class DojoSDKDropInUI {
 
 extension DojoSDKDropInUI: RootCoordinatorDelegate {
     func userForceClosedFlow() {
-     // TODO: notify app about payment result (failed)
+        completionCallback?(5) // 5 for decline
     }
     
     func userFinishedFlow(resultCode: Int) {
-        var a = 0
-    // TODO: notify app about payment result (resultCode)
+        completionCallback?(resultCode)
     }
 }
