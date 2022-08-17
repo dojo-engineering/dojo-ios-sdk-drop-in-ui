@@ -49,19 +49,32 @@ class PaymentResultViewController: BaseUIViewController {
         updateUIState()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // TODO: properly document
+        buttonDone.titleLabel?.font = theme.fontPrimaryCTAButtonActive
+    }
+    
     override func setUpDesign() {
         super.setUpDesign()
         labelMainText.textColor = theme.primaryLabelTextColor
+        labelMainText.font = theme.fontHeading4
         labelSubtitle.textColor = theme.primaryLabelTextColor
+        labelSubtitle.font = theme.fontHeading5
         labelSubtitle2.textColor = theme.secondaryLabelTextColor
+        labelSubtitle2.font = theme.fontBody1
         
         //TODO: common style
         buttonDone.backgroundColor = theme.primaryCTAButtonActiveBackgroundColor
         buttonDone.setTitleColor(theme.primaryCTAButtonActiveTextColor, for: .normal)
+        buttonDone.tintColor = theme.primaryCTAButtonActiveTextColor
         buttonDone.layer.cornerRadius = theme.primaryCTAButtonCornerRadius
         
+        //TODO: specific property
         labelPoweredBy.textColor = theme.primaryCTAButtonActiveBackgroundColor
-        imgViewPoweredBy.tintColor = theme.primaryCTAButtonActiveBackgroundColor //TODO: specific property
+        labelPoweredBy.font = theme.fontPoweredByDojo
+        labelPoweredBy.setTextSpacingBy(value: 0.5)
+        imgViewPoweredBy.tintColor = theme.primaryCTAButtonActiveBackgroundColor
     }
     
     func updateUIState() {
@@ -87,4 +100,14 @@ class PaymentResultViewController: BaseUIViewController {
     private func exitFromTheScreen() {
         delegate?.onDonePress(resultCode: viewModel.resultCode)
     }
+}
+
+extension UILabel {
+  func setTextSpacingBy(value: Double) {
+    if let textString = self.text {
+      let attributedString = NSMutableAttributedString(string: textString)
+        attributedString.addAttribute(NSAttributedString.Key.kern, value: value, range: NSRange(location: 0, length: attributedString.length - 1))
+      attributedText = attributedString
+    }
+  }
 }

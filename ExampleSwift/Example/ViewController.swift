@@ -18,8 +18,8 @@ class ViewController: UIViewController {
     }
 
     @IBAction func onStartPaymentFlowPress(_ sender: Any) {
-        requestPaymentToken { token in
-//            let token = ""
+//        requestPaymentToken { token in
+            let token = ""
         let theme = DojoThemeSettings(primaryLabelTextColor: UIColor.red,
                                       secondaryLabelTextColor: .green,
                                       headerTintColor: .green,
@@ -30,7 +30,7 @@ class ViewController: UIViewController {
                                          themeSettings: theme) { result in
                 print("SDK result code: \(result)")
             }
-        }
+//        }
     }
     
     func requestPaymentToken(completion: ((String) -> Void)?) {

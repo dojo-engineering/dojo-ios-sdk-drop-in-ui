@@ -30,7 +30,8 @@ class BaseUIViewController: UIViewController {
     }
     
     func setUpDesign() {
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: theme.headerTintColor]
+        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: theme.headerTintColor,
+                                                                        .font: theme.fontHeading5Bold]
         self.view.backgroundColor = theme.primarySurfaceBackgroundColor
     }
 }
