@@ -15,12 +15,14 @@ class ManagePaymentMethodsViewController: BaseUIViewController {
     
     var delegate: ManagePaymentMethodsViewControllerDelegate?
     
-    public init(delegate: ManagePaymentMethodsViewControllerDelegate) {
+    public init(theme: ThemeSettings,
+                delegate: ManagePaymentMethodsViewControllerDelegate) {
         self.delegate = delegate
         let nibName = String(describing: type(of: self))
         let podBundle = Bundle(for: type(of: self))
         super.init(nibName: nibName, bundle: podBundle)
         self.baseDelegate = delegate
+        self.theme = theme
     }
     
     required init?(coder: NSCoder) {

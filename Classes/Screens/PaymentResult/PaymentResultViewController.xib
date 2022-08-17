@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="buttonDone" destination="qw6-82-Sm5" id="W5W-uW-PCR"/>
                 <outlet property="imgViewPoweredBy" destination="YbF-KD-Z6p" id="bTx-L5-3Qn"/>
+                <outlet property="imgViewResult" destination="GI8-4z-Q43" id="BqD-7S-iD1"/>
                 <outlet property="labelMainText" destination="0Pj-Be-ND9" id="D7M-6Z-BaF"/>
                 <outlet property="labelPoweredBy" destination="71g-GP-dSr" id="k6n-WF-BxD"/>
                 <outlet property="labelSubtitle" destination="xaK-9E-AnX" id="HXM-1F-8XS"/>

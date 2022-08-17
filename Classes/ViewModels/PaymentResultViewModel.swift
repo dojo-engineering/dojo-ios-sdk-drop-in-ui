@@ -11,10 +11,8 @@ import dojo_ios_sdk
 class PaymentResultViewModel {
     
     let resultCode: Int
-    let theme: ThemeSettings
     
     init(config: ConfigurationManager, resultCode: Int) {
         self.resultCode = resultCode
-        self.theme = config.themeSettings
     }
 }

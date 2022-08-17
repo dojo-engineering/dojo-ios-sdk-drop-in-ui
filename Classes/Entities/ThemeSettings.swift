@@ -12,6 +12,7 @@ import UIKit
 struct ThemeSettings {
     var primaryLabelTextColor: UIColor
     var secondaryLabelTextColor: UIColor
+    var headerTintColor: UIColor
     var headerButtonTintColor: UIColor
     var primarySurfaceBackgroundColor: UIColor
     var primaryCTAButtonActiveBackgroundColor: UIColor
@@ -21,6 +22,7 @@ struct ThemeSettings {
     init (dojoTheme: DojoThemeSettings) {
         primaryLabelTextColor = dojoTheme.primaryLabelTextColor
         secondaryLabelTextColor = dojoTheme.secondaryLabelTextColor
+        headerTintColor = dojoTheme.headerTintColor
         headerButtonTintColor = dojoTheme.headerButtonTintColor
         primaryCTAButtonActiveBackgroundColor = dojoTheme.primaryCTAButtonActiveBackgroundColor
         
@@ -40,6 +42,7 @@ struct ThemeSettings {
         dojoTheme.primaryLabelTextColor = UIColor.white
         dojoTheme.secondaryLabelTextColor = UIColor.white
         dojoTheme.headerButtonTintColor = UIColor.white
+        dojoTheme.headerTintColor = UIColor.white
         dojoTheme.primaryCTAButtonActiveBackgroundColor = UIColor.white
         // create internal theme
         var theme = ThemeSettings(dojoTheme: dojoTheme)

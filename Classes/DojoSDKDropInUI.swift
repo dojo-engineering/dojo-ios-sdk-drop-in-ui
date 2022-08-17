@@ -18,8 +18,8 @@ public class DojoSDKDropInUI {
                                  themeSettings: DojoThemeSettings? = nil,
                                  completion: ((Int) -> Void)?) {
         DispatchQueue.main.async {
-            let theme = ThemeSettings(dojoTheme: themeSettings ?? DojoThemeSettings.getLightTheme())
-//            let theme = ThemeSettings.getDarkTheme()
+//            let theme = ThemeSettings(dojoTheme: themeSettings ?? DojoThemeSettings.getLightTheme())
+            let theme = ThemeSettings.getDarkTheme()
             self.completionCallback = completion
             self.configurationManager = ConfigurationManager(token: token,
                                                              isSandbox: isSandbox,
@@ -27,8 +27,8 @@ public class DojoSDKDropInUI {
             self.rootCoordinator = RootCoordinator(presentationViewController: controller,
                                                    config: self.configurationManager,
                                                    delegate: self)
-//            self.rootCoordinator?.showPaymentMethodCheckout()
-            self.rootCoordinator?.showPaymentResult(resultCode: 0)
+            self.rootCoordinator?.showPaymentMethodCheckout()
+//            self.rootCoordinator?.showPaymentResult(resultCode: 5)
         }
     }
 }

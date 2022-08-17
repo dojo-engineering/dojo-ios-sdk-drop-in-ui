@@ -20,12 +20,14 @@ class PaymentResultViewController: BaseUIViewController {
     
     //TODO: move to an external element
     @IBOutlet weak var imgViewPoweredBy: UIImageView!
+    @IBOutlet weak var imgViewResult: UIImageView!
     @IBOutlet weak var labelPoweredBy: UILabel!
     
     var viewModel: PaymentResultViewModel
     var delegate: PaymentResultViewControllerDelegate?
     
     public init(viewModel: PaymentResultViewModel,
+                theme: ThemeSettings,
                 delegate: PaymentResultViewControllerDelegate) {
         self.viewModel = viewModel
         self.delegate = delegate
@@ -34,6 +36,7 @@ class PaymentResultViewController: BaseUIViewController {
         super.init(nibName: nibName, bundle: podBundle)
         self.displayCloseButton = true
         self.displayBackButton = false
+        self.theme = theme
     }
     
     required init?(coder: NSCoder) {
@@ -41,33 +44,33 @@ class PaymentResultViewController: BaseUIViewController {
     }
     
     override func viewDidLoad() {
-        //TODO: move from here to the base class
-        self.closeButtonTintColor = viewModel.theme.headerButtonTintColor
+        self.title = "Result"
         super.viewDidLoad()
-        updateMainText()
-        setupTheme()
+        updateUIState()
     }
     
-    func setupTheme() {
-        self.view.backgroundColor = viewModel.theme.primarySurfaceBackgroundColor
-        labelMainText.textColor = viewModel.theme.primaryLabelTextColor
-        labelSubtitle.textColor = viewModel.theme.primaryLabelTextColor
-        labelSubtitle2.textColor = viewModel.theme.secondaryLabelTextColor
+    override func setUpDesign() {
+        super.setUpDesign()
+        labelMainText.textColor = theme.primaryLabelTextColor
+        labelSubtitle.textColor = theme.primaryLabelTextColor
+        labelSubtitle2.textColor = theme.secondaryLabelTextColor
         
         //TODO: common style
-        buttonDone.backgroundColor = viewModel.theme.primaryCTAButtonActiveBackgroundColor
-        buttonDone.setTitleColor(viewModel.theme.primaryCTAButtonActiveTextColor, for: .normal)
-        buttonDone.layer.cornerRadius = viewModel.theme.primaryCTAButtonCornerRadius
+        buttonDone.backgroundColor = theme.primaryCTAButtonActiveBackgroundColor
+        buttonDone.setTitleColor(theme.primaryCTAButtonActiveTextColor, for: .normal)
+        buttonDone.layer.cornerRadius = theme.primaryCTAButtonCornerRadius
         
-        labelPoweredBy.textColor = viewModel.theme.primaryCTAButtonActiveBackgroundColor
-        imgViewPoweredBy.tintColor = viewModel.theme.primaryCTAButtonActiveBackgroundColor //TODO: specific property
+        labelPoweredBy.textColor = theme.primaryCTAButtonActiveBackgroundColor
+        imgViewPoweredBy.tintColor = theme.primaryCTAButtonActiveBackgroundColor //TODO: specific property
     }
     
-    func updateMainText() {
+    func updateUIState() {
         if viewModel.resultCode == 0 {
             labelMainText.text = "Payment successful"
+            imgViewResult.image = UIImage(named: "img-result-success-light", in: Bundle(for: type(of: self)), compatibleWith: nil)
         } else {
-            labelMainText.text = "Result code: \(viewModel.resultCode)"
+            labelMainText.text = "Payment failed"
+            imgViewResult.image = UIImage(named: "img-result-error-light", in: Bundle(for: type(of: self)), compatibleWith: nil)
         }
     }
     

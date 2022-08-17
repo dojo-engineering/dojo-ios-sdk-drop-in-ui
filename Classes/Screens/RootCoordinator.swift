@@ -55,7 +55,7 @@ class RootCoordinator: RootCoordinatorProtocol {
     
     func showPaymentResult(resultCode: Int) {
         let viewModel = PaymentResultViewModel(config: config, resultCode: resultCode)
-        let controller = PaymentResultViewController(viewModel: viewModel, delegate: self)
+        let controller = PaymentResultViewController(viewModel: viewModel, theme: config.themeSettings, delegate: self)
         pushNewViewControllerToTheFlow(controller: controller)
     }
 }
@@ -82,12 +82,12 @@ extension RootCoordinator {
         switch screenType {
         case .cardDeailsCheckout:
             let viewModel = CardDetailsCheckoutViewModel(config: config)
-            controller = CardDetailsCheckoutViewController(viewModel: viewModel, delegate: self)
+            controller = CardDetailsCheckoutViewController(viewModel: viewModel, theme: config.themeSettings, delegate: self)
         case .paymentMethodCheckout:
             let viewModel = PaymentMethodCheckoutViewModel(config: config)
-            controller = PaymentMethodCheckoutViewController(viewModel: viewModel, delegate: self)
+            controller = PaymentMethodCheckoutViewController(viewModel: viewModel, theme: config.themeSettings, delegate: self)
         case .managePaymentMethods:
-            controller = ManagePaymentMethodsViewController(delegate: self)
+            controller = ManagePaymentMethodsViewController(theme: config.themeSettings, delegate: self)
             break
         }
         return controller
