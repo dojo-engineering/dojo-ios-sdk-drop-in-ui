@@ -29,6 +29,8 @@ class ThemeSettings {
     
     var fontPoweredByDojo: UIFont
     
+    var colorPoweredByDojo: UIColor //TODO
+    
     init (dojoTheme: DojoThemeSettings) {
         
         primaryLabelTextColor = dojoTheme.primaryLabelTextColor
@@ -42,6 +44,8 @@ class ThemeSettings {
         
         primaryCTAButtonCornerRadius = 21
         
+        colorPoweredByDojo = .black
+        
         // Set fall-back fonts if custom fonts are not available
         fontBody1 = UIFont.systemFont(ofSize: 16, weight: .regular)
         
@@ -50,6 +54,7 @@ class ThemeSettings {
         fontHeading5Bold = UIFont.systemFont(ofSize: 20, weight: .bold)
         fontPrimaryCTAButtonActive = UIFont.systemFont(ofSize: 16, weight: .regular)
         fontPoweredByDojo = UIFont.systemFont(ofSize: 14, weight: .regular)
+        
         
         // set custom fonts
         registerFonts() // register custom fonts to use inside the SDK
@@ -81,6 +86,7 @@ extension ThemeSettings {
         // modify items that are inaccessible by public API
         theme.primarySurfaceBackgroundColor = UIColor.black
         theme.primaryCTAButtonActiveTextColor = UIColor.black
+        theme.colorPoweredByDojo = .white
         return theme
     }
     

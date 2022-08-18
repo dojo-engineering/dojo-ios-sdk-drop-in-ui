@@ -18,10 +18,7 @@ class PaymentResultViewController: BaseUIViewController {
     @IBOutlet weak var labelSubtitle2: UILabel!
     @IBOutlet weak var buttonDone: UIButton!
     
-    //TODO: move to an external element
-    @IBOutlet weak var imgViewPoweredBy: UIImageView!
     @IBOutlet weak var imgViewResult: UIImageView!
-    @IBOutlet weak var labelPoweredBy: UILabel!
     
     var viewModel: PaymentResultViewModel
     var delegate: PaymentResultViewControllerDelegate?
@@ -69,12 +66,6 @@ class PaymentResultViewController: BaseUIViewController {
         buttonDone.setTitleColor(theme.primaryCTAButtonActiveTextColor, for: .normal)
         buttonDone.tintColor = theme.primaryCTAButtonActiveTextColor
         buttonDone.layer.cornerRadius = theme.primaryCTAButtonCornerRadius
-        
-        //TODO: specific property
-        labelPoweredBy.textColor = theme.primaryCTAButtonActiveBackgroundColor
-        labelPoweredBy.font = theme.fontPoweredByDojo
-        labelPoweredBy.setTextSpacingBy(value: 0.5)
-        imgViewPoweredBy.tintColor = theme.primaryCTAButtonActiveBackgroundColor
     }
     
     func updateUIState() {

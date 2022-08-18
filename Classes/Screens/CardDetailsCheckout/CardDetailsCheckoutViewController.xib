@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CardDetailsCheckoutViewController" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
             <connections>
                 <outlet property="activityIndicator" destination="OlF-Oo-q6O" id="x8Q-h3-Zua"/>
+                <outlet property="footerPoweredByDojoView" destination="FRT-lp-E1d" id="zp2-Tp-82n"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -47,16 +48,26 @@
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="OlF-Oo-q6O">
                     <rect key="frame" x="197" y="438" width="20" height="20"/>
                 </activityIndicatorView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FRT-lp-E1d" customClass="FooterPoweredByDojo" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="822" width="414" height="40"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Wjj-3E-N4f"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="cLD-ce-gh5" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="5fj-dU-dub"/>
+                <constraint firstItem="FRT-lp-E1d" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="G2u-cq-KhT"/>
                 <constraint firstItem="Swm-bR-QtT" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="LeY-TF-4QP"/>
+                <constraint firstAttribute="trailing" secondItem="FRT-lp-E1d" secondAttribute="trailing" id="ZeJ-VZ-R65"/>
                 <constraint firstItem="Swm-bR-QtT" firstAttribute="top" secondItem="iPh-OF-730" secondAttribute="bottom" constant="34" id="fWs-fF-ZeQ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Swm-bR-QtT" secondAttribute="bottom" constant="89" id="ikt-IP-156"/>
                 <constraint firstItem="iPh-OF-730" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="jVw-LH-LeS"/>
                 <constraint firstItem="OlF-Oo-q6O" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="pu5-Kq-mnc"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="FRT-lp-E1d" secondAttribute="bottom" id="qD2-nd-jVI"/>
                 <constraint firstItem="iPh-OF-730" firstAttribute="top" secondItem="cLD-ce-gh5" secondAttribute="bottom" constant="38" id="rvd-hd-1h7"/>
                 <constraint firstItem="OlF-Oo-q6O" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="xbV-Ru-Dm8"/>
             </constraints>

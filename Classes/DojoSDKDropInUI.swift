@@ -27,8 +27,8 @@ public class DojoSDKDropInUI {
             self.rootCoordinator = RootCoordinator(presentationViewController: controller,
                                                    config: self.configurationManager,
                                                    delegate: self)
-//            self.rootCoordinator?.showPaymentMethodCheckout()
-            self.rootCoordinator?.showPaymentResult(resultCode: 0)
+            self.rootCoordinator?.showPaymentMethodCheckout()
+//            self.rootCoordinator?.showPaymentResult(resultCode: 0)
         }
     }
 }

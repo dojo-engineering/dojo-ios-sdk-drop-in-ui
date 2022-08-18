@@ -9,6 +9,8 @@ import UIKit
 
 class BaseUIViewController: UIViewController {
     
+    @IBOutlet weak var footerPoweredByDojoView: FooterPoweredByDojo?
+    
     // TODO a custom init that will take in delegate
     var baseDelegate: BaseViewControllerDelegate?
     
@@ -17,6 +19,7 @@ class BaseUIViewController: UIViewController {
     var displayCloseButton: Bool = true // display 'X' (close button) in the header
     var displayBackButton: Bool = true // display '<' (back button) in the header
     var theme: ThemeSettings = ThemeSettings.getLightTheme() // Light theme by default
+    var footer: FooterPoweredByDojo?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +36,8 @@ class BaseUIViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: theme.headerTintColor,
                                                                         .font: theme.fontHeading5Bold]
         self.view.backgroundColor = theme.primarySurfaceBackgroundColor
+        
+        footerPoweredByDojoView?.setTheme(theme: theme)
     }
 }
 

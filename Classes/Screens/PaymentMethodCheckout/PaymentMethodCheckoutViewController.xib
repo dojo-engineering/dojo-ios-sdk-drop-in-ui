@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PaymentMethodCheckoutViewController" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
             <connections>
+                <outlet property="footerPoweredByDojoView" destination="Utf-dq-Cdi" id="PVT-YT-d3k"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -35,16 +36,27 @@
                         <action selector="onPayUsingApplePayPress:" destination="-1" eventType="touchUpInside" id="x3f-7L-VOj"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Utf-dq-Cdi" customClass="FooterPoweredByDojo" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="822" width="414" height="40"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="7ZE-4z-FnV"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="J7i-iS-hE8" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="IJW-U3-myk"/>
                 <constraint firstItem="DIE-VP-Mbo" firstAttribute="top" secondItem="J7i-iS-hE8" secondAttribute="bottom" constant="37" id="adH-bw-uZw"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Utf-dq-Cdi" secondAttribute="trailing" id="cKV-Oj-dhF"/>
                 <constraint firstItem="DIE-VP-Mbo" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="h4Q-F5-XGc"/>
+                <constraint firstItem="Utf-dq-Cdi" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="hNh-ob-wGa"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="DIE-VP-Mbo" secondAttribute="bottom" constant="47" id="sfL-1k-Y7t"/>
+                <constraint firstItem="Utf-dq-Cdi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="wj3-MS-U5M"/>
+                <constraint firstItem="Utf-dq-Cdi" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="zkz-iC-7S1"/>
             </constraints>
-            <point key="canvasLocation" x="132" y="33"/>
+            <point key="canvasLocation" x="131.8840579710145" y="32.8125"/>
         </view>
     </objects>
     <resources>

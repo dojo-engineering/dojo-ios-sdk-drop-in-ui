@@ -37,6 +37,9 @@ class RootCoordinator: RootCoordinatorProtocol {
           delegate: RootCoordinatorDelegate) {
         self.presentationViewController = presentationViewController
         self.rootNavController = UINavigationController()
+        if #available(iOS 13.0, *) { // do not dismiss on swiping down
+            self.rootNavController.isModalInPresentation = true
+        }
         self.config = config
         self.delegate = delegate
     }
