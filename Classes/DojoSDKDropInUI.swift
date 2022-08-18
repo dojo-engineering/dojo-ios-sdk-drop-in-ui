@@ -19,7 +19,7 @@ public class DojoSDKDropInUI {
                                  completion: ((Int) -> Void)?) {
         DispatchQueue.main.async {
 //            let theme = ThemeSettings(dojoTheme: themeSettings ?? DojoThemeSettings.getLightTheme())
-            let theme = ThemeSettings.getDarkTheme()
+            let theme = ThemeSettings.getLightTheme()
             self.completionCallback = completion
             self.configurationManager = ConfigurationManager(token: token,
                                                              isSandbox: isSandbox,

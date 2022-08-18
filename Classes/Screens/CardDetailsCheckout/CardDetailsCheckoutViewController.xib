@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="activityIndicator" destination="OlF-Oo-q6O" id="x8Q-h3-Zua"/>
                 <outlet property="footerPoweredByDojoView" destination="FRT-lp-E1d" id="zp2-Tp-82n"/>
+                <outlet property="topNavigationSeparatorView" destination="xKB-Pt-sx7" id="O5n-fd-Hfh"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -55,13 +56,22 @@
                         <constraint firstAttribute="height" constant="40" id="Wjj-3E-N4f"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xKB-Pt-sx7" userLabel="topSeparator">
+                    <rect key="frame" x="0.0" y="44" width="414" height="0.5"/>
+                    <color key="backgroundColor" systemColor="tintColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="0.5" id="09Y-34-Xnw"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="cLD-ce-gh5" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="5fj-dU-dub"/>
+                <constraint firstAttribute="trailing" secondItem="xKB-Pt-sx7" secondAttribute="trailing" id="9Ze-7a-p4V"/>
                 <constraint firstItem="FRT-lp-E1d" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="G2u-cq-KhT"/>
                 <constraint firstItem="Swm-bR-QtT" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="LeY-TF-4QP"/>
+                <constraint firstItem="xKB-Pt-sx7" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="OKf-YO-hLd"/>
                 <constraint firstAttribute="trailing" secondItem="FRT-lp-E1d" secondAttribute="trailing" id="ZeJ-VZ-R65"/>
                 <constraint firstItem="Swm-bR-QtT" firstAttribute="top" secondItem="iPh-OF-730" secondAttribute="bottom" constant="34" id="fWs-fF-ZeQ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Swm-bR-QtT" secondAttribute="bottom" constant="89" id="ikt-IP-156"/>
@@ -69,6 +79,7 @@
                 <constraint firstItem="OlF-Oo-q6O" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="pu5-Kq-mnc"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="FRT-lp-E1d" secondAttribute="bottom" id="qD2-nd-jVI"/>
                 <constraint firstItem="iPh-OF-730" firstAttribute="top" secondItem="cLD-ce-gh5" secondAttribute="bottom" constant="38" id="rvd-hd-1h7"/>
+                <constraint firstItem="xKB-Pt-sx7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ugv-hk-cJN"/>
                 <constraint firstItem="OlF-Oo-q6O" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="xbV-Ru-Dm8"/>
             </constraints>
             <point key="canvasLocation" x="132" y="106"/>
@@ -77,6 +88,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="tintColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

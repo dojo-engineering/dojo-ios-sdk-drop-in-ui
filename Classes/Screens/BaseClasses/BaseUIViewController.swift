@@ -10,7 +10,7 @@ import UIKit
 class BaseUIViewController: UIViewController {
     
     @IBOutlet weak var footerPoweredByDojoView: FooterPoweredByDojo?
-    
+    @IBOutlet weak var topNavigationSeparatorView: UIView?
     // TODO a custom init that will take in delegate
     var baseDelegate: BaseViewControllerDelegate?
     
@@ -38,6 +38,7 @@ class BaseUIViewController: UIViewController {
         self.view.backgroundColor = theme.primarySurfaceBackgroundColor
         
         footerPoweredByDojoView?.setTheme(theme: theme)
+        topNavigationSeparatorView?.backgroundColor = theme.separatorColor
     }
 }
 
@@ -57,7 +58,6 @@ extension BaseUIViewController {
     
     func setUpBackButton() {
         navigationItem.hidesBackButton = !displayBackButton
-        
         // TODO: theme setting
         navigationController?.navigationBar.tintColor = UIColor.black
     }

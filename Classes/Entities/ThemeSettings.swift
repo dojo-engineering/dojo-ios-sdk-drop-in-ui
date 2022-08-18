@@ -18,6 +18,7 @@ class ThemeSettings {
     var primaryCTAButtonActiveBackgroundColor: UIColor
     var primaryCTAButtonCornerRadius: CGFloat
     var primaryCTAButtonActiveTextColor: UIColor
+    var separatorColor: UIColor
     
     var fontBody1: UIFont
     
@@ -30,6 +31,7 @@ class ThemeSettings {
     var fontPoweredByDojo: UIFont
     
     var colorPoweredByDojo: UIColor //TODO
+    
     
     init (dojoTheme: DojoThemeSettings) {
         
@@ -44,6 +46,7 @@ class ThemeSettings {
         
         primaryCTAButtonCornerRadius = 21
         
+        separatorColor = .black.withAlphaComponent(0.3)
         colorPoweredByDojo = .black
         
         // Set fall-back fonts if custom fonts are not available
@@ -87,6 +90,7 @@ extension ThemeSettings {
         theme.primarySurfaceBackgroundColor = UIColor.black
         theme.primaryCTAButtonActiveTextColor = UIColor.black
         theme.colorPoweredByDojo = .white
+        theme.separatorColor = .white.withAlphaComponent(0.3)
         return theme
     }
     
