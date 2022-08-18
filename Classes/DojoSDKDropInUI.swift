@@ -4,7 +4,7 @@ import dojo_ios_sdk
 public class DojoSDKDropInUI {
     
     var configurationManager: ConfigurationManager
-    var rootCoordinator: RootCoordinatorProtocol? //TODO: optional?
+    var rootCoordinator: RootCoordinatorProtocol?
     var completionCallback: ((Int) -> Void)?
     
     public init() {
@@ -19,7 +19,7 @@ public class DojoSDKDropInUI {
                                  completion: ((Int) -> Void)?) {
         DispatchQueue.main.async {
 //            let theme = ThemeSettings(dojoTheme: themeSettings ?? DojoThemeSettings.getLightTheme())
-            let theme = ThemeSettings.getLightTheme()
+            let theme = ThemeSettings.getDarkTheme()
             self.completionCallback = completion
             self.configurationManager = ConfigurationManager(token: token,
                                                              isSandbox: isSandbox,

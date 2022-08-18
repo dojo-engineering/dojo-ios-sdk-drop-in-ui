@@ -41,9 +41,13 @@ class PaymentResultViewController: BaseUIViewController {
     }
     
     override func viewDidLoad() {
-        self.title = "Result"
         super.viewDidLoad()
         updateUIState()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNavigationTitle("Result")
     }
     
     override func viewDidLayoutSubviews() {

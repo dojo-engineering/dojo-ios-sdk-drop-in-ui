@@ -31,9 +31,13 @@ class ManagePaymentMethodsViewController: BaseUIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Change payment method"
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNavigationTitle("Change payment method")
     }
     
     @IBAction func onPayUsingNewCardPress(_ sender: Any) {

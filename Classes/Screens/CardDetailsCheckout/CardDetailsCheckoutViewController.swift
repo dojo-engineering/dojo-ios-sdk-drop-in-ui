@@ -39,7 +39,11 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.isHidden = true
-        self.title = "Pay with new card"
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNavigationTitle("Pay with new card")
     }
 
     @IBAction func onPayButtonPress(_ sender: Any) {

@@ -11,7 +11,6 @@ class BaseUIViewController: UIViewController {
     
     @IBOutlet weak var footerPoweredByDojoView: FooterPoweredByDojo?
     @IBOutlet weak var topNavigationSeparatorView: UIView?
-    // TODO a custom init that will take in delegate
     var baseDelegate: BaseViewControllerDelegate?
     
     // Per screen settings with defaul values
@@ -33,12 +32,12 @@ class BaseUIViewController: UIViewController {
     }
     
     func setUpDesign() {
-        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: theme.headerTintColor,
-                                                                        .font: theme.fontHeading5Bold]
         self.view.backgroundColor = theme.primarySurfaceBackgroundColor
         
         footerPoweredByDojoView?.setTheme(theme: theme)
         topNavigationSeparatorView?.backgroundColor = theme.separatorColor
+        navigationController?.navigationBar.tintColor = theme.headerTintColor
+        navigationItem.rightBarButtonItem?.tintColor = theme.headerButtonTintColor
     }
 }
 
@@ -51,14 +50,31 @@ extension BaseUIViewController {
                                           target: self, action: #selector(onClosePress))
         buttonClose.image = UIImage(named: "icon-button-cross-close", in: Bundle(for: type(of: self)), compatibleWith: nil)
         navigationItem.rightBarButtonItem = buttonClose
-        
-        // TODO: theme setting
-        navigationItem.rightBarButtonItem?.tintColor = theme.headerButtonTintColor
     }
     
     func setUpBackButton() {
         navigationItem.hidesBackButton = !displayBackButton
-        // TODO: theme setting
-        navigationController?.navigationBar.tintColor = UIColor.black
+    }
+    
+    func setNavigationTitle(_ title: String) {
+        if let navigationBar = self.navigationController?.navigationBar {
+            let backButtonIsHidden = navigationController?.viewControllers.count == 1 || displayBackButton == false
+            let xPosition: CGFloat = backButtonIsHidden ? 16 : 42
+            let labelTag = 88883
+            let titleLabelFrame = CGRect(x: xPosition,
+                                         y: 0,
+                                         width: navigationBar.frame.width * 0.7,
+                                         height: navigationBar.frame.height)
+            // Set up
+            let customTitleLabel = UILabel(frame: titleLabelFrame)
+            customTitleLabel.font = theme.fontHeading5Bold
+            customTitleLabel.textColor = theme.headerTintColor
+            customTitleLabel.text = title
+            customTitleLabel.tag = labelTag
+            // Remove old title if exists
+            navigationBar.subviews.first(where: {$0.tag == labelTag})?.removeFromSuperview()
+            // Add to view
+            navigationBar.addSubview(customTitleLabel)
+        }
     }
 }

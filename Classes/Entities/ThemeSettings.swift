@@ -10,45 +10,44 @@ import UIKit
 
 /// Private object for a wider theme set up
 class ThemeSettings {
+    // Colors
     var primaryLabelTextColor: UIColor
     var secondaryLabelTextColor: UIColor
     var headerTintColor: UIColor
     var headerButtonTintColor: UIColor
     var primarySurfaceBackgroundColor: UIColor
     var primaryCTAButtonActiveBackgroundColor: UIColor
-    var primaryCTAButtonCornerRadius: CGFloat
     var primaryCTAButtonActiveTextColor: UIColor
     var separatorColor: UIColor
+    var colorPoweredByDojo: UIColor
     
+    // Fonts
     var fontBody1: UIFont
-    
     var fontHeading4: UIFont
     var fontHeading5: UIFont
     var fontHeading5Bold: UIFont //TODO: speak with Designers
-    
     var fontPrimaryCTAButtonActive: UIFont
-    
     var fontPoweredByDojo: UIFont
     
-    var colorPoweredByDojo: UIColor //TODO
-    
+    // Other
+    var primaryCTAButtonCornerRadius: CGFloat
     
     init (dojoTheme: DojoThemeSettings) {
-        
+        // Colors
         primaryLabelTextColor = dojoTheme.primaryLabelTextColor
         secondaryLabelTextColor = dojoTheme.secondaryLabelTextColor
         headerTintColor = dojoTheme.headerTintColor
         headerButtonTintColor = dojoTheme.headerButtonTintColor
         primaryCTAButtonActiveBackgroundColor = dojoTheme.primaryCTAButtonActiveBackgroundColor
-        
         primarySurfaceBackgroundColor = UIColor.white
         primaryCTAButtonActiveTextColor = UIColor.white
+        colorPoweredByDojo = .black
+        separatorColor = .black.withAlphaComponent(0.3)
         
+        // Other
         primaryCTAButtonCornerRadius = 21
         
-        separatorColor = .black.withAlphaComponent(0.3)
-        colorPoweredByDojo = .black
-        
+        // Fonts
         // Set fall-back fonts if custom fonts are not available
         fontBody1 = UIFont.systemFont(ofSize: 16, weight: .regular)
         
@@ -58,8 +57,7 @@ class ThemeSettings {
         fontPrimaryCTAButtonActive = UIFont.systemFont(ofSize: 16, weight: .regular)
         fontPoweredByDojo = UIFont.systemFont(ofSize: 14, weight: .regular)
         
-        
-        // set custom fonts
+        // Custom fonts
         registerFonts() // register custom fonts to use inside the SDK
         
         if let customFontBody1 = UIFont(name: RobotoFont.regular.rawValue, size: 16) { fontBody1 = customFontBody1 }
@@ -116,4 +114,3 @@ extension ThemeSettings {
         CTFontManagerRegisterGraphicsFont(font, nil)
       }
 }
-

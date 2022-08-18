@@ -35,7 +35,11 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Payment Method"
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNavigationTitle("Payment Method")
     }
     
     @IBAction func onManagePaymentMethodsPress(_ sender: Any) {
