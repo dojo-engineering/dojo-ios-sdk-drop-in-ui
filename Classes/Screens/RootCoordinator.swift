@@ -28,7 +28,7 @@ class RootCoordinator: RootCoordinatorProtocol {
     }
     
     let presentationViewController: UIViewController
-    let rootNavController: UINavigationController
+    let rootNavController: BaseNavigationController
     let config: ConfigurationManager
     var delegate: RootCoordinatorDelegate?
     
@@ -36,7 +36,10 @@ class RootCoordinator: RootCoordinatorProtocol {
           config: ConfigurationManager,
           delegate: RootCoordinatorDelegate) {
         self.presentationViewController = presentationViewController
-        self.rootNavController = UINavigationController()
+        self.rootNavController = BaseNavigationController()
+        if #available(iOS 13.0, *) { // do not dismiss on swiping down
+            self.rootNavController.isModalInPresentation = true
+        }
         self.config = config
         self.delegate = delegate
     }
@@ -55,7 +58,7 @@ class RootCoordinator: RootCoordinatorProtocol {
     
     func showPaymentResult(resultCode: Int) {
         let viewModel = PaymentResultViewModel(config: config, resultCode: resultCode)
-        let controller = PaymentResultViewController(viewModel: viewModel, delegate: self)
+        let controller = PaymentResultViewController(viewModel: viewModel, theme: config.themeSettings, delegate: self)
         pushNewViewControllerToTheFlow(controller: controller)
     }
 }
@@ -82,12 +85,12 @@ extension RootCoordinator {
         switch screenType {
         case .cardDeailsCheckout:
             let viewModel = CardDetailsCheckoutViewModel(config: config)
-            controller = CardDetailsCheckoutViewController(viewModel: viewModel, delegate: self)
+            controller = CardDetailsCheckoutViewController(viewModel: viewModel, theme: config.themeSettings, delegate: self)
         case .paymentMethodCheckout:
             let viewModel = PaymentMethodCheckoutViewModel(config: config)
-            controller = PaymentMethodCheckoutViewController(viewModel: viewModel, delegate: self)
+            controller = PaymentMethodCheckoutViewController(viewModel: viewModel, theme: config.themeSettings, delegate: self)
         case .managePaymentMethods:
-            controller = ManagePaymentMethodsViewController(delegate: self)
+            controller = ManagePaymentMethodsViewController(theme: config.themeSettings, delegate: self)
             break
         }
         return controller

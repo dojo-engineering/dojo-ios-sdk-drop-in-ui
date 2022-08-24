@@ -20,6 +20,7 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     public init(viewModel: CardDetailsCheckoutViewModel,
+                theme: ThemeSettings,
                 delegate : CardDetailsCheckoutViewControllerDelegate) {
         self.viewModel = viewModel
         self.cardDetails = viewModel.cardDetails3DS
@@ -28,6 +29,7 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         let podBundle = Bundle(for: type(of: self))
         super.init(nibName: nibName, bundle: podBundle)
         self.baseDelegate = delegate
+        self.theme = theme
     }
     
     required init?(coder: NSCoder) {
@@ -37,7 +39,11 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.isHidden = true
-        self.title = "Pay with new card"
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNavigationTitle("Pay with new card")
     }
 
     @IBAction func onPayButtonPress(_ sender: Any) {

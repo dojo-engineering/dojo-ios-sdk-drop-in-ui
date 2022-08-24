@@ -11,6 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ManagePaymentMethodsViewController" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
             <connections>
+                <outlet property="footerPoweredByDojoView" destination="kVw-30-O4F" id="fwy-KO-c9s"/>
+                <outlet property="topNavigationSeparatorView" destination="5qR-ae-jTa" id="enc-aj-gsT"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -27,12 +29,32 @@
                         <action selector="onPayUsingNewCardPress:" destination="-1" eventType="touchUpInside" id="W59-nt-Hbt"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kVw-30-O4F" customClass="FooterPoweredByDojo" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="822" width="414" height="40"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="P29-FB-zsJ"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5qR-ae-jTa" userLabel="topSeparator">
+                    <rect key="frame" x="0.0" y="44" width="414" height="0.5"/>
+                    <color key="backgroundColor" systemColor="tintColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="0.5" id="bza-lD-bGL"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="kVw-30-O4F" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="E7g-Fw-fUM"/>
+                <constraint firstAttribute="trailing" secondItem="5qR-ae-jTa" secondAttribute="trailing" id="ENa-Dp-TUh"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="NIU-8V-UnT" secondAttribute="bottom" constant="52" id="J2e-uL-XWN"/>
+                <constraint firstItem="kVw-30-O4F" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="RsU-sB-6ts"/>
                 <constraint firstItem="NIU-8V-UnT" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="g7X-qK-ebG"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="kVw-30-O4F" secondAttribute="bottom" id="qNk-Bg-9Du"/>
+                <constraint firstItem="5qR-ae-jTa" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="ud0-oa-gBX"/>
+                <constraint firstItem="5qR-ae-jTa" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="x21-LA-JvU"/>
             </constraints>
             <point key="canvasLocation" x="132" y="106"/>
         </view>
@@ -40,6 +62,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="tintColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

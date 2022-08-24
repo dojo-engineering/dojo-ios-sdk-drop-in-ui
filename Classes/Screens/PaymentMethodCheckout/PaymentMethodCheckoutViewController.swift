@@ -15,8 +15,9 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
     
     let viewModel: PaymentMethodCheckoutViewModel
     var delegate: PaymentMethodCheckoutViewControllerDelegate?
-
+    
     public init(viewModel: PaymentMethodCheckoutViewModel,
+                theme: ThemeSettings,
                 delegate: PaymentMethodCheckoutViewControllerDelegate) {
         self.viewModel = viewModel
         self.delegate = delegate
@@ -24,16 +25,21 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
         let podBundle = Bundle(for: type(of: self))
         super.init(nibName: nibName, bundle: podBundle)
         self.baseDelegate = delegate
+        self.theme = theme
+        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Payment Method"
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNavigationTitle("Payment Method")
     }
     
     @IBAction func onManagePaymentMethodsPress(_ sender: Any) {
