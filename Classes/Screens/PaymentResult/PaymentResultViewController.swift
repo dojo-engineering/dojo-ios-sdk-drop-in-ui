@@ -47,7 +47,12 @@ class PaymentResultViewController: BaseUIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setNavigationTitle("Result")
+        //TODO: move to a better place
+        if viewModel.resultCode == 0 {
+            setNavigationTitle("Payment completed")
+        } else {
+            setNavigationTitle("Payment failed")
+        }
     }
     
     override func viewDidLayoutSubviews() {
