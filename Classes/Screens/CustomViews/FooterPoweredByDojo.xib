@@ -10,9 +10,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FooterPoweredByDojo" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
             <connections>
+                <outlet property="buttonPrivacy" destination="2Av-y6-0fO" id="wJU-sG-m39"/>
+                <outlet property="buttonTerms" destination="tc2-b9-Lbk" id="Jae-B6-mO4"/>
+                <outlet property="constraintPoweredByCenter" destination="g1z-k7-JzF" id="AaY-2t-HU4"/>
+                <outlet property="constraintPoweredByTailing" destination="tfj-o4-Zhp" id="uIV-1O-41f"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="3rn-M4-zxN"/>
                 <outlet property="imageLogo" destination="A0x-8G-3ZQ" id="6Bm-H3-DRd"/>
                 <outlet property="labelPoweredBy" destination="yDT-mM-BVr" id="Esc-0f-qUC"/>
+                <outlet property="stackViewRight" destination="hWp-WM-BjF" id="fS1-Q2-tvU"/>
+                <outlet property="viewSeparator" destination="a7L-hV-CAC" id="dyw-4B-SbB"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -20,8 +26,16 @@
             <rect key="frame" x="0.0" y="0.0" width="475" height="71"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a7L-hV-CAC" userLabel="Separator">
+                    <rect key="frame" x="237" y="25.5" width="1" height="20"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="b5z-aR-jNf"/>
+                        <constraint firstAttribute="width" constant="1" id="rZt-FD-1Xh"/>
+                    </constraints>
+                </view>
                 <stackView opaque="NO" contentMode="scaleToFill" alignment="lastBaseline" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="sog-6R-Phj" userLabel="PoweredBy">
-                    <rect key="frame" x="180.5" y="27" width="114.5" height="17"/>
+                    <rect key="frame" x="101.5" y="27" width="114.5" height="17"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Powered by" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yDT-mM-BVr">
                             <rect key="frame" x="0.0" y="0.0" width="75.5" height="17"/>
@@ -35,15 +49,48 @@
                         </imageView>
                     </subviews>
                 </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hWp-WM-BjF" userLabel="Buttons">
+                    <rect key="frame" x="250" y="26.5" width="133" height="18"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tc2-b9-Lbk" userLabel="Terms">
+                            <rect key="frame" x="0.0" y="0.0" width="63" height="18"/>
+                            <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="Terms"/>
+                            <connections>
+                                <action selector="onTermsButtonPress:" destination="-1" eventType="touchUpInside" id="QN7-1r-l49"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Av-y6-0fO">
+                            <rect key="frame" x="63" y="0.0" width="70" height="18"/>
+                            <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="Privacy"/>
+                            <connections>
+                                <action selector="onPrivacyButtonPress:" destination="-1" eventType="touchUpInside" id="r0u-JM-hnY"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="sog-6R-Phj" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="7SO-Wo-Ji8"/>
-                <constraint firstItem="sog-6R-Phj" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="qsa-lG-kjw"/>
+                <constraint firstItem="a7L-hV-CAC" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="07c-tV-d0X"/>
+                <constraint firstItem="sog-6R-Phj" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="K70-k2-JdV"/>
+                <constraint firstItem="hWp-WM-BjF" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="YIn-8j-tyu"/>
+                <constraint firstItem="hWp-WM-BjF" firstAttribute="leading" secondItem="a7L-hV-CAC" secondAttribute="trailing" constant="12" id="Zb1-u2-k8d"/>
+                <constraint firstItem="a7L-hV-CAC" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="d44-RN-Cx6"/>
+                <constraint firstItem="sog-6R-Phj" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="g1z-k7-JzF"/>
+                <constraint firstItem="sog-6R-Phj" firstAttribute="trailing" secondItem="a7L-hV-CAC" secondAttribute="trailing" constant="-22" id="tfj-o4-Zhp"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-382" y="-144"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="g1z-k7-JzF"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="-383.33333333333337" y="-144.30803571428569"/>
         </view>
     </objects>
     <resources>

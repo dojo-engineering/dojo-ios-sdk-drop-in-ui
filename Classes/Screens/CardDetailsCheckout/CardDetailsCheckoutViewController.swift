@@ -39,6 +39,7 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.isHidden = true
+        footerPoweredByDojoView?.setStyle(FooterPoweredByDojoStyle.checkoutPage)
     }
     
     override func viewWillAppear(_ animated: Bool) {

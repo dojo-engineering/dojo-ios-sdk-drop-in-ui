@@ -39,7 +39,7 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setNavigationTitle("Payment Method")
+        setNavigationTitle(LocalizedText.PaymentMethodCheckout.title)
     }
     
     @IBAction func onManagePaymentMethodsPress(_ sender: Any) {

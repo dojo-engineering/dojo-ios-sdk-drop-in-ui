@@ -1,0 +1,27 @@
+/* 
+  Localizable.strings
+  SuperpayApp
+
+  Created by Xinghou Liu on 20/02/2020.
+  Copyright © 2020 Paymentsense. All rights reserved.
+*/
+
+"dojo_ui_sdk_payment_method_checkout_title"="Payment method";
+"dojo_ui_sdk_footer_powered_by_title"="Powered by";
+"dojo_ui_sdk_footer_powered_by_terms"="Terms";
+"dojo_ui_sdk_footer_powered_by_privacy"="Privacy";
+"dojo_ui_sdk_manage_payment_methods_title"="Change payment method";
+"dojo_ui_sdk_manage_payment_methods_button_add_new_card"="Add new card";
+"dojo_ui_sdk_card_details_checkout_title"="Pay with new card";
+"dojo_ui_sdk_card_details_checkout_field_card_name"="Name on card";
+"dojo_ui_sdk_card_details_checkout_field_pan"="Debit/Credit Card information";
+"dojo_ui_sdk_card_details_checkout_placeholder_pan"="1234 1234 1234 1234";
+"dojo_ui_sdk_card_details_checkout_placeholder_expiry"="MM/YY";
+"dojo_ui_sdk_card_details_checkout_placeholder_cvv"="CVC";
+"dojo_ui_sdk_card_details_checkout_you_pay"="You pay";
+"dojo_ui_sdk_card_details_checkout_button_pay"="Pay";
+"dojo_ui_sdk_payment_result_title_success"="Payment completed";
+"dojo_ui_sdk_payment_result_title_fail"="Payment failed";
+"dojo_ui_sdk_payment_result_main_title_success"="Payment successful";
+"dojo_ui_sdk_payment_result_main_title_fail"="Payment failed";
+"dojo_ui_sdk_payment_result_button_done"="Done";
