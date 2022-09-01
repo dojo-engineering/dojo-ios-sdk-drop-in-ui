@@ -43,15 +43,16 @@ class PaymentResultViewController: BaseUIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUIState()
+        setupTranslations() // TODO: move to the base class
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //TODO: move to a better place
         if viewModel.resultCode == 0 {
-            setNavigationTitle("Payment completed")
+            setNavigationTitle(LocalizedText.PaymentResult.titleSuccess)
         } else {
-            setNavigationTitle("Payment failed")
+            setNavigationTitle(LocalizedText.PaymentResult.titleFail)
         }
     }
     
@@ -59,6 +60,10 @@ class PaymentResultViewController: BaseUIViewController {
         super.viewDidLayoutSubviews()
         // TODO: properly document
         buttonDone.titleLabel?.font = theme.fontPrimaryCTAButtonActive
+    }
+    
+    func setupTranslations() {
+        buttonDone.setTitle(LocalizedText.PaymentResult.buttonDone, for: .normal)
     }
     
     override func setUpDesign() {
@@ -79,10 +84,10 @@ class PaymentResultViewController: BaseUIViewController {
     
     func updateUIState() {
         if viewModel.resultCode == 0 {
-            labelMainText.text = "Payment successful"
+            labelMainText.text = LocalizedText.PaymentResult.mainTitleSuccess
             imgViewResult.image = UIImage(named: "img-result-success-light", in: Bundle(for: type(of: self)), compatibleWith: nil)
         } else {
-            labelMainText.text = "Payment failed"
+            labelMainText.text = LocalizedText.PaymentResult.mainTitleFail
             imgViewResult.image = UIImage(named: "img-result-error-light", in: Bundle(for: type(of: self)), compatibleWith: nil)
         }
     }

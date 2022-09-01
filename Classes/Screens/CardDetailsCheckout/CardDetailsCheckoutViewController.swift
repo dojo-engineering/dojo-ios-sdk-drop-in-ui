@@ -44,7 +44,7 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setNavigationTitle("Pay with new card")
+        setNavigationTitle(LocalizedText.CardDetailsCheckout.title)
     }
 
     @IBAction func onPayButtonPress(_ sender: Any) {

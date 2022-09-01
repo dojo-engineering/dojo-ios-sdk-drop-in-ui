@@ -32,7 +32,7 @@ TODO: Add long description of the pod here.
 
   s.source_files = 'Classes/**/*.{h,m,swift}'
 
-  s.resources = 'Classes/Screens/**/*.{xcassets,xib,strings}'
+  s.resources = 'Classes/**/*.{xcassets,xib,strings}'
 
   # s.resource_bundles = {
   #   'dojo-ios-sdk-drop-in-ui-resources' => ['Classes/**/*.{xcassets,xib,strings}']
@@ -40,5 +40,5 @@ TODO: Add long description of the pod here.
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  s.dependency 'dojo-ios-sdk', '0.2.0'
+  s.dependency 'dojo-ios-sdk', '0.3.0'
 end
