@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PaymentMethodCheckoutViewController" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
             <connections>
                 <outlet property="footerPoweredByDojoView" destination="Utf-dq-Cdi" id="PVT-YT-d3k"/>
+                <outlet property="labelAmountToPay" destination="nIa-N9-fws" id="JJr-Sf-XLm"/>
                 <outlet property="topNavigationSeparatorView" destination="dgb-bS-UCe" id="UgZ-Md-bK6"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -22,7 +23,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J7i-iS-hE8">
-                    <rect key="frame" x="109" y="716" width="196" height="31"/>
+                    <rect key="frame" x="109" y="743" width="196" height="31"/>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="Manage Payment Methods"/>
                     <connections>
@@ -51,6 +52,12 @@
                         <constraint firstAttribute="height" constant="0.5" id="Xch-hG-hX5"/>
                     </constraints>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="amount to pay:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nIa-N9-fws">
+                    <rect key="frame" x="150" y="704" width="114" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -58,10 +65,12 @@
                 <constraint firstItem="dgb-bS-UCe" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="2eE-vE-t35"/>
                 <constraint firstItem="J7i-iS-hE8" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="IJW-U3-myk"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="dgb-bS-UCe" secondAttribute="trailing" id="V6L-s1-iVS"/>
-                <constraint firstItem="DIE-VP-Mbo" firstAttribute="top" secondItem="J7i-iS-hE8" secondAttribute="bottom" constant="37" id="adH-bw-uZw"/>
+                <constraint firstItem="DIE-VP-Mbo" firstAttribute="top" secondItem="J7i-iS-hE8" secondAttribute="bottom" constant="10" id="adH-bw-uZw"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Utf-dq-Cdi" secondAttribute="trailing" id="cKV-Oj-dhF"/>
+                <constraint firstItem="nIa-N9-fws" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="feQ-00-cnB"/>
                 <constraint firstItem="DIE-VP-Mbo" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="h4Q-F5-XGc"/>
                 <constraint firstItem="Utf-dq-Cdi" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="hNh-ob-wGa"/>
+                <constraint firstItem="J7i-iS-hE8" firstAttribute="top" secondItem="nIa-N9-fws" secondAttribute="bottom" constant="18" id="q1Q-0g-z2X"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="DIE-VP-Mbo" secondAttribute="bottom" constant="47" id="sfL-1k-Y7t"/>
                 <constraint firstItem="Utf-dq-Cdi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="wj3-MS-U5M"/>
                 <constraint firstItem="dgb-bS-UCe" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="yn3-0c-VQx"/>

@@ -49,10 +49,6 @@ class RootCoordinator: RootCoordinatorProtocol {
     
     func beginFlow() {
         showDataLoading()
-        // For Demo purposes
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.showPaymentMethodCheckout()
-        }
     }
     
     func showDataLoading() {
@@ -99,7 +95,8 @@ extension RootCoordinator {
         var controller: UIViewController?
         switch screenType {
         case .dataLoading:
-            controller = DataLoadingViewController(theme: config.themeSettings, delegate: self)
+            let viewModel = DataLoadingViewModel(paymentIntentId: config.token)
+            controller = DataLoadingViewController(viewModel: viewModel, theme: config.themeSettings, delegate: self)
         case .cardDeailsCheckout:
             let viewModel = CardDetailsCheckoutViewModel(config: config)
             controller = CardDetailsCheckoutViewController(viewModel: viewModel, theme: config.themeSettings, delegate: self)
@@ -143,5 +140,16 @@ extension RootCoordinator: BaseViewControllerDelegate {
     func onForceClosePress() {
         rootNavController.dismiss(animated: true)
         delegate?.userForceClosedFlow()
+    }
+}
+
+extension RootCoordinator: DataLoadingViewControllerDelegate {
+    func paymentIntentDownloaded(data: String) {
+        showPaymentMethodCheckout()
+    }
+    
+    func errorLoadingPaymentIntent(error: Error) {
+        rootNavController.dismiss(animated: true) //TODO
+        delegate?.userFinishedFlow(resultCode: (error as NSError).code)
     }
 }

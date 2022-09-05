@@ -15,6 +15,7 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
     
     let viewModel: PaymentMethodCheckoutViewModel
     var delegate: PaymentMethodCheckoutViewControllerDelegate?
+    @IBOutlet weak var labelAmountToPay: UILabel!
     
     public init(viewModel: PaymentMethodCheckoutViewModel,
                 theme: ThemeSettings,
