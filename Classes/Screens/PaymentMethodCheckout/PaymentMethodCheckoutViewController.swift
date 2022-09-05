@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PassKit
 
 protocol PaymentMethodCheckoutViewControllerDelegate: BaseViewControllerDelegate {
     func navigateToManagePaymentMethods()
@@ -15,6 +16,9 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
     
     let viewModel: PaymentMethodCheckoutViewModel
     var delegate: PaymentMethodCheckoutViewControllerDelegate?
+    @IBOutlet weak var labelTotalDue: UILabel!
+    @IBOutlet weak var labelTotalAmount: UILabel!
+    @IBOutlet weak var paymentButton: PKPaymentButton!
     
     public init(viewModel: PaymentMethodCheckoutViewModel,
                 theme: ThemeSettings,
@@ -36,11 +40,30 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNavigationTitle(LocalizedText.PaymentMethodCheckout.title)
+    }
+    
+    override func setUpDesign() {
+        super.setUpDesign()
+        labelTotalDue.textColor = theme.primaryLabelTextColor
+        labelTotalDue.font = theme.fontHeading5Medium
+        
+        labelTotalAmount.textColor = theme.primaryLabelTextColor
+        labelTotalAmount.font = theme.fontHeading5Medium
+        
+        paymentButton.setValue(theme.applePayButtonStyle.rawValue, forKey: "style")
+        paymentButton.layer.cornerRadius = theme.primaryCTAButtonCornerRadius
+        paymentButton.clipsToBounds = true
+    }
+    
+    func setupData() {
+        //TODO: proper amount formatter
+        labelTotalAmount.text = "£\(Double(viewModel.paymentIntent.amount.value)/100.0)"
     }
     
     @IBAction func onManagePaymentMethodsPress(_ sender: Any) {

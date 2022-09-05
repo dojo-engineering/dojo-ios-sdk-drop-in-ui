@@ -11,6 +11,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DataLoadingViewController" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
             <connections>
+                <outlet property="footerPoweredByDojoView" destination="U4A-8o-AT5" id="Nhj-zb-ePN"/>
+                <outlet property="materialLoadingIndicator" destination="ghe-Ez-2Jc" id="SeM-j2-dnQ"/>
+                <outlet property="topNavigationSeparatorView" destination="mdv-gM-KcH" id="FFE-HK-XIg"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,21 +22,40 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dny-r7-SoL">
-                    <rect key="frame" x="176.5" y="139.5" width="61" height="21"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ghe-Ez-2Jc" customClass="MaterialLoadingIndicator" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
+                    <rect key="frame" x="189.5" y="132.5" width="35" height="35"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="21" id="1wO-W8-AHb"/>
+                        <constraint firstAttribute="width" constant="35" id="QK0-AF-FKp"/>
+                        <constraint firstAttribute="height" constant="35" id="zKu-eA-3iD"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U4A-8o-AT5" customClass="FooterPoweredByDojo" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="260" width="414" height="40"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="A0Z-Z3-L8C"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mdv-gM-KcH" userLabel="topSeparator">
+                    <rect key="frame" x="0.0" y="44" width="414" height="0.5"/>
+                    <color key="backgroundColor" systemColor="tintColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="0.5" id="zmz-D9-9Fv"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="dny-r7-SoL" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Cp6-wR-DCv"/>
-                <constraint firstItem="dny-r7-SoL" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="jpH-f3-Jpx"/>
+                <constraint firstItem="U4A-8o-AT5" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="0Qz-ed-dZh"/>
+                <constraint firstItem="ghe-Ez-2Jc" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="2S5-GH-Nxm"/>
+                <constraint firstAttribute="trailing" secondItem="mdv-gM-KcH" secondAttribute="trailing" id="BAR-Ta-lPW"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="U4A-8o-AT5" secondAttribute="bottom" id="BcN-Lw-Rhi"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="U4A-8o-AT5" secondAttribute="trailing" id="Ppk-aY-4ck"/>
+                <constraint firstItem="mdv-gM-KcH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="VHd-ZE-eO7"/>
+                <constraint firstItem="mdv-gM-KcH" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="c1h-6n-OMu"/>
+                <constraint firstItem="ghe-Ez-2Jc" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="jHS-et-AhH"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="132" y="91"/>
@@ -42,6 +64,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="tintColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

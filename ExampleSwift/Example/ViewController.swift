@@ -19,7 +19,7 @@ class ViewController: UIViewController {
 
     @IBAction func onStartPaymentFlowPress(_ sender: Any) {
 //        requestPaymentToken { token in
-        let paymentIntentId = ""
+        let paymentIntentId = "pi_sandbox_vT9s9z1ymECFfFNX6qUzVg"
         let theme = DojoThemeSettings(primaryLabelTextColor: UIColor.red,
                                       secondaryLabelTextColor: .green,
                                       headerTintColor: .green,

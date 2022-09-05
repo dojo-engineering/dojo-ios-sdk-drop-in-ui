@@ -10,16 +10,14 @@ import dojo_ios_sdk
 
 class PaymentMethodCheckoutViewModel {
     
-    let isSandbox: Bool
-    let token: String
+    let paymentIntent: PaymentIntent
     
     init(config: ConfigurationManager) {
-        self.isSandbox = config.isSandbox
-        self.token = config.token
+        self.paymentIntent = config.paymentIntent
     }
     
     func processApplePayPayment(fromViewControlelr: UIViewController, completion: ((Int) -> Void)?) {
-        let paymentIntent = DojoPaymentIntent(clientSessionSecret: token, totalAmount: DojoPaymentIntentAmount(value: 10, currencyCode: "GBP"))
+        let paymentIntent = DojoPaymentIntent(clientSessionSecret: self.paymentIntent.clientSessionSecret, totalAmount: paymentIntent.amount)
         let applePayload = DojoApplePayPayload(applePayConfig: DojoApplePayConfig(merchantIdentifier: "merchant.com.something"))
         DojoSDK.executeApplePayPayment(paymentIntent: paymentIntent,
                                        payload: applePayload,

@@ -16,7 +16,7 @@ class BaseNavigationController: UINavigationController, UINavigationControllerDe
         self.delegate = self
         
         self.view.translatesAutoresizingMaskIntoConstraints = false
-        heightConstraint = self.view.heightAnchor.constraint(equalToConstant: 300)
+        heightConstraint = self.view.heightAnchor.constraint(equalToConstant: 350)
         NSLayoutConstraint.activate([
             self.view.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             self.view.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -31,7 +31,7 @@ class BaseNavigationController: UINavigationController, UINavigationControllerDe
         viewController.navigationItem.backBarButtonItem = item
         
         if let _ = viewController as? PaymentMethodCheckoutViewController {
-            heightConstraint?.constant = 300
+            heightConstraint?.constant = 350
         }
 
         if let _ = viewController as? ManagePaymentMethodsViewController {

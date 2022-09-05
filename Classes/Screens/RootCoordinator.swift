@@ -32,7 +32,7 @@ class RootCoordinator: RootCoordinatorProtocol {
     
     let presentationViewController: UIViewController
     let rootNavController: BaseNavigationController
-    let config: ConfigurationManager
+    var config: ConfigurationManager
     var delegate: RootCoordinatorDelegate?
     
     init (presentationViewController: UIViewController,
@@ -49,10 +49,6 @@ class RootCoordinator: RootCoordinatorProtocol {
     
     func beginFlow() {
         showDataLoading()
-        // For Demo purposes
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.showPaymentMethodCheckout()
-        }
     }
     
     func showDataLoading() {
@@ -99,7 +95,8 @@ extension RootCoordinator {
         var controller: UIViewController?
         switch screenType {
         case .dataLoading:
-            controller = DataLoadingViewController(theme: config.themeSettings, delegate: self)
+            let viewModel = DataLoadingViewModel(paymentIntentId: config.paymentIntentId)
+            controller = DataLoadingViewController(viewModel: viewModel, theme: config.themeSettings, delegate: self)
         case .cardDeailsCheckout:
             let viewModel = CardDetailsCheckoutViewModel(config: config)
             controller = CardDetailsCheckoutViewController(viewModel: viewModel, theme: config.themeSettings, delegate: self)
@@ -143,5 +140,17 @@ extension RootCoordinator: BaseViewControllerDelegate {
     func onForceClosePress() {
         rootNavController.dismiss(animated: true)
         delegate?.userForceClosedFlow()
+    }
+}
+
+extension RootCoordinator: DataLoadingViewControllerDelegate {
+    func paymentIntentDownloaded(_ paymentIntent: PaymentIntent) {
+        config.paymentIntent = paymentIntent
+        showPaymentMethodCheckout()
+    }
+    
+    func errorLoadingPaymentIntent(error: Error) {
+        rootNavController.dismiss(animated: true) //TODO: repeats in a few places
+        delegate?.userFinishedFlow(resultCode: (error as NSError).code)
     }
 }

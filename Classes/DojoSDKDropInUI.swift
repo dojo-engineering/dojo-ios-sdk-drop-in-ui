@@ -9,7 +9,9 @@ public class DojoSDKDropInUI {
     
     public init() {
         // TODO refactor
-        configurationManager = ConfigurationManager(token: "", isSandbox: false, themeSettings: ThemeSettings(dojoTheme: DojoThemeSettings.getLightTheme())) // TODO: move to a different place
+        configurationManager = ConfigurationManager(paymentIntentId: "", //TODO: should not be set like this
+                                                    paymentIntent: PaymentIntent(id: "", clientSessionSecret: "", amount: DojoPaymentIntentAmount(value: 0, currencyCode: "")),
+                                                    themeSettings: ThemeSettings(dojoTheme: DojoThemeSettings.getLightTheme())) // TODO: move to a different place
     }
     
     public func startPaymentFlow(paymentIntentId: String,
@@ -20,8 +22,8 @@ public class DojoSDKDropInUI {
 //            let theme = ThemeSettings(dojoTheme: themeSettings ?? DojoThemeSettings.getLightTheme())
             let theme = ThemeSettings.getLightTheme()
             self.completionCallback = completion
-            self.configurationManager = ConfigurationManager(token: paymentIntentId,
-                                                             isSandbox: false,
+            self.configurationManager = ConfigurationManager(paymentIntentId: paymentIntentId,
+                                                             paymentIntent: PaymentIntent(id: "", clientSessionSecret: "", amount: DojoPaymentIntentAmount(value: 0, currencyCode: "")), //TODO: shouldn't be here
                                                              themeSettings: theme)
             self.rootCoordinator = RootCoordinator(presentationViewController: controller,
                                                    config: self.configurationManager,

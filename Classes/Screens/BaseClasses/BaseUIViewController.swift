@@ -66,7 +66,7 @@ extension BaseUIViewController {
                                          height: navigationBar.frame.height)
             // Set up
             let customTitleLabel = UILabel(frame: titleLabelFrame)
-            customTitleLabel.font = theme.fontHeading5Bold
+            customTitleLabel.font = theme.fontHeading5Medium
             customTitleLabel.textColor = theme.headerTintColor
             customTitleLabel.text = title
             customTitleLabel.tag = labelTag
