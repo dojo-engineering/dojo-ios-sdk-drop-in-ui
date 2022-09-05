@@ -26,6 +26,7 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
         super.init(nibName: nibName, bundle: podBundle)
         self.baseDelegate = delegate
         self.theme = theme
+        self.displayBackButton = false
         
     }
     

@@ -1,28 +1,28 @@
 PODS:
-  - dojo-ios-sdk (0.2.0)
+  - dojo-ios-sdk (0.3.0)
   - dojo-ios-sdk-drop-in-ui (0.1.0):
-    - dojo-ios-sdk (= 0.2.0)
+    - dojo-ios-sdk (= 0.3.0)
 
 DEPENDENCIES:
-  - "dojo-ios-sdk (from `git@github.com:Dojo-Engineering/dojo-ios-sdk.git`, tag `0.2.0`)"
+  - "dojo-ios-sdk (from `git@github.com:Dojo-Engineering/dojo-ios-sdk.git`, tag `0.3.0`)"
   - dojo-ios-sdk-drop-in-ui (from `../`)
 
 EXTERNAL SOURCES:
   dojo-ios-sdk:
     :git: "git@github.com:Dojo-Engineering/dojo-ios-sdk.git"
-    :tag: 0.2.0
+    :tag: 0.3.0
   dojo-ios-sdk-drop-in-ui:
     :path: "../"
 
 CHECKOUT OPTIONS:
   dojo-ios-sdk:
     :git: "git@github.com:Dojo-Engineering/dojo-ios-sdk.git"
-    :tag: 0.2.0
+    :tag: 0.3.0
 
 SPEC CHECKSUMS:
-  dojo-ios-sdk: 42ce63330491333a73debc5d30324406a7cb3105
-  dojo-ios-sdk-drop-in-ui: b2439e36de06351da803ddda4e66bb38f60ca057
+  dojo-ios-sdk: 2df5de8bfb3031b09fa52a3d85f2ead88447a6dd
+  dojo-ios-sdk-drop-in-ui: 641f40483379960b2118463ecbe3a9570c236c2b
 
-PODFILE CHECKSUM: 8ed91ac13b3cd8a8e07c5ce0a6d2c1e18a99a561
+PODFILE CHECKSUM: 950e7bac47e2a532aae3b278763e3e276857f1e8
 
 COCOAPODS: 1.11.3

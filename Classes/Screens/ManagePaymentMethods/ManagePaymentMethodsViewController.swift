@@ -37,7 +37,7 @@ class ManagePaymentMethodsViewController: BaseUIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setNavigationTitle("Change payment method")
+        setNavigationTitle(LocalizedText.ManagePaymentMethods.title)
     }
     
     @IBAction func onPayUsingNewCardPress(_ sender: Any) {

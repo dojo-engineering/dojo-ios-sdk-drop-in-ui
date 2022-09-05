@@ -19,7 +19,7 @@ class PaymentMethodCheckoutViewModel {
     }
     
     func processApplePayPayment(fromViewControlelr: UIViewController, completion: ((Int) -> Void)?) {
-        let paymentIntent = DojoPaymentIntent(connecteToken: token, totalAmount: DojoPaymentIntentAmount(value: 10, currencyCode: "GBP"))
+        let paymentIntent = DojoPaymentIntent(clientSessionSecret: token, totalAmount: DojoPaymentIntentAmount(value: 10, currencyCode: "GBP"))
         let applePayload = DojoApplePayPayload(applePayConfig: DojoApplePayConfig(merchantIdentifier: "merchant.com.something"))
         DojoSDK.executeApplePayPayment(paymentIntent: paymentIntent,
                                        payload: applePayload,

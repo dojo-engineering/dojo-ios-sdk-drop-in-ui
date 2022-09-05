@@ -13,6 +13,8 @@ protocol RootCoordinatorDelegate {
 }
 
 protocol RootCoordinatorProtocol {
+    func beginFlow()
+    func showDataLoading()
     func showPaymentMethodCheckout()
     func showCardDetailsCheckout()
     func showManagePaymentMethods()
@@ -22,6 +24,7 @@ protocol RootCoordinatorProtocol {
 class RootCoordinator: RootCoordinatorProtocol {
     
     enum ScreenType {
+        case dataLoading
         case paymentMethodCheckout
         case cardDeailsCheckout
         case managePaymentMethods
@@ -37,11 +40,23 @@ class RootCoordinator: RootCoordinatorProtocol {
           delegate: RootCoordinatorDelegate) {
         self.presentationViewController = presentationViewController
         self.rootNavController = BaseNavigationController()
-        if #available(iOS 13.0, *) { // do not dismiss on swiping down
-            self.rootNavController.isModalInPresentation = true
-        }
+        self.rootNavController.tapToDismissEnabled = false
+        self.rootNavController.panToDismissEnabled = false
+        self.rootNavController.preferredSheetSizing = .fit
         self.config = config
         self.delegate = delegate
+    }
+    
+    func beginFlow() {
+        showDataLoading()
+        // For Demo purposes
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.showPaymentMethodCheckout()
+        }
+    }
+    
+    func showDataLoading() {
+        pushNewScreenToTheFlow(screenType: .dataLoading, config: config)
     }
     
     func showPaymentMethodCheckout() {
@@ -53,7 +68,7 @@ class RootCoordinator: RootCoordinatorProtocol {
     }
     
     func showCardDetailsCheckout() {
-        pushNewScreenToTheFlow(screenType: .cardDeailsCheckout, config: config)
+        pushNewScreenToTheFlow(screenType: .cardDeailsCheckout, config: self.config)
     }
     
     func showPaymentResult(resultCode: Int) {
@@ -74,7 +89,7 @@ extension RootCoordinator {
     }
     
     func pushNewViewControllerToTheFlow(controller: UIViewController) {
-        rootNavController.pushViewController(controller, animated: true)
+        rootNavController.pushViewController(controller, animated: false) // TODO
         if rootNavController.presentingViewController == nil {
             presentationViewController.present(rootNavController, animated: true)
         }
@@ -83,6 +98,8 @@ extension RootCoordinator {
     func getViewControllerFor(screenType: ScreenType, config: ConfigurationManager) -> UIViewController? {
         var controller: UIViewController?
         switch screenType {
+        case .dataLoading:
+            controller = DataLoadingViewController(theme: config.themeSettings, delegate: self)
         case .cardDeailsCheckout:
             let viewModel = CardDetailsCheckoutViewModel(config: config)
             controller = CardDetailsCheckoutViewController(viewModel: viewModel, theme: config.themeSettings, delegate: self)
