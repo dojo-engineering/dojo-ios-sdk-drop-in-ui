@@ -19,13 +19,12 @@ class ViewController: UIViewController {
 
     @IBAction func onStartPaymentFlowPress(_ sender: Any) {
 //        requestPaymentToken { token in
-            let token = ""
+        let paymentIntentId = ""
         let theme = DojoThemeSettings(primaryLabelTextColor: UIColor.red,
                                       secondaryLabelTextColor: .green,
                                       headerTintColor: .green,
                                       headerButtonTintColor: .orange)
-            self.dojoUI.startPaymentFlow(token: token,
-                                         isSandbox: false,
+            self.dojoUI.startPaymentFlow(paymentIntentId: paymentIntentId,
                                          controller: self,
                                          themeSettings: theme) { result in
                 print("SDK result code: \(result)")

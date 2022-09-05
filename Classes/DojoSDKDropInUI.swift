@@ -12,8 +12,7 @@ public class DojoSDKDropInUI {
         configurationManager = ConfigurationManager(token: "", isSandbox: false, themeSettings: ThemeSettings(dojoTheme: DojoThemeSettings.getLightTheme())) // TODO: move to a different place
     }
     
-    public func startPaymentFlow(token: String,
-                                 isSandbox: Bool,
+    public func startPaymentFlow(paymentIntentId: String,
                                  controller: UIViewController,
                                  themeSettings: DojoThemeSettings? = nil,
                                  completion: ((Int) -> Void)?) {
@@ -21,14 +20,13 @@ public class DojoSDKDropInUI {
 //            let theme = ThemeSettings(dojoTheme: themeSettings ?? DojoThemeSettings.getLightTheme())
             let theme = ThemeSettings.getLightTheme()
             self.completionCallback = completion
-            self.configurationManager = ConfigurationManager(token: token,
-                                                             isSandbox: isSandbox,
+            self.configurationManager = ConfigurationManager(token: paymentIntentId,
+                                                             isSandbox: false,
                                                              themeSettings: theme)
             self.rootCoordinator = RootCoordinator(presentationViewController: controller,
                                                    config: self.configurationManager,
                                                    delegate: self)
-            self.rootCoordinator?.showPaymentMethodCheckout()
-//            self.rootCoordinator?.showPaymentResult(resultCode: 0)
+            self.rootCoordinator?.beginFlow()
         }
     }
 }
