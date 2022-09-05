@@ -8,7 +8,7 @@
 import UIKit
 
 protocol DataLoadingViewControllerDelegate: BaseViewControllerDelegate {
-    func paymentIntentDownloaded(data: String)
+    func paymentIntentDownloaded(_ paymentIntent: PaymentIntent)
     func errorLoadingPaymentIntent(error: Error)
 }
 
@@ -43,7 +43,7 @@ class DataLoadingViewController: BaseUIViewController {
         super.viewDidLoad()
 //        loadData()
         // for testing purposes
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.loadData()
         }
         setupLoadingIndicator()
@@ -51,16 +51,16 @@ class DataLoadingViewController: BaseUIViewController {
     
     func setupLoadingIndicator() {
         materialLoadingIndicator.radius = 15.0
-        materialLoadingIndicator.color = .black
+        materialLoadingIndicator.color = theme.loadingIndicatorColor
         materialLoadingIndicator.startAnimating()
     }
     
     func loadData() {
-        viewModel.fetchPaymentIntent() { intentString, error in
+        viewModel.fetchPaymentIntent() { paymentIntent, error in
             if let error = error {
                 self.delegate.errorLoadingPaymentIntent(error: error)
-            } else if let intentString = intentString {
-                self.delegate.paymentIntentDownloaded(data: intentString)
+            } else if let paymentIntent = paymentIntent {
+                self.delegate.paymentIntentDownloaded(paymentIntent)
             } else {
                 // TODO error?
 //                self.delegate.errorLoadingPaymentIntent(error: )

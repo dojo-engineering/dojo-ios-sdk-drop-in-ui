@@ -32,7 +32,7 @@ class RootCoordinator: RootCoordinatorProtocol {
     
     let presentationViewController: UIViewController
     let rootNavController: BaseNavigationController
-    let config: ConfigurationManager
+    var config: ConfigurationManager
     var delegate: RootCoordinatorDelegate?
     
     init (presentationViewController: UIViewController,
@@ -95,7 +95,7 @@ extension RootCoordinator {
         var controller: UIViewController?
         switch screenType {
         case .dataLoading:
-            let viewModel = DataLoadingViewModel(paymentIntentId: config.token)
+            let viewModel = DataLoadingViewModel(paymentIntentId: config.paymentIntentId)
             controller = DataLoadingViewController(viewModel: viewModel, theme: config.themeSettings, delegate: self)
         case .cardDeailsCheckout:
             let viewModel = CardDetailsCheckoutViewModel(config: config)
@@ -144,12 +144,13 @@ extension RootCoordinator: BaseViewControllerDelegate {
 }
 
 extension RootCoordinator: DataLoadingViewControllerDelegate {
-    func paymentIntentDownloaded(data: String) {
+    func paymentIntentDownloaded(_ paymentIntent: PaymentIntent) {
+        config.paymentIntent = paymentIntent
         showPaymentMethodCheckout()
     }
     
     func errorLoadingPaymentIntent(error: Error) {
-        rootNavController.dismiss(animated: true) //TODO
+        rootNavController.dismiss(animated: true) //TODO: repeats in a few places
         delegate?.userFinishedFlow(resultCode: (error as NSError).code)
     }
 }

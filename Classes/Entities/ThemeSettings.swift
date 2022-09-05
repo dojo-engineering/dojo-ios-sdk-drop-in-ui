@@ -19,6 +19,7 @@ class ThemeSettings {
     var primaryCTAButtonActiveBackgroundColor: UIColor
     var primaryCTAButtonActiveTextColor: UIColor
     var separatorColor: UIColor
+    var loadingIndicatorColor: UIColor
     var colorPoweredByDojo: UIColor
     var colorPoweredBySeparator: UIColor
     var colorPoweredByButtons: UIColor
@@ -51,6 +52,7 @@ class ThemeSettings {
         
         // Other
         primaryCTAButtonCornerRadius = 21
+        loadingIndicatorColor = .black
         
         // Fonts
         // Set fall-back fonts if custom fonts are not available
@@ -95,6 +97,7 @@ extension ThemeSettings {
         theme.primaryCTAButtonActiveTextColor = UIColor.black
         theme.colorPoweredByDojo = .white
         theme.separatorColor = .white.withAlphaComponent(0.3)
+        theme.loadingIndicatorColor = .white
         theme.colorPoweredBySeparator = .white.withAlphaComponent(0.3)
         theme.colorPoweredByButtons = .white.withAlphaComponent(0.6)
         return theme

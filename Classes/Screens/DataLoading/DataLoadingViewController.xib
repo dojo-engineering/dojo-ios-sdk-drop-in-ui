@@ -24,7 +24,7 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ghe-Ez-2Jc" customClass="MaterialLoadingIndicator" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
                     <rect key="frame" x="189.5" y="132.5" width="35" height="35"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="35" id="QK0-AF-FKp"/>
                         <constraint firstAttribute="height" constant="35" id="zKu-eA-3iD"/>
