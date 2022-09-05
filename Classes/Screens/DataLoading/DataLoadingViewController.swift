@@ -41,12 +41,16 @@ class DataLoadingViewController: BaseUIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        loadData()
+        setupLoadingIndicator()
+    }
+     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //        loadData()
         // for testing purposes
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
             self.loadData()
         }
-        setupLoadingIndicator()
     }
     
     func setupLoadingIndicator() {

@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import PassKit
 
 /// Private object for a wider theme set up
 class ThemeSettings {
@@ -30,11 +31,13 @@ class ThemeSettings {
     var fontHeading4: UIFont
     var fontHeading5: UIFont
     var fontHeading5Bold: UIFont //TODO: speak with Designers
+    var fontHeading5Medium: UIFont //TODO: speak with Designers
     var fontPrimaryCTAButtonActive: UIFont
     var fontPoweredByDojo: UIFont
     
     // Other
     var primaryCTAButtonCornerRadius: CGFloat
+    var applePayButtonStyle: PKPaymentButtonStyle
     
     init (dojoTheme: DojoThemeSettings) {
         // Colors
@@ -46,13 +49,14 @@ class ThemeSettings {
         primarySurfaceBackgroundColor = UIColor.white
         primaryCTAButtonActiveTextColor = UIColor.white
         colorPoweredByDojo = .black
-        separatorColor = .black.withAlphaComponent(0.3)
+        separatorColor = .black.withAlphaComponent(0.2)
         colorPoweredBySeparator = UIColor(hex: "A5A5A5") ?? separatorColor
         colorPoweredByButtons = .black.withAlphaComponent(0.6)
         
         // Other
         primaryCTAButtonCornerRadius = 21
         loadingIndicatorColor = .black
+        applePayButtonStyle = .black
         
         // Fonts
         // Set fall-back fonts if custom fonts are not available
@@ -61,6 +65,7 @@ class ThemeSettings {
         fontHeading4 = UIFont.systemFont(ofSize: 24, weight: .bold)
         fontHeading5 = UIFont.systemFont(ofSize: 20, weight: .regular)
         fontHeading5Bold = UIFont.systemFont(ofSize: 20, weight: .bold)
+        fontHeading5Medium = UIFont.systemFont(ofSize: 20, weight: .medium)
         fontPrimaryCTAButtonActive = UIFont.systemFont(ofSize: 16, weight: .regular)
         fontPoweredByDojo = UIFont.systemFont(ofSize: 14, weight: .regular)
         
@@ -72,6 +77,7 @@ class ThemeSettings {
         if let customFontHeading4 = UIFont(name: RobotoFont.bold.rawValue, size: 24) { fontHeading4 = customFontHeading4 }
         if let customFontHeading5 = UIFont(name: RobotoFont.regular.rawValue, size: 20) { fontHeading5 = customFontHeading5 }
         if let customFontHeading5Bold = UIFont(name: RobotoFont.bold.rawValue, size: 20) { fontHeading5Bold = customFontHeading5Bold }
+        if let customFontHeading5Medium = UIFont(name: RobotoFont.medium.rawValue, size: 20) { fontHeading5Medium = customFontHeading5Medium }
         if let customFontPrimaryCTAButtonActive = UIFont(name: RobotoFont.regular.rawValue, size: 16) { fontPrimaryCTAButtonActive = customFontPrimaryCTAButtonActive }
         if let customFontPoweredByDojo = UIFont(name: RobotoFont.regular.rawValue, size: 14) { fontPoweredByDojo = customFontPoweredByDojo }
     }
@@ -96,6 +102,7 @@ extension ThemeSettings {
         theme.primarySurfaceBackgroundColor = UIColor.black
         theme.primaryCTAButtonActiveTextColor = UIColor.black
         theme.colorPoweredByDojo = .white
+        theme.applePayButtonStyle = .white
         theme.separatorColor = .white.withAlphaComponent(0.3)
         theme.loadingIndicatorColor = .white
         theme.colorPoweredBySeparator = .white.withAlphaComponent(0.3)
@@ -106,11 +113,13 @@ extension ThemeSettings {
     private func registerFonts() {
         loadFont(RobotoFont.regular.rawValue)
         loadFont(RobotoFont.bold.rawValue)
+        loadFont(RobotoFont.medium.rawValue)
     }
     
     private enum RobotoFont: String {
         case regular = "Roboto-Regular"
         case bold = "Roboto-Bold"
+        case medium = "Roboto-Medium"
     }
     
     private func loadFont(_ fontName: String) {

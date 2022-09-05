@@ -28,7 +28,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   CocoaDebug: 61cf93ada6ce8f3407507dc01f9b874d91ac1d5c
   dojo-ios-sdk: 2df5de8bfb3031b09fa52a3d85f2ead88447a6dd
-  dojo-ios-sdk-drop-in-ui: 641f40483379960b2118463ecbe3a9570c236c2b
+  dojo-ios-sdk-drop-in-ui: 77be4615d8e36d4a916af770e47634cf167f4fad
 
 PODFILE CHECKSUM: a84cffaad1a3f6b01f69a9b50b7387c00f41bfad
 
