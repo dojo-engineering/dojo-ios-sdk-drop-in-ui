@@ -147,6 +147,7 @@ extension RootCoordinator: DataLoadingViewControllerDelegate {
     func paymentIntentDownloaded(_ paymentIntent: PaymentIntent) {
         config.paymentIntent = paymentIntent
         showPaymentMethodCheckout()
+//        showCardDetailsCheckout()
     }
     
     func errorLoadingPaymentIntent(error: Error) {

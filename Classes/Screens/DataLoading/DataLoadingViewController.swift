@@ -48,7 +48,7 @@ class DataLoadingViewController: BaseUIViewController {
         super.viewDidAppear(animated)
         //        loadData()
         // for testing purposes
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.loadData()
         }
     }

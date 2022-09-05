@@ -25,7 +25,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DIE-VP-Mbo" customClass="PKPaymentButton">
-                    <rect key="frame" x="16" y="771" width="382" height="44"/>
+                    <rect key="frame" x="16" y="766" width="382" height="44"/>
                     <color key="backgroundColor" systemColor="labelColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="RMN-Xe-nDa"/>
@@ -51,7 +51,7 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Due" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nIa-N9-fws">
-                    <rect key="frame" x="16" y="723" width="72" height="24"/>
+                    <rect key="frame" x="16" y="718" width="72" height="24"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="g7p-Ag-vG2"/>
                     </constraints>
@@ -60,7 +60,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="£85" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m9K-cz-gAs">
-                    <rect key="frame" x="367" y="723" width="31" height="24"/>
+                    <rect key="frame" x="367" y="718" width="31" height="24"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="3yC-9g-Dar"/>
                     </constraints>
@@ -69,7 +69,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J7i-iS-hE8">
-                    <rect key="frame" x="113.5" y="632" width="187" height="31"/>
+                    <rect key="frame" x="113.5" y="627" width="187" height="31"/>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="Change Payment Method"/>
                     <connections>
@@ -82,6 +82,7 @@
             <constraints>
                 <constraint firstItem="DIE-VP-Mbo" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="0bE-vR-cYM"/>
                 <constraint firstItem="dgb-bS-UCe" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="2eE-vE-t35"/>
+                <constraint firstItem="Utf-dq-Cdi" firstAttribute="top" secondItem="DIE-VP-Mbo" secondAttribute="bottom" constant="12" id="LtI-6G-hW0"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="dgb-bS-UCe" secondAttribute="trailing" id="V6L-s1-iVS"/>
                 <constraint firstItem="nIa-N9-fws" firstAttribute="top" secondItem="J7i-iS-hE8" secondAttribute="bottom" constant="60" id="X7g-NK-L0P"/>
                 <constraint firstItem="m9K-cz-gAs" firstAttribute="centerY" secondItem="nIa-N9-fws" secondAttribute="centerY" id="azU-6n-DKD"/>
@@ -93,7 +94,6 @@
                 <constraint firstItem="nIa-N9-fws" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="lBS-74-yhJ"/>
                 <constraint firstItem="J7i-iS-hE8" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="ndq-Fi-aIb"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="DIE-VP-Mbo" secondAttribute="trailing" constant="16" id="qUR-G4-c4T"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="DIE-VP-Mbo" secondAttribute="bottom" constant="47" id="sfL-1k-Y7t"/>
                 <constraint firstItem="Utf-dq-Cdi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="wj3-MS-U5M"/>
                 <constraint firstItem="dgb-bS-UCe" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="yn3-0c-VQx"/>
                 <constraint firstItem="Utf-dq-Cdi" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="zkz-iC-7S1"/>

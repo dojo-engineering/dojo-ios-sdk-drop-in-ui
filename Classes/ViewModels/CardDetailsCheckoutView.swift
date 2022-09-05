@@ -13,15 +13,15 @@ class CardDetailsCheckoutViewModel {
     var cardDetails3DS = DojoCardDetails(cardNumber: "4456530000001096", cardName: "Card Holder", expiryDate: "12 / 24", cv2: "020")
     var cardDetailsNon3DS = DojoCardDetails(cardNumber: "5200000000000056", cardName: "Card Holder", expiryDate: "12 / 24", cv2: "341")
     
-    let token: String
+    let paymentIntent: PaymentIntent
     
     init(config: ConfigurationManager) {
-        self.token = config.paymentIntent.clientSessionSecret
+        self.paymentIntent = config.paymentIntent
     }
     
     func processPayment(cardDetails: DojoCardDetails, fromViewControlelr: UIViewController, completion: ((Int) -> Void)?) {
         let cardPaymentPayload = DojoCardPaymentPayload(cardDetails: cardDetails, isSandbox: false)
-        DojoSDK.executeCardPayment(token: token,
+        DojoSDK.executeCardPayment(token: paymentIntent.clientSessionSecret,
                                     payload: cardPaymentPayload,
                                     fromViewController: fromViewControlelr,
                                     completion: completion)

@@ -48,6 +48,7 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
         setNavigationTitle(LocalizedText.PaymentMethodCheckout.title)
     }
     
+    
     override func setUpDesign() {
         super.setUpDesign()
         labelTotalDue.textColor = theme.primaryLabelTextColor
@@ -63,7 +64,7 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
     
     func setupData() {
         //TODO: proper amount formatter
-        labelTotalAmount.text = "£\(Double(viewModel.paymentIntent.amount.value)/100.0)"
+        labelTotalAmount.text = "£\(String(format: "%.2f", Double(viewModel.paymentIntent.amount.value)/100.0))"
     }
     
     @IBAction func onManagePaymentMethodsPress(_ sender: Any) {
