@@ -11,7 +11,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ManagePaymentMethodsViewController" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
             <connections>
+                <outlet property="buttonPayUsingNewCard" destination="NIU-8V-UnT" id="Y5S-Cu-WyD"/>
+                <outlet property="buttonUseSelectedPaymentMethod" destination="DQi-4j-kXE" id="sSy-hL-7n0"/>
                 <outlet property="footerPoweredByDojoView" destination="kVw-30-O4F" id="fwy-KO-c9s"/>
+                <outlet property="tableViewPaymentMethods" destination="Jvd-9S-Y5u" id="qu0-zv-i1J"/>
                 <outlet property="topNavigationSeparatorView" destination="5qR-ae-jTa" id="enc-aj-gsT"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -21,14 +24,6 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NIU-8V-UnT">
-                    <rect key="frame" x="126.5" y="779" width="161" height="31"/>
-                    <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" title="Pay using a new card"/>
-                    <connections>
-                        <action selector="onPayUsingNewCardPress:" destination="-1" eventType="touchUpInside" id="W59-nt-Hbt"/>
-                    </connections>
-                </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kVw-30-O4F" customClass="FooterPoweredByDojo" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="822" width="414" height="40"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -43,20 +38,54 @@
                         <constraint firstAttribute="height" constant="0.5" id="bza-lD-bGL"/>
                     </constraints>
                 </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Jvd-9S-Y5u">
+                    <rect key="frame" x="0.0" y="44.5" width="414" height="654.5"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DQi-4j-kXE">
+                    <rect key="frame" x="16" y="769" width="382" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="tZh-Df-Xky"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Use this payment method"/>
+                    <connections>
+                        <action selector="onUseThisPaymentMethodPress:" destination="-1" eventType="touchUpInside" id="mAX-2w-TJV"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NIU-8V-UnT">
+                    <rect key="frame" x="16" y="709" width="382" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="13u-a3-9xV"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Pay using a new card"/>
+                    <connections>
+                        <action selector="onPayUsingNewCardPress:" destination="-1" eventType="touchUpInside" id="W59-nt-Hbt"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="NIU-8V-UnT" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="0Td-b6-uVW"/>
+                <constraint firstItem="DQi-4j-kXE" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="2Za-9h-FPy"/>
+                <constraint firstItem="Jvd-9S-Y5u" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="4ff-ps-Wj6"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Jvd-9S-Y5u" secondAttribute="trailing" id="C0O-JT-n21"/>
                 <constraint firstItem="kVw-30-O4F" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="E7g-Fw-fUM"/>
                 <constraint firstAttribute="trailing" secondItem="5qR-ae-jTa" secondAttribute="trailing" id="ENa-Dp-TUh"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="NIU-8V-UnT" secondAttribute="bottom" constant="52" id="J2e-uL-XWN"/>
+                <constraint firstItem="kVw-30-O4F" firstAttribute="top" secondItem="DQi-4j-kXE" secondAttribute="bottom" constant="9" id="PNg-eL-at3"/>
+                <constraint firstItem="NIU-8V-UnT" firstAttribute="top" secondItem="Jvd-9S-Y5u" secondAttribute="bottom" constant="10" id="Q67-lO-MTE"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="DQi-4j-kXE" secondAttribute="trailing" constant="16" id="RTo-O1-Ur0"/>
                 <constraint firstItem="kVw-30-O4F" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="RsU-sB-6ts"/>
-                <constraint firstItem="NIU-8V-UnT" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="g7X-qK-ebG"/>
+                <constraint firstItem="Jvd-9S-Y5u" firstAttribute="top" secondItem="5qR-ae-jTa" secondAttribute="bottom" id="fDe-bN-su3"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="kVw-30-O4F" secondAttribute="bottom" id="qNk-Bg-9Du"/>
                 <constraint firstItem="5qR-ae-jTa" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="ud0-oa-gBX"/>
                 <constraint firstItem="5qR-ae-jTa" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="x21-LA-JvU"/>
+                <constraint firstItem="DQi-4j-kXE" firstAttribute="top" secondItem="NIU-8V-UnT" secondAttribute="bottom" constant="16" id="xYY-Cs-wSw"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="NIU-8V-UnT" secondAttribute="trailing" constant="16" id="xj7-hc-b7L"/>
             </constraints>
-            <point key="canvasLocation" x="132" y="106"/>
+            <point key="canvasLocation" x="131.8840579710145" y="105.80357142857143"/>
         </view>
     </objects>
     <resources>

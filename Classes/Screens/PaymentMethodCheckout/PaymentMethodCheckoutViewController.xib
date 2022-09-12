@@ -26,7 +26,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DIE-VP-Mbo" customClass="PKPaymentButton">
-                    <rect key="frame" x="16" y="766" width="382" height="44"/>
+                    <rect key="frame" x="16" y="769" width="382" height="44"/>
                     <color key="backgroundColor" systemColor="labelColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="RMN-Xe-nDa"/>
@@ -52,7 +52,7 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Due" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nIa-N9-fws">
-                    <rect key="frame" x="16" y="718" width="72" height="24"/>
+                    <rect key="frame" x="16" y="721" width="72" height="24"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="g7p-Ag-vG2"/>
                     </constraints>
@@ -61,7 +61,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="£85" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m9K-cz-gAs">
-                    <rect key="frame" x="367" y="718" width="31" height="24"/>
+                    <rect key="frame" x="367" y="721" width="31" height="24"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="3yC-9g-Dar"/>
                     </constraints>
@@ -70,7 +70,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bl0-mH-Tqe" userLabel="SelectedPaymentMethod" customClass="SelectedPaymentMethodView" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="631" width="414" height="55"/>
+                    <rect key="frame" x="0.0" y="634" width="414" height="55"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="55" id="wYV-a2-VLB"/>
@@ -82,7 +82,7 @@
             <constraints>
                 <constraint firstItem="DIE-VP-Mbo" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="0bE-vR-cYM"/>
                 <constraint firstItem="dgb-bS-UCe" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="2eE-vE-t35"/>
-                <constraint firstItem="Utf-dq-Cdi" firstAttribute="top" secondItem="DIE-VP-Mbo" secondAttribute="bottom" constant="12" id="LtI-6G-hW0"/>
+                <constraint firstItem="Utf-dq-Cdi" firstAttribute="top" secondItem="DIE-VP-Mbo" secondAttribute="bottom" constant="9" id="LtI-6G-hW0"/>
                 <constraint firstItem="bl0-mH-Tqe" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="RxK-HW-ob4"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="dgb-bS-UCe" secondAttribute="trailing" id="V6L-s1-iVS"/>
                 <constraint firstItem="m9K-cz-gAs" firstAttribute="centerY" secondItem="nIa-N9-fws" secondAttribute="centerY" id="azU-6n-DKD"/>
