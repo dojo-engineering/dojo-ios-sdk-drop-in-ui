@@ -19,6 +19,7 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
     @IBOutlet weak var labelTotalDue: UILabel!
     @IBOutlet weak var labelTotalAmount: UILabel!
     @IBOutlet weak var paymentButton: PKPaymentButton!
+    @IBOutlet weak var selectedPaymentMethodView: SelectedPaymentMethodView!
     
     public init(viewModel: PaymentMethodCheckoutViewModel,
                 theme: ThemeSettings,
@@ -41,6 +42,7 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupData()
+        setupViews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,6 +50,10 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
         setNavigationTitle(LocalizedText.PaymentMethodCheckout.title)
     }
     
+    
+    func setupViews() {
+        selectedPaymentMethodView.delegate = self
+    }
     
     override func setUpDesign() {
         super.setUpDesign()
@@ -60,6 +66,8 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
         paymentButton.setValue(theme.applePayButtonStyle.rawValue, forKey: "style")
         paymentButton.layer.cornerRadius = theme.primaryCTAButtonCornerRadius
         paymentButton.clipsToBounds = true
+        
+        selectedPaymentMethodView.setTheme(theme: theme)
     }
     
     func setupData() {
@@ -67,13 +75,15 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
         labelTotalAmount.text = "£\(String(format: "%.2f", Double(viewModel.paymentIntent.amount.value)/100.0))"
     }
     
-    @IBAction func onManagePaymentMethodsPress(_ sender: Any) {
-        delegate?.navigateToManagePaymentMethods()
-    }
-    
     @IBAction func onPayUsingApplePayPress(_ sender: Any) {
         viewModel.processApplePayPayment(fromViewControlelr: self) { result in
             self.delegate?.navigateToPaymentResult(resultCode: result)
         }
+    }
+}
+
+extension PaymentMethodCheckoutViewController: SelectedPaymentMethodViewDelegate {
+    func onPress() {
+        delegate?.navigateToManagePaymentMethods()
     }
 }

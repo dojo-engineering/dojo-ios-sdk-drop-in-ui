@@ -15,6 +15,7 @@
                 <outlet property="labelTotalAmount" destination="m9K-cz-gAs" id="Fac-sZ-K0t"/>
                 <outlet property="labelTotalDue" destination="nIa-N9-fws" id="PNR-ZL-mtx"/>
                 <outlet property="paymentButton" destination="DIE-VP-Mbo" id="aBb-iW-gWa"/>
+                <outlet property="selectedPaymentMethodView" destination="bl0-mH-Tqe" id="zGn-K5-Zr3"/>
                 <outlet property="topNavigationSeparatorView" destination="dgb-bS-UCe" id="UgZ-Md-bK6"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -68,14 +69,13 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J7i-iS-hE8">
-                    <rect key="frame" x="113.5" y="627" width="187" height="31"/>
-                    <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" title="Change Payment Method"/>
-                    <connections>
-                        <action selector="onManagePaymentMethodsPress:" destination="-1" eventType="touchUpInside" id="qdA-HT-Szf"/>
-                    </connections>
-                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bl0-mH-Tqe" userLabel="SelectedPaymentMethod" customClass="SelectedPaymentMethodView" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="631" width="414" height="55"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="55" id="wYV-a2-VLB"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -83,16 +83,17 @@
                 <constraint firstItem="DIE-VP-Mbo" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="0bE-vR-cYM"/>
                 <constraint firstItem="dgb-bS-UCe" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="2eE-vE-t35"/>
                 <constraint firstItem="Utf-dq-Cdi" firstAttribute="top" secondItem="DIE-VP-Mbo" secondAttribute="bottom" constant="12" id="LtI-6G-hW0"/>
+                <constraint firstItem="bl0-mH-Tqe" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="RxK-HW-ob4"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="dgb-bS-UCe" secondAttribute="trailing" id="V6L-s1-iVS"/>
-                <constraint firstItem="nIa-N9-fws" firstAttribute="top" secondItem="J7i-iS-hE8" secondAttribute="bottom" constant="60" id="X7g-NK-L0P"/>
                 <constraint firstItem="m9K-cz-gAs" firstAttribute="centerY" secondItem="nIa-N9-fws" secondAttribute="centerY" id="azU-6n-DKD"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Utf-dq-Cdi" secondAttribute="trailing" id="cKV-Oj-dhF"/>
+                <constraint firstItem="nIa-N9-fws" firstAttribute="top" secondItem="bl0-mH-Tqe" secondAttribute="bottom" constant="32" id="eUu-dt-Tnr"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="bl0-mH-Tqe" secondAttribute="trailing" id="gfc-Dn-FDH"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="m9K-cz-gAs" secondAttribute="trailing" constant="16" id="gib-HA-TDs"/>
                 <constraint firstItem="DIE-VP-Mbo" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="h4Q-F5-XGc"/>
                 <constraint firstItem="DIE-VP-Mbo" firstAttribute="top" secondItem="nIa-N9-fws" secondAttribute="bottom" constant="24" id="h5v-1j-WAQ"/>
                 <constraint firstItem="Utf-dq-Cdi" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="hNh-ob-wGa"/>
                 <constraint firstItem="nIa-N9-fws" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="lBS-74-yhJ"/>
-                <constraint firstItem="J7i-iS-hE8" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="ndq-Fi-aIb"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="DIE-VP-Mbo" secondAttribute="trailing" constant="16" id="qUR-G4-c4T"/>
                 <constraint firstItem="Utf-dq-Cdi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="wj3-MS-U5M"/>
                 <constraint firstItem="dgb-bS-UCe" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="yn3-0c-VQx"/>

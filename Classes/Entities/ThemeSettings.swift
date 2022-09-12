@@ -27,6 +27,7 @@ class ThemeSettings {
     
     // Fonts
     var fontBody1: UIFont
+    var fontSubtitle1: UIFont
     var fontSubtitle1Medium: UIFont
     var fontSubtitle2: UIFont
     var fontHeading3Medium: UIFont
@@ -63,6 +64,7 @@ class ThemeSettings {
         // Fonts
         // Set fall-back fonts if custom fonts are not available
         fontBody1 = UIFont.systemFont(ofSize: 16, weight: .regular)
+        fontSubtitle1 = UIFont.systemFont(ofSize: 16, weight: .regular)
         fontSubtitle1Medium = UIFont.systemFont(ofSize: 16, weight: .medium)
         fontSubtitle2 = UIFont.systemFont(ofSize: 14, weight: .regular)
         fontHeading3Medium = UIFont.systemFont(ofSize: 32, weight: .medium)
@@ -77,6 +79,7 @@ class ThemeSettings {
         registerFonts() // register custom fonts to use inside the SDK
         
         if let customFontBody1 = UIFont(name: RobotoFont.regular.rawValue, size: 16) { fontBody1 = customFontBody1 }
+        if let customfontSubtitle1 = UIFont(name: RobotoFont.regular.rawValue, size: 16) { fontSubtitle1 = customfontSubtitle1 }
         if let customfontSubtitle1Medium = UIFont(name: RobotoFont.medium.rawValue, size: 16) { fontSubtitle1Medium = customfontSubtitle1Medium }
         if let customFontSubtitle2 = UIFont(name: RobotoFont.regular.rawValue, size: 14) { fontSubtitle2 = customFontSubtitle2 }
         if let customFontHeading3Medium = UIFont(name: RobotoFont.medium.rawValue, size: 32) { fontHeading3Medium = customFontHeading3Medium }

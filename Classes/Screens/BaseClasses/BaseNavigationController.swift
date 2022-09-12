@@ -31,7 +31,7 @@ class BaseNavigationController: UINavigationController, UINavigationControllerDe
         viewController.navigationItem.backBarButtonItem = item
         
         if let _ = viewController as? PaymentMethodCheckoutViewController {
-            heightConstraint?.constant = 350
+            heightConstraint?.constant = 330
         }
 
         if let _ = viewController as? ManagePaymentMethodsViewController {
