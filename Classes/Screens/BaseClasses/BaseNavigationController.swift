@@ -35,11 +35,11 @@ class BaseNavigationController: UINavigationController, UINavigationControllerDe
         }
 
         if let _ = viewController as? ManagePaymentMethodsViewController {
-            heightConstraint?.constant = 400
+            heightConstraint?.constant = 500
         }
 
         if let _ = viewController as? CardDetailsCheckoutViewController {
-            heightConstraint?.constant = 650
+            heightConstraint?.constant = 720
         }
         
         if let _ = viewController as? PaymentResultViewController {

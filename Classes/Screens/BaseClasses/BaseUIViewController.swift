@@ -43,12 +43,21 @@ class BaseUIViewController: UIViewController {
 extension BaseUIViewController {
     
     func setUpCloseButton() {
+        
+        // try to remove old button if presenet
+        let buttonTag = 88884
+        self.navigationController?.navigationBar.subviews.first(where: {$0.tag == buttonTag})?.removeFromSuperview()
+        // if don't need to display, exit
         guard displayCloseButton == true else { return }
-        let buttonClose = UIBarButtonItem(title: "",
-                                          style: .plain,
-                                          target: self, action: #selector(onClosePress))
-        buttonClose.image = UIImage(named: "icon-button-cross-close", in: Bundle(for: type(of: self)), compatibleWith: nil)
-        navigationItem.rightBarButtonItem = buttonClose
+        
+        if let navigationBar = self.navigationController?.navigationBar {
+            let buttonClose = UIButton(frame: CGRect(x: navigationBar.frame.width - 55, y: -5, width: 50, height: 50))
+            buttonClose.addTarget(self, action: #selector(onClosePress), for: .touchUpInside)
+            buttonClose.setImage(UIImage(named: "icon-button-cross-close", in: Bundle(for: type(of: self)), compatibleWith: nil), for: .normal)
+            buttonClose.tintColor = theme.headerButtonTintColor
+            buttonClose.tag = buttonTag
+            navigationBar.addSubview(buttonClose)
+        }
     }
     
     func setUpBackButton() {
