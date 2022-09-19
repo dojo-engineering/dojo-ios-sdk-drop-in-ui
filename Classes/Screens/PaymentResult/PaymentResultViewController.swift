@@ -9,6 +9,7 @@ import UIKit
 
 protocol PaymentResultViewControllerDelegate: BaseViewControllerDelegate {
     func onDonePress(resultCode: Int)
+    func onPaymentIntentRefreshSucess(paymentIntent: PaymentIntent)
 }
 
 class PaymentResultViewController: BaseUIViewController {
@@ -17,7 +18,7 @@ class PaymentResultViewController: BaseUIViewController {
     @IBOutlet weak var labelSubtitle: UILabel!
     @IBOutlet weak var labelSubtitle2: UILabel!
     @IBOutlet weak var buttonDone: UIButton!
-    
+    @IBOutlet weak var buttonTryAgain: UIButton!
     @IBOutlet weak var imgViewResult: UIImageView!
     
     var viewModel: PaymentResultViewModel
@@ -84,9 +85,11 @@ class PaymentResultViewController: BaseUIViewController {
     
     func updateUIState() {
         if viewModel.resultCode == 0 {
+            buttonTryAgain.isHidden = true
             labelMainText.text = LocalizedText.PaymentResult.mainTitleSuccess
             imgViewResult.image = UIImage(named: "img-result-success-light", in: Bundle(for: type(of: self)), compatibleWith: nil)
         } else {
+            buttonTryAgain.isHidden = false
             labelMainText.text = LocalizedText.PaymentResult.mainTitleFail
             imgViewResult.image = UIImage(named: "img-result-error-light", in: Bundle(for: type(of: self)), compatibleWith: nil)
         }
@@ -100,6 +103,17 @@ class PaymentResultViewController: BaseUIViewController {
     @IBAction func onDoneButtonPress(_ sender: Any) {
         // close and done button behave the same on this screen (sending the final result to the app)
         exitFromTheScreen()
+    }
+    
+    @IBAction func onButtonTryAgainPress(_ sender: Any) {
+        viewModel.refreshToken { result, error in
+            if let data = result?.data(using: .utf8) {
+                let decoder = JSONDecoder()
+                if let decodedResponse = try? decoder.decode(PaymentIntent.self, from: data) {
+                    self.delegate?.onPaymentIntentRefreshSucess(paymentIntent: decodedResponse)
+                } // TODO: log error
+            }
+        }
     }
     
     private func exitFromTheScreen() {

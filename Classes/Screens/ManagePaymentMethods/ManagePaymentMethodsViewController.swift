@@ -82,7 +82,7 @@ class ManagePaymentMethodsViewController: BaseUIViewController {
     }
     
     @IBAction func onUseThisPaymentMethodPress(_ sender: Any) {
-        navigationController?.popViewController(animated: false)
+        navigationController?.popViewController(animated: false) //TODO: delegate to root and the same method as refresh token
     }
 }
 
