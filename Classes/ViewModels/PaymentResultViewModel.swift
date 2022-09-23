@@ -12,11 +12,13 @@ class PaymentResultViewModel {
     
     let resultCode: Int
     let paymentIntentId: String
+    let demoDelay: Double
     
     init(config: ConfigurationManager,
          resultCode: Int) {
         self.resultCode = resultCode
         self.paymentIntentId = config.paymentIntentId
+        self.demoDelay = config.demoDelay
     }
     
     func refreshToken(completion: ((String?,Error?)-> Void)?) {

@@ -26,6 +26,7 @@ enum LocalizedText {
         static let placeholderCVV = "dojo_ui_sdk_card_details_checkout_placeholder_cvv".localized
         static let youPay = "dojo_ui_sdk_card_details_checkout_you_pay".localized
         static let buttonPay = "dojo_ui_sdk_card_details_checkout_button_pay".localized
+        static let buttonProcessing = "dojo_ui_sdk_card_details_checkout_button_processing".localized
     }
     
     enum PaymentResult {
@@ -34,6 +35,9 @@ enum LocalizedText {
         static let mainTitleSuccess = "dojo_ui_sdk_payment_result_main_title_success".localized
         static let mainTitleFail = "dojo_ui_sdk_payment_result_main_title_fail".localized
         static let buttonDone = "dojo_ui_sdk_payment_result_button_done".localized
+        static let buttonPleaseWait = "dojo_ui_sdk_payment_ressult_button_please_wait".localized
+        static let orderId = "dojo_ui_sdk_payment_result_order_info".localized
+        static let mainErrorMessage = "dojo_ui_sdk_payment_result_failed_description".localized
     }
     
     enum PoweredBy {

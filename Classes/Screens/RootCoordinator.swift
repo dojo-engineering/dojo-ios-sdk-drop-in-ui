@@ -95,7 +95,7 @@ extension RootCoordinator {
         var controller: UIViewController?
         switch screenType {
         case .dataLoading:
-            let viewModel = DataLoadingViewModel(paymentIntentId: config.paymentIntentId)
+            let viewModel = DataLoadingViewModel(paymentIntentId: config.paymentIntentId, demoDelay: config.demoDelay)
             controller = DataLoadingViewController(viewModel: viewModel, theme: config.themeSettings, delegate: self)
         case .cardDeailsCheckout:
             let viewModel = CardDetailsCheckoutViewModel(config: config)

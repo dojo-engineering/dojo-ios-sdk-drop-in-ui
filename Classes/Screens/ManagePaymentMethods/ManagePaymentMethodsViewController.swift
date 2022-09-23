@@ -55,7 +55,6 @@ class ManagePaymentMethodsViewController: BaseUIViewController {
         buttonPayUsingNewCard.setTitleColor(theme.primaryLabelTextColor, for: .normal)
         buttonPayUsingNewCard.tintColor = theme.primaryLabelTextColor
         buttonPayUsingNewCard.layer.cornerRadius = theme.primaryCTAButtonCornerRadius
-        buttonPayUsingNewCard.layer.cornerRadius = theme.primaryCTAButtonCornerRadius
         
         buttonPayUsingNewCard.layer.borderWidth = 1
         buttonPayUsingNewCard.layer.borderColor = theme.primaryCTAButtonActiveBackgroundColor.cgColor

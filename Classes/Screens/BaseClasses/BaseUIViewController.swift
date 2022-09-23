@@ -38,6 +38,14 @@ class BaseUIViewController: UIViewController {
         navigationController?.navigationBar.tintColor = theme.headerTintColor
         navigationItem.rightBarButtonItem?.tintColor = theme.headerButtonTintColor
     }
+    
+    func disableScreen() {
+        view.isUserInteractionEnabled = false
+    }
+    
+    func enableScreen() {
+        view.isUserInteractionEnabled = true
+    }
 }
 
 extension BaseUIViewController {
