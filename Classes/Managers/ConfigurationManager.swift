@@ -13,5 +13,5 @@ struct ConfigurationManager {
     var paymentIntent: PaymentIntent
     var themeSettings: ThemeSettings
     
-    var demoDelay: Double = 2 // add delay to requests for UI demo purposes
+    var demoDelay: Double = 0 // add delay to requests for UI demo purposes
 }
