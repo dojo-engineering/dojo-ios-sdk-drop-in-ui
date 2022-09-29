@@ -17,6 +17,7 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     var cardDetails: DojoCardDetails
     var delegate: CardDetailsCheckoutViewControllerDelegate?
     
+    @IBOutlet weak var constraintPayButtonBottom: NSLayoutConstraint!
     @IBOutlet weak var labelPrimaryAmount: UILabel!
     @IBOutlet weak var labelYouPay: UILabel!
     @IBOutlet weak var tempLoadingIndicator: MaterialLoadingIndicator!
@@ -51,6 +52,7 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         super.viewDidLoad()
         setUpData()
         setUpViews()
+        setUpKeyboard()
     }
     
     override func setUpDesign() {
@@ -80,6 +82,24 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         let buttonPayTitle = "Pay \(amountText)"
         buttonPay.setTitle(buttonPayTitle, for: .normal)
         labelPrimaryAmount.text = amountText
+    }
+    
+    func setUpKeyboard() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            
+            constraintPayButtonBottom.constant = keyboardHeight - (UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0) + 12
+        }
+    }
+    
+    @objc func keyboardWillHide(_ notification: Notification) {
+        constraintPayButtonBottom.constant = 52
     }
     
     func setUpViews() {
@@ -120,3 +140,11 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         textFieldCVV.text = cardDetails.cv2
     }
 }
+
+extension CardDetailsCheckoutViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+}
+
