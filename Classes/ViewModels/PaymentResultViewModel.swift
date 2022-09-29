@@ -11,8 +11,17 @@ import dojo_ios_sdk
 class PaymentResultViewModel {
     
     let resultCode: Int
+    let paymentIntentId: String
+    let demoDelay: Double
     
-    init(config: ConfigurationManager, resultCode: Int) {
+    init(config: ConfigurationManager,
+         resultCode: Int) {
         self.resultCode = resultCode
+        self.paymentIntentId = config.paymentIntentId
+        self.demoDelay = config.demoDelay
+    }
+    
+    func refreshToken(completion: ((String?,Error?)-> Void)?) {
+        DojoSDK.refreshPaymentIntent(intentId: paymentIntentId, completion: completion)
     }
 }

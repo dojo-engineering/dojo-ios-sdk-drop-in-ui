@@ -95,7 +95,7 @@ extension RootCoordinator {
         var controller: UIViewController?
         switch screenType {
         case .dataLoading:
-            let viewModel = DataLoadingViewModel(paymentIntentId: config.paymentIntentId)
+            let viewModel = DataLoadingViewModel(paymentIntentId: config.paymentIntentId, demoDelay: config.demoDelay)
             controller = DataLoadingViewController(viewModel: viewModel, theme: config.themeSettings, delegate: self)
         case .cardDeailsCheckout:
             let viewModel = CardDetailsCheckoutViewModel(config: config)
@@ -134,6 +134,11 @@ extension RootCoordinator: PaymentResultViewControllerDelegate {
         rootNavController.dismiss(animated: true)
         delegate?.userFinishedFlow(resultCode: resultCode)
     }
+    
+    func onPaymentIntentRefreshSucess(paymentIntent: PaymentIntent) {
+        config.paymentIntent = paymentIntent
+        rootNavController.popViewController(animated: false) //TODO: make a method for navigating back
+    }
 }
 
 extension RootCoordinator: BaseViewControllerDelegate {
@@ -147,6 +152,7 @@ extension RootCoordinator: DataLoadingViewControllerDelegate {
     func paymentIntentDownloaded(_ paymentIntent: PaymentIntent) {
         config.paymentIntent = paymentIntent
         showPaymentMethodCheckout()
+//        showPaymentResult(resultCode: 5)
 //        showCardDetailsCheckout()
     }
     

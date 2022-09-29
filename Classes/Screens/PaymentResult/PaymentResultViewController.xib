@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PaymentResultViewController" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
             <connections>
                 <outlet property="buttonDone" destination="qw6-82-Sm5" id="W5W-uW-PCR"/>
+                <outlet property="buttonTryAgain" destination="Kxd-5L-vfw" id="9Z2-LF-pcz"/>
                 <outlet property="footerPoweredByDojoView" destination="yU4-QQ-5W5" id="F1b-3I-Yo9"/>
                 <outlet property="imgViewResult" destination="GI8-4z-Q43" id="BqD-7S-iD1"/>
                 <outlet property="labelMainText" destination="0Pj-Be-ND9" id="D7M-6Z-BaF"/>
@@ -34,8 +35,26 @@
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                     <state key="normal" title="Done"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Done">
+                        <fontDescription key="titleFontDescription" type="boldSystem" pointSize="16"/>
+                    </buttonConfiguration>
                     <connections>
                         <action selector="onDoneButtonPress:" destination="-1" eventType="touchUpInside" id="DRl-8u-jT9"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kxd-5L-vfw" customClass="LoadingButton" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
+                    <rect key="frame" x="16" y="709" width="382" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="87M-GK-O6T"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="Try Again"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Try Again">
+                        <fontDescription key="titleFontDescription" type="boldSystem" pointSize="16"/>
+                    </buttonConfiguration>
+                    <connections>
+                        <action selector="onButtonTryAgainPress:" destination="-1" eventType="touchUpInside" id="5Iv-tQ-Lrn"/>
                     </connections>
                 </button>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img-result-success-light" translatesAutoresizingMaskIntoConstraints="NO" id="GI8-4z-Q43">
@@ -47,7 +66,7 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order O-00001" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xaK-9E-AnX">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order O-00001" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xaK-9E-AnX">
                     <rect key="frame" x="16" y="468" width="382" height="24"/>
                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                     <nil key="textColor"/>
@@ -67,7 +86,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yzg-D4-IOU" userLabel="topSeparator">
-                    <rect key="frame" x="0.0" y="44" width="414" height="0.5"/>
+                    <rect key="frame" x="0.0" y="48" width="414" height="0.5"/>
                     <color key="backgroundColor" systemColor="tintColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="0.5" id="iSh-ZX-5Qd"/>
@@ -77,9 +96,11 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Kxd-5L-vfw" secondAttribute="trailing" constant="16" id="3WA-U7-hSg"/>
                 <constraint firstAttribute="trailing" secondItem="yzg-D4-IOU" secondAttribute="trailing" id="CyF-aS-K0m"/>
                 <constraint firstItem="yU4-QQ-5W5" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="DaZ-LG-sWR"/>
                 <constraint firstItem="yzg-D4-IOU" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="EHl-T8-ynb"/>
+                <constraint firstItem="qw6-82-Sm5" firstAttribute="top" secondItem="Kxd-5L-vfw" secondAttribute="bottom" constant="16" id="F4h-TA-noO"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="yU4-QQ-5W5" secondAttribute="bottom" id="Guu-in-swz"/>
                 <constraint firstItem="SiX-RT-8wU" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="40" id="HeS-aS-Drw"/>
                 <constraint firstItem="xaK-9E-AnX" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="Ihm-sg-Xp4"/>
@@ -95,6 +116,7 @@
                 <constraint firstItem="qw6-82-Sm5" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="aQj-qu-Rsd"/>
                 <constraint firstItem="0Pj-Be-ND9" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="aYf-zO-LQ3"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="0Pj-Be-ND9" secondAttribute="trailing" constant="16" id="aZg-is-jRq"/>
+                <constraint firstItem="Kxd-5L-vfw" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="ioR-Th-0vT"/>
                 <constraint firstItem="GI8-4z-Q43" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="nPA-pt-8qx"/>
                 <constraint firstItem="yU4-QQ-5W5" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="w2X-Ak-j9N"/>
                 <constraint firstItem="yU4-QQ-5W5" firstAttribute="top" secondItem="qw6-82-Sm5" secondAttribute="bottom" constant="9" id="xVI-Wo-uRp"/>

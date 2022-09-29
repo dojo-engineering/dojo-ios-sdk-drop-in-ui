@@ -43,7 +43,7 @@ class BaseNavigationController: UINavigationController, UINavigationControllerDe
         }
         
         if let _ = viewController as? PaymentResultViewController {
-            heightConstraint?.constant = 500
+            heightConstraint?.constant = 650
         }
         
         UIView.setAnimationsEnabled(false)

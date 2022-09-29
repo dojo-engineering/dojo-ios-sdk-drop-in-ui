@@ -55,7 +55,6 @@ class ManagePaymentMethodsViewController: BaseUIViewController {
         buttonPayUsingNewCard.setTitleColor(theme.primaryLabelTextColor, for: .normal)
         buttonPayUsingNewCard.tintColor = theme.primaryLabelTextColor
         buttonPayUsingNewCard.layer.cornerRadius = theme.primaryCTAButtonCornerRadius
-        buttonPayUsingNewCard.layer.cornerRadius = theme.primaryCTAButtonCornerRadius
         
         buttonPayUsingNewCard.layer.borderWidth = 1
         buttonPayUsingNewCard.layer.borderColor = theme.primaryCTAButtonActiveBackgroundColor.cgColor
@@ -82,7 +81,7 @@ class ManagePaymentMethodsViewController: BaseUIViewController {
     }
     
     @IBAction func onUseThisPaymentMethodPress(_ sender: Any) {
-        navigationController?.popViewController(animated: false)
+        navigationController?.popViewController(animated: false) //TODO: delegate to root and the same method as refresh token
     }
 }
 

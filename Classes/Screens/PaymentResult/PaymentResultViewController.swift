@@ -9,6 +9,7 @@ import UIKit
 
 protocol PaymentResultViewControllerDelegate: BaseViewControllerDelegate {
     func onDonePress(resultCode: Int)
+    func onPaymentIntentRefreshSucess(paymentIntent: PaymentIntent)
 }
 
 class PaymentResultViewController: BaseUIViewController {
@@ -17,7 +18,7 @@ class PaymentResultViewController: BaseUIViewController {
     @IBOutlet weak var labelSubtitle: UILabel!
     @IBOutlet weak var labelSubtitle2: UILabel!
     @IBOutlet weak var buttonDone: UIButton!
-    
+    @IBOutlet weak var buttonTryAgain: LoadingButton!
     @IBOutlet weak var imgViewResult: UIImageView!
     
     var viewModel: PaymentResultViewModel
@@ -74,21 +75,39 @@ class PaymentResultViewController: BaseUIViewController {
         labelSubtitle.font = theme.fontHeading5
         labelSubtitle2.textColor = theme.secondaryLabelTextColor
         labelSubtitle2.font = theme.fontBody1
-        
-        //TODO: common style
-        buttonDone.backgroundColor = theme.primaryCTAButtonActiveBackgroundColor
-        buttonDone.setTitleColor(theme.primaryCTAButtonActiveTextColor, for: .normal)
-        buttonDone.tintColor = theme.primaryCTAButtonActiveTextColor
-        buttonDone.layer.cornerRadius = theme.primaryCTAButtonCornerRadius
     }
     
     func updateUIState() {
         if viewModel.resultCode == 0 {
+            buttonTryAgain.isHidden = true
             labelMainText.text = LocalizedText.PaymentResult.mainTitleSuccess
+            labelSubtitle.text = "\(LocalizedText.PaymentResult.orderId) \(viewModel.paymentIntentId)"  //TODO: the same for both cases
             imgViewResult.image = UIImage(named: "img-result-success-light", in: Bundle(for: type(of: self)), compatibleWith: nil)
+            
+            //TODO: common style
+            buttonDone.backgroundColor = theme.primaryCTAButtonActiveBackgroundColor
+            buttonDone.setTitleColor(theme.primaryCTAButtonActiveTextColor, for: .normal)
+            buttonDone.tintColor = theme.primaryCTAButtonActiveTextColor
+            buttonDone.layer.cornerRadius = theme.primaryCTAButtonCornerRadius
         } else {
+            buttonTryAgain.isHidden = false
             labelMainText.text = LocalizedText.PaymentResult.mainTitleFail
+            labelSubtitle.text = "\(LocalizedText.PaymentResult.orderId) \(viewModel.paymentIntentId)"
+            labelSubtitle2.text = LocalizedText.PaymentResult.mainErrorMessage
             imgViewResult.image = UIImage(named: "img-result-error-light", in: Bundle(for: type(of: self)), compatibleWith: nil)
+            
+            //TODO: common style
+            buttonTryAgain.backgroundColor = theme.primaryCTAButtonActiveBackgroundColor
+            buttonTryAgain.setTitleColor(theme.primaryCTAButtonActiveTextColor, for: .normal)
+            buttonTryAgain.tintColor = theme.primaryCTAButtonActiveTextColor
+            buttonTryAgain.layer.cornerRadius = theme.primaryCTAButtonCornerRadius
+            
+            buttonDone.backgroundColor = .white
+            buttonDone.setTitleColor(theme.primaryLabelTextColor, for: .normal)
+            buttonDone.tintColor = theme.primaryLabelTextColor
+            buttonDone.layer.cornerRadius = theme.primaryCTAButtonCornerRadius
+            buttonDone.layer.borderWidth = 1
+            buttonDone.layer.borderColor = theme.primaryCTAButtonActiveBackgroundColor.cgColor
         }
     }
     
@@ -102,17 +121,30 @@ class PaymentResultViewController: BaseUIViewController {
         exitFromTheScreen()
     }
     
+    @IBAction func onButtonTryAgainPress(_ sender: Any) {
+        buttonTryAgain.showLoading(LocalizedText.PaymentResult.buttonPleaseWait)
+        disableScreen()
+        DispatchQueue.main.asyncAfter(deadline: .now() + viewModel.demoDelay) {
+            self.viewModel.refreshToken { result, error in
+                self.enableScreen()
+                
+                if let _ = error {
+                    // something went wrong
+                    self.buttonTryAgain.hideLoading()
+                    return
+                }
+                
+                if let data = result?.data(using: .utf8) {
+                    let decoder = JSONDecoder()
+                    if let decodedResponse = try? decoder.decode(PaymentIntent.self, from: data) {
+                        self.delegate?.onPaymentIntentRefreshSucess(paymentIntent: decodedResponse)
+                    } // TODO: log error
+                }
+            }
+        }
+    }
+    
     private func exitFromTheScreen() {
         delegate?.onDonePress(resultCode: viewModel.resultCode)
     }
-}
-
-extension UILabel {
-  func setTextSpacingBy(value: Double) {
-    if let textString = self.text {
-      let attributedString = NSMutableAttributedString(string: textString)
-        attributedString.addAttribute(NSAttributedString.Key.kern, value: value, range: NSRange(location: 0, length: attributedString.length - 1))
-      attributedText = attributedString
-    }
-  }
 }
