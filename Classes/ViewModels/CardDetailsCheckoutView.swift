@@ -26,4 +26,12 @@ class CardDetailsCheckoutViewModel {
                                     fromViewController: fromViewControlelr,
                                     completion: completion)
     }
+    
+    var showFieldEmail: Bool {
+        paymentIntent.config?.customerEmail?.collectionRequired ?? false
+    }
+    
+    var showFieldBilling: Bool {
+        paymentIntent.config?.billingAddress?.collectionRequired ?? false
+    }
 }

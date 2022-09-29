@@ -40,5 +40,5 @@ TODO: Add long description of the pod here.
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  s.dependency 'dojo-ios-sdk', '0.4.0'
+  s.dependency 'dojo-ios-sdk', '0.4.1'
 end

@@ -12,4 +12,14 @@ struct PaymentIntent: Codable {
     let id: String
     let clientSessionSecret: String
     let amount: DojoPaymentIntentAmount
+    var config: PaymentIntentConfig? = nil
+}
+
+struct PaymentIntentConfig: Codable {
+    let customerEmail: ConfigurationRequired?
+    let billingAddress: ConfigurationRequired?
+}
+
+struct ConfigurationRequired: Codable {
+    let collectionRequired: Bool
 }

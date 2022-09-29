@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,10 +12,13 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CardDetailsCheckoutViewController" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
             <connections>
                 <outlet property="buttonPay" destination="Swm-bR-QtT" id="sMQ-gK-Oss"/>
+                <outlet property="containerBilling" destination="7Ex-ei-0Te" id="j2q-XF-hYF"/>
+                <outlet property="containerEmail" destination="24E-f5-cfU" id="bMe-Hx-pdf"/>
                 <outlet property="footerPoweredByDojoView" destination="FRT-lp-E1d" id="zp2-Tp-82n"/>
                 <outlet property="labelPrimaryAmount" destination="sNy-Ak-ZDx" id="VS5-Gl-yYa"/>
                 <outlet property="labelYouPay" destination="yWi-LP-owe" id="GLL-Ju-xmb"/>
                 <outlet property="tempLoadingIndicator" destination="zjl-zu-ihy" id="vXc-ja-F50"/>
+                <outlet property="textFieldBillingAddress" destination="vm6-9m-QwS" id="mIR-33-cca"/>
                 <outlet property="textFieldCVV" destination="TB4-a8-Syq" id="k53-4C-iBn"/>
                 <outlet property="textFieldCardNumber" destination="6cU-aj-AC0" id="2vF-GJ-jCg"/>
                 <outlet property="textFieldCardholder" destination="k3N-34-hoH" id="pvb-du-h5i"/>
@@ -41,7 +44,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iPh-OF-730">
-                    <rect key="frame" x="16" y="701" width="82" height="31"/>
+                    <rect key="frame" x="16" y="697.5" width="92.5" height="34.5"/>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="Non 3DS"/>
                     <connections>
@@ -56,14 +59,14 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xKB-Pt-sx7" userLabel="topSeparator">
-                    <rect key="frame" x="0.0" y="44" width="414" height="0.5"/>
+                    <rect key="frame" x="0.0" y="48" width="414" height="0.5"/>
                     <color key="backgroundColor" systemColor="tintColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="0.5" id="09Y-34-Xnw"/>
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You pay" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yWi-LP-owe">
-                    <rect key="frame" x="177" y="60.5" width="60.5" height="24"/>
+                    <rect key="frame" x="177" y="64.5" width="60.5" height="24"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="8gV-s0-d4C"/>
                     </constraints>
@@ -72,7 +75,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="£34.34" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sNy-Ak-ZDx">
-                    <rect key="frame" x="179.5" y="88.5" width="55.5" height="40"/>
+                    <rect key="frame" x="179.5" y="92.5" width="55.5" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="Oy6-Jz-WYI"/>
                     </constraints>
@@ -81,7 +84,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="afX-ci-4On" userLabel="Cardholder">
-                    <rect key="frame" x="16" y="159" width="382" height="70"/>
+                    <rect key="frame" x="16" y="163" width="382" height="70"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name on card" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dxf-ev-vTa">
                             <rect key="frame" x="0.0" y="0.0" width="382" height="19.5"/>
@@ -100,7 +103,7 @@
                     </constraints>
                 </stackView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cLD-ce-gh5">
-                    <rect key="frame" x="104" y="701" width="51.5" height="31"/>
+                    <rect key="frame" x="114.5" y="697.5" width="57" height="34.5"/>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="3DS"/>
                     <connections>
@@ -108,7 +111,7 @@
                     </connections>
                 </button>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="onx-z8-Fa5" userLabel="Cardholder">
-                    <rect key="frame" x="16" y="252" width="383" height="100"/>
+                    <rect key="frame" x="16" y="256" width="383" height="100"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Debit/Credit Card information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SRm-CK-EUz">
                             <rect key="frame" x="0.0" y="0.0" width="383" height="19.5"/>
@@ -141,6 +144,55 @@
                         <constraint firstAttribute="height" constant="100" id="jMQ-F4-XKa"/>
                     </constraints>
                 </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="24E-f5-cfU" userLabel="Email">
+                    <rect key="frame" x="16" y="379" width="382" height="70"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="loo-fL-BYp">
+                            <rect key="frame" x="0.0" y="0.0" width="382" height="19.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="andy.smith@gmail.com" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6AM-On-ST3">
+                            <rect key="frame" x="0.0" y="24.5" width="382" height="45.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="70" id="X8O-2m-c3F"/>
+                    </constraints>
+                </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="7Ex-ei-0Te" userLabel="Billing">
+                    <rect key="frame" x="16" y="472" width="382" height="110"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Billing Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wUk-sD-BQd">
+                            <rect key="frame" x="0.0" y="0.0" width="382" height="20"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" tag="991" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="United Kingdom" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vm6-9m-QwS">
+                            <rect key="frame" x="0.0" y="25" width="382" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="bjK-F1-etU"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Postcode" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JAE-uF-C3O">
+                            <rect key="frame" x="0.0" y="70" width="382" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="36Q-Rq-5fO"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="110" id="hnX-jA-PNj"/>
+                    </constraints>
+                </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zjl-zu-ihy" customClass="MaterialLoadingIndicator" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
                     <rect key="frame" x="177" y="418" width="60" height="60"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -157,16 +209,22 @@
                 <constraint firstAttribute="trailing" secondItem="xKB-Pt-sx7" secondAttribute="trailing" id="9Ze-7a-p4V"/>
                 <constraint firstItem="onx-z8-Fa5" firstAttribute="top" secondItem="afX-ci-4On" secondAttribute="bottom" constant="23" id="BO3-Ap-uRu"/>
                 <constraint firstItem="onx-z8-Fa5" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="BfZ-ES-zAW"/>
+                <constraint firstAttribute="trailing" secondItem="24E-f5-cfU" secondAttribute="trailing" constant="16" id="BvZ-Pe-Oj0"/>
+                <constraint firstItem="24E-f5-cfU" firstAttribute="top" secondItem="onx-z8-Fa5" secondAttribute="bottom" constant="23" id="COm-Oj-3nj"/>
                 <constraint firstItem="FRT-lp-E1d" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="G2u-cq-KhT"/>
+                <constraint firstItem="7Ex-ei-0Te" firstAttribute="top" secondItem="24E-f5-cfU" secondAttribute="bottom" constant="23" id="Gdi-7x-Q5u"/>
                 <constraint firstItem="cLD-ce-gh5" firstAttribute="leading" secondItem="iPh-OF-730" secondAttribute="trailing" constant="6" id="Har-mb-zcE"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Swm-bR-QtT" secondAttribute="trailing" constant="16" id="KAR-AP-jLR"/>
                 <constraint firstItem="Swm-bR-QtT" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="LeY-TF-4QP"/>
+                <constraint firstItem="7Ex-ei-0Te" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="Nh8-VC-5uk"/>
                 <constraint firstItem="xKB-Pt-sx7" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="OKf-YO-hLd"/>
                 <constraint firstItem="afX-ci-4On" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="Vs0-gv-dn6"/>
                 <constraint firstAttribute="trailing" secondItem="FRT-lp-E1d" secondAttribute="trailing" id="ZeJ-VZ-R65"/>
                 <constraint firstItem="sNy-Ak-ZDx" firstAttribute="top" secondItem="yWi-LP-owe" secondAttribute="bottom" constant="4" id="ZuN-YC-42L"/>
                 <constraint firstItem="Swm-bR-QtT" firstAttribute="top" secondItem="iPh-OF-730" secondAttribute="bottom" constant="34" id="bu5-e7-rnm"/>
+                <constraint firstAttribute="trailing" secondItem="7Ex-ei-0Te" secondAttribute="trailing" constant="16" id="cGq-zn-S1o"/>
                 <constraint firstItem="Swm-bR-QtT" firstAttribute="top" secondItem="cLD-ce-gh5" secondAttribute="bottom" constant="34" id="iJz-Yd-rtI"/>
+                <constraint firstItem="24E-f5-cfU" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="lEY-VB-gVO"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="FRT-lp-E1d" secondAttribute="bottom" id="qD2-nd-jVI"/>
                 <constraint firstItem="zjl-zu-ihy" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="qbu-gB-I5o"/>
                 <constraint firstItem="iPh-OF-730" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="ruv-K3-G2L"/>

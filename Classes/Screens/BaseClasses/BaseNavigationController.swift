@@ -39,7 +39,7 @@ class BaseNavigationController: UINavigationController, UINavigationControllerDe
         }
 
         if let _ = viewController as? CardDetailsCheckoutViewController {
-            heightConstraint?.constant = 720
+            heightConstraint?.constant = 780
         }
         
         if let _ = viewController as? PaymentResultViewController {

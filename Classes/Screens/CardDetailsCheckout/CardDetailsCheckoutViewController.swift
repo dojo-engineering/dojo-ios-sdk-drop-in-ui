@@ -26,6 +26,9 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     @IBOutlet weak var textFieldCardNumber: UITextField!
     @IBOutlet weak var textFieldCVV: UITextField!
     @IBOutlet weak var textFieldExpiry: UITextField!
+    @IBOutlet weak var textFieldBillingAddress: UITextField!
+    @IBOutlet weak var containerEmail: UIStackView!
+    @IBOutlet weak var containerBilling: UIStackView!
     
     public init(viewModel: CardDetailsCheckoutViewModel,
                 theme: ThemeSettings,
@@ -46,8 +49,8 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        footerPoweredByDojoView?.setStyle(FooterPoweredByDojoStyle.checkoutPage)
         setUpData()
+        setUpViews()
     }
     
     override func setUpDesign() {
@@ -77,6 +80,13 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         let buttonPayTitle = "Pay \(amountText)"
         buttonPay.setTitle(buttonPayTitle, for: .normal)
         labelPrimaryAmount.text = amountText
+    }
+    
+    func setUpViews() {
+        footerPoweredByDojoView?.setStyle(FooterPoweredByDojoStyle.checkoutPage)
+        
+        containerEmail.isHidden = !viewModel.showFieldEmail
+        containerBilling.isHidden = !viewModel.showFieldBilling
     }
     
     override func viewWillAppear(_ animated: Bool) {
