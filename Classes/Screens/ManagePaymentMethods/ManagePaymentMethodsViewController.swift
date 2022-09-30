@@ -44,6 +44,8 @@ class ManagePaymentMethodsViewController: BaseUIViewController {
     override func setUpDesign() {
         super.setUpDesign()
         
+        tableViewPaymentMethods.backgroundColor = theme.primarySurfaceBackgroundColor
+        
         //TODO: common style
         buttonUseSelectedPaymentMethod.backgroundColor = theme.primaryCTAButtonActiveBackgroundColor
         buttonUseSelectedPaymentMethod.setTitleColor(theme.primaryCTAButtonActiveTextColor, for: .normal)
@@ -51,7 +53,7 @@ class ManagePaymentMethodsViewController: BaseUIViewController {
         buttonUseSelectedPaymentMethod.layer.cornerRadius = theme.primaryCTAButtonCornerRadius
         
         //TODO: for demo only
-        buttonPayUsingNewCard.backgroundColor = .white
+        buttonPayUsingNewCard.backgroundColor = theme.primarySurfaceBackgroundColor
         buttonPayUsingNewCard.setTitleColor(theme.primaryLabelTextColor, for: .normal)
         buttonPayUsingNewCard.tintColor = theme.primaryLabelTextColor
         buttonPayUsingNewCard.layer.cornerRadius = theme.primaryCTAButtonCornerRadius

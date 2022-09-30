@@ -109,6 +109,16 @@ extension RootCoordinator {
         }
         return controller
     }
+    
+    func propagateConfigChanges() {
+        // Propagate change to all view controllers
+        rootNavController.viewControllers.forEach({
+            if let controller = $0 as? BaseUIViewController {
+                controller.viewModel?.paymentIntent = config.paymentIntent
+                controller.setUpDesign()
+            }
+        })
+    }
 }
 
 extension RootCoordinator: PaymentMethodCheckoutViewControllerDelegate {
@@ -137,12 +147,8 @@ extension RootCoordinator: PaymentResultViewControllerDelegate {
     
     func onPaymentIntentRefreshSucess(paymentIntent: PaymentIntent) {
         config.paymentIntent = paymentIntent
-        ////
-        rootNavController.viewControllers.forEach({
-            if let controller = $0 as? BaseUIViewController {
-                controller.viewModel?.paymentIntent = paymentIntent
-            }
-        })
+        propagateConfigChanges()
+       
         rootNavController.popViewController(animated: false) //TODO: make a method for navigating back
     }
 }
@@ -157,6 +163,7 @@ extension RootCoordinator: BaseViewControllerDelegate {
 extension RootCoordinator: DataLoadingViewControllerDelegate {
     func paymentIntentDownloaded(_ paymentIntent: PaymentIntent) {
         config.paymentIntent = paymentIntent
+        propagateConfigChanges()
         showPaymentMethodCheckout()
 //        showPaymentResult(resultCode: 5)
 //        showCardDetailsCheckout()

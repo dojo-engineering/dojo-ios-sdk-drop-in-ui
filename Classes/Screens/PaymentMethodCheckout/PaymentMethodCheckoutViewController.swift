@@ -31,7 +31,6 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
         self.baseDelegate = delegate
         self.theme = theme
         self.displayBackButton = false
-        
     }
     
     required init?(coder: NSCoder) {

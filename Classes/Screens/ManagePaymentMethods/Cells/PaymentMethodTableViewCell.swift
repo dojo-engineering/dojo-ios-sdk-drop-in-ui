@@ -22,6 +22,7 @@ class PaymentMethodTableViewCell: UITableViewCell {
     func setTheme(theme: ThemeSettings) {
         labelMainTitle.font = theme.fontSubtitle1
         labelMainTitle.textColor = theme.primaryLabelTextColor
+        backgroundColor = theme.primarySurfaceBackgroundColor
     }
 
     override func awakeFromNib() {

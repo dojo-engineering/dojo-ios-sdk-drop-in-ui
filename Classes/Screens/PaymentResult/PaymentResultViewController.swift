@@ -84,7 +84,7 @@ class PaymentResultViewController: BaseUIViewController {
         if getViewModal()?.resultCode == 0 {
             buttonTryAgain.isHidden = true
             labelMainText.text = LocalizedText.PaymentResult.mainTitleSuccess
-            labelSubtitle.text = "\(LocalizedText.PaymentResult.orderId) \(viewModel?.paymentIntent.id)"  //TODO: the same for both cases
+            labelSubtitle.text = "\(LocalizedText.PaymentResult.orderId) \(viewModel?.paymentIntent.id ?? "")"  //TODO: the same for both cases
             imgViewResult.image = UIImage(named: "img-result-success-light", in: Bundle(for: type(of: self)), compatibleWith: nil)
             
             //TODO: common style
@@ -95,7 +95,7 @@ class PaymentResultViewController: BaseUIViewController {
         } else {
             buttonTryAgain.isHidden = false
             labelMainText.text = LocalizedText.PaymentResult.mainTitleFail
-            labelSubtitle.text = "\(LocalizedText.PaymentResult.orderId) \(viewModel?.paymentIntent.id)"
+            labelSubtitle.text = "\(LocalizedText.PaymentResult.orderId) \(viewModel?.paymentIntent.id ?? "")"
             labelSubtitle2.text = LocalizedText.PaymentResult.mainErrorMessage
             imgViewResult.image = UIImage(named: "img-result-error-light", in: Bundle(for: type(of: self)), compatibleWith: nil)
             
@@ -105,7 +105,7 @@ class PaymentResultViewController: BaseUIViewController {
             buttonTryAgain.tintColor = theme.primaryCTAButtonActiveTextColor
             buttonTryAgain.layer.cornerRadius = theme.primaryCTAButtonCornerRadius
             
-            buttonDone.backgroundColor = .white
+            buttonDone.backgroundColor = theme.primarySurfaceBackgroundColor
             buttonDone.setTitleColor(theme.primaryLabelTextColor, for: .normal)
             buttonDone.tintColor = theme.primaryLabelTextColor
             buttonDone.layer.cornerRadius = theme.primaryCTAButtonCornerRadius
