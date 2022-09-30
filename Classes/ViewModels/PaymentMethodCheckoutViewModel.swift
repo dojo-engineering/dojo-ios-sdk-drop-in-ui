@@ -8,12 +8,10 @@
 import UIKit
 import dojo_ios_sdk
 
-class PaymentMethodCheckoutViewModel {
-    
-    let paymentIntent: PaymentIntent
+class PaymentMethodCheckoutViewModel: BaseViewModel {
     
     init(config: ConfigurationManager) {
-        self.paymentIntent = config.paymentIntent
+        super.init(paymentIntent: config.paymentIntent)
     }
     
     func processApplePayPayment(fromViewControlelr: UIViewController, completion: ((Int) -> Void)?) {

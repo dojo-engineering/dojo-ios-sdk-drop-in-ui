@@ -14,18 +14,17 @@ protocol DataLoadingViewControllerDelegate: BaseViewControllerDelegate {
 
 class DataLoadingViewController: BaseUIViewController {
     
-    let viewModel: DataLoadingViewModel
     var delegate: DataLoadingViewControllerDelegate
     @IBOutlet weak var materialLoadingIndicator: MaterialLoadingIndicator!
     
     public init(viewModel: DataLoadingViewModel,
                 theme: ThemeSettings,
-                delegate :DataLoadingViewControllerDelegate) {
-        self.viewModel = viewModel
+                delegate: DataLoadingViewControllerDelegate) {
         self.delegate = delegate
         let nibName = String(describing: type(of: self))
         let podBundle = Bundle(for: type(of: self))
         super.init(nibName: nibName, bundle: podBundle)
+        self.viewModel = viewModel
         self.baseDelegate = delegate
         self.theme = theme
     }
@@ -46,11 +45,14 @@ class DataLoadingViewController: BaseUIViewController {
      
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        //        loadData()
-        // for testing purposes
-        DispatchQueue.main.asyncAfter(deadline: .now() + viewModel.demoDelay) {
+        let delay = getViewModel()?.demoDelay ?? 0
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             self.loadData()
         }
+    }
+    
+    func getViewModel() -> DataLoadingViewModel? {
+        viewModel as? DataLoadingViewModel
     }
     
     func setupLoadingIndicator() {
@@ -60,7 +62,7 @@ class DataLoadingViewController: BaseUIViewController {
     }
     
     func loadData() {
-        viewModel.fetchPaymentIntent() { paymentIntent, error in
+        getViewModel()?.fetchPaymentIntent() { paymentIntent, error in
             if let error = error {
                 self.delegate.errorLoadingPaymentIntent(error: error)
             } else if let paymentIntent = paymentIntent {

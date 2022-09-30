@@ -21,19 +21,18 @@ class PaymentResultViewController: BaseUIViewController {
     @IBOutlet weak var buttonTryAgain: LoadingButton!
     @IBOutlet weak var imgViewResult: UIImageView!
     
-    var viewModel: PaymentResultViewModel
     var delegate: PaymentResultViewControllerDelegate?
     
     public init(viewModel: PaymentResultViewModel,
                 theme: ThemeSettings,
                 delegate: PaymentResultViewControllerDelegate) {
-        self.viewModel = viewModel
         self.delegate = delegate
         let nibName = String(describing: type(of: self))
         let podBundle = Bundle(for: type(of: self))
         super.init(nibName: nibName, bundle: podBundle)
         self.displayCloseButton = true
         self.displayBackButton = false
+        self.viewModel = viewModel
         self.theme = theme
     }
     
@@ -50,7 +49,7 @@ class PaymentResultViewController: BaseUIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //TODO: move to a better place
-        if viewModel.resultCode == 0 {
+        if getViewModal()?.resultCode == 0 {
             setNavigationTitle(LocalizedText.PaymentResult.titleSuccess)
         } else {
             setNavigationTitle(LocalizedText.PaymentResult.titleFail)
@@ -61,6 +60,10 @@ class PaymentResultViewController: BaseUIViewController {
         super.viewDidLayoutSubviews()
         // TODO: properly document
         buttonDone.titleLabel?.font = theme.fontPrimaryCTAButtonActive
+    }
+    
+    func getViewModal() -> PaymentResultViewModel? {
+        viewModel as? PaymentResultViewModel
     }
     
     func setupTranslations() {
@@ -78,10 +81,10 @@ class PaymentResultViewController: BaseUIViewController {
     }
     
     func updateUIState() {
-        if viewModel.resultCode == 0 {
+        if getViewModal()?.resultCode == 0 {
             buttonTryAgain.isHidden = true
             labelMainText.text = LocalizedText.PaymentResult.mainTitleSuccess
-            labelSubtitle.text = "\(LocalizedText.PaymentResult.orderId) \(viewModel.paymentIntentId)"  //TODO: the same for both cases
+            labelSubtitle.text = "\(LocalizedText.PaymentResult.orderId) \(viewModel?.paymentIntent.id)"  //TODO: the same for both cases
             imgViewResult.image = UIImage(named: "img-result-success-light", in: Bundle(for: type(of: self)), compatibleWith: nil)
             
             //TODO: common style
@@ -92,7 +95,7 @@ class PaymentResultViewController: BaseUIViewController {
         } else {
             buttonTryAgain.isHidden = false
             labelMainText.text = LocalizedText.PaymentResult.mainTitleFail
-            labelSubtitle.text = "\(LocalizedText.PaymentResult.orderId) \(viewModel.paymentIntentId)"
+            labelSubtitle.text = "\(LocalizedText.PaymentResult.orderId) \(viewModel?.paymentIntent.id)"
             labelSubtitle2.text = LocalizedText.PaymentResult.mainErrorMessage
             imgViewResult.image = UIImage(named: "img-result-error-light", in: Bundle(for: type(of: self)), compatibleWith: nil)
             
@@ -124,8 +127,9 @@ class PaymentResultViewController: BaseUIViewController {
     @IBAction func onButtonTryAgainPress(_ sender: Any) {
         buttonTryAgain.showLoading(LocalizedText.PaymentResult.buttonPleaseWait)
         disableScreen()
-        DispatchQueue.main.asyncAfter(deadline: .now() + viewModel.demoDelay) {
-            self.viewModel.refreshToken { result, error in
+        let delay = getViewModal()?.demoDelay ?? 0
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            self.getViewModal()?.refreshToken { result, error in
                 self.enableScreen()
                 
                 if let _ = error {
@@ -145,6 +149,6 @@ class PaymentResultViewController: BaseUIViewController {
     }
     
     private func exitFromTheScreen() {
-        delegate?.onDonePress(resultCode: viewModel.resultCode)
+        delegate?.onDonePress(resultCode: getViewModal()?.resultCode ?? 5) //TODO
     }
 }

@@ -137,6 +137,12 @@ extension RootCoordinator: PaymentResultViewControllerDelegate {
     
     func onPaymentIntentRefreshSucess(paymentIntent: PaymentIntent) {
         config.paymentIntent = paymentIntent
+        ////
+        rootNavController.viewControllers.forEach({
+            if let controller = $0 as? BaseUIViewController {
+                controller.viewModel?.paymentIntent = paymentIntent
+            }
+        })
         rootNavController.popViewController(animated: false) //TODO: make a method for navigating back
     }
 }

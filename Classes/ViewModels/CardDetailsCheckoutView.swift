@@ -8,15 +8,13 @@
 import UIKit
 import dojo_ios_sdk
 
-class CardDetailsCheckoutViewModel {
+class CardDetailsCheckoutViewModel: BaseViewModel {
     // for test purposes only
     var cardDetails3DS = DojoCardDetails(cardNumber: "4456530000001096", cardName: "Card Holder", expiryDate: "12 / 24", cv2: "020")
     var cardDetailsNon3DS = DojoCardDetails(cardNumber: "5200000000000056", cardName: "Card Holder", expiryDate: "12 / 24", cv2: "341")
     
-    let paymentIntent: PaymentIntent
-    
     init(config: ConfigurationManager) {
-        self.paymentIntent = config.paymentIntent
+        super.init(paymentIntent: config.paymentIntent)
     }
     
     func processPayment(cardDetails: DojoCardDetails, fromViewControlelr: UIViewController, completion: ((Int) -> Void)?) {

@@ -8,20 +8,19 @@
 import UIKit
 import dojo_ios_sdk
 
-class PaymentResultViewModel {
+class PaymentResultViewModel: BaseViewModel {
     
     let resultCode: Int
-    let paymentIntentId: String
     let demoDelay: Double
     
     init(config: ConfigurationManager,
          resultCode: Int) {
         self.resultCode = resultCode
-        self.paymentIntentId = config.paymentIntentId
         self.demoDelay = config.demoDelay
+        super.init(paymentIntent: config.paymentIntent)
     }
     
     func refreshToken(completion: ((String?,Error?)-> Void)?) {
-        DojoSDK.refreshPaymentIntent(intentId: paymentIntentId, completion: completion)
+        DojoSDK.refreshPaymentIntent(intentId: paymentIntent.id, completion: completion)
     }
 }

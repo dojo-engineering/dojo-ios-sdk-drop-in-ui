@@ -13,16 +13,15 @@ protocol CardDetailsCheckoutViewControllerDelegate: BaseViewControllerDelegate {
 
 class CardDetailsCheckoutViewController: BaseUIViewController {
     
-    let viewModel: CardDetailsCheckoutViewModel
     var cardDetails: DojoCardDetails
     var delegate: CardDetailsCheckoutViewControllerDelegate?
     
     @IBOutlet weak var constraintPayButtonBottom: NSLayoutConstraint!
     @IBOutlet weak var labelPrimaryAmount: UILabel!
     @IBOutlet weak var labelYouPay: UILabel!
-    @IBOutlet weak var tempLoadingIndicator: MaterialLoadingIndicator!
-    @IBOutlet weak var buttonPay: UIButton!
+    @IBOutlet weak var buttonPay: LoadingButton!
     
+    @IBOutlet weak var mainContentScrollView: UIScrollView!
     @IBOutlet weak var textFieldCardholder: UITextField!
     @IBOutlet weak var textFieldCardNumber: UITextField!
     @IBOutlet weak var textFieldCVV: UITextField!
@@ -34,12 +33,12 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     public init(viewModel: CardDetailsCheckoutViewModel,
                 theme: ThemeSettings,
                 delegate : CardDetailsCheckoutViewControllerDelegate) {
-        self.viewModel = viewModel
-        self.cardDetails = viewModel.cardDetailsNon3DS
+        self.cardDetails = viewModel.cardDetails3DS
         self.delegate = delegate
         let nibName = String(describing: type(of: self))
         let podBundle = Bundle(for: type(of: self))
         super.init(nibName: nibName, bundle: podBundle)
+        self.viewModel = viewModel
         self.baseDelegate = delegate
         self.theme = theme
     }
@@ -69,16 +68,15 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         
         labelPrimaryAmount.textColor = theme.primaryLabelTextColor
         labelPrimaryAmount.font = theme.fontHeading3Medium
-        
-        tempLoadingIndicator.radius = 40.0
-        tempLoadingIndicator.lineWidth = 7
-        tempLoadingIndicator.color = theme.loadingIndicatorColor
-        tempLoadingIndicator.alpha = 0 // isHidden doesn't work
+    }
+    
+    func getViewModel() -> CardDetailsCheckoutViewModel? {
+        viewModel as? CardDetailsCheckoutViewModel
     }
     
     func setUpData() {
         //TODO: proper formatter
-        let amountText = "£\(String(format: "%.2f", Double(viewModel.paymentIntent.amount.value)/100.0))"
+        let amountText = "£\(String(format: "%.2f", Double(getViewModel()?.paymentIntent.amount.value ?? 0)/100.0))"
         let buttonPayTitle = "Pay \(amountText)"
         buttonPay.setTitle(buttonPayTitle, for: .normal)
         labelPrimaryAmount.text = amountText
@@ -105,8 +103,8 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     func setUpViews() {
         footerPoweredByDojoView?.setStyle(FooterPoweredByDojoStyle.checkoutPage)
         
-        containerEmail.isHidden = !viewModel.showFieldEmail
-        containerBilling.isHidden = !viewModel.showFieldBilling
+        containerEmail.isHidden = !(getViewModel()?.showFieldEmail ?? false)
+        containerBilling.isHidden = !(getViewModel()?.showFieldBilling ?? false)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -115,20 +113,34 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     }
 
     @IBAction func onPayButtonPress(_ sender: Any) {
-        tempLoadingIndicator.alpha = 1
-        tempLoadingIndicator.startAnimating()
-        viewModel.processPayment(cardDetails: cardDetails,
-                                 fromViewControlelr: self) { result in
+        setStateLoading()
+        getViewModel()?.processPayment(cardDetails: cardDetails,
+                                 fromViewControlelr: self) { result in //TODO: force unwrap
             self.delegate?.navigateToPaymentResult(resultCode: result)
+            self.setStateNormal()
         }
     }
     
+    func setStateLoading() {
+        buttonPay.showLoading(LocalizedText.CardDetailsCheckout.buttonProcessing)
+        mainContentScrollView.isUserInteractionEnabled = false
+        mainContentScrollView.alpha = 0.4
+    }
+    
+    func setStateNormal() {
+        buttonPay.hideLoading()
+        mainContentScrollView.isUserInteractionEnabled = true
+        mainContentScrollView.alpha = 1
+    }
+    
     @IBAction func onAutocomplete3DS(_ sender: Any) {
+        guard let viewModel = getViewModel() else { return }
         cardDetails = viewModel.cardDetails3DS
         autofillUI()
     }
     
     @IBAction func onAutocompleteNon3DS(_ sender: Any) {
+        guard let viewModel = getViewModel() else { return }
         cardDetails = viewModel.cardDetailsNon3DS
         autofillUI()
     }

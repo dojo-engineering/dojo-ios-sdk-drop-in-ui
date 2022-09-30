@@ -12,6 +12,7 @@ class BaseUIViewController: UIViewController {
     @IBOutlet weak var footerPoweredByDojoView: FooterPoweredByDojo?
     @IBOutlet weak var topNavigationSeparatorView: UIView?
     var baseDelegate: BaseViewControllerDelegate?
+    var viewModel: BaseViewModel?
     
     // Per screen settings with defaul values
     // overwrite them during init of any subclass

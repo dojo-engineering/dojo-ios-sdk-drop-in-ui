@@ -18,7 +18,7 @@
                 <outlet property="footerPoweredByDojoView" destination="FRT-lp-E1d" id="zp2-Tp-82n"/>
                 <outlet property="labelPrimaryAmount" destination="sNy-Ak-ZDx" id="VS5-Gl-yYa"/>
                 <outlet property="labelYouPay" destination="yWi-LP-owe" id="GLL-Ju-xmb"/>
-                <outlet property="tempLoadingIndicator" destination="zjl-zu-ihy" id="vXc-ja-F50"/>
+                <outlet property="mainContentScrollView" destination="AND-dd-xoI" id="tK7-Yw-yrM"/>
                 <outlet property="textFieldBillingAddress" destination="vm6-9m-QwS" id="mIR-33-cca"/>
                 <outlet property="textFieldCVV" destination="TB4-a8-Syq" id="k53-4C-iBn"/>
                 <outlet property="textFieldCardNumber" destination="6cU-aj-AC0" id="2vF-GJ-jCg"/>
@@ -33,7 +33,7 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Swm-bR-QtT">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Swm-bR-QtT" customClass="LoadingButton" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
                     <rect key="frame" x="16" y="766" width="382" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="bYb-5z-Bgb"/>
@@ -239,14 +239,6 @@
                         <constraint firstItem="24E-f5-cfU" firstAttribute="leading" secondItem="AND-dd-xoI" secondAttribute="leading" constant="16" id="puX-ek-scO"/>
                     </constraints>
                 </scrollView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zjl-zu-ihy" customClass="MaterialLoadingIndicator" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
-                    <rect key="frame" x="177" y="418" width="60" height="60"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="60" id="8Hz-Gf-wzh"/>
-                        <constraint firstAttribute="width" constant="60" id="ZMK-Dn-G5A"/>
-                    </constraints>
-                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -266,11 +258,9 @@
                 <constraint firstItem="AND-dd-xoI" firstAttribute="top" secondItem="xKB-Pt-sx7" secondAttribute="bottom" id="hUL-QH-HmG"/>
                 <constraint firstAttribute="trailing" secondItem="AND-dd-xoI" secondAttribute="trailing" id="pyV-bT-HU7"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="FRT-lp-E1d" secondAttribute="bottom" id="qD2-nd-jVI"/>
-                <constraint firstItem="zjl-zu-ihy" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="qbu-gB-I5o"/>
                 <constraint firstAttribute="bottom" secondItem="cLD-ce-gh5" secondAttribute="bottom" constant="164" id="rWX-3K-3ug"/>
                 <constraint firstItem="iPh-OF-730" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="ruv-K3-G2L"/>
                 <constraint firstItem="xKB-Pt-sx7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ugv-hk-cJN"/>
-                <constraint firstItem="zjl-zu-ihy" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="vlc-mj-Yfe"/>
                 <constraint firstItem="Swm-bR-QtT" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="wBC-HS-PdW"/>
             </constraints>
             <point key="canvasLocation" x="131.8840579710145" y="105.80357142857143"/>

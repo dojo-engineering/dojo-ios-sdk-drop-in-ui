@@ -14,7 +14,6 @@ protocol PaymentMethodCheckoutViewControllerDelegate: BaseViewControllerDelegate
 
 class PaymentMethodCheckoutViewController: BaseUIViewController {
     
-    let viewModel: PaymentMethodCheckoutViewModel
     var delegate: PaymentMethodCheckoutViewControllerDelegate?
     @IBOutlet weak var labelTotalDue: UILabel!
     @IBOutlet weak var labelTotalAmount: UILabel!
@@ -24,11 +23,11 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
     public init(viewModel: PaymentMethodCheckoutViewModel,
                 theme: ThemeSettings,
                 delegate: PaymentMethodCheckoutViewControllerDelegate) {
-        self.viewModel = viewModel
         self.delegate = delegate
         let nibName = String(describing: type(of: self))
         let podBundle = Bundle(for: type(of: self))
         super.init(nibName: nibName, bundle: podBundle)
+        self.viewModel = viewModel
         self.baseDelegate = delegate
         self.theme = theme
         self.displayBackButton = false
@@ -72,13 +71,18 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
     
     func setupData() {
         //TODO: proper amount formatter
-        labelTotalAmount.text = "£\(String(format: "%.2f", Double(viewModel.paymentIntent.amount.value)/100.0))"
+        let value = Double(getViewModel()?.paymentIntent.amount.value ?? 0)
+        labelTotalAmount.text = "£\(String(format: "%.2f", value/100.0))"
     }
     
     @IBAction func onPayUsingApplePayPress(_ sender: Any) {
-        viewModel.processApplePayPayment(fromViewControlelr: self) { result in
+        getViewModel()?.processApplePayPayment(fromViewControlelr: self) { result in
             self.delegate?.navigateToPaymentResult(resultCode: result)
         }
+    }
+    
+    func getViewModel() -> PaymentMethodCheckoutViewModel? {
+        viewModel as? PaymentMethodCheckoutViewModel
     }
 }
 

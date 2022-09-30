@@ -8,7 +8,7 @@
 import UIKit
 import dojo_ios_sdk
 
-class DataLoadingViewModel {
+class DataLoadingViewModel: BaseViewModel {
     
     let paymentIntentId: String
     let demoDelay: Double
@@ -16,6 +16,10 @@ class DataLoadingViewModel {
     init(paymentIntentId: String, demoDelay: Double) {
         self.paymentIntentId = paymentIntentId
         self.demoDelay = demoDelay
+        let emptyPaymentIntent = PaymentIntent(id: paymentIntentId,
+                                               clientSessionSecret: "",
+                                               amount: DojoPaymentIntentAmount(value: 0, currencyCode: ""))
+        super.init(paymentIntent: emptyPaymentIntent)
     }
     
     func fetchPaymentIntent(completion: ((PaymentIntent?, Error?) -> Void)?) {
