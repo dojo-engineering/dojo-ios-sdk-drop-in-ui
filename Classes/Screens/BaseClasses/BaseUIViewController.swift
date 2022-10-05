@@ -52,10 +52,11 @@ class BaseUIViewController: UIViewController {
 extension BaseUIViewController {
     
     func setUpCloseButton() {
-        
-        // try to remove old button if presenet
         let buttonTag = 88884
-        self.navigationController?.navigationBar.subviews.first(where: {$0.tag == buttonTag})?.removeFromSuperview()
+        if let _ = self.navigationController?.navigationBar.subviews.first(where: {$0.tag == buttonTag}) {
+            // old button already exists, don't need to add a new one
+            return
+        }
         // if don't need to display, exit
         guard displayCloseButton == true else { return }
         
