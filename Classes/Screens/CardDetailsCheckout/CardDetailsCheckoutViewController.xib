@@ -14,7 +14,7 @@
                 <outlet property="buttonPay" destination="Swm-bR-QtT" id="sMQ-gK-Oss"/>
                 <outlet property="constraintPayButtonBottom" destination="Qgg-Dw-3jc" id="4WN-ne-y2K"/>
                 <outlet property="containerBilling" destination="7Ex-ei-0Te" id="j2q-XF-hYF"/>
-                <outlet property="containerEmail" destination="24E-f5-cfU" id="bMe-Hx-pdf"/>
+                <outlet property="fieldEmail" destination="6gL-di-Oc5" id="oTS-ie-XHs"/>
                 <outlet property="footerPoweredByDojoView" destination="FRT-lp-E1d" id="zp2-Tp-82n"/>
                 <outlet property="labelPrimaryAmount" destination="sNy-Ak-ZDx" id="VS5-Gl-yYa"/>
                 <outlet property="labelYouPay" destination="yWi-LP-owe" id="GLL-Ju-xmb"/>
@@ -96,32 +96,17 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="S7j-46-8kb">
-                            <rect key="frame" x="16" y="108.5" width="379" height="419"/>
+                            <rect key="frame" x="16" y="108.5" width="379" height="469"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="24E-f5-cfU" userLabel="Email">
-                                    <rect key="frame" x="0.0" y="0.0" width="379" height="70"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="loo-fL-BYp">
-                                            <rect key="frame" x="0.0" y="0.0" width="379" height="19.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="andy.smith@gmail.com" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6AM-On-ST3">
-                                            <rect key="frame" x="0.0" y="24.5" width="379" height="45.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                            <connections>
-                                                <outlet property="delegate" destination="-1" id="SKZ-Bo-7MF"/>
-                                            </connections>
-                                        </textField>
-                                    </subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6gL-di-Oc5" userLabel="Email" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="379" height="120"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="70" id="X8O-2m-c3F"/>
+                                        <constraint firstAttribute="height" constant="120" id="RAk-Oj-nEh"/>
                                     </constraints>
-                                </stackView>
+                                </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="7Ex-ei-0Te" userLabel="Billing">
-                                    <rect key="frame" x="0.0" y="93" width="379" height="110"/>
+                                    <rect key="frame" x="0.0" y="143" width="379" height="110"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Billing Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wUk-sD-BQd">
                                             <rect key="frame" x="0.0" y="0.0" width="379" height="20"/>
@@ -157,7 +142,7 @@
                                     </constraints>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="afX-ci-4On" userLabel="Cardholder">
-                                    <rect key="frame" x="0.0" y="226" width="379" height="70"/>
+                                    <rect key="frame" x="0.0" y="276" width="379" height="70"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name on card" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dxf-ev-vTa">
                                             <rect key="frame" x="0.0" y="0.0" width="379" height="19.5"/>
@@ -179,7 +164,7 @@
                                     </constraints>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="onx-z8-Fa5" userLabel="Pan">
-                                    <rect key="frame" x="0.0" y="319" width="379" height="100"/>
+                                    <rect key="frame" x="0.0" y="369" width="379" height="100"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Debit/Credit Card information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SRm-CK-EUz">
                                             <rect key="frame" x="0.0" y="0.0" width="379" height="19.5"/>

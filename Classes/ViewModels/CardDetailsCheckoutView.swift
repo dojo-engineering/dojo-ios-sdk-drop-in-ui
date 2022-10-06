@@ -33,3 +33,12 @@ class CardDetailsCheckoutViewModel: BaseViewModel {
         paymentIntent.config?.billingAddress?.collectionRequired ?? false
     }
 }
+
+// Validators
+extension CardDetailsCheckoutViewModel {
+    
+    func isEmailValid(_ email: String) -> Bool {
+        return false
+    }
+    
+}

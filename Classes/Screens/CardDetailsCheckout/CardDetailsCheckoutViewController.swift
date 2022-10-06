@@ -21,13 +21,14 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     @IBOutlet weak var labelYouPay: UILabel!
     @IBOutlet weak var buttonPay: LoadingButton!
     
+    @IBOutlet weak var fieldEmail: DojoInputField!
     @IBOutlet weak var mainContentScrollView: UIScrollView!
     @IBOutlet weak var textFieldCardholder: UITextField!
     @IBOutlet weak var textFieldCardNumber: UITextField!
     @IBOutlet weak var textFieldCVV: UITextField!
     @IBOutlet weak var textFieldExpiry: UITextField!
     @IBOutlet weak var textFieldBillingAddress: UITextField!
-    @IBOutlet weak var containerEmail: UIStackView!
+//    @IBOutlet weak var containerEmail: UIStackView!
     @IBOutlet weak var containerBilling: UIStackView!
     
     public init(viewModel: CardDetailsCheckoutViewModel,
@@ -103,7 +104,8 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     func setUpViews() {
         footerPoweredByDojoView?.setStyle(FooterPoweredByDojoStyle.checkoutPage)
         
-        containerEmail.isHidden = !(getViewModel()?.showFieldEmail ?? false)
+        fieldEmail.setType(.email)
+//        containerEmail.isHidden = !(getViewModel()?.showFieldEmail ?? false)
         containerBilling.isHidden = !(getViewModel()?.showFieldBilling ?? false)
     }
     
