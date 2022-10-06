@@ -31,11 +31,11 @@ class BaseNavigationController: UINavigationController, UINavigationControllerDe
         viewController.navigationItem.backBarButtonItem = item
         
         if let _ = viewController as? PaymentMethodCheckoutViewController {
-            heightConstraint?.constant = 330
+            heightConstraint?.constant = 286 + safeAreaBottomHeight
         }
 
         if let _ = viewController as? ManagePaymentMethodsViewController {
-            heightConstraint?.constant = 500
+            heightConstraint?.constant = 466 + safeAreaBottomHeight
         }
 
         if let _ = viewController as? CardDetailsCheckoutViewController {
@@ -43,10 +43,14 @@ class BaseNavigationController: UINavigationController, UINavigationControllerDe
         }
         
         if let _ = viewController as? PaymentResultViewController {
-            heightConstraint?.constant = 650
+            heightConstraint?.constant = 616 + safeAreaBottomHeight
         }
         
         UIView.setAnimationsEnabled(false)
+    }
+    
+    var safeAreaBottomHeight: CGFloat {
+        UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
     }
     
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {

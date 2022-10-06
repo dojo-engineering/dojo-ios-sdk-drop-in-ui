@@ -111,10 +111,11 @@ extension RootCoordinator {
     }
     
     func propagateConfigChanges() {
-        // Propagate change to all view controllers
+        // Propagate changes to all view controllers
         rootNavController.viewControllers.forEach({
             if let controller = $0 as? BaseUIViewController {
                 controller.viewModel?.paymentIntent = config.paymentIntent
+                controller.theme = config.themeSettings
                 controller.setUpDesign()
             }
         })
