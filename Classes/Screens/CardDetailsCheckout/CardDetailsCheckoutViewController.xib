@@ -13,17 +13,17 @@
             <connections>
                 <outlet property="buttonPay" destination="Swm-bR-QtT" id="sMQ-gK-Oss"/>
                 <outlet property="constraintPayButtonBottom" destination="Qgg-Dw-3jc" id="4WN-ne-y2K"/>
-                <outlet property="containerBilling" destination="7Ex-ei-0Te" id="j2q-XF-hYF"/>
+                <outlet property="fieldBillingCountry" destination="uYT-ur-wBA" id="pZk-0O-Cjm"/>
+                <outlet property="fieldBillingPostcode" destination="PMf-IG-Igc" id="60J-Mh-Rb6"/>
+                <outlet property="fieldCVV" destination="VmM-dZ-fl3" id="9Al-Y0-4fG"/>
+                <outlet property="fieldCardNumber" destination="HYC-gQ-ZCU" id="WUy-Tn-2aw"/>
+                <outlet property="fieldCardholder" destination="K1F-SH-mec" id="9Mw-XO-Bnf"/>
                 <outlet property="fieldEmail" destination="6gL-di-Oc5" id="oTS-ie-XHs"/>
+                <outlet property="fieldExpiry" destination="zfe-AI-Fj8" id="YHK-Ac-5mx"/>
                 <outlet property="footerPoweredByDojoView" destination="FRT-lp-E1d" id="zp2-Tp-82n"/>
                 <outlet property="labelPrimaryAmount" destination="sNy-Ak-ZDx" id="VS5-Gl-yYa"/>
                 <outlet property="labelYouPay" destination="yWi-LP-owe" id="GLL-Ju-xmb"/>
                 <outlet property="mainContentScrollView" destination="AND-dd-xoI" id="tK7-Yw-yrM"/>
-                <outlet property="textFieldBillingAddress" destination="vm6-9m-QwS" id="mIR-33-cca"/>
-                <outlet property="textFieldCVV" destination="TB4-a8-Syq" id="k53-4C-iBn"/>
-                <outlet property="textFieldCardNumber" destination="6cU-aj-AC0" id="2vF-GJ-jCg"/>
-                <outlet property="textFieldCardholder" destination="k3N-34-hoH" id="pvb-du-h5i"/>
-                <outlet property="textFieldExpiry" destination="Xxl-6y-pMT" id="Tp2-BP-gU3"/>
                 <outlet property="topNavigationSeparatorView" destination="xKB-Pt-sx7" id="O5n-fd-Hfh"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -96,116 +96,112 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="S7j-46-8kb">
-                            <rect key="frame" x="16" y="108.5" width="379" height="469"/>
+                            <rect key="frame" x="16" y="108.5" width="379" height="1049"/>
                             <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Av9-to-bSP" userLabel="Cards Strip">
+                                    <rect key="frame" x="0.0" y="0.0" width="379" height="40"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="w0x-CL-rMb">
+                                            <rect key="frame" x="0.0" y="0.0" width="126.5" height="40"/>
+                                            <color key="backgroundColor" systemColor="systemPinkColor"/>
+                                        </imageView>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0L4-QB-E6s">
+                                            <rect key="frame" x="126.5" y="0.0" width="126" height="40"/>
+                                            <color key="backgroundColor" systemColor="systemTealColor"/>
+                                        </imageView>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dUp-js-3C5">
+                                            <rect key="frame" x="252.5" y="0.0" width="126.5" height="40"/>
+                                            <color key="backgroundColor" systemColor="systemPurpleColor"/>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="DXU-Gn-hD1"/>
+                                    </constraints>
+                                </stackView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6gL-di-Oc5" userLabel="Email" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="379" height="120"/>
+                                    <rect key="frame" x="0.0" y="63" width="379" height="120"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="120" id="RAk-Oj-nEh"/>
                                     </constraints>
                                 </view>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="7Ex-ei-0Te" userLabel="Billing">
-                                    <rect key="frame" x="0.0" y="143" width="379" height="110"/>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uYT-ur-wBA" userLabel="Billing - Country" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="206" width="379" height="120"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="120" id="fiD-Pu-Wlu"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PMf-IG-Igc" userLabel="Billing - Postcode" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="349" width="379" height="120"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="120" id="9ng-sC-JpH"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K1F-SH-mec" userLabel="Cardholder" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="492" width="379" height="120"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="120" id="vIj-9e-Aw8"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HYC-gQ-ZCU" userLabel="CardNumber" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="635" width="379" height="120"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="120" id="Ybp-Hy-WqZ"/>
+                                    </constraints>
+                                </view>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="VKl-s2-HV7">
+                                    <rect key="frame" x="0.0" y="778" width="379" height="120"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Billing Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wUk-sD-BQd">
-                                            <rect key="frame" x="0.0" y="0.0" width="379" height="20"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <textField opaque="NO" tag="991" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="United Kingdom" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vm6-9m-QwS">
-                                            <rect key="frame" x="0.0" y="25" width="379" height="40"/>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zfe-AI-Fj8" userLabel="Expiry" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="179.5" height="120"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="40" id="bjK-F1-etU"/>
+                                                <constraint firstAttribute="height" constant="120" id="2AO-eI-FMd"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                            <connections>
-                                                <outlet property="delegate" destination="-1" id="b7e-n8-G5Y"/>
-                                            </connections>
-                                        </textField>
-                                        <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Postcode" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JAE-uF-C3O">
-                                            <rect key="frame" x="0.0" y="70" width="379" height="40"/>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VmM-dZ-fl3" userLabel="CVV" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
+                                            <rect key="frame" x="199.5" y="0.0" width="179.5" height="120"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="40" id="36Q-Rq-5fO"/>
+                                                <constraint firstAttribute="height" constant="120" id="d3D-zm-Fp6"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                            <connections>
-                                                <outlet property="delegate" destination="-1" id="7k5-sK-dE1"/>
-                                            </connections>
-                                        </textField>
+                                        </view>
                                     </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="110" id="hnX-jA-PNj"/>
-                                    </constraints>
                                 </stackView>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="afX-ci-4On" userLabel="Cardholder">
-                                    <rect key="frame" x="0.0" y="276" width="379" height="70"/>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RfQ-Ax-Vd4">
+                                    <rect key="frame" x="0.0" y="921" width="379" height="128"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name on card" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dxf-ev-vTa">
-                                            <rect key="frame" x="0.0" y="0.0" width="379" height="19.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="u98-ls-or9">
+                                            <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                            <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="20" id="Q30-nE-s8M"/>
+                                                <constraint firstAttribute="width" constant="20" id="xTf-cy-Wkr"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Save card for future use" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DqQ-ba-SrD">
+                                            <rect key="frame" x="40" y="0.0" width="182" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="41d-HH-xhG"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Andy Smith" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k3N-34-hoH">
-                                            <rect key="frame" x="0.0" y="24.5" width="379" height="45.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                            <connections>
-                                                <outlet property="delegate" destination="-1" id="QOh-0U-hBX"/>
-                                            </connections>
-                                        </textField>
                                     </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="70" id="C8k-JF-ho6"/>
+                                        <constraint firstItem="u98-ls-or9" firstAttribute="leading" secondItem="RfQ-Ax-Vd4" secondAttribute="leading" id="10V-CT-dRC"/>
+                                        <constraint firstItem="DqQ-ba-SrD" firstAttribute="top" secondItem="RfQ-Ax-Vd4" secondAttribute="top" id="1JT-Uq-l2J"/>
+                                        <constraint firstAttribute="height" constant="128" id="Uze-om-nBp"/>
+                                        <constraint firstItem="u98-ls-or9" firstAttribute="top" secondItem="RfQ-Ax-Vd4" secondAttribute="top" id="hf7-Fg-E3b"/>
+                                        <constraint firstItem="DqQ-ba-SrD" firstAttribute="leading" secondItem="RfQ-Ax-Vd4" secondAttribute="leading" constant="40" id="yV1-My-LGE"/>
                                     </constraints>
-                                </stackView>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="onx-z8-Fa5" userLabel="Pan">
-                                    <rect key="frame" x="0.0" y="369" width="379" height="100"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Debit/Credit Card information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SRm-CK-EUz">
-                                            <rect key="frame" x="0.0" y="0.0" width="379" height="19.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="1234 1234 1234 1234" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6cU-aj-AC0">
-                                            <rect key="frame" x="0.0" y="19.5" width="379" height="46.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                            <connections>
-                                                <outlet property="delegate" destination="-1" id="DOG-Pp-tf3"/>
-                                            </connections>
-                                        </textField>
-                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="k9u-kj-b8a">
-                                            <rect key="frame" x="0.0" y="66" width="379" height="34"/>
-                                            <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="MM/YY" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xxl-6y-pMT">
-                                                    <rect key="frame" x="0.0" y="0.0" width="189.5" height="34"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                    <connections>
-                                                        <outlet property="delegate" destination="-1" id="Wia-nR-pMx"/>
-                                                    </connections>
-                                                </textField>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="CVC" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TB4-a8-Syq">
-                                                    <rect key="frame" x="189.5" y="0.0" width="189.5" height="34"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                    <connections>
-                                                        <outlet property="delegate" destination="-1" id="wco-6s-1KQ"/>
-                                                    </connections>
-                                                </textField>
-                                            </subviews>
-                                        </stackView>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="100" id="jMQ-F4-XKa"/>
-                                    </constraints>
-                                </stackView>
+                                </view>
                             </subviews>
                         </stackView>
                     </subviews>
@@ -250,6 +246,18 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemPurpleColor">
+            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemTealColor">
+            <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tintColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

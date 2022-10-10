@@ -10,14 +10,22 @@ import UIKit
 enum DojoInputFieldType {
     case email
     case cardHolderName
+    case cardNumber
+    case billingCountry
+    case billingPostcode
+    case expiry
+    case cvv
 }
 
 class DojoInputField: UIView {
     
     @IBOutlet private var contentView: UIView!
-    @IBOutlet weak var mainTextField: UITextField!
+    @IBOutlet weak var labelTop: UILabel!
+    @IBOutlet weak var textFieldMain: UITextField!
+    @IBOutlet weak var imageViewBottom: UIImageView!
+    @IBOutlet weak var labelBottom: UILabel!
     
-    var viewModel: DojoInputFieldViewModel?
+    var viewModel: DojoInputFieldViewModelProtocol?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -44,25 +52,92 @@ class DojoInputField: UIView {
     
     func reloadUI() {
         guard let viewModel = viewModel else { return } //TODO: notify about an error
-        mainTextField.keyboardType = viewModel.getKeyboardType()
+        textFieldMain.keyboardType = viewModel.fieldKeyboardType
+        textFieldMain.placeholder = viewModel.fieldPlaceholder
+        labelTop.text = viewModel.fieldName
+        labelBottom.text = viewModel.fieldError
+    }
+    
+    func setTheme(theme: ThemeSettings) {
+        labelTop.font = theme.fontSubtitle1
+        labelTop.textColor = theme.primaryLabelTextColor
+        
+        labelBottom.font = theme.fontSubtitle2
+        labelBottom.textColor = theme.errorTextColor
     }
 }
 
 
-class DojoInputFieldViewModel {
+protocol DojoInputFieldViewModelProtocol {
+    init(type: DojoInputFieldType)
+    var fieldKeyboardType: UIKeyboardType {get}
+    var fieldPlaceholder: String {get}
+    var fieldName: String {get}
+    var fieldError: String {get}
+}
+
+class DojoInputFieldViewModel: DojoInputFieldViewModelProtocol {
     
     let type: DojoInputFieldType
     
-    init(type: DojoInputFieldType) {
+    required init(type: DojoInputFieldType) {
         self.type = type
     }
     
-    func getKeyboardType() -> UIKeyboardType {
-        switch type {
-        case .email:
-            return .emailAddress
-        case .cardHolderName:
-            return .default
+    var fieldKeyboardType: UIKeyboardType {
+        get {
+            switch type {
+            case .email:
+                return .emailAddress
+            case .cardNumber, .expiry, .cvv:
+                return .numberPad
+            default:
+                return .default
+            }
+        }
+    }
+    
+    var fieldPlaceholder: String {
+        get {
+            switch type {
+            case .cardNumber:
+                return "1234 1234 1234 1234"
+            case .cvv:
+                return "CVC"
+            case .expiry:
+                return "MM/YY"
+            case .billingPostcode:
+                return "Postcode"
+            default:
+                return ""
+            }
+        }
+    }
+    
+    var fieldName: String {
+        get {
+            switch type {
+            case .email:
+                return "Email" //TODO: move to translations
+            case .cardHolderName:
+                return "Name on card"
+            case .cardNumber:
+                return "Debit/Credit Card number"
+            case .billingCountry:
+                return "Billing Country"
+            case .billingPostcode:
+                return "Billing Postcode"
+            case .expiry:
+                return "Expiry"
+            case .cvv:
+                return "CVC"
+            }
+        }
+    }
+    
+    var fieldError: String {
+        get {
+            return "Please enter your name"
         }
     }
 }

@@ -22,14 +22,13 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     @IBOutlet weak var buttonPay: LoadingButton!
     
     @IBOutlet weak var fieldEmail: DojoInputField!
+    @IBOutlet weak var fieldCardholder: DojoInputField!
+    @IBOutlet weak var fieldCardNumber: DojoInputField!
+    @IBOutlet weak var fieldExpiry: DojoInputField!
+    @IBOutlet weak var fieldCVV: DojoInputField!
+    @IBOutlet weak var fieldBillingCountry: DojoInputField!
+    @IBOutlet weak var fieldBillingPostcode: DojoInputField!
     @IBOutlet weak var mainContentScrollView: UIScrollView!
-    @IBOutlet weak var textFieldCardholder: UITextField!
-    @IBOutlet weak var textFieldCardNumber: UITextField!
-    @IBOutlet weak var textFieldCVV: UITextField!
-    @IBOutlet weak var textFieldExpiry: UITextField!
-    @IBOutlet weak var textFieldBillingAddress: UITextField!
-//    @IBOutlet weak var containerEmail: UIStackView!
-    @IBOutlet weak var containerBilling: UIStackView!
     
     public init(viewModel: CardDetailsCheckoutViewModel,
                 theme: ThemeSettings,
@@ -69,6 +68,15 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         
         labelPrimaryAmount.textColor = theme.primaryLabelTextColor
         labelPrimaryAmount.font = theme.fontHeading3Medium
+        
+        fieldEmail.setTheme(theme: theme)
+        fieldCardholder.setTheme(theme: theme)
+        fieldCardNumber.setTheme(theme: theme) // TODO refactor
+        
+        fieldBillingCountry.setTheme(theme: theme)
+        fieldBillingPostcode.setTheme(theme: theme)
+        fieldExpiry.setTheme(theme: theme)
+        fieldCVV.setTheme(theme: theme)
     }
     
     func getViewModel() -> CardDetailsCheckoutViewModel? {
@@ -105,8 +113,18 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         footerPoweredByDojoView?.setStyle(FooterPoweredByDojoStyle.checkoutPage)
         
         fieldEmail.setType(.email)
-//        containerEmail.isHidden = !(getViewModel()?.showFieldEmail ?? false)
-        containerBilling.isHidden = !(getViewModel()?.showFieldBilling ?? false)
+        fieldCardholder.setType(.cardHolderName)
+        fieldCardNumber.setType(.cardNumber)
+        fieldBillingCountry.setType(.billingCountry)
+        fieldBillingPostcode.setType(.billingPostcode)
+        fieldExpiry.setType(.expiry)
+        fieldCVV.setType(.cvv)
+        
+        let billingIsHidden = !(getViewModel()?.showFieldBilling ?? false)
+        let emailIsHidden = !(getViewModel()?.showFieldEmail ?? false)
+        fieldEmail.isHidden = emailIsHidden
+        fieldBillingCountry.isHidden = billingIsHidden
+        fieldBillingPostcode.isHidden = billingIsHidden
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -148,10 +166,10 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     }
     
     func autofillUI() {
-        textFieldCardholder.text = cardDetails.cardName
-        textFieldCardNumber.text = cardDetails.cardNumber
-        textFieldExpiry.text = cardDetails.expiryDate
-        textFieldCVV.text = cardDetails.cv2
+//        textFieldCardholder.text = cardDetails.cardName
+//        textFieldCardNumber.text = cardDetails.cardNumber
+//        textFieldExpiry.text = cardDetails.expiryDate
+//        textFieldCVV.text = cardDetails.cv2
     }
 }
 

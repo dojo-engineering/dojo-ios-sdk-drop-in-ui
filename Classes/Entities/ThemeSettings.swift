@@ -14,6 +14,7 @@ class ThemeSettings {
     // Colors
     var primaryLabelTextColor: UIColor
     var secondaryLabelTextColor: UIColor
+    var errorTextColor: UIColor
     var headerTintColor: UIColor
     var headerButtonTintColor: UIColor
     var primarySurfaceBackgroundColor: UIColor
@@ -53,8 +54,9 @@ class ThemeSettings {
         primaryCTAButtonActiveTextColor = UIColor.white
         colorPoweredByDojo = .black
         separatorColor = .black.withAlphaComponent(0.2)
-        colorPoweredBySeparator = UIColor(hex: "A5A5A5") ?? separatorColor
+        colorPoweredBySeparator = UIColor(hex: "#A5A5A5FF") ?? separatorColor
         colorPoweredByButtons = .black.withAlphaComponent(0.6)
+        errorTextColor = UIColor(hex: "#B00020FF") ?? .systemRed
         
         // Other
         primaryCTAButtonCornerRadius = 21
