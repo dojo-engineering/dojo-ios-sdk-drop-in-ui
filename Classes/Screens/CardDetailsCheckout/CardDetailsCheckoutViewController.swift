@@ -19,6 +19,7 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     @IBOutlet weak var constraintPayButtonBottom: NSLayoutConstraint!
     @IBOutlet weak var labelPrimaryAmount: UILabel!
     @IBOutlet weak var labelYouPay: UILabel!
+    @IBOutlet weak var labelSaveCardForFutureUse: UILabel!
     @IBOutlet weak var buttonPay: LoadingButton!
     
     @IBOutlet weak var fieldEmail: DojoInputField!
@@ -29,7 +30,7 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     @IBOutlet weak var fieldBillingCountry: DojoInputField!
     @IBOutlet weak var fieldBillingPostcode: DojoInputField!
     @IBOutlet weak var mainContentScrollView: UIScrollView!
-    
+    @IBOutlet weak var containerSavedCard: UIView!
     public init(viewModel: CardDetailsCheckoutViewModel,
                 theme: ThemeSettings,
                 delegate : CardDetailsCheckoutViewControllerDelegate) {
@@ -68,6 +69,9 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         
         labelPrimaryAmount.textColor = theme.primaryLabelTextColor
         labelPrimaryAmount.font = theme.fontHeading3Medium
+        
+        labelSaveCardForFutureUse.font = theme.fontSubtitle1
+        labelSaveCardForFutureUse.textColor = theme.secondaryLabelTextColor
         
         fieldEmail.setTheme(theme: theme)
         fieldCardholder.setTheme(theme: theme)
@@ -109,6 +113,16 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         constraintPayButtonBottom.constant = 52
     }
     
+    func setUpSaveCardCheckbox() {
+//        containerSavedCard.isHidden = true // TODO: get from BE
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleOnSaveCardCheckboxPress))
+        containerSavedCard.addGestureRecognizer(tap)
+    }
+    
+    @objc func handleOnSaveCardCheckboxPress() {
+        print("On saved card pressed")
+    }
+    
     func setUpViews() {
         footerPoweredByDojoView?.setStyle(FooterPoweredByDojoStyle.checkoutPage)
         
@@ -125,6 +139,9 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         fieldEmail.isHidden = emailIsHidden
         fieldBillingCountry.isHidden = billingIsHidden
         fieldBillingPostcode.isHidden = billingIsHidden
+        
+        setUpSaveCardCheckbox()
+    
     }
     
     override func viewWillAppear(_ animated: Bool) {

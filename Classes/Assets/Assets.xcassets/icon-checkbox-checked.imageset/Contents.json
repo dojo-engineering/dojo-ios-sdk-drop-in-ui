@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "check_box_24px.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
