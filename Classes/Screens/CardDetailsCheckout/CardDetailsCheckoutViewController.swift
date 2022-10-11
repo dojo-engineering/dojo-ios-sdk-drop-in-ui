@@ -31,6 +31,7 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     @IBOutlet weak var fieldBillingPostcode: DojoInputField!
     @IBOutlet weak var mainContentScrollView: UIScrollView!
     @IBOutlet weak var containerSavedCard: UIView!
+    @IBOutlet weak var containerCardsStrip: UIStackView!
     public init(viewModel: CardDetailsCheckoutViewModel,
                 theme: ThemeSettings,
                 delegate : CardDetailsCheckoutViewControllerDelegate) {
@@ -119,6 +120,18 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         containerSavedCard.addGestureRecognizer(tap)
     }
     
+    func setUpCardsStrip() {
+        //TODO: get cards from backend
+        //TODO: a better function for that
+        let cardItems: [UIImageCardIcon] = [.visa, .mastercard, .amex, .diner, .discover, .maestro]
+        cardItems.forEach({
+            let imageView = UIImageView(frame: CGRectMake(0, 0, 40, 20))
+            imageView.image = UIImage.getCardIcon($0)
+            imageView.contentMode = .scaleAspectFit
+            containerCardsStrip.addArrangedSubview(imageView)
+        })
+    }
+    
     @objc func handleOnSaveCardCheckboxPress() {
         print("On saved card pressed")
     }
@@ -141,6 +154,7 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         fieldBillingPostcode.isHidden = billingIsHidden
         
         setUpSaveCardCheckbox()
+        setUpCardsStrip()
     
     }
     
@@ -196,4 +210,6 @@ extension CardDetailsCheckoutViewController: UITextFieldDelegate {
         return false
     }
 }
+
+
 

@@ -13,7 +13,8 @@
             <connections>
                 <outlet property="buttonPay" destination="Swm-bR-QtT" id="sMQ-gK-Oss"/>
                 <outlet property="constraintPayButtonBottom" destination="Qgg-Dw-3jc" id="4WN-ne-y2K"/>
-                <outlet property="containerSavedCard" destination="RfQ-Ax-Vd4" id="96D-xI-D0H"/>
+                <outlet property="containerCardsStrip" destination="Av9-to-bSP" id="jze-mn-nI8"/>
+                <outlet property="containerSavedCard" destination="RfQ-Ax-Vd4" id="HqT-XP-kbx"/>
                 <outlet property="fieldBillingCountry" destination="uYT-ur-wBA" id="pZk-0O-Cjm"/>
                 <outlet property="fieldBillingPostcode" destination="PMf-IG-Igc" id="60J-Mh-Rb6"/>
                 <outlet property="fieldCVV" destination="VmM-dZ-fl3" id="9Al-Y0-4fG"/>
@@ -84,22 +85,8 @@
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="S7j-46-8kb">
                             <rect key="frame" x="16" y="108.5" width="379" height="969"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Av9-to-bSP" userLabel="Cards Strip">
+                                <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Av9-to-bSP" userLabel="Cards Strip">
                                     <rect key="frame" x="0.0" y="0.0" width="379" height="40"/>
-                                    <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="w0x-CL-rMb">
-                                            <rect key="frame" x="0.0" y="0.0" width="126.5" height="40"/>
-                                            <color key="backgroundColor" systemColor="systemPinkColor"/>
-                                        </imageView>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0L4-QB-E6s">
-                                            <rect key="frame" x="126.5" y="0.0" width="126" height="40"/>
-                                            <color key="backgroundColor" systemColor="systemTealColor"/>
-                                        </imageView>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dUp-js-3C5">
-                                            <rect key="frame" x="252.5" y="0.0" width="126.5" height="40"/>
-                                            <color key="backgroundColor" systemColor="systemPurpleColor"/>
-                                        </imageView>
-                                    </subviews>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="DXU-Gn-hD1"/>
                                     </constraints>
@@ -229,15 +216,6 @@
         <image name="icon-checkbox-checked" width="24" height="24"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemPinkColor">
-            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemPurpleColor">
-            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemTealColor">
-            <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tintColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
