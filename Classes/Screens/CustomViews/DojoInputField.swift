@@ -17,6 +17,12 @@ enum DojoInputFieldType {
     case cvv
 }
 
+enum DojoInputFieldState {
+    case normal
+    case activeInput
+    case error
+}
+
 class DojoInputField: UIView {
     
     @IBOutlet private var contentView: UIView!
@@ -42,11 +48,13 @@ class DojoInputField: UIView {
                         bundle: Bundle(for: type(of: self)))
         nib.instantiate(withOwner: self, options: nil)
         contentView.frame = bounds
+        textFieldMain.delegate = self
         addSubview(contentView)
     }
     
     func setType(_ type: DojoInputFieldType) {
         self.viewModel = DojoInputFieldViewModel(type: type)
+        setState(.normal)
         reloadUI()
     }
     
@@ -64,6 +72,39 @@ class DojoInputField: UIView {
         
         labelBottom.font = theme.fontSubtitle2
         labelBottom.textColor = theme.errorTextColor
+    }
+    
+    func setState(_ state: DojoInputFieldState) {
+        switch state {
+        case .normal:
+            imageViewBottom.isHidden = true
+            labelBottom.isHidden = true
+            textFieldMain.layer.borderWidth = 1.0
+            textFieldMain.layer.borderColor = UIColor.black.withAlphaComponent(0.6).cgColor
+            textFieldMain.layer.cornerRadius = 4
+        case .activeInput:
+            imageViewBottom.isHidden = true
+            labelBottom.isHidden = true
+            textFieldMain.layer.borderWidth = 1.0
+            textFieldMain.layer.borderColor = UIColor(hex: "#00857DFF")?.cgColor ?? UIColor.systemGreen.cgColor
+            textFieldMain.layer.cornerRadius = 4
+        case .error:
+            imageViewBottom.isHidden = false
+            labelBottom.isHidden = false
+            textFieldMain.layer.borderWidth = 1.0
+            textFieldMain.layer.borderColor = UIColor(hex: "#B00020FF")?.cgColor ?? UIColor.systemRed.cgColor
+            textFieldMain.layer.cornerRadius = 4
+        }
+    }
+}
+
+extension DojoInputField: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        setState(.activeInput)
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        setState(.normal)
     }
 }
 
