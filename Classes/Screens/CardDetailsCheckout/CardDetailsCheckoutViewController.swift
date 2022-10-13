@@ -72,7 +72,7 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         labelPrimaryAmount.font = theme.fontHeading3Medium
         
         labelSaveCardForFutureUse.font = theme.fontSubtitle1
-        labelSaveCardForFutureUse.textColor = theme.secondaryLabelTextColor
+        labelSaveCardForFutureUse.textColor = UIColor.black.withAlphaComponent(0.6) //TODO
         
         fieldEmail.setTheme(theme: theme)
         fieldCardholder.setTheme(theme: theme)
@@ -90,10 +90,17 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     
     func setUpData() {
         //TODO: proper formatter
-        let amountText = "£\(String(format: "%.2f", Double(getViewModel()?.paymentIntent.amount.value ?? 0)/100.0))"
+        let amountText = "\(String(format: "%.2f", Double(getViewModel()?.paymentIntent.amount.value ?? 0)/100.0))"
         let buttonPayTitle = "Pay \(amountText)"
         buttonPay.setTitle(buttonPayTitle, for: .normal)
-        labelPrimaryAmount.text = amountText
+        
+        
+        var fontCurrency = [NSAttributedString.Key.font : theme.fontBody1] // TODO: correct font
+        var fontAmount = [NSAttributedString.Key.font : theme.fontHeading3Medium]
+        var gbpString = NSMutableAttributedString(string:"£", attributes: fontCurrency)
+        var attributedString = NSMutableAttributedString(string: amountText, attributes: fontAmount)
+        gbpString.append(attributedString)
+        labelPrimaryAmount.attributedText = gbpString
     }
     
     func setUpKeyboard() {

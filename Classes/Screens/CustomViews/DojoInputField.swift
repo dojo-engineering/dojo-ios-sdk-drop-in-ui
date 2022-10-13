@@ -100,11 +100,45 @@ class DojoInputField: UIView {
 
 extension DojoInputField: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        setupTextFieldsAccessoryView()
         setState(.activeInput)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         setState(.normal)
+    }
+    
+    func setupTextFieldsAccessoryView() {
+        guard textFieldMain.inputAccessoryView == nil else {
+            print("textfields accessory view already set up")
+            return
+        }
+        
+        let toolBar: UIToolbar = UIToolbar(frame:CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 44))
+        toolBar.barStyle = UIBarStyle.default
+        
+        let flexsibleSpace: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil) // flexible space to add left end side
+        let doneButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: self, action: #selector(didPressDoneKeyboardButton))
+        let nextButton: UIBarButtonItem = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(didPressNextKeybaordButton)) //TODO: add to localisation
+        let backButton: UIBarButtonItem = UIBarButtonItem(title: "Previous", style: .plain, target: self, action: #selector(didPressBackKeybaordButton)) //TODO: add to localisation
+        toolBar.items = [backButton, nextButton, flexsibleSpace, doneButton]
+        textFieldMain.inputAccessoryView = toolBar
+    }
+    
+    @objc func didPressBackKeybaordButton(button: UIButton) {
+        
+    }
+    
+    @objc func didPressNextKeybaordButton(button: UIButton) {
+        
+    }
+    
+    @objc func didPressDoneKeyboardButton(button: UIButton) {
+        // Button has been pressed
+        // Process the containment of the textfield or whatever
+        
+        // Hide keyboard
+        textFieldMain.resignFirstResponder()
     }
 }
 

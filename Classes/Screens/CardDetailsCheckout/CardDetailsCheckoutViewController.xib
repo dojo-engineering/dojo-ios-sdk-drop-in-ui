@@ -64,77 +64,91 @@
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AND-dd-xoI">
                     <rect key="frame" x="0.0" y="48.5" width="414" height="707.5"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You pay" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yWi-LP-owe">
-                            <rect key="frame" x="177" y="10" width="60.5" height="24"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="24" id="8gV-s0-d4C"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="£34.34" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sNy-Ak-ZDx">
-                            <rect key="frame" x="179.5" y="38" width="55.5" height="40"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="40" id="Oy6-Jz-WYI"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="S7j-46-8kb">
-                            <rect key="frame" x="16" y="108.5" width="379" height="770"/>
+                            <rect key="frame" x="16" y="0.0" width="379" height="886"/>
                             <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zoo-fD-CxZ" userLabel="Spacer">
+                                    <rect key="frame" x="0.0" y="0.0" width="379" height="16"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="16" id="cQz-t1-QOg"/>
+                                    </constraints>
+                                </view>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You pay" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yWi-LP-owe">
+                                    <rect key="frame" x="0.0" y="21" width="379" height="24"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="24" id="8gV-s0-d4C"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="£34.34" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sNy-Ak-ZDx">
+                                    <rect key="frame" x="0.0" y="50" width="379" height="40"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="Oy6-Jz-WYI"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p8k-vM-JQk" userLabel="Spacer">
+                                    <rect key="frame" x="0.0" y="95" width="379" height="16"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="16" id="ESZ-qm-XDz"/>
+                                    </constraints>
+                                </view>
                                 <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Av9-to-bSP" userLabel="Cards Strip">
-                                    <rect key="frame" x="0.0" y="0.0" width="379" height="40"/>
+                                    <rect key="frame" x="0.0" y="116" width="379" height="40"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="DXU-Gn-hD1"/>
                                     </constraints>
                                 </stackView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fRD-io-LS3" userLabel="Spacer">
-                                    <rect key="frame" x="0.0" y="45" width="379" height="20"/>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <rect key="frame" x="0.0" y="161" width="379" height="20"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="20" id="C5n-6R-1ma"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6gL-di-Oc5" userLabel="Email" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="70" width="379" height="104"/>
+                                    <rect key="frame" x="0.0" y="186" width="379" height="104"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="104" id="RAk-Oj-nEh"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uYT-ur-wBA" userLabel="Billing - Country" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="179" width="379" height="104"/>
+                                    <rect key="frame" x="0.0" y="295" width="379" height="104"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="104" id="fiD-Pu-Wlu"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PMf-IG-Igc" userLabel="Billing - Postcode" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="288" width="379" height="120"/>
+                                    <rect key="frame" x="0.0" y="404" width="379" height="120"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="120" id="9ng-sC-JpH"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K1F-SH-mec" userLabel="Cardholder" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="413" width="379" height="104"/>
+                                    <rect key="frame" x="0.0" y="529" width="379" height="104"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="104" id="vIj-9e-Aw8"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HYC-gQ-ZCU" userLabel="CardNumber" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="522" width="379" height="104"/>
+                                    <rect key="frame" x="0.0" y="638" width="379" height="104"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="104" id="Ybp-Hy-WqZ"/>
                                     </constraints>
                                 </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="VKl-s2-HV7">
-                                    <rect key="frame" x="0.0" y="631" width="379" height="104"/>
+                                    <rect key="frame" x="0.0" y="747" width="379" height="104"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zfe-AI-Fj8" userLabel="Expiry" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="179.5" height="104"/>
@@ -153,7 +167,7 @@
                                     </subviews>
                                 </stackView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RfQ-Ax-Vd4" userLabel="Save Card Checkbox">
-                                    <rect key="frame" x="0.0" y="740" width="379" height="30"/>
+                                    <rect key="frame" x="0.0" y="856" width="379" height="30"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-checkbox-checked" translatesAutoresizingMaskIntoConstraints="NO" id="u98-ls-or9">
                                             <rect key="frame" x="0.0" y="3" width="24" height="24"/>
@@ -164,10 +178,7 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Save card for future use" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DqQ-ba-SrD">
-                                            <rect key="frame" x="38" y="4.5" width="182" height="21"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="41d-HH-xhG"/>
-                                            </constraints>
+                                            <rect key="frame" x="38" y="5" width="182" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -186,14 +197,10 @@
                         </stackView>
                     </subviews>
                     <constraints>
+                        <constraint firstItem="S7j-46-8kb" firstAttribute="top" secondItem="AND-dd-xoI" secondAttribute="top" id="4Mc-KN-vlm"/>
                         <constraint firstItem="S7j-46-8kb" firstAttribute="leading" secondItem="AND-dd-xoI" secondAttribute="leading" constant="16" id="58q-ba-QPt"/>
-                        <constraint firstItem="yWi-LP-owe" firstAttribute="centerX" secondItem="AND-dd-xoI" secondAttribute="centerX" id="AVC-FU-hqW"/>
-                        <constraint firstItem="yWi-LP-owe" firstAttribute="top" secondItem="AND-dd-xoI" secondAttribute="top" constant="10" id="DA2-oD-6bz"/>
-                        <constraint firstItem="sNy-Ak-ZDx" firstAttribute="centerX" secondItem="AND-dd-xoI" secondAttribute="centerX" id="ETZ-HW-bBW"/>
-                        <constraint firstItem="S7j-46-8kb" firstAttribute="top" secondItem="sNy-Ak-ZDx" secondAttribute="bottom" constant="30.5" id="FDu-68-04W"/>
                         <constraint firstItem="S7j-46-8kb" firstAttribute="width" secondItem="AND-dd-xoI" secondAttribute="width" multiplier="0.915" id="LUU-hB-Kge"/>
                         <constraint firstAttribute="trailing" secondItem="S7j-46-8kb" secondAttribute="trailing" id="Nin-yB-YKR"/>
-                        <constraint firstItem="sNy-Ak-ZDx" firstAttribute="top" secondItem="yWi-LP-owe" secondAttribute="bottom" constant="4" id="VuY-BI-Tgb"/>
                         <constraint firstAttribute="bottom" secondItem="S7j-46-8kb" secondAttribute="bottom" constant="10" id="qhk-XV-VXW"/>
                     </constraints>
                 </scrollView>
