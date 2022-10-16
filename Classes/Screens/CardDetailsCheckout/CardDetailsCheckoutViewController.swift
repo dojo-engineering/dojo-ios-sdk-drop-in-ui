@@ -15,6 +15,7 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     
     var cardDetails: DojoCardDetails
     var delegate: CardDetailsCheckoutViewControllerDelegate?
+    var inputFields: [DojoInputField] = []
     
     @IBOutlet weak var constraintPayButtonBottom: NSLayoutConstraint!
     @IBOutlet weak var labelPrimaryAmount: UILabel!
@@ -32,6 +33,7 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     @IBOutlet weak var mainContentScrollView: UIScrollView!
     @IBOutlet weak var containerSavedCard: UIView!
     @IBOutlet weak var containerCardsStrip: UIStackView!
+    
     public init(viewModel: CardDetailsCheckoutViewModel,
                 theme: ThemeSettings,
                 delegate : CardDetailsCheckoutViewControllerDelegate) {
@@ -59,11 +61,7 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     override func setUpDesign() {
         super.setUpDesign()
         
-        buttonPay.backgroundColor = theme.primaryCTAButtonActiveBackgroundColor
-        buttonPay.layer.cornerRadius = theme.primaryCTAButtonCornerRadius
-        buttonPay.setTitleColor(theme.primaryCTAButtonActiveTextColor, for: .normal)
-        buttonPay.tintColor = theme.primaryCTAButtonActiveTextColor
-        buttonPay.clipsToBounds = true
+        buttonPay.setTheme(theme)
         
         labelYouPay.textColor = theme.primaryLabelTextColor
         labelYouPay.font = theme.fontSubtitle1Medium
@@ -95,10 +93,10 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         buttonPay.setTitle(buttonPayTitle, for: .normal)
         
         
-        var fontCurrency = [NSAttributedString.Key.font : theme.fontBody1] // TODO: correct font
-        var fontAmount = [NSAttributedString.Key.font : theme.fontHeading3Medium]
-        var gbpString = NSMutableAttributedString(string:"£", attributes: fontCurrency)
-        var attributedString = NSMutableAttributedString(string: amountText, attributes: fontAmount)
+        let fontCurrency = [NSAttributedString.Key.font : theme.fontBody1] // TODO: correct font
+        let fontAmount = [NSAttributedString.Key.font : theme.fontHeading3Medium]
+        let gbpString = NSMutableAttributedString(string:"£", attributes: fontCurrency)
+        let attributedString = NSMutableAttributedString(string: amountText, attributes: fontAmount)
         gbpString.append(attributedString)
         labelPrimaryAmount.attributedText = gbpString
     }
@@ -146,13 +144,13 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     func setUpViews() {
         footerPoweredByDojoView?.setStyle(FooterPoweredByDojoStyle.checkoutPage)
         
-        fieldEmail.setType(.email)
-        fieldCardholder.setType(.cardHolderName)
-        fieldCardNumber.setType(.cardNumber)
-        fieldBillingCountry.setType(.billingCountry)
-        fieldBillingPostcode.setType(.billingPostcode)
-        fieldExpiry.setType(.expiry)
-        fieldCVV.setType(.cvv)
+        fieldEmail.setType(.email, delegate: self)
+        fieldCardholder.setType(.cardHolderName, delegate: self)
+        fieldCardNumber.setType(.cardNumber, delegate: self)
+        fieldBillingCountry.setType(.billingCountry, delegate: self)
+        fieldBillingPostcode.setType(.billingPostcode, delegate: self)
+        fieldExpiry.setType(.expiry, delegate: self)
+        fieldCVV.setType(.cvv, delegate: self)
         
         let billingIsHidden = !(getViewModel()?.showFieldBilling ?? false)
         let emailIsHidden = !(getViewModel()?.showFieldEmail ?? false)
@@ -160,9 +158,13 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         fieldBillingCountry.isHidden = billingIsHidden
         fieldBillingPostcode.isHidden = billingIsHidden
         
+        if !emailIsHidden { inputFields.append(fieldEmail) }
+        //TODO: next navigation for billing fields
+        inputFields.append(contentsOf: [fieldCardholder, fieldCardNumber, fieldExpiry, fieldCVV])
+        
         setUpSaveCardCheckbox()
         setUpCardsStrip()
-    
+        buttonPay.setEnabled(false)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -215,6 +217,50 @@ extension CardDetailsCheckoutViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
+    }
+}
+
+//TODO: make safer
+extension CardDetailsCheckoutViewController: DojoInputFieldDelegate {
+    func onNextField(_ from: DojoInputField) {
+        if let index = inputFields.firstIndex(of: from) {
+            if inputFields.count - 1 > index {
+                let _ = inputFields[index + 1].becomeFirstResponder()
+            } else if inputFields.count > 0 {
+                let _ = inputFields[0].becomeFirstResponder()
+            }
+        }
+    }
+    
+    func onPreviousField(_ from: DojoInputField) {
+        if let index = inputFields.firstIndex(of: from) {
+            if inputFields.count > index && index >= 1 {
+                let _ = inputFields[index - 1].becomeFirstResponder()
+            } else if inputFields.count > 0 {
+                let _ = inputFields[inputFields.count - 1].becomeFirstResponder()
+            }
+        }
+    }
+    
+    func onTextFieldDidFinishEditing(_ from: DojoInputField) {
+//        var isValid = true
+//        if let fieldType = from.getType() {
+//            switch fieldType {
+//            case .email:
+//            case .cardHolderName:
+//                <#code#>
+//            case .cardNumber:
+//                <#code#>
+//            case .billingCountry:
+//                <#code#>
+//            case .billingPostcode:
+//                <#code#>
+//            case .expiry:
+//                <#code#>
+//            case .cvv:
+//                <#code#>
+//            }
+//        }
     }
 }
 

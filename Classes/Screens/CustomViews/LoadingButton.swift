@@ -18,6 +18,32 @@ class LoadingButton: UIButton {
     private (set) var buttonStates: [ButtonState] = []
     private var beforeLoadingTitle: String = ""
     
+    var theme: ThemeSettings?
+    
+    func setTheme(_ theme: ThemeSettings) {
+        self.theme = theme
+        if isUserInteractionEnabled {
+            backgroundColor = theme.primaryCTAButtonActiveBackgroundColor
+            layer.cornerRadius = theme.primaryCTAButtonCornerRadius
+            setTitleColor(theme.primaryCTAButtonActiveTextColor, for: .normal)
+            tintColor = theme.primaryCTAButtonActiveTextColor
+            clipsToBounds = true
+        } else {
+            backgroundColor = theme.primaryCTAButtonDisabledBackgroundColor
+            layer.cornerRadius = theme.primaryCTAButtonCornerRadius
+            setTitleColor(theme.primaryCTAButtonDisableTextColor, for: .normal)
+            tintColor = theme.primaryCTAButtonDisableTextColor
+            clipsToBounds = true
+        }
+    }
+    
+    func setEnabled(_ isEnabled: Bool) {
+        isUserInteractionEnabled = isEnabled
+        if let theme = theme {
+            setTheme(theme)
+        }
+    }
+    
     private lazy var activityIndicator: MaterialLoadingIndicator = {
         let activityIndicator = MaterialLoadingIndicator(frame: CGRectMake(0, 0, 10, 10))
         activityIndicator.radius = 10.0

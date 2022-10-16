@@ -23,6 +23,12 @@ enum DojoInputFieldState {
     case error
 }
 
+protocol DojoInputFieldDelegate {
+    func onNextField(_ from: DojoInputField)
+    func onPreviousField(_ from: DojoInputField)
+    func onTextFieldDidFinishEditing(_ from: DojoInputField)
+}
+
 class DojoInputField: UIView {
     
     @IBOutlet private var contentView: UIView!
@@ -30,8 +36,9 @@ class DojoInputField: UIView {
     @IBOutlet weak var textFieldMain: UITextField!
     @IBOutlet weak var imageViewBottom: UIImageView!
     @IBOutlet weak var labelBottom: UILabel!
-    
+    @IBOutlet weak var constrainLabelBottomLeft: NSLayoutConstraint!
     var viewModel: DojoInputFieldViewModelProtocol?
+    var delegate: DojoInputFieldDelegate?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -52,10 +59,20 @@ class DojoInputField: UIView {
         addSubview(contentView)
     }
     
-    func setType(_ type: DojoInputFieldType) {
+    func getType() -> DojoInputFieldType? {
+        guard let viewModel = viewModel else { return nil } //TODO: notify about an error
+        return viewModel.type
+    }
+    
+    func setType(_ type: DojoInputFieldType, delegate: DojoInputFieldDelegate) {
         self.viewModel = DojoInputFieldViewModel(type: type)
+        self.delegate = delegate
         setState(.normal)
         reloadUI()
+    }
+    
+    override func becomeFirstResponder() -> Bool {
+        textFieldMain.becomeFirstResponder()
     }
     
     func reloadUI() {
@@ -64,6 +81,9 @@ class DojoInputField: UIView {
         textFieldMain.placeholder = viewModel.fieldPlaceholder
         labelTop.text = viewModel.fieldName
         labelBottom.text = viewModel.fieldError
+        
+        //TODO: base on type update bottom label position and text
+        // additional text or error constrainLabelBottomLeft
     }
     
     func setTheme(theme: ThemeSettings) {
@@ -94,6 +114,8 @@ class DojoInputField: UIView {
             textFieldMain.layer.borderWidth = 1.0
             textFieldMain.layer.borderColor = UIColor(hex: "#B00020FF")?.cgColor ?? UIColor.systemRed.cgColor
             textFieldMain.layer.cornerRadius = 4
+            let isTextEmpty = textFieldMain.text?.isEmpty ?? true
+            labelBottom.text = isTextEmpty ? viewModel?.fieldErrorEmpty : viewModel?.fieldError
         }
     }
 }
@@ -105,7 +127,9 @@ extension DojoInputField: UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        setState(.normal)
+        guard let viewModel = viewModel else { return } //TODO: notify about an error
+        let fieldState = viewModel.validateField(textField.text)
+        setState(fieldState)
     }
     
     func setupTextFieldsAccessoryView() {
@@ -126,11 +150,11 @@ extension DojoInputField: UITextFieldDelegate {
     }
     
     @objc func didPressBackKeybaordButton(button: UIButton) {
-        
+        delegate?.onPreviousField(self)
     }
     
     @objc func didPressNextKeybaordButton(button: UIButton) {
-        
+        delegate?.onNextField(self)
     }
     
     @objc func didPressDoneKeyboardButton(button: UIButton) {
@@ -149,6 +173,10 @@ protocol DojoInputFieldViewModelProtocol {
     var fieldPlaceholder: String {get}
     var fieldName: String {get}
     var fieldError: String {get}
+    var fieldErrorEmpty: String {get}
+    var type: DojoInputFieldType {get}
+    
+    func validateField(_ text: String?) -> DojoInputFieldState
 }
 
 class DojoInputFieldViewModel: DojoInputFieldViewModelProtocol {
@@ -197,13 +225,13 @@ class DojoInputFieldViewModel: DojoInputFieldViewModelProtocol {
             case .cardHolderName:
                 return "Name on card"
             case .cardNumber:
-                return "Debit/Credit Card number"
+                return "Card number"
             case .billingCountry:
                 return "Billing Country"
             case .billingPostcode:
-                return "Billing Postcode"
+                return "Postcode"
             case .expiry:
-                return "Expiry"
+                return "Expiry date"
             case .cvv:
                 return "CVC"
             }
@@ -212,7 +240,56 @@ class DojoInputFieldViewModel: DojoInputFieldViewModelProtocol {
     
     var fieldError: String {
         get {
-            return "Please enter your name"
+            switch type {
+            case .email:
+                return "Please fill in a valid email address"
+            case .cardHolderName:
+                return "Enter your name exactly as it’s written on your card"
+            case .cardNumber:
+                return "Enter your card number"
+            case .billingCountry:
+                return ""
+            case .billingPostcode:
+                return "Please enter a valid postcode"
+            case .expiry:
+                return "Enter a valid expiry date"
+            case .cvv:
+                return "Enter a valid security code"
+            }
         }
+    }
+    
+    var fieldErrorEmpty: String {
+        get {
+            switch type {
+            case .email:
+                return "Please fill in an email address"
+            case .cardHolderName:
+                return "Enter your name exactly as it’s written on your card"
+            case .cardNumber:
+                return "Enter your card number"
+            case .billingCountry:
+                return ""
+            case .billingPostcode:
+                return "Please enter your billing postcode"
+            case .expiry:
+                return "Enter expiry date"
+            case .cvv:
+                return "Enter security code"
+            }
+        }
+    }
+}
+
+extension DojoInputFieldViewModel {
+    
+    func validateField(_ text: String?) -> DojoInputFieldState {
+        // can't be empty
+        if text?.isEmpty ?? true { return .error }
+        return .error
+    }
+    
+    func isEmailValid(_ email: String) -> Bool {
+        return false
     }
 }

@@ -19,7 +19,9 @@ class ThemeSettings {
     var headerButtonTintColor: UIColor
     var primarySurfaceBackgroundColor: UIColor
     var primaryCTAButtonActiveBackgroundColor: UIColor
+    var primaryCTAButtonDisabledBackgroundColor: UIColor
     var primaryCTAButtonActiveTextColor: UIColor
+    var primaryCTAButtonDisableTextColor: UIColor
     var separatorColor: UIColor
     var loadingIndicatorColor: UIColor
     var colorPoweredByDojo: UIColor
@@ -62,6 +64,9 @@ class ThemeSettings {
         primaryCTAButtonCornerRadius = 21
         loadingIndicatorColor = .black
         applePayButtonStyle = .black
+        
+        primaryCTAButtonDisabledBackgroundColor = UIColor(hex: "#E5E5E5FF") ?? .gray
+        primaryCTAButtonDisableTextColor = UIColor.black.withAlphaComponent(0.38)
         
         // Fonts
         // Set fall-back fonts if custom fonts are not available
