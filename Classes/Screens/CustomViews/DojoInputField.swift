@@ -39,6 +39,8 @@ class DojoInputField: UIView {
     @IBOutlet weak var constrainLabelBottomLeft: NSLayoutConstraint!
     var viewModel: DojoInputFieldViewModelProtocol?
     var delegate: DojoInputFieldDelegate?
+    var picker: UIPickerView?
+    var selectedPickerPosition: Int = 0
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -67,6 +69,10 @@ class DojoInputField: UIView {
     func setType(_ type: DojoInputFieldType, delegate: DojoInputFieldDelegate) {
         self.viewModel = DojoInputFieldViewModel(type: type)
         self.delegate = delegate
+        if type == .billingCountry {
+            var displayingItem = getCSVData()?[selectedPickerPosition] //TODO: make sure it won't crash
+            textFieldMain.text = displayingItem
+        }
         setState(.normal)
         reloadUI()
     }
@@ -120,14 +126,59 @@ class DojoInputField: UIView {
     }
 }
 
+extension DojoInputField: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        getCSVData()?.count ?? 0
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        getCSVData()?[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        selectedPickerPosition = row
+        textFieldMain.text = getCSVData()?[row]
+    }
+}
+
 extension DojoInputField: UITextFieldDelegate {
+    
+//    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+//        guard let viewModel = viewModel else { return true } //TODO: notify about an error
+//        if viewModel.type == .billingCountry, // disable paste for billing field
+//           action == #selector(UIResponderStandardEditActions.paste(_:))  {
+//            return false
+//        }
+//        return super.canPerformAction(action, withSender: sender)
+//    }
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        guard let viewModel = viewModel else { return } //TODO: notify about an error
+        // Handle country selection
+        if viewModel.type == .billingCountry {
+            self.picker = UIPickerView()
+            self.picker?.delegate = self
+            self.picker?.dataSource = self
+            self.picker?.selectRow(selectedPickerPosition, inComponent: 0, animated: false)
+            textFieldMain.inputView = self.picker
+            setState(.activeInput)
+            return
+        }
         setupTextFieldsAccessoryView()
         setState(.activeInput)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         guard let viewModel = viewModel else { return } //TODO: notify about an error
+        guard viewModel.type != .billingCountry else {
+            // country selection is pre-defined and doesn't need to be validated
+            setState(.normal)
+            return
+        }
         let fieldState = viewModel.validateField(textField.text)
         setState(fieldState)
     }
@@ -163,6 +214,27 @@ extension DojoInputField: UITextFieldDelegate {
         
         // Hide keyboard
         textFieldMain.resignFirstResponder()
+    }
+    
+    func getCSVData() -> Array<String>? {
+        let bundle = Bundle(for: type(of: self))
+        guard let countriesCSV = bundle.url(forResource: "countries", withExtension: "csv") else {
+            return nil
+        }
+        
+        do {
+            let content = try String(contentsOf: countriesCSV)
+            var parsedCSV: [String] = content.components(
+                separatedBy: "\n"
+            ).map{ $0.components(separatedBy: ",")[0] }
+            if parsedCSV.count > 0 {
+                parsedCSV.removeFirst()
+            }
+            return parsedCSV
+        }
+        catch {
+            return []
+        }
     }
 }
 

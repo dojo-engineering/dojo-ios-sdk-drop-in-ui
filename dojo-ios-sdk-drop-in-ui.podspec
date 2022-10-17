@@ -32,7 +32,7 @@ TODO: Add long description of the pod here.
 
   s.source_files = 'Classes/**/*.{h,m,swift}'
 
-  s.resources = 'Classes/**/*.{xcassets,xib,strings,ttf}'
+  s.resources = 'Classes/**/*.{xcassets,xib,strings,ttf,csv}'
 
   # s.resource_bundles = {
   #   'dojo-ios-sdk-drop-in-ui-resources' => ['Classes/**/*.{xcassets,xib,strings}']
