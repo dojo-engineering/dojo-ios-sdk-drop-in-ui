@@ -18,7 +18,7 @@ class CardDetailsCheckoutViewModel: BaseViewModel {
     }
     
     func processPayment(cardDetails: DojoCardDetails, fromViewControlelr: UIViewController, completion: ((Int) -> Void)?) {
-        let cardPaymentPayload = DojoCardPaymentPayload(cardDetails: cardDetails, isSandbox: false)
+        let cardPaymentPayload = DojoCardPaymentPayload(cardDetails: cardDetails, savePaymentMethod: false)
         DojoSDK.executeCardPayment(token: paymentIntent.clientSessionSecret,
                                     payload: cardPaymentPayload,
                                     fromViewController: fromViewControlelr,

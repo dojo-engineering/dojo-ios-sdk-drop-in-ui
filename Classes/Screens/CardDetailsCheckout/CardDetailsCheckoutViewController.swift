@@ -159,6 +159,7 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         fieldBillingPostcode.isHidden = billingIsHidden
         
         if !emailIsHidden { inputFields.append(fieldEmail) }
+        if !billingIsHidden { inputFields.append(contentsOf: [fieldBillingCountry, fieldBillingPostcode]) }
         //TODO: next navigation for billing fields
         inputFields.append(contentsOf: [fieldCardholder, fieldCardNumber, fieldExpiry, fieldCVV])
         
@@ -244,23 +245,20 @@ extension CardDetailsCheckoutViewController: DojoInputFieldDelegate {
     
     func onTextFieldDidFinishEditing(_ from: DojoInputField) {
 //        var isValid = true
-//        if let fieldType = from.getType() {
-//            switch fieldType {
-//            case .email:
-//            case .cardHolderName:
-//                <#code#>
-//            case .cardNumber:
-//                <#code#>
-//            case .billingCountry:
-//                <#code#>
-//            case .billingPostcode:
-//                <#code#>
-//            case .expiry:
-//                <#code#>
-//            case .cvv:
-//                <#code#>
-//            }
-//        }
+        if let fieldType = from.getType() {
+            switch fieldType {
+            case .billingCountry:
+                if from.textFieldMain.text == "United Kingdom" {
+                    fieldBillingPostcode.isHidden = false
+                    inputFields.insert(fieldBillingPostcode, at: 2) //TODO: if email is hidden, that should be a different position
+                } else {
+                    fieldBillingPostcode.isHidden = true
+                    inputFields.removeAll(where: {$0.getType() == .billingPostcode})
+                }
+            default:
+                break;
+            }
+        }
     }
 }
 

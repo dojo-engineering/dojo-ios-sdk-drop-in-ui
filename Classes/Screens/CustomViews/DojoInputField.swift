@@ -70,7 +70,7 @@ class DojoInputField: UIView {
         self.viewModel = DojoInputFieldViewModel(type: type)
         self.delegate = delegate
         if type == .billingCountry {
-            var displayingItem = getCSVData()?[selectedPickerPosition] //TODO: make sure it won't crash
+            let displayingItem = getCSVData()?[selectedPickerPosition] //TODO: make sure it won't crash
             textFieldMain.text = displayingItem
         }
         setState(.normal)
@@ -165,8 +165,6 @@ extension DojoInputField: UITextFieldDelegate {
             self.picker?.dataSource = self
             self.picker?.selectRow(selectedPickerPosition, inComponent: 0, animated: false)
             textFieldMain.inputView = self.picker
-            setState(.activeInput)
-            return
         }
         setupTextFieldsAccessoryView()
         setState(.activeInput)
@@ -174,6 +172,7 @@ extension DojoInputField: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         guard let viewModel = viewModel else { return } //TODO: notify about an error
+        delegate?.onTextFieldDidFinishEditing(self)
         guard viewModel.type != .billingCountry else {
             // country selection is pre-defined and doesn't need to be validated
             setState(.normal)
@@ -183,12 +182,7 @@ extension DojoInputField: UITextFieldDelegate {
         setState(fieldState)
     }
     
-    func setupTextFieldsAccessoryView() {
-        guard textFieldMain.inputAccessoryView == nil else {
-            print("textfields accessory view already set up")
-            return
-        }
-        
+    func getTextFieldAccessoryView() -> UIToolbar {
         let toolBar: UIToolbar = UIToolbar(frame:CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 44))
         toolBar.barStyle = UIBarStyle.default
         
@@ -197,7 +191,16 @@ extension DojoInputField: UITextFieldDelegate {
         let nextButton: UIBarButtonItem = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(didPressNextKeybaordButton)) //TODO: add to localisation
         let backButton: UIBarButtonItem = UIBarButtonItem(title: "Previous", style: .plain, target: self, action: #selector(didPressBackKeybaordButton)) //TODO: add to localisation
         toolBar.items = [backButton, nextButton, flexsibleSpace, doneButton]
-        textFieldMain.inputAccessoryView = toolBar
+        return toolBar
+    }
+    
+    func setupTextFieldsAccessoryView() {
+        guard textFieldMain.inputAccessoryView == nil else {
+            print("textfields accessory view already set up")
+            return
+        }
+        
+        textFieldMain.inputAccessoryView = getTextFieldAccessoryView()
     }
     
     @objc func didPressBackKeybaordButton(button: UIButton) {
