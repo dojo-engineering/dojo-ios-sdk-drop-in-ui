@@ -23,6 +23,7 @@
                 <outlet property="fieldEmail" destination="6gL-di-Oc5" id="oTS-ie-XHs"/>
                 <outlet property="fieldExpiry" destination="zfe-AI-Fj8" id="YHK-Ac-5mx"/>
                 <outlet property="footerPoweredByDojoView" destination="FRT-lp-E1d" id="zp2-Tp-82n"/>
+                <outlet property="imageViewSaveCardCheckbox" destination="u98-ls-or9" id="4gY-Jn-FxZ"/>
                 <outlet property="labelPrimaryAmount" destination="sNy-Ak-ZDx" id="VS5-Gl-yYa"/>
                 <outlet property="labelSaveCardForFutureUse" destination="DqQ-ba-SrD" id="hPE-6d-2we"/>
                 <outlet property="labelYouPay" destination="yWi-LP-owe" id="GLL-Ju-xmb"/>

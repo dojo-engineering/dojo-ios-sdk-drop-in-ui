@@ -23,6 +23,7 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     @IBOutlet weak var labelSaveCardForFutureUse: UILabel!
     @IBOutlet weak var buttonPay: LoadingButton!
     
+    @IBOutlet weak var imageViewSaveCardCheckbox: UIImageView!
     @IBOutlet weak var fieldEmail: DojoInputField!
     @IBOutlet weak var fieldCardholder: DojoInputField!
     @IBOutlet weak var fieldCardNumber: DojoInputField!
@@ -128,7 +129,7 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     func setUpCardsStrip() {
         //TODO: get cards from backend
         //TODO: a better function for that
-        let cardItems: [UIImageCardIcon] = [.visa, .mastercard, .amex, .diner, .discover, .maestro]
+        let cardItems: [UIImageCardIcon] = [.visa, .mastercard, .amex, .maestro]
         cardItems.forEach({
             let imageView = UIImageView(frame: CGRectMake(0, 0, 40, 20))
             imageView.image = UIImage.getCardIcon($0)
@@ -138,6 +139,14 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     }
     
     @objc func handleOnSaveCardCheckboxPress() {
+        //TODO: hide the save card view at all if needed
+        guard let viewModel = getViewModel() else { return }
+        viewModel.isSaveCardSelected = !viewModel.isSaveCardSelected
+        if viewModel.isSaveCardSelected {
+            imageViewSaveCardCheckbox.image = UIImage(named: "icon-checkbox-checked", in: Bundle(for: type(of: self)), compatibleWith: nil)
+        } else {
+            imageViewSaveCardCheckbox.image = UIImage(named: "icon-checkbox-unchecked", in: Bundle(for: type(of: self)), compatibleWith: nil)
+        }
         print("On saved card pressed")
     }
     
