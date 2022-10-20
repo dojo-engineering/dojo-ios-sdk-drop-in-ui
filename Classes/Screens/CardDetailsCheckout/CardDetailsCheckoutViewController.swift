@@ -127,12 +127,11 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     }
     
     func setUpCardsStrip() {
-        //TODO: get cards from backend
         //TODO: a better function for that
-        let cardItems: [UIImageCardIcon] = [.visa, .mastercard, .amex, .maestro]
-        cardItems.forEach({
+        guard let viewModel = getViewModel() else { return }
+        viewModel.supportedCardSchemes.forEach({
             let imageView = UIImageView(frame: CGRectMake(0, 0, 40, 20))
-            imageView.image = UIImage.getCardIcon($0)
+            imageView.image = UIImage.getCardIcon(type: $0)
             imageView.contentMode = .scaleAspectFit
             containerCardsStrip.addArrangedSubview(imageView)
         })
@@ -163,14 +162,17 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         
         let billingIsHidden = !(getViewModel()?.showFieldBilling ?? false)
         let emailIsHidden = !(getViewModel()?.showFieldEmail ?? false)
+        let showSaveCardCheckbox = !(getViewModel()?.showSaveCardCheckbox ?? false)
         fieldEmail.isHidden = emailIsHidden
         fieldBillingCountry.isHidden = billingIsHidden
         fieldBillingPostcode.isHidden = billingIsHidden
+        containerSavedCard.isHidden = showSaveCardCheckbox
         
         if !emailIsHidden { inputFields.append(fieldEmail) }
         if !billingIsHidden { inputFields.append(contentsOf: [fieldBillingCountry, fieldBillingPostcode]) }
         //TODO: next navigation for billing fields
         inputFields.append(contentsOf: [fieldCardholder, fieldCardNumber, fieldExpiry, fieldCVV])
+        
         
         setUpSaveCardCheckbox()
         setUpCardsStrip()

@@ -33,6 +33,14 @@ class CardDetailsCheckoutViewModel: BaseViewModel {
     var showFieldBilling: Bool {
         paymentIntent.config?.billingAddress?.collectionRequired ?? false
     }
+    
+    var showSaveCardCheckbox: Bool {
+        paymentIntent.customer?.id != nil
+    }
+    
+    var supportedCardSchemes: [CardSchemes] {
+        paymentIntent.merchantConfig?.supportedPaymentMethods?.cardSchemes ?? []
+    }
 }
 
 // Validators

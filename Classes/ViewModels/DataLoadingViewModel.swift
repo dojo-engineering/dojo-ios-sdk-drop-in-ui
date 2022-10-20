@@ -27,10 +27,11 @@ class DataLoadingViewModel: BaseViewModel {
             if let error = error {
                 completion?(nil, error) // error
             } else if let data = stringData?.data(using: .utf8) {
-                let decoder = JSONDecoder()
-                if let decodedResponse = try? decoder.decode(PaymentIntent.self, from: data) {
+                do {
+                    let decoder = JSONDecoder()
+                    let decodedResponse = try decoder.decode(PaymentIntent.self, from: data)
                     completion?(decodedResponse, nil) // decoded payment intent
-                } else {
+                } catch {
                     completion?(nil, error) //TODO: decoding error
                 }
             } else {

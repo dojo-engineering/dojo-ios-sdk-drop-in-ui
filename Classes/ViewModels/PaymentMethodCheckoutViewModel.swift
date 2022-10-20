@@ -19,7 +19,9 @@ class PaymentMethodCheckoutViewModel: BaseViewModel {
         let applePayload = DojoApplePayPayload(applePayConfig: DojoApplePayConfig(merchantIdentifier: "merchant.uk.co.paymentsense.sdk.demo.app"))
         DojoSDK.executeApplePayPayment(paymentIntent: paymentIntent,
                                        payload: applePayload,
-                                       fromViewController: fromViewControlelr,
-                                       completion: completion)
+                                       fromViewController: fromViewControlelr) { result in
+                guard result == 0 else { return }
+                completion?(result)
+            }
     }
 }

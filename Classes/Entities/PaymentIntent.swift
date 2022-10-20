@@ -13,6 +13,45 @@ struct PaymentIntent: Codable {
     let clientSessionSecret: String
     let amount: DojoPaymentIntentAmount
     var config: PaymentIntentConfig? = nil
+    var merchantConfig: MerchantConfig? = nil
+    var customer: CustomerConfig? = nil
+}
+
+enum CardSchemes: String, Codable {
+    case visa = "VISA"
+    case mastercard = "MASTERCARD"
+    case maestro = "MAESTRO"
+    case amex = "AMEX" //TODO: confirm
+    case other
+    
+    public init(rawValue: String) {
+        switch rawValue.lowercased() {
+        case CardSchemes.visa.rawValue.lowercased():
+            self = .visa
+        case CardSchemes.mastercard.rawValue.lowercased():
+            self = .mastercard
+        case CardSchemes.maestro.rawValue.lowercased():
+            self = .maestro
+        case CardSchemes.amex.rawValue.lowercased():
+            self = .amex
+        default:
+            self = .other
+        }
+    }
+}
+
+enum Wallets: String, Codable {
+    case applePay = "APPLE_PAY"
+    case other
+    
+    public init(rawValue: String) {
+        switch rawValue.lowercased() {
+        case Wallets.applePay.rawValue.lowercased():
+            self = .applePay
+        default:
+            self = .other
+        }
+    }
 }
 
 struct PaymentIntentConfig: Codable {
@@ -20,6 +59,20 @@ struct PaymentIntentConfig: Codable {
     let billingAddress: ConfigurationRequired?
 }
 
+struct CustomerConfig: Codable {
+    let id: String?
+}
+
+struct MerchantConfig: Codable {
+    let supportedPaymentMethods: SupportedPaymentMethods?
+}
+
+struct SupportedPaymentMethods: Codable {
+    let cardSchemes: [CardSchemes]?
+    let wallets: [Wallets]?
+}
+
 struct ConfigurationRequired: Codable {
     let collectionRequired: Bool
 }
+
