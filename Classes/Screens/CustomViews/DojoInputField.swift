@@ -106,7 +106,7 @@ class DojoInputField: UIView {
             imageViewBottom.isHidden = true
             labelBottom.isHidden = true
             textFieldMain.layer.borderWidth = 1.0
-            textFieldMain.layer.borderColor = UIColor.black.withAlphaComponent(0.6).cgColor
+            textFieldMain.layer.borderColor = UIColor.black.withAlphaComponent(0.15).cgColor
             textFieldMain.layer.cornerRadius = 4
         case .activeInput:
             imageViewBottom.isHidden = true
@@ -279,13 +279,13 @@ class DojoInputFieldViewModel: DojoInputFieldViewModelProtocol {
         get {
             switch type {
             case .cardNumber:
-                return "1234 1234 1234 1234"
+                return LocalizedText.CardDetailsCheckout.placeholderPan
             case .cvv:
-                return "CVC"
+                return LocalizedText.CardDetailsCheckout.placeholderCVV
             case .expiry:
-                return "MM/YY"
+                return LocalizedText.CardDetailsCheckout.placeholderExpiry
             case .billingPostcode:
-                return "Postcode"
+                return "Postcode" //TODO: move to translations
             default:
                 return ""
             }
@@ -296,19 +296,19 @@ class DojoInputFieldViewModel: DojoInputFieldViewModelProtocol {
         get {
             switch type {
             case .email:
-                return "Email" //TODO: move to translations
+                return LocalizedText.CardDetailsCheckout.fieldEmail
             case .cardHolderName:
-                return "Name on card"
+                return LocalizedText.CardDetailsCheckout.fieldCardName
             case .cardNumber:
-                return "Card number"
+                return LocalizedText.CardDetailsCheckout.fieldPan
             case .billingCountry:
-                return "Billing Country"
+                return LocalizedText.CardDetailsCheckout.fieldBillingCountry
             case .billingPostcode:
-                return "Postcode"
+                return LocalizedText.CardDetailsCheckout.fieldBillingPostcode
             case .expiry:
-                return "Expiry date"
+                return LocalizedText.CardDetailsCheckout.fieldExpiryDate
             case .cvv:
-                return "CVC"
+                return LocalizedText.CardDetailsCheckout.fieldCVV
             }
         }
     }
@@ -317,19 +317,11 @@ class DojoInputFieldViewModel: DojoInputFieldViewModelProtocol {
         get {
             switch type {
             case .email:
-                return "Please fill in a valid email address"
-            case .cardHolderName:
-                return "Enter your name exactly as it’s written on your card"
+                return LocalizedText.CardDetailsCheckout.errorInvalidEmail
             case .cardNumber:
-                return "Enter your card number"
-            case .billingCountry:
+                return LocalizedText.CardDetailsCheckout.errorInvalidPan
+            default:
                 return ""
-            case .billingPostcode:
-                return "Please enter a valid postcode"
-            case .expiry:
-                return "Enter a valid expiry date"
-            case .cvv:
-                return "Enter a valid security code"
             }
         }
     }
@@ -338,19 +330,19 @@ class DojoInputFieldViewModel: DojoInputFieldViewModelProtocol {
         get {
             switch type {
             case .email:
-                return "Please fill in an email address"
+                return LocalizedText.CardDetailsCheckout.errorEmptyEmail
             case .cardHolderName:
-                return "Enter your name exactly as it’s written on your card"
+                return LocalizedText.CardDetailsCheckout.errorEmptyCardHolder
             case .cardNumber:
-                return "Enter your card number"
+                return LocalizedText.CardDetailsCheckout.errorEmptyPan
             case .billingCountry:
                 return ""
             case .billingPostcode:
-                return "Please enter your billing postcode"
+                return LocalizedText.CardDetailsCheckout.errorEmptyBillingPostcode
             case .expiry:
-                return "Enter expiry date"
+                return LocalizedText.CardDetailsCheckout.errorEmptyExpiry
             case .cvv:
-                return "Enter security code"
+                return LocalizedText.CardDetailsCheckout.errorEmptyCvv
             }
         }
     }

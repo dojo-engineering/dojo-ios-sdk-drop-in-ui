@@ -20,13 +20,28 @@ enum LocalizedText {
     enum CardDetailsCheckout {
         static let title = "dojo_ui_sdk_card_details_checkout_title".localized
         static let fieldCardName = "dojo_ui_sdk_card_details_checkout_field_card_name".localized
+        static let fieldEmail = "dojo_ui_sdk_card_details_checkout_field_email".localized
         static let fieldPan = "dojo_ui_sdk_card_details_checkout_field_pan".localized
+        static let fieldBillingCountry = "dojo_ui_sdk_card_details_checkout_billing_country".localized
+        static let fieldBillingPostcode = "dojo_ui_sdk_card_details_checkout_billing_postcode".localized
+        static let fieldBillingZipcode = "dojo_ui_sdk_card_details_checkout_billing_zipcode".localized
+        static let fieldExpiryDate = "dojo_ui_sdk_card_details_checkout_expiry_date".localized
+        static let fieldCVV = "dojo_ui_sdk_card_details_checkout_cvv".localized
         static let placeholderPan = "dojo_ui_sdk_card_details_checkout_placeholder_pan".localized
         static let placeholderExpiry = "dojo_ui_sdk_card_details_checkout_placeholder_expiry".localized
         static let placeholderCVV = "dojo_ui_sdk_card_details_checkout_placeholder_cvv".localized
         static let youPay = "dojo_ui_sdk_card_details_checkout_you_pay".localized
         static let buttonPay = "dojo_ui_sdk_card_details_checkout_button_pay".localized
         static let buttonProcessing = "dojo_ui_sdk_card_details_checkout_button_processing".localized
+        static let errorEmptyEmail = "dojo_ui_sdk_card_details_checkout_error_empty_email".localized
+        static let errorEmptyCardHolder = "dojo_ui_sdk_card_details_checkout_error_empty_card_holder".localized
+        static let errorEmptyPan = "dojo_ui_sdk_card_details_checkout_error_empty_card_number".localized
+        static let errorEmptyBillingPostcode = "dojo_ui_sdk_card_details_checkout_error_empty_billing_postcode".localized
+        static let errorEmptyExpiry = "dojo_ui_sdk_card_details_checkout_error_empty_expiry".localized
+        static let errorEmptyCvv = "dojo_ui_sdk_card_details_checkout_error_empty_cvv".localized
+        static let errorInvalidEmail = "dojo_ui_sdk_card_details_checkout_error_invalid_email".localized
+        static let errorInvalidPan = "dojo_ui_sdk_card_details_checkout_error_invalid_card_number".localized
+        static let saveCardForFutureUse = "dojo_ui_sdk_card_details_checkout_save_card".localized
     }
     
     enum PaymentResult {
