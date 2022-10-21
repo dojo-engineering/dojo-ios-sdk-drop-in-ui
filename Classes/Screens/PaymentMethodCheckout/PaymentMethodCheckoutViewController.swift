@@ -75,6 +75,11 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
     }
     
     @IBAction func onPayUsingApplePayPress(_ sender: Any) {
+        guard getViewModel()?.isApplePayAvailable() ?? false else {
+            print("Apple pay is not available")
+            return
+        }
+        
         getViewModel()?.processApplePayPayment(fromViewControlelr: self) { result in
             self.delegate?.navigateToPaymentResult(resultCode: result)
         }

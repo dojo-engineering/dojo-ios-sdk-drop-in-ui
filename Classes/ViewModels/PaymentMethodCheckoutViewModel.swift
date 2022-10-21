@@ -10,13 +10,31 @@ import dojo_ios_sdk
 
 class PaymentMethodCheckoutViewModel: BaseViewModel {
     
+    let applePayConfig: DojoUIApplePayConfig?
+    
     init(config: ConfigurationManager) {
+        self.applePayConfig = config.applePayConfig
         super.init(paymentIntent: config.paymentIntent)
     }
     
+    func isApplePayAvailable() -> Bool {
+        guard let appleConfig = getApplePayConfig() else { return false }
+        return DojoSDK.isApplePayAvailable(config: appleConfig)
+    }
+    
+    func getApplePayConfig() -> DojoApplePayConfig? {
+        guard let merchantIdentifier = applePayConfig?.merchantIdentifier else { return nil }
+        return DojoApplePayConfig(merchantIdentifier: merchantIdentifier,
+                                  supportedCards: getSupportedApplePayCards())
+    }
+    
     func processApplePayPayment(fromViewControlelr: UIViewController, completion: ((Int) -> Void)?) {
+        guard let merchantIdentifier = applePayConfig?.merchantIdentifier else {
+            completion?(5)
+            return
+        }
         let paymentIntent = DojoPaymentIntent(id:paymentIntent.id, totalAmount: paymentIntent.amount)
-        let applePayload = DojoApplePayPayload(applePayConfig: DojoApplePayConfig(merchantIdentifier: "merchant.uk.co.paymentsense.sdk.demo.app",
+        let applePayload = DojoApplePayPayload(applePayConfig: DojoApplePayConfig(merchantIdentifier: merchantIdentifier,
                                                                                   supportedCards: getSupportedApplePayCards()))
         DojoSDK.executeApplePayPayment(paymentIntent: paymentIntent,
                                        payload: applePayload,

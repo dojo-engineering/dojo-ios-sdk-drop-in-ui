@@ -16,6 +16,7 @@ public class DojoSDKDropInUI {
     
     public func startPaymentFlow(paymentIntentId: String,
                                  controller: UIViewController,
+                                 applePayConfig: DojoUIApplePayConfig? = nil,
                                  themeSettings: DojoThemeSettings? = nil,
                                  completion: ((Int) -> Void)?) {
         DispatchQueue.main.async {
@@ -24,13 +25,18 @@ public class DojoSDKDropInUI {
             self.completionCallback = completion
             self.configurationManager = ConfigurationManager(paymentIntentId: paymentIntentId,
                                                              paymentIntent: PaymentIntent(id: "", clientSessionSecret: "", amount: DojoPaymentIntentAmount(value: 0, currencyCode: "")), //TODO: shouldn't be here
-                                                             themeSettings: theme)
+                                                             themeSettings: theme,
+                                                             applePayConfig: applePayConfig)
             self.rootCoordinator = RootCoordinator(presentationViewController: controller,
                                                    config: self.configurationManager,
                                                    delegate: self)
             self.rootCoordinator?.beginFlow()
         }
     }
+}
+
+public struct DojoUIApplePayConfig {
+    let merchantIdentifier: String
 }
 
 extension DojoSDKDropInUI: RootCoordinatorDelegate {
