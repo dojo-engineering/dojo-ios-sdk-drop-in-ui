@@ -1,8 +1,5 @@
 //
 //  LocalizedText.swift
-//  EcomUI
-//
-//  Created by Deniss Kaibagarovs on 24/11/2020.
 //
 
 import Foundation

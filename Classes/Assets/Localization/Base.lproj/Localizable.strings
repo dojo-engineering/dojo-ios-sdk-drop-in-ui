@@ -1,9 +1,5 @@
 /*
   Localizable.strings
-  SuperpayApp
-
-  Created by Xinghou Liu on 20/02/2020.
-  Copyright © 2020 Paymentsense. All rights reserved.
 */
 
 "dojo_ui_sdk_payment_method_checkout_title"="Payment method";

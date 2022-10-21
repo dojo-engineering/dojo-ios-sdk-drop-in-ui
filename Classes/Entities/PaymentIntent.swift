@@ -21,7 +21,7 @@ enum CardSchemes: String, Codable {
     case visa = "VISA"
     case mastercard = "MASTERCARD"
     case maestro = "MAESTRO"
-    case amex = "AMEX" //TODO: confirm
+    case amex = "AMEX"
     case other
     
     public init(rawValue: String) {
