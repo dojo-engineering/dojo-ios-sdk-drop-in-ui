@@ -25,7 +25,9 @@ class BaseNavigationController: UINavigationController, UINavigationControllerDe
         ])
     }
 
-    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+    func navigationController(_ navigationController: UINavigationController,
+                              willShow viewController: UIViewController,
+                              animated: Bool) {
         // Remove title form back button
         let item = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         viewController.navigationItem.backBarButtonItem = item
@@ -53,7 +55,9 @@ class BaseNavigationController: UINavigationController, UINavigationControllerDe
         UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
     }
     
-    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+    func navigationController(_ navigationController: UINavigationController,
+                              didShow viewController: UIViewController,
+                              animated: Bool) {
         UIView.setAnimationsEnabled(true)
     }
     

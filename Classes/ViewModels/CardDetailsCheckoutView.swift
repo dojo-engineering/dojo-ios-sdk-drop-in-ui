@@ -18,11 +18,11 @@ class CardDetailsCheckoutViewModel: BaseViewModel {
         super.init(paymentIntent: config.paymentIntent)
     }
     
-    func processPayment(cardDetails: DojoCardDetails, fromViewControlelr: UIViewController, completion: ((Int) -> Void)?) {
+    func processPayment(cardDetails: DojoCardDetails, fromViewController: UIViewController, completion: ((Int) -> Void)?) {
         let cardPaymentPayload = DojoCardPaymentPayload(cardDetails: cardDetails, savePaymentMethod: false)
         DojoSDK.executeCardPayment(token: paymentIntent.clientSessionSecret,
                                     payload: cardPaymentPayload,
-                                    fromViewController: fromViewControlelr,
+                                    fromViewController: fromViewController,
                                     completion: completion)
     }
     

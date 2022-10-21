@@ -187,7 +187,7 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     @IBAction func onPayButtonPress(_ sender: Any) {
         setStateLoading()
         getViewModel()?.processPayment(cardDetails: cardDetails,
-                                 fromViewControlelr: self) { result in //TODO: force unwrap
+                                       fromViewController: self) { result in
             self.delegate?.navigateToPaymentResult(resultCode: result)
             self.setStateNormal()
         }
