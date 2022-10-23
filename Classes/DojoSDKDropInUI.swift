@@ -37,6 +37,10 @@ public class DojoSDKDropInUI {
 
 public struct DojoUIApplePayConfig {
     let merchantIdentifier: String
+    
+    public init(merchantIdentifier: String) {
+        self.merchantIdentifier = merchantIdentifier
+    }
 }
 
 extension DojoSDKDropInUI: RootCoordinatorDelegate {

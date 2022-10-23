@@ -35,7 +35,9 @@ class PaymentMethodCheckoutViewModel: BaseViewModel {
         }
         let paymentIntent = DojoPaymentIntent(id:paymentIntent.id, totalAmount: paymentIntent.amount)
         let applePayload = DojoApplePayPayload(applePayConfig: DojoApplePayConfig(merchantIdentifier: merchantIdentifier,
-                                                                                  supportedCards: getSupportedApplePayCards()))
+                                                                                  supportedCards: getSupportedApplePayCards(),
+                                                                                  collectBillingAddress: self.paymentIntent.config?.billingAddress?.collectionRequired ?? false,
+                                                                                  collectEmail: self.paymentIntent.config?.customerEmail?.collectionRequired ?? false))
         DojoSDK.executeApplePayPayment(paymentIntent: paymentIntent,
                                        payload: applePayload,
                                        fromViewController: fromViewControlelr) { result in

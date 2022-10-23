@@ -117,7 +117,7 @@ class DojoInputField: UIView {
         case .activeInput:
             imageViewBottom.isHidden = true
             labelBottom.isHidden = true
-            textFieldMain.layer.borderWidth = 1.0
+            textFieldMain.layer.borderWidth = 2.0
             textFieldMain.layer.borderColor = UIColor(hex: "#00857DFF")?.cgColor ?? UIColor.systemGreen.cgColor
             textFieldMain.layer.cornerRadius = 4
         case .error:

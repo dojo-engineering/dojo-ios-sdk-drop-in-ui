@@ -259,7 +259,9 @@ extension CardDetailsCheckoutViewController: DojoInputFieldDelegate {
         if let fieldType = from.getType() {
             switch fieldType {
             case .billingCountry:
-                if from.textFieldMain.text == "United Kingdom" {
+                if from.textFieldMain.text == "United Kingdom" || //TODO: move to identifiers
+                   from.textFieldMain.text == "United States of America" ||
+                   from.textFieldMain.text == "Canada" {
                     fieldBillingPostcode.isHidden = false
                     inputFields.insert(fieldBillingPostcode, at: 2) //TODO: if email is hidden, that should be a different position
                 } else {
