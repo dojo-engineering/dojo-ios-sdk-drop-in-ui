@@ -69,10 +69,16 @@ class DojoInputField: UIView {
     func setType(_ type: DojoInputFieldType, delegate: DojoInputFieldDelegate) {
         self.viewModel = DojoInputFieldViewModel(type: type)
         self.delegate = delegate
-        if type == .billingCountry {
+        
+        let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: 20))
+        textFieldMain.leftView = paddingView
+        textFieldMain.leftViewMode = .always
+        
+        if type == .billingCountry { //TODO: switch
             let displayingItem = getCSVData()?[selectedPickerPosition] //TODO: make sure it won't crash
             textFieldMain.text = displayingItem
         }
+        
         setState(.normal)
         reloadUI()
     }
@@ -170,6 +176,18 @@ extension DojoInputField: UITextFieldDelegate {
         setState(.activeInput)
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let updatedString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string)
+        if getType() == .cardNumber,
+            let cardScheme = viewModel?.getCardScheme(updatedString) {
+            let image = UIImage.getCardIcon(icon: cardScheme)
+            textFieldMain.rightImage(image, imageWidth: 25, padding: 10)
+        } else {
+            textFieldMain.rightImage(nil, imageWidth: 0, padding: 10)
+        }
+        return true
+    }
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         guard let viewModel = viewModel else { return } //TODO: notify about an error
         delegate?.onTextFieldDidFinishEditing(self)
@@ -252,6 +270,7 @@ protocol DojoInputFieldViewModelProtocol {
     var type: DojoInputFieldType {get}
     
     func validateField(_ text: String?) -> DojoInputFieldState
+    func getCardScheme(_ text: String?) -> UIImageCardIcon?
 }
 
 class DojoInputFieldViewModel: DojoInputFieldViewModelProtocol {
@@ -351,12 +370,118 @@ class DojoInputFieldViewModel: DojoInputFieldViewModelProtocol {
 extension DojoInputFieldViewModel {
     
     func validateField(_ text: String?) -> DojoInputFieldState {
-        // can't be empty
-        if text?.isEmpty ?? true { return .error }
-        return .error
+        guard let text = text else { return .error}
+        if text.isEmpty { return .error }
+        switch type {
+        case .email:
+            let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+            let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+            if !emailPred.evaluate(with: text) {
+                return .error
+            }
+        case .cardNumber:
+            if !luhnCheck(text) {
+                return .error
+            }
+        default:
+            return .normal
+        }
+        
+        return .normal
     }
     
     func isEmailValid(_ email: String) -> Bool {
         return false
+    }
+    
+    func luhnCheck(_ number: String) -> Bool {
+        var sum = 0
+        let digitStrings = number.reversed().map { String($0) }
+
+        for tuple in digitStrings.enumerated() {
+            if let digit = Int(tuple.element) {
+                let odd = tuple.offset % 2 == 1
+
+                switch (odd, digit) {
+                case (true, 9):
+                    sum += 9
+                case (true, 0...8):
+                    sum += (digit * 2) % 9
+                default:
+                    sum += digit
+                }
+            } else {
+                return false
+            }
+        }
+        return sum % 10 == 0
+    }
+    
+    func getCardScheme(_ text: String?) -> UIImageCardIcon? {
+        let amexRegEx = "^3[47].*$"
+        let amexPred = NSPredicate(format:"SELF MATCHES %@", amexRegEx)
+        if amexPred.evaluate(with: text) {
+            return .amex
+        }
+        
+        let visaRegEx = "^4.*$"
+        let visaPred = NSPredicate(format:"SELF MATCHES %@", visaRegEx)
+        if visaPred.evaluate(with: text) {
+            return .visa
+        }
+        
+        let masterRegEx = "^5[12345].*$"
+        let masterPred = NSPredicate(format:"SELF MATCHES %@", masterRegEx)
+        if masterPred.evaluate(with: text) {
+            return .mastercard
+        }
+        
+        let maestroRegEx = "^(5018|5020|5038|6304|6759|6761|6763).*$"
+        let maestroPred = NSPredicate(format:"SELF MATCHES %@", maestroRegEx)
+        if maestroPred.evaluate(with: text) {
+            return .maestro
+        }
+        
+        return nil
+    }
+}
+
+
+extension NSLayoutDimension {
+
+@discardableResult
+func set(
+        to constant: CGFloat,
+        priority: UILayoutPriority = .required
+        ) -> NSLayoutConstraint {
+
+        let cons = constraint(equalToConstant: constant)
+        cons.priority = priority
+        cons.isActive = true
+        return cons
+    }
+}
+
+extension UITextField {
+    func leftImage(_ image: UIImage?, imageWidth: CGFloat, padding: CGFloat) {
+        let imageView = UIImageView(image: image)
+        imageView.frame = CGRect(x: padding, y: 0, width: imageWidth, height: frame.height)
+        imageView.contentMode = .center
+        
+        let containerView = UIView(frame: CGRect(x: 0, y: 0, width: imageWidth + 2 * padding, height: frame.height))
+        containerView.addSubview(imageView)
+        leftView = containerView
+        leftViewMode = .always
+    }
+    
+    func rightImage(_ image: UIImage?, imageWidth: CGFloat, padding: CGFloat) {
+        let imageView = UIImageView(image: image)
+        imageView.frame = CGRect(x: padding, y: 0, width: imageWidth, height: frame.height)
+        imageView.contentMode = .scaleAspectFit
+        
+        let containerView = UIView(frame: CGRect(x: 0, y: 0, width: imageWidth + 2 * padding, height: frame.height))
+        containerView.addSubview(imageView)
+        rightView = containerView
+        rightViewMode = .always
     }
 }
