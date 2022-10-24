@@ -1,19 +1,21 @@
 
 import dojo_ios_sdk
 
-public class DojoSDKDropInUI {
+@objc
+public class DojoSDKDropInUI: NSObject {
     
     var configurationManager: ConfigurationManager
     var rootCoordinator: RootCoordinatorProtocol?
     var completionCallback: ((Int) -> Void)?
     
-    public init() {
+    public override init() {
         // TODO refactor
         configurationManager = ConfigurationManager(paymentIntentId: "", //TODO: should not be set like this
                                                     paymentIntent: PaymentIntent(id: "", clientSessionSecret: "", amount: DojoPaymentIntentAmount(value: 0, currencyCode: "")),
                                                     themeSettings: ThemeSettings(dojoTheme: DojoThemeSettings.getLightTheme())) // TODO: move to a different place
     }
     
+    @objc
     public func startPaymentFlow(paymentIntentId: String,
                                  controller: UIViewController,
                                  customerSecret: String? = nil,
@@ -36,9 +38,11 @@ public class DojoSDKDropInUI {
     }
 }
 
-public struct DojoUIApplePayConfig {
+@objc
+public class DojoUIApplePayConfig: NSObject {
     let merchantIdentifier: String
     
+    @objc
     public init(merchantIdentifier: String) {
         self.merchantIdentifier = merchantIdentifier
     }

@@ -7,13 +7,15 @@
 
 import UIKit
 
-public struct DojoThemeSettings {
+@objc
+public class DojoThemeSettings: NSObject {
     public var primaryLabelTextColor: UIColor
     public var secondaryLabelTextColor: UIColor
     public var headerButtonTintColor: UIColor
     public var headerTintColor: UIColor
     public var primaryCTAButtonActiveBackgroundColor: UIColor
     
+    @objc
     public init(primaryLabelTextColor: UIColor? = nil,
                 secondaryLabelTextColor: UIColor? = nil,
                 headerTintColor: UIColor? = nil,
