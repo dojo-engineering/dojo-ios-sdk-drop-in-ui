@@ -13,7 +13,6 @@ protocol CardDetailsCheckoutViewControllerDelegate: BaseViewControllerDelegate {
 
 class CardDetailsCheckoutViewController: BaseUIViewController {
     
-    var cardDetails: DojoCardDetails
     var delegate: CardDetailsCheckoutViewControllerDelegate?
     var inputFields: [DojoInputField] = []
     
@@ -38,7 +37,6 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     public init(viewModel: CardDetailsCheckoutViewModel,
                 theme: ThemeSettings,
                 delegate : CardDetailsCheckoutViewControllerDelegate) {
-        self.cardDetails = viewModel.cardDetails3DS
         self.delegate = delegate
         let nibName = String(describing: type(of: self))
         let podBundle = Bundle(for: type(of: self))
@@ -162,11 +160,12 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         
         let billingIsHidden = !(getViewModel()?.showFieldBilling ?? false)
         let emailIsHidden = !(getViewModel()?.showFieldEmail ?? false)
-        let showSaveCardCheckbox = !(getViewModel()?.showSaveCardCheckbox ?? false)
+        let saveCardCheckboxIsHidden = !(getViewModel()?.showSaveCardCheckbox ?? false)
         fieldEmail.isHidden = emailIsHidden
         fieldBillingCountry.isHidden = billingIsHidden
         fieldBillingPostcode.isHidden = billingIsHidden
-        containerSavedCard.isHidden = showSaveCardCheckbox
+        containerSavedCard.isHidden = saveCardCheckboxIsHidden
+        getViewModel()?.isSaveCardSelected = !saveCardCheckboxIsHidden
         
         if !emailIsHidden { inputFields.append(fieldEmail) }
         if !billingIsHidden { inputFields.append(contentsOf: [fieldBillingCountry, fieldBillingPostcode]) }
@@ -185,6 +184,9 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
 
     @IBAction func onPayButtonPress(_ sender: Any) {
         setStateLoading()
+        let cardDetails = fetchDataFromFields()
+        getViewModel()?.email = fieldEmail.textFieldMain.text
+        getViewModel()?.billingPostcode = fieldBillingPostcode.textFieldMain.text
         getViewModel()?.processPayment(cardDetails: cardDetails,
                                        fromViewController: self) { result in
             self.delegate?.navigateToPaymentResult(resultCode: result)
@@ -202,25 +204,6 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         buttonPay.hideLoading()
         mainContentScrollView.isUserInteractionEnabled = true
         mainContentScrollView.alpha = 1
-    }
-    
-    @IBAction func onAutocomplete3DS(_ sender: Any) {
-        guard let viewModel = getViewModel() else { return }
-        cardDetails = viewModel.cardDetails3DS
-        autofillUI()
-    }
-    
-    @IBAction func onAutocompleteNon3DS(_ sender: Any) {
-        guard let viewModel = getViewModel() else { return }
-        cardDetails = viewModel.cardDetailsNon3DS
-        autofillUI()
-    }
-    
-    func autofillUI() {
-//        textFieldCardholder.text = cardDetails.cardName
-//        textFieldCardNumber.text = cardDetails.cardNumber
-//        textFieldExpiry.text = cardDetails.expiryDate
-//        textFieldCVV.text = cardDetails.cv2
     }
 }
 
@@ -282,6 +265,16 @@ extension CardDetailsCheckoutViewController: DojoInputFieldDelegate {
     
     func onTextFieldBeginEditing(_ from: DojoInputField) {
         buttonPay.setEnabled(false)
+    }
+    
+    func fetchDataFromFields() -> DojoCardDetails {
+        //TODO:
+        let cardNumber = fieldCardNumber.textFieldMain.text?.replacingOccurrences(of: " ", with: "") ?? ""
+        let cardName = fieldCardholder.textFieldMain.text
+        let expiryDate = fieldExpiry.textFieldMain.text?.replacingOccurrences(of: "/", with: " / ")
+        let cvv = fieldCVV.textFieldMain.text
+        let cardDetails = DojoCardDetails(cardNumber: cardNumber, cardName: cardName, expiryDate: expiryDate, cv2: cvv)
+        return cardDetails
     }
 }
 

@@ -12,6 +12,9 @@ class CardDetailsCheckoutViewModel: BaseViewModel {
     // for test purposes only
     var cardDetails3DS = DojoCardDetails(cardNumber: "4456530000001096", cardName: "Card Holder", expiryDate: "12 / 24", cv2: "020")
     var cardDetailsNon3DS = DojoCardDetails(cardNumber: "5200000000000056", cardName: "Card Holder", expiryDate: "12 / 24", cv2: "341")
+    var email: String?
+    var billingCountry: String?
+    var billingPostcode: String? //TODO:
     var isSaveCardSelected = true
     
     init(config: ConfigurationManager) {
@@ -19,7 +22,10 @@ class CardDetailsCheckoutViewModel: BaseViewModel {
     }
     
     func processPayment(cardDetails: DojoCardDetails, fromViewController: UIViewController, completion: ((Int) -> Void)?) {
-        let cardPaymentPayload = DojoCardPaymentPayload(cardDetails: cardDetails, savePaymentMethod: false)
+        let cardPaymentPayload = DojoCardPaymentPayload(cardDetails: cardDetails,
+                                                        userEmailAddress: email,
+                                                        billingAddress: DojoAddressDetails(postcode: billingPostcode, countryCode: billingPostcode),
+                                                        savePaymentMethod: isSaveCardSelected)
         DojoSDK.executeCardPayment(token: paymentIntent.clientSessionSecret,
                                     payload: cardPaymentPayload,
                                     fromViewController: fromViewController,
@@ -41,13 +47,4 @@ class CardDetailsCheckoutViewModel: BaseViewModel {
     var supportedCardSchemes: [CardSchemes] {
         paymentIntent.merchantConfig?.supportedPaymentMethods?.cardSchemes ?? []
     }
-}
-
-// Validators
-extension CardDetailsCheckoutViewModel {
-    
-    func isEmailValid(_ email: String) -> Bool {
-        return false
-    }
-    
 }
