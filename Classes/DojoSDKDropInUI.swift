@@ -16,6 +16,7 @@ public class DojoSDKDropInUI {
     
     public func startPaymentFlow(paymentIntentId: String,
                                  controller: UIViewController,
+                                 customerSecret: String? = nil,
                                  applePayConfig: DojoUIApplePayConfig? = nil,
                                  themeSettings: DojoThemeSettings? = nil,
                                  completion: ((Int) -> Void)?) {

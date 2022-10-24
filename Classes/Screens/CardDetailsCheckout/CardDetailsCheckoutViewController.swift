@@ -272,6 +272,13 @@ extension CardDetailsCheckoutViewController: DojoInputFieldDelegate {
                 break;
             }
         }
+        var isValid = true
+        inputFields.forEach({
+            if !$0.isValid() {
+                isValid = false
+            }
+        })
+        buttonPay.setEnabled(isValid)
     }
 }
 

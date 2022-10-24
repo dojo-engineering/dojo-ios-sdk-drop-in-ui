@@ -19,13 +19,14 @@ class ViewController: UIViewController {
 
     @IBAction func onStartPaymentFlowPress(_ sender: Any) {
 //        requestPaymentToken { token in
-        let paymentIntentId = "pi_sandbox_EVdgwtJirUq5ZXaaaMI8Mw"
+        let paymentIntentId = "pi_sandbox_2yVLqJYWZkKeNp_xqa1ygQ"
         let theme = DojoThemeSettings(primaryLabelTextColor: UIColor.red,
                                       secondaryLabelTextColor: .green,
                                       headerTintColor: .green,
                                       headerButtonTintColor: .orange)
             self.dojoUI.startPaymentFlow(paymentIntentId: paymentIntentId,
                                          controller: self,
+                                         applePayConfig: DojoUIApplePayConfig(merchantIdentifier: "merchant.uk.co.paymentsense.sdk.demo.app"),
                                          themeSettings: theme) { result in
                 print("SDK result code: \(result)")
             }

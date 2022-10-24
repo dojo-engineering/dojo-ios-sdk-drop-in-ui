@@ -130,6 +130,14 @@ class DojoInputField: UIView {
             labelBottom.text = isTextEmpty ? viewModel?.fieldErrorEmpty : viewModel?.fieldError
         }
     }
+    
+    func isValid() -> Bool {
+        if viewModel?.validateField(textFieldMain.text) == .normal {
+            return true
+        } else {
+            return false
+        }
+    }
 }
 
 extension DojoInputField: UIPickerViewDelegate, UIPickerViewDataSource {
@@ -178,14 +186,56 @@ extension DojoInputField: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let updatedString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string)
-        if getType() == .cardNumber,
-            let cardScheme = viewModel?.getCardScheme(updatedString) {
-            let image = UIImage.getCardIcon(icon: cardScheme)
-            textFieldMain.rightImage(image, imageWidth: 25, padding: 10)
-        } else {
-            textFieldMain.rightImage(nil, imageWidth: 0, padding: 10)
+        
+        if getType() == .expiry {
+            // only allow numerical characters
+            guard string.compactMap({ Int(String($0)) }).count ==
+                    string.count else { return false }
+            
+            let maxNumberOfCharacters = 4
+            
+            let text = textField.text ?? ""
+            if string.count == 0 {
+                textField.text = String(text.dropLast()).chunkFormatted(withChunkSize: 2, withSeparator: "/")
+            }
+            else {
+                let newText = String((text + string).filter({ $0 != "/" }).prefix(maxNumberOfCharacters))
+                textField.text = newText.chunkFormatted(withChunkSize: 2, withSeparator: "/")
+            }
+            return false
         }
-        return true
+        
+        if getType() == .cardNumber {
+            // only allow numerical characters
+            guard string.compactMap({ Int(String($0)) }).count ==
+                    string.count else { return false }
+            if let cardScheme = viewModel?.getCardScheme(updatedString) {
+                let image = UIImage.getCardIcon(icon: cardScheme)
+                textFieldMain.rightImage(image, imageWidth: 25, padding: 10)
+            } else {
+                textFieldMain.rightImage(nil, imageWidth: 0, padding: 10)
+            }
+            
+            let maxNumberOfCharacters = 20
+            
+            let text = textField.text ?? ""
+            if string.count == 0 {
+                textField.text = String(text.dropLast()).chunkFormatted()
+            }
+            else {
+                let newText = String((text + string).filter({ $0 != " " }).prefix(maxNumberOfCharacters))
+                textField.text = newText.chunkFormatted()
+            }
+            return false
+        }
+        
+        guard let textFieldText = textField.text,
+              let rangeOfTextToReplace = Range(range, in: textFieldText) else {
+            return false
+        }
+        let substringToReplace = textFieldText[rangeOfTextToReplace]
+        let count = textFieldText.count - substringToReplace.count + string.count
+        return count <= viewModel?.fieldMaxLimit ?? 120 //Todo
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -267,6 +317,7 @@ protocol DojoInputFieldViewModelProtocol {
     var fieldName: String {get}
     var fieldError: String {get}
     var fieldErrorEmpty: String {get}
+    var fieldMaxLimit: Int {get}
     var type: DojoInputFieldType {get}
     
     func validateField(_ text: String?) -> DojoInputFieldState
@@ -365,6 +416,21 @@ class DojoInputFieldViewModel: DojoInputFieldViewModelProtocol {
             }
         }
     }
+    
+    var fieldMaxLimit: Int {
+        get {
+            switch type {
+            case .cardNumber:
+                return 20
+            case .cvv:
+                return 4
+            case .billingPostcode:
+                return 50
+            default:
+                return 120
+            }
+        }
+    }
 }
 
 extension DojoInputFieldViewModel {
@@ -380,7 +446,7 @@ extension DojoInputFieldViewModel {
                 return .error
             }
         case .cardNumber:
-            if !luhnCheck(text) {
+            if !luhnCheck(text.replacingOccurrences(of: " ", with: "")) {
                 return .error
             }
         default:
@@ -483,5 +549,28 @@ extension UITextField {
         containerView.addSubview(imageView)
         rightView = containerView
         rightViewMode = .always
+    }
+}
+
+
+extension Collection {
+    public func chunk(n: IndexDistance) -> [SubSequence] {
+        var res: [SubSequence] = []
+        var i = startIndex
+        var j: Index
+        while i != endIndex {
+            j = index(i, offsetBy: n, limitedBy: endIndex) ?? endIndex
+            res.append(self[i..<j])
+            i = j
+        }
+        return res
+    }
+}
+
+extension String {
+    func chunkFormatted(withChunkSize chunkSize: Int = 4,
+        withSeparator separator: Character = " ") -> String {
+        return filter { $0 != separator }.chunk(n: chunkSize)
+            .map{ String($0) }.joined(separator: String(separator))
     }
 }
