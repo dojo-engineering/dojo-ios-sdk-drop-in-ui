@@ -31,6 +31,8 @@
 "dojo_ui_sdk_card_details_checkout_error_empty_cvv"="Enter security code";
 "dojo_ui_sdk_card_details_checkout_error_invalid_email"="Please fill in a valid email address";
 "dojo_ui_sdk_card_details_checkout_error_invalid_card_number"="Enter a valid card number";
+"dojo_ui_sdk_card_details_checkout_error_invalid_expiry"="Enter a valid expiry date";
+"dojo_ui_sdk_card_details_checkout_error_invalid_cvv"="Enter a valid security code";
 "dojo_ui_sdk_card_details_checkout_save_card"="Save card for future use";
 "dojo_ui_sdk_payment_result_title_success"="Payment completed";
 "dojo_ui_sdk_payment_result_title_fail"="Payment failed";

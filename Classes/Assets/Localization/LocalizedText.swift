@@ -38,6 +38,8 @@ enum LocalizedText {
         static let errorEmptyCvv = "dojo_ui_sdk_card_details_checkout_error_empty_cvv".localized
         static let errorInvalidEmail = "dojo_ui_sdk_card_details_checkout_error_invalid_email".localized
         static let errorInvalidPan = "dojo_ui_sdk_card_details_checkout_error_invalid_card_number".localized
+        static let errorInvalidExpiry = "dojo_ui_sdk_card_details_checkout_error_invalid_expiry".localized
+        static let errorInvalidCVV = "dojo_ui_sdk_card_details_checkout_error_invalid_cvv".localized
         static let saveCardForFutureUse = "dojo_ui_sdk_card_details_checkout_save_card".localized
     }
     

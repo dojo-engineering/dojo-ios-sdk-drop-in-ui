@@ -280,6 +280,10 @@ extension CardDetailsCheckoutViewController: DojoInputFieldDelegate {
         })
         buttonPay.setEnabled(isValid)
     }
+    
+    func onTextFieldBeginEditing(_ from: DojoInputField) {
+        buttonPay.setEnabled(false)
+    }
 }
 
 

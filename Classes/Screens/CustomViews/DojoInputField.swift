@@ -27,6 +27,7 @@ protocol DojoInputFieldDelegate {
     func onNextField(_ from: DojoInputField)
     func onPreviousField(_ from: DojoInputField)
     func onTextFieldDidFinishEditing(_ from: DojoInputField)
+    func onTextFieldBeginEditing(_ from: DojoInputField)
 }
 
 class DojoInputField: UIView {
@@ -171,6 +172,7 @@ extension DojoInputField: UITextFieldDelegate {
 //    }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        delegate?.onTextFieldBeginEditing(self)
         guard let viewModel = viewModel else { return } //TODO: notify about an error
         // Handle country selection
         if viewModel.type == .billingCountry {
@@ -186,6 +188,12 @@ extension DojoInputField: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let updatedString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string)
+        
+        if getType() == .cvv {
+            // only allow numerical characters
+            guard string.compactMap({ Int(String($0)) }).count ==
+                    string.count else { return false }
+        }
         
         if getType() == .expiry {
             // only allow numerical characters
@@ -239,8 +247,8 @@ extension DojoInputField: UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        guard let viewModel = viewModel else { return } //TODO: notify about an error
         delegate?.onTextFieldDidFinishEditing(self)
+        guard let viewModel = viewModel else { return } //TODO: notify about an error
         guard viewModel.type != .billingCountry else {
             // country selection is pre-defined and doesn't need to be validated
             setState(.normal)
@@ -390,6 +398,10 @@ class DojoInputFieldViewModel: DojoInputFieldViewModelProtocol {
                 return LocalizedText.CardDetailsCheckout.errorInvalidEmail
             case .cardNumber:
                 return LocalizedText.CardDetailsCheckout.errorInvalidPan
+            case .expiry:
+                return LocalizedText.CardDetailsCheckout.errorInvalidExpiry
+            case .cvv:
+                return LocalizedText.CardDetailsCheckout.errorInvalidCVV
             default:
                 return ""
             }
@@ -448,6 +460,24 @@ extension DojoInputFieldViewModel {
         case .cardNumber:
             if !luhnCheck(text.replacingOccurrences(of: " ", with: "")) {
                 return .error
+            }
+        case .expiry:
+            let textItems = text.split(separator: "/")
+            if let month = textItems.first,
+               let year = textItems.last,
+               let monthInt = Int(month),
+            let yearInt = Int(year),
+            monthInt > 0 && monthInt < 13,
+            yearInt > 21 && yearInt < 99 {
+                return .normal
+            } else {
+                return .error
+            }
+        case .cvv:
+            if text.count > 2 { //TODO: add amex check 
+                return .normal
+            } else {
+                return  .error
             }
         default:
             return .normal

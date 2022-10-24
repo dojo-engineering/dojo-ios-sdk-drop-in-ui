@@ -37,7 +37,7 @@ class BaseNavigationController: UINavigationController, UINavigationControllerDe
         }
 
         if let _ = viewController as? ManagePaymentMethodsViewController {
-            heightConstraint?.constant = 466 + safeAreaBottomHeight
+            heightConstraint?.constant = UIScreen.main.bounds.height - 60
         }
 
         if let _ = viewController as? CardDetailsCheckoutViewController {
