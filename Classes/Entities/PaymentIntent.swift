@@ -15,6 +15,7 @@ struct PaymentIntent: Codable {
     var config: PaymentIntentConfig? = nil
     var merchantConfig: MerchantConfig? = nil
     var customer: CustomerConfig? = nil
+    var status: String?
 }
 
 enum CardSchemes: String, Codable {

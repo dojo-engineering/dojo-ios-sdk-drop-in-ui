@@ -173,7 +173,6 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         //TODO: next navigation for billing fields
         inputFields.append(contentsOf: [fieldCardholder, fieldCardNumber, fieldExpiry, fieldCVV])
         
-        
         setUpSaveCardCheckbox()
         setUpCardsStrip()
         buttonPay.setEnabled(false)
