@@ -8,14 +8,21 @@ import UIKit
 import dojo_ios_sdk
 
 class ManagePaymentMethodsViewModel: BaseViewModel {
-    var items: [PaymentMethodItem] = [PaymentMethodItem(id: "", title: "Apple Pay", type: .applePay, selected: true),
+    var items: [PaymentMethodItem] = [PaymentMethodItem(id: "", title: "Apple Pay", type: .applePay),
                                       PaymentMethodItem(id: "123", title: "****0043", type: .mastercard),
                                       PaymentMethodItem(id: "1234", title: "****0043", type: .maestro),
                                       PaymentMethodItem(id: "12345", title: "****0043", type: .visa),
                                       PaymentMethodItem(id: "123456", title: "****0043", type: .amex)]
     
-    init(config: ConfigurationManager) {
+    init(config: ConfigurationManager, selectedPaymentMethod: PaymentMethodItem? = nil) {
         super.init(paymentIntent: config.paymentIntent)
+        if let selectedPaymentMethod = selectedPaymentMethod {
+            items.forEach({
+                if $0.id == selectedPaymentMethod.id {
+                    $0.selected = true
+                }
+            })
+        }
     }
     
     func removeItemAtIndex(_ index: Int) {

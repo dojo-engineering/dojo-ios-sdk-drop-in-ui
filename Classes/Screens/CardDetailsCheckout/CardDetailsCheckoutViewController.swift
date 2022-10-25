@@ -54,7 +54,6 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         super.viewDidLoad()
         setUpData()
         setUpViews()
-        setUpKeyboard()
     }
     
     override func setUpDesign() {
@@ -103,6 +102,11 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     func setUpKeyboard() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    func removeKeyboardObservers() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
     }
     
     @objc func keyboardWillShow(_ notification: Notification) {
@@ -180,6 +184,12 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNavigationTitle(LocalizedText.CardDetailsCheckout.title)
+        setUpKeyboard()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        removeKeyboardObservers()
     }
 
     @IBAction func onPayButtonPress(_ sender: Any) {

@@ -17,7 +17,7 @@ protocol RootCoordinatorProtocol {
     func showDataLoading()
     func showPaymentMethodCheckout()
     func showCardDetailsCheckout()
-    func showManagePaymentMethods()
+    func showManagePaymentMethods(_ selectedPaymentMethod: PaymentMethodItem?)
     func showPaymentResult(resultCode: Int)
 }
 
@@ -59,8 +59,10 @@ class RootCoordinator: RootCoordinatorProtocol {
         pushNewScreenToTheFlow(screenType: .paymentMethodCheckout, config: config)
     }
     
-    func showManagePaymentMethods() {
-        pushNewScreenToTheFlow(screenType: .managePaymentMethods, config: config)
+    func showManagePaymentMethods(_ selectedPaymentMethod: PaymentMethodItem? = nil) {
+        let viewModel = ManagePaymentMethodsViewModel(config: config, selectedPaymentMethod: selectedPaymentMethod)
+        let controller = ManagePaymentMethodsViewController(viewModel: viewModel, theme: config.themeSettings, delegate: self)
+        pushNewViewControllerToTheFlow(controller: controller)
     }
     
     func showCardDetailsCheckout() {
@@ -106,7 +108,6 @@ extension RootCoordinator {
         case .managePaymentMethods:
             let viewModel = ManagePaymentMethodsViewModel(config: config)
             controller = ManagePaymentMethodsViewController(viewModel: viewModel, theme: config.themeSettings, delegate: self)
-            break
         }
         return controller
     }
@@ -124,8 +125,8 @@ extension RootCoordinator {
 }
 
 extension RootCoordinator: PaymentMethodCheckoutViewControllerDelegate {
-    func navigateToManagePaymentMethods() {
-        showManagePaymentMethods()
+    func navigateToManagePaymentMethods(_ selectedPaymentMethod: PaymentMethodItem) {
+        showManagePaymentMethods(selectedPaymentMethod)
     }
 }
 

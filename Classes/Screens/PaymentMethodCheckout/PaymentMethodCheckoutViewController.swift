@@ -9,12 +9,14 @@ import UIKit
 import PassKit
 
 protocol PaymentMethodCheckoutViewControllerDelegate: BaseViewControllerDelegate {
-    func navigateToManagePaymentMethods()
+    func navigateToManagePaymentMethods(_ selectedPaymentMethod: PaymentMethodItem)
 }
 
 class PaymentMethodCheckoutViewController: BaseUIViewController {
     
     var delegate: PaymentMethodCheckoutViewControllerDelegate?
+    var selectedMethod: PaymentMethodItem?
+    
     @IBOutlet weak var labelTotalDue: UILabel!
     @IBOutlet weak var labelTotalAmount: UILabel!
     @IBOutlet weak var paymentButton: PKPaymentButton!
@@ -48,14 +50,13 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setUpKeyboard()
         setNavigationTitle(LocalizedText.PaymentMethodCheckout.title)
     }
-    
     
     func setupViews() {
         selectedPaymentMethodView.delegate = self
         selectedPaymentMethodView.setStyle(.applePay)
-        setUpKeyboard()
         buttonPayCard.isHidden = true //TODO
     }
     
@@ -79,6 +80,7 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.view.endEditing(true)
+        removeKeyboardObservers()
     }
     
     func setupData() {
@@ -105,6 +107,11 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
     func setUpKeyboard() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    func removeKeyboardObservers() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
     }
     
     @objc func keyboardWillShow(_ notification: Notification) {
@@ -154,7 +161,7 @@ extension PaymentMethodCheckoutViewController: SelectedPaymentMethodViewDelegate
         buttonPayCard.setEnabled(isValid)
     }
     
-    func onPress() {
-        delegate?.navigateToManagePaymentMethods()
+    func onPress(_ item: PaymentMethodItem) {
+        delegate?.navigateToManagePaymentMethods(item)
     }
 }

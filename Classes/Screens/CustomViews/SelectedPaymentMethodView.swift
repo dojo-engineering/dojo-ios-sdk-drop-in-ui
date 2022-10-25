@@ -13,7 +13,7 @@ enum SelectedPaymentMethodViewStyle {
 }
 
 protocol SelectedPaymentMethodViewDelegate {
-    func onPress()
+    func onPress(_ item: PaymentMethodItem)
     func onCVVStateChange(_ isValid: Bool)
 }
 
@@ -28,6 +28,7 @@ class SelectedPaymentMethodView: UIView {
     @IBOutlet weak var mainTextField: UITextField!
     
     public var delegate: SelectedPaymentMethodViewDelegate?
+    var paymentMethod: PaymentMethodItem?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -65,6 +66,10 @@ class SelectedPaymentMethodView: UIView {
         
         labelSubtitle2.font = theme.fontSubtitle2
         labelSubtitle2.textColor = UIColor.black.withAlphaComponent(0.87) //TODO:
+        
+        let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: 16))
+        mainTextField.leftView = paddingView
+        mainTextField.leftViewMode = .always
     }
     
     func setStyle(_ style: SelectedPaymentMethodViewStyle = .applePay) {
@@ -84,6 +89,8 @@ class SelectedPaymentMethodView: UIView {
     }
     
     func setPaymentMethod(_ item: PaymentMethodItem) {
+        self.paymentMethod = item
+        mainTextField.text = ""
         switch item.type {
         case .applePay:
             setStyle(.applePay) //TODO: refactor
@@ -113,7 +120,11 @@ class SelectedPaymentMethodView: UIView {
     
     
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
-        delegate?.onPress()
+        if let paymentMethod = paymentMethod {
+            delegate?.onPress(paymentMethod)
+        } else {
+            delegate?.onPress(PaymentMethodItem(id: "", title: "", type: .applePay))
+        }
     }
 }
 
@@ -134,6 +145,7 @@ extension SelectedPaymentMethodView: UITextFieldDelegate {
         } else {
             delegate?.onCVVStateChange(false)
         }
-        return true
+        
+        return updatedString?.count ?? 0 <= 4
     }
 }
