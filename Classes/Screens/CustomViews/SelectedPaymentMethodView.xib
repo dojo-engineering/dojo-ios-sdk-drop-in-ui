@@ -48,7 +48,7 @@
                         <constraint firstAttribute="width" constant="24" id="yEq-zi-Aam"/>
                     </constraints>
                 </imageView>
-                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XEQ-bU-NAs">
+                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="CVV" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XEQ-bU-NAs">
                     <rect key="frame" x="166" y="14.5" width="81" height="48"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="81" id="BVE-Dr-iBv"/>

@@ -27,6 +27,7 @@ public class DojoSDKDropInUI: NSObject {
             let theme = ThemeSettings.getLightTheme()
             self.completionCallback = completion
             self.configurationManager = ConfigurationManager(paymentIntentId: paymentIntentId,
+                                                             customerSecret: customerSecret,
                                                              paymentIntent: PaymentIntent(id: "", clientSessionSecret: "", amount: DojoPaymentIntentAmount(value: 0, currencyCode: "")), //TODO: shouldn't be here
                                                              themeSettings: theme,
                                                              applePayConfig: applePayConfig)

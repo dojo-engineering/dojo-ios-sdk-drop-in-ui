@@ -6,7 +6,7 @@ PODS:
 
 DEPENDENCIES:
   - CocoaDebug
-  - "dojo-ios-sdk (from `git@github.com:Dojo-Engineering/dojo-ios-sdk.git`, tag `0.6.1`)"
+  - "dojo-ios-sdk (from `git@github.com:Dojo-Engineering/dojo-ios-sdk.git`, branch `feature/customer-payment-methods`)"
   - dojo-ios-sdk-drop-in-ui (from `../`)
 
 SPEC REPOS:
@@ -15,21 +15,21 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   dojo-ios-sdk:
+    :branch: feature/customer-payment-methods
     :git: "git@github.com:Dojo-Engineering/dojo-ios-sdk.git"
-    :tag: 0.6.1
   dojo-ios-sdk-drop-in-ui:
     :path: "../"
 
 CHECKOUT OPTIONS:
   dojo-ios-sdk:
+    :commit: 030d4bf96084e606222b8758795fcae7965e7a3b
     :git: "git@github.com:Dojo-Engineering/dojo-ios-sdk.git"
-    :tag: 0.6.1
 
 SPEC CHECKSUMS:
   CocoaDebug: 61cf93ada6ce8f3407507dc01f9b874d91ac1d5c
   dojo-ios-sdk: cc0bfb88e638ef3cf7dbfa6bc8a54c256bac35e4
   dojo-ios-sdk-drop-in-ui: 4b28aafe731a9ebb33fc480a5c88ff018d188ebb
 
-PODFILE CHECKSUM: fe9236a3f7766b628971c1ec58428c6264753943
+PODFILE CHECKSUM: 358f1fa9e278f00578b7373b913b282e962fddc9
 
 COCOAPODS: 1.11.3

@@ -11,10 +11,12 @@ import dojo_ios_sdk
 class DataLoadingViewModel: BaseViewModel {
     
     let paymentIntentId: String
+    let customerSecret: String?
     let demoDelay: Double
     
-    init(paymentIntentId: String, demoDelay: Double) {
+    init(paymentIntentId: String, customerSecret: String? = nil, demoDelay: Double) {
         self.paymentIntentId = paymentIntentId
+        self.customerSecret = customerSecret
         self.demoDelay = demoDelay
         let emptyPaymentIntent = PaymentIntent(id: paymentIntentId,
                                                clientSessionSecret: "",
@@ -38,5 +40,13 @@ class DataLoadingViewModel: BaseViewModel {
                 completion?(nil, error)
             }
         }
+    }
+    
+    func fetchCustomersPaymentMethods(customerId: String) {
+        if let customerSecret = customerSecret {
+            DojoSDK.fetchCustomerPaymentMethods(customerId: customerId, customerSecret: customerSecret, completion: {result, error in
+                var a = 0
+            })
+        }//TODO: when not passed
     }
 }
