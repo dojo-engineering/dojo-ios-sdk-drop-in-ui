@@ -130,6 +130,15 @@ extension RootCoordinator: PaymentMethodCheckoutViewControllerDelegate {
 }
 
 extension RootCoordinator: ManagePaymentMethodsViewControllerDelegate {
+    func onPayUsingPaymentMethod(_ item: PaymentMethodItem) {
+        rootNavController.viewControllers.forEach({
+            if let controller = $0 as? PaymentMethodCheckoutViewController {
+                controller.paymentMethodSelected(item)
+            }
+        })
+        rootNavController.popViewController(animated: false)
+    }
+    
     func onPayUsingNewCardPress() {
         showCardDetailsCheckout()
     }

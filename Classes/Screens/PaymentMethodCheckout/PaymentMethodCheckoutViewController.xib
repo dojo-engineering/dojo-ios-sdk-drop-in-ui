@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,6 +11,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PaymentMethodCheckoutViewController" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
             <connections>
+                <outlet property="buttonPayCard" destination="AHi-j5-5XI" id="5tS-wl-aFq"/>
+                <outlet property="constraintPayButtonBottom" destination="LtI-6G-hW0" id="69e-1h-dkg"/>
+                <outlet property="constraintPayButtonCardBottom" destination="p1p-xY-jcv" id="Gh3-Gv-9pJ"/>
                 <outlet property="footerPoweredByDojoView" destination="Utf-dq-Cdi" id="PVT-YT-d3k"/>
                 <outlet property="labelTotalAmount" destination="m9K-cz-gAs" id="Fac-sZ-K0t"/>
                 <outlet property="labelTotalDue" destination="nIa-N9-fws" id="PNR-ZL-mtx"/>
@@ -25,7 +28,7 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DIE-VP-Mbo" customClass="PKPaymentButton">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DIE-VP-Mbo" userLabel="ApplePay Button" customClass="PKPaymentButton">
                     <rect key="frame" x="16" y="769" width="382" height="44"/>
                     <color key="backgroundColor" systemColor="labelColor"/>
                     <constraints>
@@ -45,7 +48,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dgb-bS-UCe" userLabel="topSeparator">
-                    <rect key="frame" x="0.0" y="44" width="414" height="0.5"/>
+                    <rect key="frame" x="0.0" y="48" width="414" height="0.5"/>
                     <color key="backgroundColor" systemColor="tintColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="0.5" id="Xch-hG-hX5"/>
@@ -76,14 +79,25 @@
                         <constraint firstAttribute="height" constant="55" id="wYV-a2-VLB"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AHi-j5-5XI" userLabel="Card Pay Button" customClass="LoadingButton" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
+                    <rect key="frame" x="16" y="769" width="382" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="H5X-03-0qr"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Pay"/>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="DIE-VP-Mbo" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="0bE-vR-cYM"/>
                 <constraint firstItem="dgb-bS-UCe" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="2eE-vE-t35"/>
+                <constraint firstItem="AHi-j5-5XI" firstAttribute="top" secondItem="nIa-N9-fws" secondAttribute="bottom" constant="24" id="9CA-Bl-WCC"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="AHi-j5-5XI" secondAttribute="trailing" constant="16" id="KGz-9q-BeG"/>
                 <constraint firstItem="Utf-dq-Cdi" firstAttribute="top" secondItem="DIE-VP-Mbo" secondAttribute="bottom" constant="9" id="LtI-6G-hW0"/>
                 <constraint firstItem="bl0-mH-Tqe" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="RxK-HW-ob4"/>
+                <constraint firstItem="AHi-j5-5XI" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="U18-La-MT0"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="dgb-bS-UCe" secondAttribute="trailing" id="V6L-s1-iVS"/>
                 <constraint firstItem="m9K-cz-gAs" firstAttribute="centerY" secondItem="nIa-N9-fws" secondAttribute="centerY" id="azU-6n-DKD"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Utf-dq-Cdi" secondAttribute="trailing" id="cKV-Oj-dhF"/>
@@ -94,6 +108,7 @@
                 <constraint firstItem="DIE-VP-Mbo" firstAttribute="top" secondItem="nIa-N9-fws" secondAttribute="bottom" constant="24" id="h5v-1j-WAQ"/>
                 <constraint firstItem="Utf-dq-Cdi" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="hNh-ob-wGa"/>
                 <constraint firstItem="nIa-N9-fws" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="lBS-74-yhJ"/>
+                <constraint firstItem="Utf-dq-Cdi" firstAttribute="top" secondItem="AHi-j5-5XI" secondAttribute="bottom" constant="9" id="p1p-xY-jcv"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="DIE-VP-Mbo" secondAttribute="trailing" constant="16" id="qUR-G4-c4T"/>
                 <constraint firstItem="Utf-dq-Cdi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="wj3-MS-U5M"/>
                 <constraint firstItem="dgb-bS-UCe" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="yn3-0c-VQx"/>
@@ -104,7 +119,7 @@
     </objects>
     <resources>
         <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

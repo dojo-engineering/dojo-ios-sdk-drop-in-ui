@@ -88,7 +88,7 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     func setUpData() {
         //TODO: proper formatter
         let amountText = "\(String(format: "%.2f", Double(getViewModel()?.paymentIntent.amount.value ?? 0)/100.0))"
-        let buttonPayTitle = "Pay \(amountText)"
+        let buttonPayTitle = "Pay £\(amountText)"
         buttonPay.setTitle(buttonPayTitle, for: .normal)
         
         
@@ -208,7 +208,7 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
 }
 
 extension CardDetailsCheckoutViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool { //TODO: move to fields file
         self.view.endEditing(true)
         return false
     }

@@ -9,6 +9,7 @@ import UIKit
 
 protocol ManagePaymentMethodsViewControllerDelegate: BaseViewControllerDelegate {
     func onPayUsingNewCardPress()
+    func onPayUsingPaymentMethod(_ item: PaymentMethodItem)
 }
 
 class ManagePaymentMethodsViewController: BaseUIViewController {
@@ -86,7 +87,13 @@ class ManagePaymentMethodsViewController: BaseUIViewController {
     }
     
     @IBAction func onUseThisPaymentMethodPress(_ sender: Any) {
-        navigationController?.popViewController(animated: false) //TODO: delegate to root and the same method as refresh token
+        if let viewModel = getViewModel(),
+           let paymentMethod = viewModel.items.first(where: {$0.selected}) {
+            delegate?.onPayUsingPaymentMethod(paymentMethod)
+        }
+        
+        
+//        navigationController?.popViewController(animated: false) //TODO: delegate to root and the same method as refresh token
     }
     
     func getViewModel() -> ManagePaymentMethodsViewModel? {
