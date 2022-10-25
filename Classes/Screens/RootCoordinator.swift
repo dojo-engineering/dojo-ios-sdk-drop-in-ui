@@ -104,7 +104,8 @@ extension RootCoordinator {
             let viewModel = PaymentMethodCheckoutViewModel(config: config)
             controller = PaymentMethodCheckoutViewController(viewModel: viewModel, theme: config.themeSettings, delegate: self)
         case .managePaymentMethods:
-            controller = ManagePaymentMethodsViewController(theme: config.themeSettings, delegate: self)
+            let viewModel = ManagePaymentMethodsViewModel(config: config)
+            controller = ManagePaymentMethodsViewController(viewModel: viewModel, theme: config.themeSettings, delegate: self)
             break
         }
         return controller
