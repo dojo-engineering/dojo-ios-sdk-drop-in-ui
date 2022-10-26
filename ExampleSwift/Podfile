@@ -2,7 +2,7 @@ use_frameworks!
 
 platform :ios, '11.0'
 
-target 'dojo-ios-sdk-drop-in-ui_Example' do
+target 'Dojo SDK UI' do
   pod 'dojo-ios-sdk', :git => 'git@github.com:Dojo-Engineering/dojo-ios-sdk.git', :branch => 'feature/customer-payment-methods'
   pod 'dojo-ios-sdk-drop-in-ui', :path => '../'
   pod 'CocoaDebug', :configurations => ['Debug'] #network trafic tool

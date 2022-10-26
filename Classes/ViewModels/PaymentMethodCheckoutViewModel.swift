@@ -46,6 +46,18 @@ class PaymentMethodCheckoutViewModel: BaseViewModel {
             }
     }
     
+    func processSavedCardPayment(fromViewControlelr: UIViewController,
+                                 paymentId: String,
+                                 cvv: String,
+                                 completion: ((Int) -> Void)?) {
+        let savedCardPaymentPayload = DojoSavedCardPaymentPayload(cvv: cvv,
+                                                                  paymentMethodId: paymentId)
+        DojoSDK.executeSavedCardPayment(token: paymentIntent.clientSessionSecret,
+                                        payload: savedCardPaymentPayload,
+                                        fromViewController: fromViewControlelr,
+                                        completion: completion)
+    }
+    
     func getSupportedApplePayCards() -> [String] {
         paymentIntent.merchantConfig?.supportedPaymentMethods?.cardSchemes?.compactMap({
             switch $0 {

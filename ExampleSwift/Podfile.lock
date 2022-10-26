@@ -30,6 +30,6 @@ SPEC CHECKSUMS:
   dojo-ios-sdk: cc0bfb88e638ef3cf7dbfa6bc8a54c256bac35e4
   dojo-ios-sdk-drop-in-ui: 4b28aafe731a9ebb33fc480a5c88ff018d188ebb
 
-PODFILE CHECKSUM: 358f1fa9e278f00578b7373b913b282e962fddc9
+PODFILE CHECKSUM: a0ae1e8a83f6d1e2007e8249aa2a0c99cb6d6d4e
 
 COCOAPODS: 1.11.3

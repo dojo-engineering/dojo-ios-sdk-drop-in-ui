@@ -15,7 +15,6 @@ protocol PaymentMethodCheckoutViewControllerDelegate: BaseViewControllerDelegate
 class PaymentMethodCheckoutViewController: BaseUIViewController {
     
     var delegate: PaymentMethodCheckoutViewControllerDelegate?
-    var selectedMethod: PaymentMethodItem?
     
     @IBOutlet weak var labelTotalDue: UILabel!
     @IBOutlet weak var labelTotalAmount: UILabel!
@@ -96,6 +95,27 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
         }
         
         getViewModel()?.processApplePayPayment(fromViewControlelr: self) { result in
+            self.delegate?.navigateToPaymentResult(resultCode: result)
+        }
+    }
+    
+    @IBAction func onPayUsingSavedCard(_ sender: Any) {
+        guard let selectedPaymentMethodId = selectedPaymentMethodView.paymentMethod?.id else {
+            print("paymentMethod is not selected")
+            return
+        }
+        guard let cvv = selectedPaymentMethodView.mainTextField.text else {
+            print("cvv is empty")
+            return
+        }
+        
+        self.view.isUserInteractionEnabled = false
+        buttonPayCard.showLoading(LocalizedText.CardDetailsCheckout.buttonProcessing)
+        getViewModel()?.processSavedCardPayment(fromViewControlelr: self,
+                                                paymentId: selectedPaymentMethodId,
+                                                cvv: cvv) { result in
+            self.buttonPayCard.hideLoading()
+            self.view.isUserInteractionEnabled = true
             self.delegate?.navigateToPaymentResult(resultCode: result)
         }
     }
