@@ -132,10 +132,12 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         //TODO: a better function for that
         guard let viewModel = getViewModel() else { return }
         viewModel.supportedCardSchemes.forEach({
-            let imageView = UIImageView(frame: CGRectMake(0, 0, 40, 20))
-            imageView.image = UIImage.getCardIcon(type: $0)
-            imageView.contentMode = .scaleAspectFit
-            containerCardsStrip.addArrangedSubview(imageView)
+            if let image = UIImage.getCardIcon(type: $0) {
+                let imageView = UIImageView(frame: CGRectMake(0, 0, 40, 20))
+                imageView.image = image
+                imageView.contentMode = .scaleAspectFit
+                containerCardsStrip.addArrangedSubview(imageView)
+            }
         })
     }
     

@@ -100,11 +100,16 @@
                                         <constraint firstAttribute="height" constant="16" id="ESZ-qm-XDz"/>
                                     </constraints>
                                 </view>
-                                <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Av9-to-bSP" userLabel="Cards Strip">
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="MT6-B5-RJK" userLabel="Card Strip container">
                                     <rect key="frame" x="0.0" y="116" width="379" height="40"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="40" id="DXU-Gn-hD1"/>
-                                    </constraints>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Av9-to-bSP" userLabel="Cards Strip">
+                                            <rect key="frame" x="0.0" y="0.0" width="379" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="DXU-Gn-hD1"/>
+                                            </constraints>
+                                        </stackView>
+                                    </subviews>
                                 </stackView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fRD-io-LS3" userLabel="Spacer">
                                     <rect key="frame" x="0.0" y="161" width="379" height="20"/>
