@@ -18,17 +18,22 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
+
 - (IBAction)onStartPaymentFlowPress:(id)sender {
     self.dojoUI = [[DojoSDKDropInUI alloc] init];
-    [self.dojoUI startPaymentFlowWithPaymentIntentId:@"pi_sandbox_TppuC1x2q06PEfRnagLVfA"
+    DojoThemeSettings *theme = [[DojoThemeSettings alloc] initWithPrimaryLabelTextColor: UIColor.redColor
+                                                                secondaryLabelTextColor:UIColor.greenColor
+                                                                        headerTintColor:UIColor.greenColor
+                                                                  headerButtonTintColor:UIColor.orangeColor
+                                                  primaryCTAButtonActiveBackgroundColor: UIColor.blueColor];
+    [self.dojoUI startPaymentFlowWithPaymentIntentId: @"payment-intent-id"
                                           controller: self
                                       customerSecret: nil
                                       applePayConfig: nil
-                                       themeSettings: nil
-                                          completion:^(NSInteger result) {
-        
+                                       themeSettings: theme
+                                          completion: ^(NSInteger result) {
+        NSLog(@"%ld", (long)result);
     }];
 }
-
 
 @end

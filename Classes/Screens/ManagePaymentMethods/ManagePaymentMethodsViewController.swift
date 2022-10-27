@@ -74,6 +74,9 @@ class ManagePaymentMethodsViewController: BaseUIViewController {
         tableViewPaymentMethods.rowHeight = UITableView.automaticDimension;
         tableViewPaymentMethods.delegate = self
         tableViewPaymentMethods.dataSource = self
+        tableViewPaymentMethods.allowsMultipleSelectionDuringEditing = false
+        tableViewPaymentMethods.isExclusiveTouch = true
+        tableViewPaymentMethods.delaysContentTouches = true
         PaymentMethodTableViewCell.register(tableView: tableViewPaymentMethods)
         
         tableViewPaymentMethods.contentInset = UIEdgeInsets(top: 16,

@@ -23,8 +23,8 @@ public class DojoSDKDropInUI: NSObject {
                                  themeSettings: DojoThemeSettings? = nil,
                                  completion: ((Int) -> Void)?) {
         DispatchQueue.main.async {
-//            let theme = ThemeSettings(dojoTheme: themeSettings ?? DojoThemeSettings.getLightTheme())
-            let theme = ThemeSettings.getLightTheme()
+            let theme = ThemeSettings(dojoTheme: themeSettings ?? DojoThemeSettings.getLightTheme())
+//            let theme = ThemeSettings.getLightTheme()
             self.completionCallback = completion
             self.configurationManager = ConfigurationManager(paymentIntentId: paymentIntentId,
                                                              customerSecret: customerSecret,
