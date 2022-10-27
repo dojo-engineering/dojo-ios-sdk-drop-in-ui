@@ -27,11 +27,11 @@ pod 'dojo-ios-sdk-drop-in-ui' :git => 'git@github.com:dojo-engineering/dojo-ios-
 
 ## How to use
 
-You need to creat a payment intent and pass it into the SDK. More on how to create it: 
+You need to creat a payment intent and pass it into the SDK. More on how to create it: {URL_PAYMENT_INTENT}
 
 ### Start checkout process:
 Swift
-```
+```swift
 import dojo_ios_sdk_drop_in_ui
 
 let dojoUI = DojoSDKDropInUI()
@@ -42,30 +42,28 @@ dojoUI.startPaymentFlow(paymentIntentId: "payment-intent-id",
 }
 ```
 Objective-C
-```
+```objc
 #import <dojo_ios_sdk_drop_in_ui-Swift.h>
 
 @property DojoSDKDropInUI *dojoUI;
 
 self.dojoUI = [[DojoSDKDropInUI alloc] init];
-
-self.dojoUI = [[DojoSDKDropInUI alloc] init];
-[self.dojoUI startPaymentFlowWithPaymentIntentId:@"payment-intent-id"
+[self.dojoUI startPaymentFlowWithPaymentIntentId: @"payment-intent-id"
                                       controller: self
                                   customerSecret: nil
                                   applePayConfig: nil
                                    themeSettings: nil
-                                      completion:^(NSInteger result) {
+                                      completion: ^(NSInteger result) {
     NSLog(@"%ld", (long)result);
 }];
 ```
 
-To use ApplePay you first need to generate a merchnat certificate and send it to us. For more information on that process contact us at:
+To use ApplePay you first need to generate a merchnat certificate and send it to us. For more information on that process contact us at: {URL_SUPPORT_EMAIL}
 After that, you'll need to pass your merchant identifier to the SDK
 
 ### Configure ApplePay
 Swift
-```
+```swift
 dojoUI.startPaymentFlow(paymentIntentId: "payment-intent-id",
                         controller: self,
                         applePayConfig: DojoUIApplePayConfig(merchantIdentifier: "merchant-identifier")) { result in
@@ -73,25 +71,25 @@ dojoUI.startPaymentFlow(paymentIntentId: "payment-intent-id",
 }
 ```
 Objective-C
-```
-[self.dojoUI startPaymentFlowWithPaymentIntentId:@"payment-intent-id"
+```objc
+[self.dojoUI startPaymentFlowWithPaymentIntentId: @"payment-intent-id"
                                       controller: self
                                   customerSecret: nil
                                   applePayConfig: [[DojoUIApplePayConfig alloc] initWithMerchantIdentifier: @"merchant-identifier"]
                                    themeSettings: nil
-                                      completion:^(NSInteger result) {
+                                      completion: ^(NSInteger result) {
     NSLog(@"%ld", (long)result);
 }];
 ```
 
 In order for user to be able to pay or save a card, you need to:
-- Create a customer on your backend. Reference
-- Pass customerId during the creation of payment intent. Reference 
-- Generate CustomerSecret and pass it into the SDK. Reference
+- Create a customer on your backend. {URL_API_REFERENCE_CUSTOMER}
+- Pass customerId during the creation of payment intent. {URL_API_REFERENCE_PAYMENT_INTENT_CREATION}
+- Generate CustomerSecret and pass it into the SDK. {URL_API_REFERENCE_CUSTOMER_SECRET_CREATION}
 
 ### Configure Saved Cards
 Swift
-```
+```swift
 dojoUI.startPaymentFlow(paymentIntentId: "payment-intent-id",
                         controller: self,
                         customerSecret: "customer-secret") { result in
@@ -99,21 +97,21 @@ dojoUI.startPaymentFlow(paymentIntentId: "payment-intent-id",
 }
 ```
 Objective-C
-```
-[self.dojoUI startPaymentFlowWithPaymentIntentId:@"payment-intent-id"
+```objc
+[self.dojoUI startPaymentFlowWithPaymentIntentId: @"payment-intent-id"
                                       controller: self
                                   customerSecret: @"customer-secret"
                                   applePayConfig: nil
                                    themeSettings: nil
-                                      completion:^(NSInteger result) {
+                                      completion: ^(NSInteger result) {
     NSLog(@"%ld", (long)result);
 }];
 ```
-It's possible to customise the look of the sdk. For the full set of available UI customisations refer to: 
+It's possible to customise the look of the sdk by providing DojoThemeSettings object
 
 ### Customise UI
 Swift
-```
+```swift
 let theme = DojoThemeSettings(primaryLabelTextColor: .red,
                               secondaryLabelTextColor: .green,
                               headerTintColor: .green,
@@ -126,22 +124,22 @@ dojoUI.startPaymentFlow(paymentIntentId: "payment-intent-id",
 }
 ```
 Objective-C
-```
+```objc
 DojoThemeSettings *theme = [[DojoThemeSettings alloc] initWithPrimaryLabelTextColor: UIColor.redColor
-                                                            secondaryLabelTextColor:UIColor.greenColor
-                                                                    headerTintColor:UIColor.greenColor
-                                                              headerButtonTintColor:UIColor.orangeColor
+                                                            secondaryLabelTextColor: UIColor.greenColor
+                                                                    headerTintColor: UIColor.greenColor
+                                                              headerButtonTintColor: UIColor.orangeColor
                                               primaryCTAButtonActiveBackgroundColor: UIColor.blueColor];
-[self.dojoUI startPaymentFlowWithPaymentIntentId:@"payment-intent-id"
+[self.dojoUI startPaymentFlowWithPaymentIntentId: @"payment-intent-id"
                                       controller: self
                                   customerSecret: nil
                                   applePayConfig: nil
                                    themeSettings: theme
-                                      completion:^(NSInteger result) {
+                                      completion: ^(NSInteger result) {
     NSLog(@"%ld", (long)result);
 }];
 ```
 
 ## License
 
-dojo-ios-sdk-drop-in-ui is available under the MIT license. See the LICENSE file for more info.
+Dojo SDK Drop in UI is available under the MIT license. See the LICENSE file for more info.
