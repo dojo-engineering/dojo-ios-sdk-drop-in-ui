@@ -10,7 +10,7 @@ iOS 11+
 
 ## Installation
 
-dojo-ios-sdk-drop-in-ui is available through [CocoaPods](https://cocoapods.org). To install
+Dojo SDK Drop in UI is available through [CocoaPods](https://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
@@ -58,10 +58,10 @@ self.dojoUI = [[DojoSDKDropInUI alloc] init];
 }];
 ```
 
+### Configure ApplePay
 To use ApplePay you first need to generate a merchnat certificate and send it to us. For more information on that process contact us at: {URL_SUPPORT_EMAIL}
 After that, you'll need to pass your merchant identifier to the SDK
 
-### Configure ApplePay
 Swift
 ```swift
 dojoUI.startPaymentFlow(paymentIntentId: "payment-intent-id",
@@ -82,12 +82,12 @@ Objective-C
 }];
 ```
 
+### Configure Saved Cards
 In order for user to be able to pay or save a card, you need to:
 - Create a customer on your backend. {URL_API_REFERENCE_CUSTOMER}
 - Pass customerId during the creation of payment intent. {URL_API_REFERENCE_PAYMENT_INTENT_CREATION}
 - Generate CustomerSecret and pass it into the SDK. {URL_API_REFERENCE_CUSTOMER_SECRET_CREATION}
 
-### Configure Saved Cards
 Swift
 ```swift
 dojoUI.startPaymentFlow(paymentIntentId: "payment-intent-id",
@@ -107,9 +107,10 @@ Objective-C
     NSLog(@"%ld", (long)result);
 }];
 ```
-It's possible to customise the look of the sdk by providing DojoThemeSettings object
 
 ### Customise UI
+It's possible to customise the look of the sdk by providing DojoThemeSettings object
+
 Swift
 ```swift
 let theme = DojoThemeSettings(primaryLabelTextColor: .red,
