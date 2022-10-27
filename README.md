@@ -30,6 +30,7 @@ pod 'dojo-ios-sdk-drop-in-ui' :git => 'git@github.com:dojo-engineering/dojo-ios-
 You need to creat a payment intent and pass it into the SDK. More on how to create it: 
 
 ### Start checkout process:
+Swift
 ```
 import dojo_ios_sdk_drop_in_ui
 
@@ -40,17 +41,47 @@ dojoUI.startPaymentFlow(paymentIntentId: "payment-intent-id",
     print(result)
 }
 ```
+Objective-C
+```
+#import <dojo_ios_sdk_drop_in_ui-Swift.h>
+
+@property DojoSDKDropInUI *dojoUI;
+
+self.dojoUI = [[DojoSDKDropInUI alloc] init];
+
+self.dojoUI = [[DojoSDKDropInUI alloc] init];
+[self.dojoUI startPaymentFlowWithPaymentIntentId:@"payment-intent-id"
+                                      controller: self
+                                  customerSecret: nil
+                                  applePayConfig: nil
+                                   themeSettings: nil
+                                      completion:^(NSInteger result) {
+    NSLog(@"%ld", (long)result);
+}];
+```
 
 To use ApplePay you first need to generate a merchnat certificate and send it to us. For more information on that process contact us at:
 After that, you'll need to pass your merchant identifier to the SDK
 
 ### Configure ApplePay
+Swift
 ```
 dojoUI.startPaymentFlow(paymentIntentId: "payment-intent-id",
                         controller: self,
                         applePayConfig: DojoUIApplePayConfig(merchantIdentifier: "merchant-identifier")) { result in
     print(result)
 }
+```
+Objective-C
+```
+[self.dojoUI startPaymentFlowWithPaymentIntentId:@"payment-intent-id"
+                                      controller: self
+                                  customerSecret: nil
+                                  applePayConfig: [[DojoUIApplePayConfig alloc] initWithMerchantIdentifier: @"merchant-identifier"]
+                                   themeSettings: nil
+                                      completion:^(NSInteger result) {
+    NSLog(@"%ld", (long)result);
+}];
 ```
 
 In order for user to be able to pay or save a card, you need to:
@@ -59,6 +90,7 @@ In order for user to be able to pay or save a card, you need to:
 - Generate CustomerSecret and pass it into the SDK. Reference
 
 ### Configure Saved Cards
+Swift
 ```
 dojoUI.startPaymentFlow(paymentIntentId: "payment-intent-id",
                         controller: self,
@@ -66,16 +98,48 @@ dojoUI.startPaymentFlow(paymentIntentId: "payment-intent-id",
     print(result)
 }
 ```
-
+Objective-C
+```
+[self.dojoUI startPaymentFlowWithPaymentIntentId:@"payment-intent-id"
+                                      controller: self
+                                  customerSecret: @"customer-secret"
+                                  applePayConfig: nil
+                                   themeSettings: nil
+                                      completion:^(NSInteger result) {
+    NSLog(@"%ld", (long)result);
+}];
+```
 It's possible to customise the look of the sdk. For the full set of available UI customisations refer to: 
 
 ### Customise UI
+Swift
 ```
+let theme = DojoThemeSettings(primaryLabelTextColor: .red,
+                              secondaryLabelTextColor: .green,
+                              headerTintColor: .green,
+                              headerButtonTintColor: .orange,
+                              primaryCTAButtonActiveBackgroundColor: .blue)
 dojoUI.startPaymentFlow(paymentIntentId: "payment-intent-id",
                         controller: self,
-                        customerSecret: "customer-secret") { result in
+                        themeSettings: theme) { result in
     print(result)
 }
+```
+Objective-C
+```
+DojoThemeSettings *theme = [[DojoThemeSettings alloc] initWithPrimaryLabelTextColor: UIColor.redColor
+                                                            secondaryLabelTextColor:UIColor.greenColor
+                                                                    headerTintColor:UIColor.greenColor
+                                                              headerButtonTintColor:UIColor.orangeColor
+                                              primaryCTAButtonActiveBackgroundColor: UIColor.blueColor];
+[self.dojoUI startPaymentFlowWithPaymentIntentId:@"payment-intent-id"
+                                      controller: self
+                                  customerSecret: nil
+                                  applePayConfig: nil
+                                   themeSettings: theme
+                                      completion:^(NSInteger result) {
+    NSLog(@"%ld", (long)result);
+}];
 ```
 
 ## License
