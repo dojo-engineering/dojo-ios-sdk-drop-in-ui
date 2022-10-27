@@ -140,12 +140,14 @@ extension SelectedPaymentMethodView: UITextFieldDelegate {
                 string.count else { return false }
         
         let updatedString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string)
-        if updatedString?.count ?? 0 > 2 {
+        let numberOfCharacters = paymentMethod?.type == .amex ? 4 : 3
+        let shouldChange = updatedString?.count ?? 0 <= numberOfCharacters
+        
+        if updatedString?.count ?? 0 >= numberOfCharacters {
             delegate?.onCVVStateChange(true)
         } else {
             delegate?.onCVVStateChange(false)
         }
-        
-        return updatedString?.count ?? 0 <= 4
+        return shouldChange
     }
 }

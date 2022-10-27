@@ -28,6 +28,7 @@ protocol DojoInputFieldDelegate {
     func onPreviousField(_ from: DojoInputField)
     func onTextFieldDidFinishEditing(_ from: DojoInputField)
     func onTextFieldBeginEditing(_ from: DojoInputField)
+    func onTextChange(_ from: DojoInputField)
 }
 
 class DojoInputField: UIView {
@@ -42,6 +43,7 @@ class DojoInputField: UIView {
     var delegate: DojoInputFieldDelegate?
     var picker: UIPickerView?
     var selectedPickerPosition: Int = 0
+    var currentCardSchema: UIImageCardIcon = .visa
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -59,6 +61,7 @@ class DojoInputField: UIView {
         nib.instantiate(withOwner: self, options: nil)
         contentView.frame = bounds
         textFieldMain.delegate = self
+        textFieldMain.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         addSubview(contentView)
     }
     
@@ -78,6 +81,7 @@ class DojoInputField: UIView {
         if type == .billingCountry { //TODO: switch
             let displayingItem = getCSVData()?[selectedPickerPosition] //TODO: make sure it won't crash
             textFieldMain.text = displayingItem
+            textFieldMain.tintColor = .clear
         }
         
         setState(.normal)
@@ -138,6 +142,10 @@ class DojoInputField: UIView {
         } else {
             return false
         }
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        delegate?.onTextChange(self)
     }
 }
 
@@ -210,21 +218,25 @@ extension DojoInputField: UITextFieldDelegate {
                 let newText = String((text + string).filter({ $0 != "/" }).prefix(maxNumberOfCharacters))
                 textField.text = newText.chunkFormatted(withChunkSize: 2, withSeparator: "/")
             }
+            delegate?.onTextChange(self)
             return false
         }
         
         if getType() == .cardNumber {
             // only allow numerical characters
+            var maxNumberOfCharacters = 16
             guard string.compactMap({ Int(String($0)) }).count ==
                     string.count else { return false }
             if let cardScheme = viewModel?.getCardScheme(updatedString) {
                 let image = UIImage.getCardIcon(icon: cardScheme)
                 textFieldMain.rightImage(image, imageWidth: 25, padding: 10)
+                currentCardSchema = cardScheme
+                if cardScheme == .amex {
+                    maxNumberOfCharacters = 15
+                }
             } else {
                 textFieldMain.rightImage(nil, imageWidth: 0, padding: 10)
             }
-            
-            let maxNumberOfCharacters = 20
             
             let text = textField.text ?? ""
             if string.count == 0 {
@@ -234,6 +246,7 @@ extension DojoInputField: UITextFieldDelegate {
                 let newText = String((text + string).filter({ $0 != " " }).prefix(maxNumberOfCharacters))
                 textField.text = newText.chunkFormatted()
             }
+            delegate?.onTextChange(self)
             return false
         }
         
@@ -243,7 +256,13 @@ extension DojoInputField: UITextFieldDelegate {
         }
         let substringToReplace = textFieldText[rangeOfTextToReplace]
         let count = textFieldText.count - substringToReplace.count + string.count
-        return count <= viewModel?.fieldMaxLimit ?? 120 //Todo
+        if getType() == .cvv {
+            let shouldChange = count <= (currentCardSchema == .amex ? 4 : 3)
+            return shouldChange
+        } else {
+            let shouldChange = count <= viewModel?.fieldMaxLimit ?? 120 //Todo
+            return shouldChange
+        }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -433,9 +452,9 @@ class DojoInputFieldViewModel: DojoInputFieldViewModelProtocol {
         get {
             switch type {
             case .cardNumber:
-                return 20
+                return 16 //TOOD: not relevant
             case .cvv:
-                return 4
+                return 4 //TOOD: not relevant
             case .billingPostcode:
                 return 50
             default:

@@ -228,6 +228,7 @@ extension CardDetailsCheckoutViewController: UITextFieldDelegate {
 
 //TODO: make safer
 extension CardDetailsCheckoutViewController: DojoInputFieldDelegate {
+    
     func onNextField(_ from: DojoInputField) {
         if let index = inputFields.firstIndex(of: from) {
             if inputFields.count - 1 > index {
@@ -248,6 +249,16 @@ extension CardDetailsCheckoutViewController: DojoInputFieldDelegate {
         }
     }
     
+    func onTextChange(_ from: DojoInputField) {
+        var isValid = true
+        inputFields.forEach({
+            if !$0.isValid() {
+                isValid = false
+            }
+        })
+       buttonPay.setEnabled(isValid)
+    }
+    
     func onTextFieldDidFinishEditing(_ from: DojoInputField) {
 //        var isValid = true
         if let fieldType = from.getType() {
@@ -262,6 +273,12 @@ extension CardDetailsCheckoutViewController: DojoInputFieldDelegate {
                     fieldBillingPostcode.isHidden = true
                     inputFields.removeAll(where: {$0.getType() == .billingPostcode})
                 }
+            case .cardNumber:
+                inputFields.forEach({
+                    if $0.getType() == .cvv {
+                        $0.currentCardSchema = from.currentCardSchema
+                    }
+                })
             default:
                 break;
             }
@@ -276,7 +293,7 @@ extension CardDetailsCheckoutViewController: DojoInputFieldDelegate {
     }
     
     func onTextFieldBeginEditing(_ from: DojoInputField) {
-        buttonPay.setEnabled(false)
+        
     }
     
     func fetchDataFromFields() -> DojoCardDetails {
