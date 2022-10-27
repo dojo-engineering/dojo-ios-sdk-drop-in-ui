@@ -10,6 +10,7 @@ import UIKit
 class BaseNavigationController: UINavigationController, UINavigationControllerDelegate {
     
     var heightConstraint: NSLayoutConstraint?
+    var defaultHeight: CGFloat?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +34,11 @@ class BaseNavigationController: UINavigationController, UINavigationControllerDe
         viewController.navigationItem.backBarButtonItem = item
         
         if let _ = viewController as? PaymentMethodCheckoutViewController {
-            heightConstraint?.constant = 286 + safeAreaBottomHeight
+            if let defaultHeight = defaultHeight {
+                heightConstraint?.constant = defaultHeight + safeAreaBottomHeight
+            } else {
+                heightConstraint?.constant = 286 + safeAreaBottomHeight
+            }
         }
 
         if let _ = viewController as? ManagePaymentMethodsViewController {

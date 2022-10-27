@@ -96,7 +96,6 @@
             <constraints>
                 <constraint firstItem="DIE-VP-Mbo" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="0bE-vR-cYM"/>
                 <constraint firstItem="dgb-bS-UCe" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="2eE-vE-t35"/>
-                <constraint firstItem="AHi-j5-5XI" firstAttribute="top" secondItem="nIa-N9-fws" secondAttribute="bottom" constant="24" id="9CA-Bl-WCC"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="AHi-j5-5XI" secondAttribute="trailing" constant="16" id="KGz-9q-BeG"/>
                 <constraint firstItem="Utf-dq-Cdi" firstAttribute="top" secondItem="DIE-VP-Mbo" secondAttribute="bottom" constant="9" id="LtI-6G-hW0"/>
                 <constraint firstItem="bl0-mH-Tqe" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="RxK-HW-ob4"/>

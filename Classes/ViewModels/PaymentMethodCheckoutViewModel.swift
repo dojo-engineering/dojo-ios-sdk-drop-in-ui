@@ -18,8 +18,15 @@ class PaymentMethodCheckoutViewModel: BaseViewModel {
     }
     
     func isApplePayAvailable() -> Bool {
+        // ApplePay config was not passed
         guard let appleConfig = getApplePayConfig() else { return false }
+        // ApplePay is not configured for the merchant
+        guard paymentIntent.merchantConfig?.supportedPaymentMethods?.wallets?.contains(.applePay) == true else { return false }
         return DojoSDK.isApplePayAvailable(config: appleConfig)
+    }
+    
+    func isSavedPaymentMethodsAvailable() -> Bool {
+        paymentIntent.customer?.id != nil
     }
     
     func getApplePayConfig() -> DojoApplePayConfig? {

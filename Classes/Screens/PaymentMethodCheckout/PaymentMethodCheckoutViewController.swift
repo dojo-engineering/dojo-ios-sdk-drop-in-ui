@@ -10,6 +10,7 @@ import PassKit
 
 protocol PaymentMethodCheckoutViewControllerDelegate: BaseViewControllerDelegate {
     func navigateToManagePaymentMethods(_ selectedPaymentMethod: PaymentMethodItem)
+    func navigateToCardCheckout()
 }
 
 class PaymentMethodCheckoutViewController: BaseUIViewController {
@@ -54,9 +55,34 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
     }
     
     func setupViews() {
-        selectedPaymentMethodView.delegate = self
-        selectedPaymentMethodView.setStyle(.applePay)
         buttonPayCard.isHidden = true //TODO
+        if getViewModel()?.isSavedPaymentMethodsAvailable() ?? false {
+            selectedPaymentMethodView.isHidden = false
+            selectedPaymentMethodView.delegate = self
+            selectedPaymentMethodView.setStyle(.applePay)
+        } else {
+            selectedPaymentMethodView.isHidden = true
+            constraintPayButtonBottom.constant = 70
+            buttonPayCard.isHidden = false
+            
+            let buttonPayTitle = "Pay by card"
+            buttonPayCard.setTitle(buttonPayTitle, for: .normal)
+            buttonPayCard.backgroundColor = theme.primarySurfaceBackgroundColor
+            buttonPayCard.setTitleColor(theme.primaryLabelTextColor, for: .normal)
+            buttonPayCard.layer.borderWidth = 1
+            buttonPayCard.layer.borderColor = theme.primaryLabelTextColor.cgColor
+        }
+        
+        if getViewModel()?.isApplePayAvailable() ?? false {
+           //TODO
+        } else {
+            paymentButton.isHidden = true
+            constraintPayButtonBottom.constant = 9
+            buttonPayCard.setTheme(theme)
+            if let navigation = (navigationController as? BaseNavigationController) {
+                navigation.defaultHeight = 210
+            }
+        }
     }
     
     override func setUpDesign() {
@@ -102,6 +128,11 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
     @IBAction func onPayUsingSavedCard(_ sender: Any) {
         guard let selectedPaymentMethodId = selectedPaymentMethodView.paymentMethod?.id else {
             print("paymentMethod is not selected")
+            
+            if let isSavedPaymentMethodsAvailable = getViewModel()?.isSavedPaymentMethodsAvailable(),
+                isSavedPaymentMethodsAvailable == false {
+                delegate?.navigateToCardCheckout()
+            }
             return
         }
         guard let cvv = selectedPaymentMethodView.mainTextField.text else {

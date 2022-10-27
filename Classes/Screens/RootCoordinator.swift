@@ -125,6 +125,10 @@ extension RootCoordinator {
 }
 
 extension RootCoordinator: PaymentMethodCheckoutViewControllerDelegate {
+    func navigateToCardCheckout() {
+        showCardDetailsCheckout()
+    }
+    
     func navigateToManagePaymentMethods(_ selectedPaymentMethod: PaymentMethodItem) {
         showManagePaymentMethods(selectedPaymentMethod)
     }
