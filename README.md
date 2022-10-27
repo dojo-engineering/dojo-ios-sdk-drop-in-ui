@@ -140,6 +140,24 @@ DojoThemeSettings *theme = [[DojoThemeSettings alloc] initWithPrimaryLabelTextCo
 }];
 ```
 
+## Result codes
+
+```
+successful = 0
+authorizing = 3
+referred = 4
+declined = 5
+duplicateTransaction = 20
+failed = 30
+waitingPreExecute = 99
+invalidRequest = 400
+issueWithAccessToken = 401
+noAccessTokenSupplied = 404
+internalServerError = 500
+            
+sdkInternalError = 7770
+```
+
 ## License
 
 Dojo SDK Drop in UI is available under the MIT license. See the LICENSE file for more info.
