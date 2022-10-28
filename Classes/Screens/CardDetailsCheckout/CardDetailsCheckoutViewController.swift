@@ -197,6 +197,9 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     @IBAction func onPayButtonPress(_ sender: Any) {
         setStateLoading()
         let cardDetails = fetchDataFromFields()
+        if let selectedCountry = fieldBillingCountry.getSelectedCountry() {
+            getViewModel()?.billingCountry = selectedCountry.isoCode
+        }
         getViewModel()?.email = fieldEmail.textFieldMain.text
         getViewModel()?.billingPostcode = fieldBillingPostcode.textFieldMain.text
         getViewModel()?.processPayment(cardDetails: cardDetails,

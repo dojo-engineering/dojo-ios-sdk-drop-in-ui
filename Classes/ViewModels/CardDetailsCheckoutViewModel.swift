@@ -1,5 +1,5 @@
 //
-//  CardDetailsCheckoutView.swift
+//  CardDetailsCheckoutViewModel.swift
 //  dojo-ios-sdk-drop-in-ui
 //
 //  Created by Deniss Kaibagarovs on 03/08/2022.
@@ -24,7 +24,7 @@ class CardDetailsCheckoutViewModel: BaseViewModel {
     func processPayment(cardDetails: DojoCardDetails, fromViewController: UIViewController, completion: ((Int) -> Void)?) {
         let cardPaymentPayload = DojoCardPaymentPayload(cardDetails: cardDetails,
                                                         userEmailAddress: email,
-                                                        billingAddress: DojoAddressDetails(postcode: billingPostcode, countryCode: billingPostcode),
+                                                        billingAddress: DojoAddressDetails(postcode: billingPostcode, countryCode: billingCountry),
                                                         savePaymentMethod: isSaveCardSelected)
         DojoSDK.executeCardPayment(token: paymentIntent.clientSessionSecret,
                                     payload: cardPaymentPayload,

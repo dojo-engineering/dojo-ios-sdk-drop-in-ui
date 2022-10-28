@@ -80,7 +80,7 @@ class DojoInputField: UIView {
         
         if type == .billingCountry { //TODO: switch
             let displayingItem = getCSVData()?[selectedPickerPosition] //TODO: make sure it won't crash
-            textFieldMain.text = displayingItem
+            textFieldMain.text = displayingItem?.title
             textFieldMain.tintColor = .clear
         }
         
@@ -159,12 +159,12 @@ extension DojoInputField: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        getCSVData()?[row]
+        getCSVData()?[row].title
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedPickerPosition = row
-        textFieldMain.text = getCSVData()?[row]
+        textFieldMain.text = getCSVData()?[row].title
     }
 }
 
@@ -314,7 +314,7 @@ extension DojoInputField: UITextFieldDelegate {
         textFieldMain.resignFirstResponder()
     }
     
-    func getCSVData() -> Array<String>? {
+    func getCSVData() -> Array<CountryDropdownItem>? {
         let bundle = Bundle(for: type(of: self))
         guard let countriesCSV = bundle.url(forResource: "countries", withExtension: "csv") else {
             return nil
@@ -322,9 +322,11 @@ extension DojoInputField: UITextFieldDelegate {
         
         do {
             let content = try String(contentsOf: countriesCSV)
-            var parsedCSV: [String] = content.components(
+            var parsedCSV: [CountryDropdownItem] = content.components(
                 separatedBy: "\n"
-            ).map{ $0.components(separatedBy: ",")[0] }
+            ).map{
+                CountryDropdownItem(title: $0.components(separatedBy: ",")[0], //TODO: make sure it won't crash
+                                    isoCode: $0.components(separatedBy: ",")[1])}
             if parsedCSV.count > 0 {
                 parsedCSV.removeFirst()
             }
@@ -334,6 +336,15 @@ extension DojoInputField: UITextFieldDelegate {
             return []
         }
     }
+    
+    func getSelectedCountry() -> CountryDropdownItem? {
+        getCSVData()?[selectedPickerPosition]
+    }
+}
+
+struct CountryDropdownItem {
+    let title: String
+    let isoCode: String
 }
 
 
