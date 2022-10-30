@@ -171,8 +171,9 @@ extension RootCoordinator: PaymentResultViewControllerDelegate {
 
 extension RootCoordinator: BaseViewControllerDelegate {
     func onForceClosePress() {
-        rootNavController.dismiss(animated: true)
-        delegate?.userForceClosedFlow()
+        rootNavController.dismiss(animated: true) {
+            self.delegate?.userForceClosedFlow()
+        }
     }
 }
 

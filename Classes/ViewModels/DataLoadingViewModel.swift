@@ -42,11 +42,13 @@ class DataLoadingViewModel: BaseViewModel {
         }
     }
     
-    func fetchCustomersPaymentMethods(customerId: String) {
+    func fetchCustomersPaymentMethods(customerId: String, completion: (([SavedPaymentMethod], Error?) -> Void)?) {
         if let customerSecret = customerSecret {
             DojoSDK.fetchCustomerPaymentMethods(customerId: customerId, customerSecret: customerSecret, completion: {result, error in
-                var a = 0
+                completion?([], error)
             })
-        }//TODO: when not passed
+        } else {
+            completion?([], nil) //TODO: add error that customerSecret is not passed
+        }
     }
 }

@@ -52,9 +52,11 @@ public class DojoUIApplePayConfig: NSObject {
 extension DojoSDKDropInUI: RootCoordinatorDelegate {
     func userForceClosedFlow() {
         completionCallback?(5) // 5 for decline
+        completionCallback = nil
     }
     
     func userFinishedFlow(resultCode: Int) {
         completionCallback?(resultCode)
+        completionCallback = nil
     }
 }

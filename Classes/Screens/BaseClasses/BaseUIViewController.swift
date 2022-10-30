@@ -18,6 +18,7 @@ class BaseUIViewController: UIViewController {
     // overwrite them during init of any subclass
     var displayCloseButton: Bool = true // display 'X' (close button) in the header
     var displayBackButton: Bool = true // display '<' (back button) in the header
+    var diableCloseButton: Bool = false
     var theme: ThemeSettings = ThemeSettings.getLightTheme() // Light theme by default
     
     override func viewDidLoad() {
@@ -28,6 +29,7 @@ class BaseUIViewController: UIViewController {
     }
     
     @objc func onClosePress() {
+        guard diableCloseButton == false else { return }
         baseDelegate?.onForceClosePress()
     }
     
@@ -53,8 +55,9 @@ extension BaseUIViewController {
     
     func setUpCloseButton() {
         let buttonTag = 88884
-        if let _ = self.navigationController?.navigationBar.subviews.first(where: {$0.tag == buttonTag}) {
+        if let buttonClose = self.navigationController?.navigationBar.subviews.first(where: {$0.tag == buttonTag}) as? UIButton{
             // old button already exists, don't need to add a new one
+            buttonClose.addTarget(self, action: #selector(onClosePress), for: .touchUpInside)
             return
         }
         // if don't need to display, exit

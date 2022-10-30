@@ -213,12 +213,15 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         buttonPay.showLoading(LocalizedText.CardDetailsCheckout.buttonProcessing)
         mainContentScrollView.isUserInteractionEnabled = false
         mainContentScrollView.alpha = 0.4
+        diableCloseButton = true
+        
     }
     
     func setStateNormal() {
         buttonPay.hideLoading()
         mainContentScrollView.isUserInteractionEnabled = true
         mainContentScrollView.alpha = 1
+        diableCloseButton = false
     }
 }
 

@@ -8,14 +8,14 @@ import UIKit
 import dojo_ios_sdk
 
 class ManagePaymentMethodsViewModel: BaseViewModel {
-    var items: [PaymentMethodItem] = [PaymentMethodItem(id: "", title: "Apple Pay", type: .applePay),
-                                      PaymentMethodItem(id: "123", title: "****0043", type: .mastercard),
-                                      PaymentMethodItem(id: "1234", title: "****0043", type: .maestro),
-                                      PaymentMethodItem(id: "12345", title: "****0043", type: .visa),
-                                      PaymentMethodItem(id: "123456", title: "****0043", type: .amex)]
+    var items: [PaymentMethodItem] = []
+    
+    let applePayConfig: DojoUIApplePayConfig?
     
     init(config: ConfigurationManager, selectedPaymentMethod: PaymentMethodItem? = nil) {
+        self.applePayConfig = config.applePayConfig
         super.init(paymentIntent: config.paymentIntent)
+        items.append(PaymentMethodItem(id: "", title: "ApplePay", type: .applePay))
         if let selectedPaymentMethod = selectedPaymentMethod {
             items.forEach({
                 if $0.id == selectedPaymentMethod.id {
@@ -30,6 +30,38 @@ class ManagePaymentMethodsViewModel: BaseViewModel {
            index > -1 {
             items.remove(at: index)
         }
+    }
+    
+    //TODO: duplication of the method
+    func isApplePayAvailable() -> Bool {
+        // ApplePay config was not passed
+        guard let appleConfig = getApplePayConfig() else { return false }
+        // ApplePay is not configured for the merchant
+        guard paymentIntent.merchantConfig?.supportedPaymentMethods?.wallets?.contains(.applePay) == true else { return false }
+        return DojoSDK.isApplePayAvailable(config: appleConfig)
+    }
+    
+    func getApplePayConfig() -> DojoApplePayConfig? {
+        guard let merchantIdentifier = applePayConfig?.merchantIdentifier else { return nil }
+        return DojoApplePayConfig(merchantIdentifier: merchantIdentifier,
+                                  supportedCards: getSupportedApplePayCards())
+    }
+    
+    func getSupportedApplePayCards() -> [String] {
+        paymentIntent.merchantConfig?.supportedPaymentMethods?.cardSchemes?.compactMap({
+            switch $0 {
+            case .visa:
+                return ApplePaySupportedCards.visa.rawValue
+            case .mastercard:
+                return ApplePaySupportedCards.mastercard.rawValue
+            case .maestro:
+                return ApplePaySupportedCards.maestro.rawValue
+            case .amex:
+                return ApplePaySupportedCards.amex.rawValue
+            case .other:
+                return nil
+            }
+        }) ?? []
     }
 }
 
