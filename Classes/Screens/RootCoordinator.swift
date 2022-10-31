@@ -129,7 +129,7 @@ extension RootCoordinator: PaymentMethodCheckoutViewControllerDelegate {
         showCardDetailsCheckout()
     }
     
-    func navigateToManagePaymentMethods(_ selectedPaymentMethod: PaymentMethodItem) {
+    func navigateToManagePaymentMethods(_ selectedPaymentMethod: PaymentMethodItem?) {
         showManagePaymentMethods(selectedPaymentMethod)
     }
 }
@@ -178,9 +178,12 @@ extension RootCoordinator: BaseViewControllerDelegate {
 }
 
 extension RootCoordinator: DataLoadingViewControllerDelegate {
-    func paymentIntentDownloaded(_ paymentIntent: PaymentIntent) {
+    func initialDataDownloaded(_ paymentIntent: PaymentIntent,
+                               savedPaymentMethods: [SavedPaymentMethod]?) {
         config.paymentIntent = paymentIntent
+        config.savedPaymentMethods = savedPaymentMethods
         propagateConfigChanges()
+        //TODO: send saved payment methods to the needed controller
         if paymentIntent.status == "Captured" { //TODO:
             showPaymentResult(resultCode: 0)
         } else {

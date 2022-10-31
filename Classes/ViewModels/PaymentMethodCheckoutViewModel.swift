@@ -11,9 +11,11 @@ import dojo_ios_sdk
 class PaymentMethodCheckoutViewModel: BaseViewModel {
     
     let applePayConfig: DojoUIApplePayConfig?
+    let savedPaymentMethods: [SavedPaymentMethod]?
     
     init(config: ConfigurationManager) {
         self.applePayConfig = config.applePayConfig
+        self.savedPaymentMethods = config.savedPaymentMethods
         super.init(paymentIntent: config.paymentIntent)
     }
     
@@ -26,7 +28,8 @@ class PaymentMethodCheckoutViewModel: BaseViewModel {
     }
     
     func isSavedPaymentMethodsAvailable() -> Bool {
-        paymentIntent.customer?.id != nil
+        paymentIntent.customer?.id != nil &&
+        savedPaymentMethods?.count ?? 0 > 0
     }
     
     func getApplePayConfig() -> DojoApplePayConfig? {

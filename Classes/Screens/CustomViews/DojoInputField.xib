@@ -38,7 +38,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="48" id="jey-hp-ktZ"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-field-error" translatesAutoresizingMaskIntoConstraints="NO" id="p7z-NC-R3c">

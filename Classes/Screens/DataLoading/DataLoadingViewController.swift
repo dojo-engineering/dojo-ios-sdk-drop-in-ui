@@ -8,7 +8,7 @@
 import UIKit
 
 protocol DataLoadingViewControllerDelegate: BaseViewControllerDelegate {
-    func paymentIntentDownloaded(_ paymentIntent: PaymentIntent)
+    func initialDataDownloaded(_ paymentIntent: PaymentIntent, savedPaymentMethods: [SavedPaymentMethod]?)
     func errorLoadingPaymentIntent(error: Error)
 }
 
@@ -66,11 +66,13 @@ class DataLoadingViewController: BaseUIViewController {
             if let error = error {
                 self.delegate.errorLoadingPaymentIntent(error: error)
             } else if let paymentIntent = paymentIntent {
-//                if let customerId = paymentIntent.customer?.id {
-//                    self.getViewModel()?.fetchCustomersPaymentMethods(customerId: customerId)
-//                } else {
-                    self.delegate.paymentIntentDownloaded(paymentIntent)
-//                }
+                if let customerId = paymentIntent.customer?.id {
+                    self.getViewModel()?.fetchCustomersPaymentMethods(customerId: customerId) { savedMethods, error in
+                        self.delegate.initialDataDownloaded(paymentIntent, savedPaymentMethods: savedMethods)
+                    }
+                } else {
+                    self.delegate.initialDataDownloaded(paymentIntent, savedPaymentMethods: nil) //TODO:
+                }
             } else {
                 // TODO error?
 //                self.delegate.errorLoadingPaymentIntent(error: )

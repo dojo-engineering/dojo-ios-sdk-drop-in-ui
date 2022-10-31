@@ -12,10 +12,21 @@ class ManagePaymentMethodsViewModel: BaseViewModel {
     
     let applePayConfig: DojoUIApplePayConfig?
     
-    init(config: ConfigurationManager, selectedPaymentMethod: PaymentMethodItem? = nil) {
+    init(config: ConfigurationManager,
+         selectedPaymentMethod: PaymentMethodItem? = nil) {
         self.applePayConfig = config.applePayConfig
         super.init(paymentIntent: config.paymentIntent)
-        items.append(PaymentMethodItem(id: "", title: "ApplePay", type: .applePay))
+        if isApplePayAvailable() {
+            items.append(PaymentMethodItem(id: "", title: "ApplePay", type: .applePay))
+        }
+        config.savedPaymentMethods?.forEach({
+            if let paymentMethodType = PaymentMethodType($0.cardDetails.scheme) {
+                items.append(PaymentMethodItem(id: $0.id,
+                                               title: String($0.cardDetails.pan.suffix(8)),
+                                               type: paymentMethodType))
+            }
+        })
+        
         if let selectedPaymentMethod = selectedPaymentMethod {
             items.forEach({
                 if $0.id == selectedPaymentMethod.id {
@@ -71,6 +82,21 @@ enum PaymentMethodType {
     case maestro
     case visa
     case amex
+    
+    init?(_ cardShema: CardSchemes) {
+        switch cardShema {
+        case .amex:
+            self = .amex
+        case .visa:
+            self = .visa
+        case .mastercard:
+            self = .mastercard
+        case .maestro:
+            self = .maestro
+        case .other:
+            return nil
+        }
+    }
 }
 
 class PaymentMethodItem {
