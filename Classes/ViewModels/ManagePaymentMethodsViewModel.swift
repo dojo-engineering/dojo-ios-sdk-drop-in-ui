@@ -11,10 +11,12 @@ class ManagePaymentMethodsViewModel: BaseViewModel {
     var items: [PaymentMethodItem] = []
     
     let applePayConfig: DojoUIApplePayConfig?
+    let customerSecret: String?
     
     init(config: ConfigurationManager,
          selectedPaymentMethod: PaymentMethodItem? = nil) {
         self.applePayConfig = config.applePayConfig
+        self.customerSecret = config.customerSecret
         super.init(paymentIntent: config.paymentIntent)
         if isApplePayAvailable() {
             items.append(PaymentMethodItem(id: "", title: "ApplePay", type: .applePay))
@@ -39,6 +41,15 @@ class ManagePaymentMethodsViewModel: BaseViewModel {
     func removeItemAtIndex(_ index: Int) {
         if items.count > index,
            index > -1 {
+            let item = items[index]
+            if let customerId = paymentIntent.customer?.id,
+               let customerSecret = customerSecret {
+                DojoSDK.deleteCustomerPaymentMethod(customerId: customerId,
+                                                    paymentMethodId: item.id,
+                                                    customerSecret: customerSecret,
+                                                    completion: nil)
+            }
+               
             items.remove(at: index)
         }
     }

@@ -13,35 +13,16 @@ class ViewController: UIViewController {
     
     let dojoUI = DojoSDKDropInUI()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     @IBAction func onStartPaymentFlowPress(_ sender: Any) {
-        let paymentIntentId = "pi_sandbox_KGb-jp6lOUi-0dmHYitrKw"
+        let paymentIntentId = "pi_sandbox_jCwQc-JXZ0qus-Mr5lq9FA"
+        let customerSecret = "cs_sandbox_E4ZriDsoEXca-a_WBje76ZBDXjB8aUPqUTekiZgF8AYOgPXJazp__YcMldRjLAafzc_uqVBfMOvQ_OCoh7PG022C8RQcJpeY0IL6okng3WeuGakXa2jVc9zEsikE0gSZ6Qvs1-G5jv-6mTRHVi0-NECBaLotcY5Udd7iKsiONPs"
+        let applePayConfig = DojoUIApplePayConfig(merchantIdentifier: "merchant.uk.co.paymentsense.sdk.demo.app")
         dojoUI.startPaymentFlow(paymentIntentId: paymentIntentId,
                                 controller: self,
-                                customerSecret: nil,
-                                applePayConfig: DojoUIApplePayConfig(merchantIdentifier: "merchant.uk.co.paymentsense.sdk.demo.app"),
-                                themeSettings: nil) { result in
+                                customerSecret: customerSecret,
+                                applePayConfig: applePayConfig) { result in
             print("SDK result code: \(result)")
         }
     }
-    
-    func requestPaymentToken(completion: ((String) -> Void)?) {
-        let url = URL(string: "http://localhost:3000/token")!
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            if let data = data {
-                let token = String(decoding: data, as: UTF8.self)
-                completion?(token)
-            } else if let error = error {
-                print("HTTP Request Failed \(error)")
-            }
-        }
-        task.resume()
-    }
-    
 }
 
