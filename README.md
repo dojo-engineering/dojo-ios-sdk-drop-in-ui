@@ -27,7 +27,7 @@ pod 'dojo-ios-sdk-drop-in-ui' :git => 'git@github.com:dojo-engineering/dojo-ios-
 
 ## How to use
 
-You need to creat a payment intent and pass it into the SDK. More on how to create it: {URL_PAYMENT_INTENT}
+You need to creat a payment intent and pass it into the SDK. More on how to [Create Payment Intent](https://docs.dojo.tech/api#tag/Payment-intents/operation/PaymentIntents_CreatePaymentIntent)
 
 ### Start checkout process:
 Swift
@@ -84,9 +84,9 @@ Objective-C
 
 ### Configure Saved Cards
 In order for user to be able to pay or save a card, you need to:
-- Create a customer on your backend. {URL_API_REFERENCE_CUSTOMER}
-- Pass customerId during the creation of payment intent. {URL_API_REFERENCE_PAYMENT_INTENT_CREATION}
-- Generate CustomerSecret and pass it into the SDK. {URL_API_REFERENCE_CUSTOMER_SECRET_CREATION}
+- [Create a customer on your backend](https://docs.dojo.tech/api#tag/Customers/operation/Customers_Create)
+- Pass customerId during the [creation of payment intent](https://docs.dojo.tech/api#tag/Payment-intents/operation/PaymentIntents_CreatePaymentIntent)
+- [Generate CustomerSecret](https://docs.dojo.tech/api#tag/Customers/operation/Customers_CreateCustomerSecret) and pass it into the SDK
 
 Swift
 ```swift
