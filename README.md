@@ -59,7 +59,7 @@ self.dojoUI = [[DojoSDKDropInUI alloc] init];
 ```
 
 ### Configure ApplePay
-To use ApplePay you first need to generate a merchnat certificate and send it to us. For more information on that process contact us at: {URL_SUPPORT_EMAIL}
+To use ApplePay you first need to generate a merchnat certificate and send it to us. For more information on that process [contact us](https://support.dojo.tech/hc/en-gb/requests/new) 
 After that, you'll need to pass your merchant identifier to the SDK
 
 Swift
