@@ -13,11 +13,16 @@ class ManagePaymentMethodsViewModel: BaseViewModel {
     let applePayConfig: DojoUIApplePayConfig?
     let customerSecret: String?
     
-    init(config: ConfigurationManager,
+    init?(config: ConfigurationManager,
          selectedPaymentMethod: PaymentMethodItem? = nil) {
         self.applePayConfig = config.applePayConfig
         self.customerSecret = config.customerSecret
-        super.init(paymentIntent: config.paymentIntent)
+        if let paymentIntent = config.paymentIntent {
+            super.init(paymentIntent: paymentIntent)
+        } else {
+            // payment intent is required for this screen
+            return nil
+        }
         if isApplePayAvailable() {
             items.append(PaymentMethodItem(id: "", title: "ApplePay", type: .applePay))
         }

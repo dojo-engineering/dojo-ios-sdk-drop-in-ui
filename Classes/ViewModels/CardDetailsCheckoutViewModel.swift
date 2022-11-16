@@ -17,8 +17,13 @@ class CardDetailsCheckoutViewModel: BaseViewModel {
     var billingPostcode: String? //TODO:
     var isSaveCardSelected = true
     
-    init(config: ConfigurationManager) {
-        super.init(paymentIntent: config.paymentIntent)
+    init?(config: ConfigurationManager) {
+        if let paymentIntent = config.paymentIntent {
+            super.init(paymentIntent: paymentIntent)
+        } else {
+            // payment intent is required for this screen
+            return nil
+        }
     }
     
     func processPayment(cardDetails: DojoCardDetails, fromViewController: UIViewController, completion: ((Int) -> Void)?) {

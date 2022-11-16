@@ -13,11 +13,16 @@ class PaymentResultViewModel: BaseViewModel {
     let resultCode: Int
     let demoDelay: Double
     
-    init(config: ConfigurationManager,
+    init?(config: ConfigurationManager,
          resultCode: Int) {
         self.resultCode = resultCode
         self.demoDelay = config.demoDelay
-        super.init(paymentIntent: config.paymentIntent)
+        if let paymentIntent = config.paymentIntent {
+            super.init(paymentIntent: paymentIntent)
+        } else {
+            // payment intent is required for this screen
+            return nil
+        }
     }
     
     func refreshToken(completion: ((String?,Error?)-> Void)?) {

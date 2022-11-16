@@ -60,9 +60,12 @@ class RootCoordinator: RootCoordinatorProtocol {
     }
     
     func showManagePaymentMethods(_ selectedPaymentMethod: PaymentMethodItem? = nil) {
-        let viewModel = ManagePaymentMethodsViewModel(config: config, selectedPaymentMethod: selectedPaymentMethod)
-        let controller = ManagePaymentMethodsViewController(viewModel: viewModel, theme: config.themeSettings, delegate: self)
-        pushNewViewControllerToTheFlow(controller: controller)
+        if let viewModel = ManagePaymentMethodsViewModel(config: config, selectedPaymentMethod: selectedPaymentMethod) {
+            let controller = ManagePaymentMethodsViewController(viewModel: viewModel, theme: config.themeSettings, delegate: self)
+            pushNewViewControllerToTheFlow(controller: controller)
+        } else {
+            delegate?.userFinishedFlow(resultCode: 7770)
+        }
     }
     
     func showCardDetailsCheckout() {
@@ -70,9 +73,14 @@ class RootCoordinator: RootCoordinatorProtocol {
     }
     
     func showPaymentResult(resultCode: Int) {
-        let viewModel = PaymentResultViewModel(config: config, resultCode: resultCode)
-        let controller = PaymentResultViewController(viewModel: viewModel, theme: config.themeSettings, delegate: self)
-        pushNewViewControllerToTheFlow(controller: controller)
+        if let viewModel = PaymentResultViewModel(config: config, resultCode: resultCode) {
+            let controller = PaymentResultViewController(viewModel: viewModel,
+                                                         theme: config.themeSettings,
+                                                         delegate: self)
+            pushNewViewControllerToTheFlow(controller: controller)
+        } else {
+            delegate?.userFinishedFlow(resultCode: 7770)
+        }
     }
 }
 
@@ -100,14 +108,17 @@ extension RootCoordinator {
             let viewModel = DataLoadingViewModel(paymentIntentId: config.paymentIntentId, customerSecret: config.customerSecret, demoDelay: config.demoDelay)
             controller = DataLoadingViewController(viewModel: viewModel, theme: config.themeSettings, delegate: self)
         case .cardDeailsCheckout:
-            let viewModel = CardDetailsCheckoutViewModel(config: config)
-            controller = CardDetailsCheckoutViewController(viewModel: viewModel, theme: config.themeSettings, delegate: self)
+            if let viewModel = CardDetailsCheckoutViewModel(config: config) {
+                controller = CardDetailsCheckoutViewController(viewModel: viewModel, theme: config.themeSettings, delegate: self)
+            }
         case .paymentMethodCheckout:
-            let viewModel = PaymentMethodCheckoutViewModel(config: config)
-            controller = PaymentMethodCheckoutViewController(viewModel: viewModel, theme: config.themeSettings, delegate: self)
+            if let viewModel = PaymentMethodCheckoutViewModel(config: config) {
+                controller = PaymentMethodCheckoutViewController(viewModel: viewModel, theme: config.themeSettings, delegate: self)
+            }
         case .managePaymentMethods:
-            let viewModel = ManagePaymentMethodsViewModel(config: config)
-            controller = ManagePaymentMethodsViewController(viewModel: viewModel, theme: config.themeSettings, delegate: self)
+            if let viewModel = ManagePaymentMethodsViewModel(config: config) {
+                controller = ManagePaymentMethodsViewController(viewModel: viewModel, theme: config.themeSettings, delegate: self)
+            }
         }
         return controller
     }
@@ -115,8 +126,9 @@ extension RootCoordinator {
     func propagateConfigChanges() {
         // Propagate changes to all view controllers
         rootNavController.viewControllers.forEach({
-            if let controller = $0 as? BaseUIViewController {
-                controller.viewModel?.paymentIntent = config.paymentIntent
+            if let controller = $0 as? BaseUIViewController,
+               let paymentIntent = config.paymentIntent {
+                controller.viewModel?.paymentIntent = paymentIntent
                 controller.theme = config.themeSettings
                 controller.setUpDesign()
             }

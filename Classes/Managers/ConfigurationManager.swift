@@ -11,7 +11,7 @@ import dojo_ios_sdk
 struct ConfigurationManager {
     var paymentIntentId: String
     var customerSecret: String?
-    var paymentIntent: PaymentIntent
+    var paymentIntent: PaymentIntent?
     var savedPaymentMethods: [SavedPaymentMethod]?
     var themeSettings: ThemeSettings
     var applePayConfig: DojoUIApplePayConfig?

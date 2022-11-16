@@ -4,16 +4,12 @@ import dojo_ios_sdk
 @objc
 public class DojoSDKDropInUI: NSObject {
     
-    var configurationManager: ConfigurationManager
+    var configurationManager: ConfigurationManager?
     var rootCoordinator: RootCoordinatorProtocol?
     var completionCallback: ((Int) -> Void)?
     
-    public override init() {
-        // TODO refactor
-        configurationManager = ConfigurationManager(paymentIntentId: "", //TODO: should not be set like this
-                                                    paymentIntent: PaymentIntent(id: "", clientSessionSecret: "", amount: DojoPaymentIntentAmount(value: 0, currencyCode: "")),
-                                                    themeSettings: ThemeSettings(dojoTheme: DojoThemeSettings.getLightTheme())) // TODO: move to a different place
-    }
+    @objc
+    public override init() {}
     
     @objc
     public func startPaymentFlow(paymentIntentId: String,
@@ -24,17 +20,22 @@ public class DojoSDKDropInUI: NSObject {
                                  completion: ((Int) -> Void)?) {
         DispatchQueue.main.async {
             let theme = ThemeSettings(dojoTheme: themeSettings ?? DojoThemeSettings.getLightTheme())
-//            let theme = ThemeSettings.getLightTheme()
             self.completionCallback = completion
             self.configurationManager = ConfigurationManager(paymentIntentId: paymentIntentId,
                                                              customerSecret: customerSecret,
-                                                             paymentIntent: PaymentIntent(id: "", clientSessionSecret: "", amount: DojoPaymentIntentAmount(value: 0, currencyCode: "")), //TODO: shouldn't be here
+                                                             paymentIntent: nil,
                                                              themeSettings: theme,
                                                              applePayConfig: applePayConfig)
-            self.rootCoordinator = RootCoordinator(presentationViewController: controller,
-                                                   config: self.configurationManager,
-                                                   delegate: self)
-            self.rootCoordinator?.beginFlow()
+            if let configurationManager = self.configurationManager {
+                self.rootCoordinator = RootCoordinator(presentationViewController: controller,
+                                                       config: configurationManager,
+                                                       delegate: self)
+                self.rootCoordinator?.beginFlow()
+            } else {
+                // SDK internal error
+                self.completionCallback?(7770)
+            }
+          
         }
     }
 }

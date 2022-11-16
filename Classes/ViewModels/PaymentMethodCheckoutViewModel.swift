@@ -13,10 +13,15 @@ class PaymentMethodCheckoutViewModel: BaseViewModel {
     let applePayConfig: DojoUIApplePayConfig?
     let savedPaymentMethods: [SavedPaymentMethod]?
     
-    init(config: ConfigurationManager) {
+    init?(config: ConfigurationManager) {
         self.applePayConfig = config.applePayConfig
         self.savedPaymentMethods = config.savedPaymentMethods
-        super.init(paymentIntent: config.paymentIntent)
+        if let paymentIntent = config.paymentIntent {
+            super.init(paymentIntent: paymentIntent)
+        } else {
+            // payment intent is required for this screen
+            return nil
+        }
     }
     
     func isApplePayAvailable() -> Bool {
