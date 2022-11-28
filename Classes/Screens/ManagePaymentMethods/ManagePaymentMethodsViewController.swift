@@ -18,7 +18,7 @@ class ManagePaymentMethodsViewController: BaseUIViewController {
     
     @IBOutlet weak var tableViewPaymentMethods: UITableView!
     
-    @IBOutlet weak var buttonUseSelectedPaymentMethod: UIButton!
+    @IBOutlet weak var buttonUseSelectedPaymentMethod: LoadingButton!
     @IBOutlet weak var buttonPayUsingNewCard: UIButton!
     
     public init(viewModel: ManagePaymentMethodsViewModel,
@@ -49,12 +49,6 @@ class ManagePaymentMethodsViewController: BaseUIViewController {
         
         tableViewPaymentMethods.backgroundColor = theme.primarySurfaceBackgroundColor
         
-        //TODO: common style
-        buttonUseSelectedPaymentMethod.backgroundColor = theme.primaryCTAButtonActiveBackgroundColor
-        buttonUseSelectedPaymentMethod.setTitleColor(theme.primaryCTAButtonActiveTextColor, for: .normal)
-        buttonUseSelectedPaymentMethod.tintColor = theme.primaryCTAButtonActiveTextColor
-        buttonUseSelectedPaymentMethod.layer.cornerRadius = theme.primaryCTAButtonCornerRadius
-        
         //TODO: for demo only
         buttonPayUsingNewCard.backgroundColor = theme.primarySurfaceBackgroundColor
         buttonPayUsingNewCard.setTitleColor(theme.primaryLabelTextColor, for: .normal)
@@ -63,6 +57,25 @@ class ManagePaymentMethodsViewController: BaseUIViewController {
         
         buttonPayUsingNewCard.layer.borderWidth = 1
         buttonPayUsingNewCard.layer.borderColor = theme.primaryCTAButtonActiveBackgroundColor.cgColor
+        
+        if let _ = getViewModel()?.items.first(where: {$0.selected}) {
+            //TODO: common style
+            buttonUseSelectedPaymentMethod.isUserInteractionEnabled = true
+            buttonUseSelectedPaymentMethod.backgroundColor = theme.primaryCTAButtonActiveBackgroundColor
+            buttonUseSelectedPaymentMethod.setTitleColor(theme.primaryCTAButtonActiveTextColor, for: .normal)
+            buttonUseSelectedPaymentMethod.tintColor = theme.primaryCTAButtonActiveTextColor
+            buttonUseSelectedPaymentMethod.layer.cornerRadius = theme.primaryCTAButtonCornerRadius
+        } else {
+            // if no selected item - disable "Use this payment method" button
+            buttonUseSelectedPaymentMethod.setTheme(theme)
+            buttonUseSelectedPaymentMethod.setEnabled(false)
+//            buttonUseSelectedPaymentMethod.isUserInteractionEnabled = false
+            
+//            buttonUseSelectedPaymentMethod.backgroundColor = theme.primaryCTAButtonActiveBackgroundColor
+//            buttonUseSelectedPaymentMethod.setTitleColor(theme.primaryCTAButtonActiveTextColor, for: .normal)
+//            buttonUseSelectedPaymentMethod.tintColor = theme.primaryCTAButtonActiveTextColor
+//            buttonUseSelectedPaymentMethod.layer.cornerRadius = theme.primaryCTAButtonCornerRadius
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -128,6 +141,8 @@ extension ManagePaymentMethodsViewController: UITableViewDelegate, UITableViewDa
             viewModel.items[indexPath.row].selected = true
             tableView.reloadData()
          }
+        
+        setUpDesign() // TODO: reload buttons view
     }
     
     

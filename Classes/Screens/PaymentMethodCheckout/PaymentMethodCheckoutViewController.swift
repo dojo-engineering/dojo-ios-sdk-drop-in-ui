@@ -55,35 +55,76 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
     }
     
     func setupViews() {
-        buttonPayCard.isHidden = true //TODO
-        
-        if getViewModel()?.isApplePayAvailable() ?? false == false {
-            // ApplePay is not available
-            // No saved cards
+        if getViewModel()?.isSavedPaymentMethodsAvailable() ?? false {
+            buttonPayCard.isHidden = true //TODO
             
-            paymentButton.isHidden = true
-            constraintPayButtonBottom.constant = 9
-            buttonPayCard.setTheme(theme)
-            if let navigation = (navigationController as? BaseNavigationController) {
-                navigation.defaultHeight = 210
+            if getViewModel()?.isApplePayAvailable() ?? false == false {
+                // the same as below?
+                paymentButton.isHidden = true
+                constraintPayButtonBottom.constant = 9
+                buttonPayCard.setTheme(theme)
+                if let navigation = (navigationController as? BaseNavigationController) {
+                    navigation.defaultHeight = 210
+                }
+                
+                selectedPaymentMethodView.isHidden = true
+    //            constraintPayButtonBottom.constant = 70
+                buttonPayCard.isHidden = false
+    //
+                let buttonPayTitle = LocalizedText.PaymentMethodCheckout.payByCard
+                buttonPayCard.setTitle(buttonPayTitle, for: .normal)
+                buttonPayCard.backgroundColor = theme.primaryCTAButtonActiveBackgroundColor
+                buttonPayCard.setTitleColor(theme.primaryCTAButtonActiveTextColor, for: .normal)
+                buttonPayCard.layer.borderWidth = 1
+                buttonPayCard.layer.borderColor = theme.primaryCTAButtonActiveBackgroundColor.cgColor
+                
+            } else {
+                //TODO
             }
+        } else {
+            buttonPayCard.isHidden = true //TODO
             
-            selectedPaymentMethodView.isHidden = true
-//            constraintPayButtonBottom.constant = 70
-            buttonPayCard.isHidden = false
-//
-            let buttonPayTitle = "Pay by card"
-            buttonPayCard.setTitle(buttonPayTitle, for: .normal)
-            buttonPayCard.backgroundColor = theme.primarySurfaceBackgroundColor
-            buttonPayCard.setTitleColor(theme.primaryLabelTextColor, for: .normal)
-            buttonPayCard.layer.borderWidth = 1
-            buttonPayCard.layer.borderColor = theme.primaryLabelTextColor.cgColor
-        } else if getViewModel()?.isApplePayAvailable() ?? false {
-            // ApplePay is available
-            selectedPaymentMethodView.isHidden = false
-            selectedPaymentMethodView.delegate = self
-            selectedPaymentMethodView.setStyle(.applePay)
+            if getViewModel()?.isApplePayAvailable() ?? false == false {
+                // ApplePay is not available
+                // No saved cards
+                
+                paymentButton.isHidden = true
+                constraintPayButtonBottom.constant = 9
+                buttonPayCard.setTheme(theme)
+                if let navigation = (navigationController as? BaseNavigationController) {
+                    navigation.defaultHeight = 210
+                }
+                
+                selectedPaymentMethodView.isHidden = true
+    //            constraintPayButtonBottom.constant = 70
+                buttonPayCard.isHidden = false
+    //
+                let buttonPayTitle = LocalizedText.PaymentMethodCheckout.payByCard
+                buttonPayCard.setTitle(buttonPayTitle, for: .normal)
+                buttonPayCard.backgroundColor = theme.primaryCTAButtonActiveBackgroundColor
+                buttonPayCard.setTitleColor(theme.primaryCTAButtonActiveTextColor, for: .normal)
+                buttonPayCard.layer.borderWidth = 1
+                buttonPayCard.layer.borderColor = theme.primaryCTAButtonActiveBackgroundColor.cgColor
+            } else if getViewModel()?.isApplePayAvailable() ?? false {
+                // ApplePay is available
+                selectedPaymentMethodView.isHidden = false
+                selectedPaymentMethodView.delegate = self
+                selectedPaymentMethodView.setStyle(.applePay)
+                
+                selectedPaymentMethodView.isHidden = true
+                constraintPayButtonBottom.constant = 70
+                buttonPayCard.isHidden = false
+
+                let buttonPayTitle = LocalizedText.PaymentMethodCheckout.payByCard
+                buttonPayCard.setTitle(buttonPayTitle, for: .normal)
+                buttonPayCard.backgroundColor = theme.primarySurfaceBackgroundColor
+                buttonPayCard.setTitleColor(theme.primaryLabelTextColor, for: .normal)
+                buttonPayCard.layer.borderWidth = 1
+                buttonPayCard.layer.borderColor = theme.primaryLabelTextColor.cgColor
+            }
         }
+        
+       
 //        } else {
 //            selectedPaymentMethodView.isHidden = true
 //            constraintPayButtonBottom.constant = 70

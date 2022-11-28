@@ -9,12 +9,9 @@ import UIKit
 import dojo_ios_sdk
 
 class CardDetailsCheckoutViewModel: BaseViewModel {
-    // for test purposes only
-    var cardDetails3DS = DojoCardDetails(cardNumber: "4456530000001096", cardName: "Card Holder", expiryDate: "12 / 24", cv2: "020")
-    var cardDetailsNon3DS = DojoCardDetails(cardNumber: "5200000000000056", cardName: "Card Holder", expiryDate: "12 / 24", cv2: "341")
     var email: String?
     var billingCountry: String?
-    var billingPostcode: String? //TODO:
+    var billingPostcode: String?
     var isSaveCardSelected = true
     
     init?(config: ConfigurationManager) {

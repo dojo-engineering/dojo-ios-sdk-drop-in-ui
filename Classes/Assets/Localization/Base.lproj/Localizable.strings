@@ -46,3 +46,9 @@
 "dojo_ui_sdk_payment_result_successful_description"="you have paid ";
 "dojo_ui_sdk_payment_result_failed_description"="We could not verify your payment details";
 "dojo_ui_sdk_pay_with_this_method"="Use this payment method";
+"dojo_ui_sdk_google_pay_string"="Google pay";
+"dojo_ui_sdk_pay_with_card_string"="Pay by card";
+"dojo_ui_sdk_mange_payments_dialog_title"="Are you sure?";
+"dojo_ui_sdk_mange_payments_dialog_message"="You are about to permanently delete this payment method.";
+"dojo_ui_sdk_mange_payments_dialog_confirm_text"="Confirm";
+"dojo_ui_sdk_mange_payments_dialog_cancel_text"="Cancel";
