@@ -131,6 +131,7 @@ extension RootCoordinator {
                 controller.viewModel?.paymentIntent = paymentIntent
                 controller.theme = config.themeSettings
                 controller.setUpDesign()
+                controller.updateData(config: config)
             }
         })
     }
@@ -158,6 +159,11 @@ extension RootCoordinator: ManagePaymentMethodsViewControllerDelegate {
     
     func onPayUsingNewCardPress() {
         showCardDetailsCheckout()
+    }
+    
+    func onRemoveSavedPaymentMethod(_ id: String) {
+        config.savedPaymentMethods?.removeAll(where: {$0.id == id})
+        propagateConfigChanges()
     }
 }
 

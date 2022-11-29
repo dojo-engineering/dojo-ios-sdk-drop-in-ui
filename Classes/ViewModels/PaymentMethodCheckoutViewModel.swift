@@ -11,7 +11,7 @@ import dojo_ios_sdk
 class PaymentMethodCheckoutViewModel: BaseViewModel {
     
     let applePayConfig: DojoUIApplePayConfig?
-    let savedPaymentMethods: [SavedPaymentMethod]?
+    var savedPaymentMethods: [SavedPaymentMethod]?
     
     init?(config: ConfigurationManager) {
         self.applePayConfig = config.applePayConfig

@@ -42,6 +42,8 @@ class BaseUIViewController: UIViewController {
         navigationItem.rightBarButtonItem?.tintColor = theme.headerButtonTintColor
     }
     
+    func updateData(config: ConfigurationManager) { }
+    
     func disableScreen() {
         view.isUserInteractionEnabled = false
     }

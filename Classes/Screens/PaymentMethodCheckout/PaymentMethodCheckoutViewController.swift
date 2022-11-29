@@ -55,6 +55,9 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
     }
     
     func setupViews() {
+        selectedPaymentMethodView.paymentMethod = nil
+        buttonPayCard.setEnabled(true) //TODO edge case when payment method is removed
+        selectedPaymentMethodView.delegate = self
         if getViewModel()?.isSavedPaymentMethodsAvailable() ?? false {
             buttonPayCard.isHidden = true //TODO
             
@@ -257,6 +260,16 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
         
         constraintPayButtonBottom.constant = 9
         constraintPayButtonCardBottom.constant = constraintPayButtonBottom.constant
+    }
+    
+    override func updateData(config: ConfigurationManager) {
+        super.updateData(config: config)
+        getViewModel()?.savedPaymentMethods = config.savedPaymentMethods
+        
+        if !(getViewModel()?.savedPaymentMethods?.contains(where: {$0.id == selectedPaymentMethodView.paymentMethod?.id}) ?? false) {
+            // if selected payment method was removed remove it from the UI
+            setupViews()
+        }
     }
     
     func paymentMethodSelected(_ item: PaymentMethodItem) {

@@ -13,6 +13,10 @@ enum LocalizedText {
     enum ManagePaymentMethods {
         static let title = "dojo_ui_sdk_manage_payment_methods_title".localized
         static let addNewCard = "dojo_ui_sdk_manage_payment_methods_button_add_new_card".localized
+        static let alertRemoveTitle = "dojo_ui_sdk_mange_payments_dialog_title".localized
+        static let alertRemoveBody = "dojo_ui_sdk_mange_payments_dialog_message".localized
+        static let alertRemoveConfirm = "dojo_ui_sdk_mange_payments_dialog_confirm_text".localized
+        static let alertRemoveCancel = "dojo_ui_sdk_mange_payments_dialog_cancel_text".localized
     }
     
     enum CardDetailsCheckout {

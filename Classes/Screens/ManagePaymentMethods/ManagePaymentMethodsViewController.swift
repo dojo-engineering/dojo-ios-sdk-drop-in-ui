@@ -10,6 +10,7 @@ import UIKit
 protocol ManagePaymentMethodsViewControllerDelegate: BaseViewControllerDelegate {
     func onPayUsingNewCardPress()
     func onPayUsingPaymentMethod(_ item: PaymentMethodItem)
+    func onRemoveSavedPaymentMethod(_ id: String)
 }
 
 class ManagePaymentMethodsViewController: BaseUIViewController {
@@ -107,9 +108,6 @@ class ManagePaymentMethodsViewController: BaseUIViewController {
            let paymentMethod = viewModel.items.first(where: {$0.selected}) {
             delegate?.onPayUsingPaymentMethod(paymentMethod)
         }
-        
-        
-//        navigationController?.popViewController(animated: false) //TODO: delegate to root and the same method as refresh token
     }
     
     func getViewModel() -> ManagePaymentMethodsViewModel? {
@@ -149,7 +147,9 @@ extension ManagePaymentMethodsViewController: UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             showRemovePaymentMethodAlert() {
-                self.getViewModel()?.removeItemAtIndex(indexPath.row)
+                if let removedItem = self.getViewModel()?.removeItemAtIndex(indexPath.row) {
+                    self.delegate?.onRemoveSavedPaymentMethod(removedItem.id)
+                }
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }
         } else if editingStyle == .insert {
@@ -158,13 +158,13 @@ extension ManagePaymentMethodsViewController: UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        if indexPath.row == 0,
-           let viewModel = getViewModel() {
-            if viewModel.items.first?.type == .applePay {
-                return false
-            }
+        // we can only remove items that are not WalletPayments and are not selected
+        if let item = getViewModel()?.items[indexPath.row],
+           item.type != .applePay,
+           item.selected == false {
+            return true
         }
-        return true
+        return false
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -180,11 +180,13 @@ extension ManagePaymentMethodsViewController: UITableViewDelegate, UITableViewDa
 
 extension ManagePaymentMethodsViewController {
     func showRemovePaymentMethodAlert(onConfrim : @escaping(() -> Void?)) {
-        let alert = UIAlertController(title: "Are you sure?", message: "You are about to permanently delete this payment method.", preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "Confirm", style: .destructive, handler: { _ in
+        let alert = UIAlertController(title: LocalizedText.ManagePaymentMethods.alertRemoveTitle,
+                                      message: LocalizedText.ManagePaymentMethods.alertRemoveBody,
+                                      preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: LocalizedText.ManagePaymentMethods.alertRemoveConfirm, style: .destructive, handler: { _ in
             onConfrim()
         }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: LocalizedText.ManagePaymentMethods.alertRemoveCancel, style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
 }

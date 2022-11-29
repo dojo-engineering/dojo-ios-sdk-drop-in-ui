@@ -43,7 +43,7 @@ class ManagePaymentMethodsViewModel: BaseViewModel {
         }
     }
     
-    func removeItemAtIndex(_ index: Int) {
+    func removeItemAtIndex(_ index: Int) -> PaymentMethodItem? {
         if items.count > index,
            index > -1 {
             let item = items[index]
@@ -54,9 +54,10 @@ class ManagePaymentMethodsViewModel: BaseViewModel {
                                                     customerSecret: customerSecret,
                                                     completion: nil)
             }
-               
             items.remove(at: index)
+            return item
         }
+        return nil
     }
     
     //TODO: duplication of the method

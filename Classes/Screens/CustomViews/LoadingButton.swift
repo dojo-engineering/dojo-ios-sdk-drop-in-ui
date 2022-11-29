@@ -24,12 +24,14 @@ class LoadingButton: UIButton {
         self.theme = theme
         if isUserInteractionEnabled {
             backgroundColor = theme.primaryCTAButtonActiveBackgroundColor
+            layer.borderColor = theme.primaryCTAButtonActiveBackgroundColor.cgColor
             layer.cornerRadius = theme.primaryCTAButtonCornerRadius
             setTitleColor(theme.primaryCTAButtonActiveTextColor, for: .normal)
             tintColor = theme.primaryCTAButtonActiveTextColor
             clipsToBounds = true
         } else {
             backgroundColor = theme.primaryCTAButtonDisabledBackgroundColor
+            layer.borderColor = theme.primaryCTAButtonDisabledBackgroundColor.cgColor
             layer.cornerRadius = theme.primaryCTAButtonCornerRadius
             setTitleColor(theme.primaryCTAButtonDisableTextColor, for: .normal)
             tintColor = theme.primaryCTAButtonDisableTextColor
