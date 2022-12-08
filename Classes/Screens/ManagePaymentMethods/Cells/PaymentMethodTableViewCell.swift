@@ -34,7 +34,7 @@ class PaymentMethodTableViewCell: UITableViewCell {
         labelSubtitle1.textColor = theme.colorPoweredByButtons //TODO:
         
         labelSubtitle2.font = theme.fontSubtitle2
-        labelSubtitle2.textColor = UIColor.black.withAlphaComponent(0.87) //TODO:
+        labelSubtitle2.textColor = theme.primaryLabelTextColor
         backgroundColor = theme.primarySurfaceBackgroundColor
     }
     

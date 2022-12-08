@@ -53,10 +53,10 @@ class ThemeSettings {
         headerTintColor = dojoTheme.headerTintColor
         headerButtonTintColor = dojoTheme.headerButtonTintColor
         primaryCTAButtonActiveBackgroundColor = dojoTheme.primaryCTAButtonActiveBackgroundColor
-        primarySurfaceBackgroundColor = UIColor.white
-        primaryCTAButtonActiveTextColor = UIColor.white
+        primarySurfaceBackgroundColor = dojoTheme.primarySurfaceBackgroundColor
+        primaryCTAButtonActiveTextColor = dojoTheme.primaryCTAButtonActiveTextColor
         colorPoweredByDojo = .black
-        separatorColor = .black.withAlphaComponent(0.2)
+        separatorColor = dojoTheme.separatorColor
         colorPoweredBySeparator = UIColor(hex: "#A5A5A5FF") ?? separatorColor
         colorPoweredByButtons = .black.withAlphaComponent(0.6)
         errorTextColor = UIColor(hex: "#B00020FF") ?? .systemRed
@@ -66,8 +66,8 @@ class ThemeSettings {
         loadingIndicatorColor = .black
         applePayButtonStyle = .black
         
-        primaryCTAButtonDisabledBackgroundColor = UIColor(hex: "#E5E5E5FF") ?? .gray
-        primaryCTAButtonDisableTextColor = UIColor.black.withAlphaComponent(0.38)
+        primaryCTAButtonDisabledBackgroundColor = dojoTheme.primaryCTAButtonDisabledBackgroundColor
+        primaryCTAButtonDisableTextColor = dojoTheme.primaryCTAButtonDisableTextColor
         
         // Fonts
         // Set fall-back fonts if custom fonts are not available
