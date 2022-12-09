@@ -18,7 +18,6 @@ class ManagePaymentMethodsViewController: BaseUIViewController {
     var delegate: ManagePaymentMethodsViewControllerDelegate?
     
     @IBOutlet weak var tableViewPaymentMethods: UITableView!
-    
     @IBOutlet weak var buttonUseSelectedPaymentMethod: LoadingButton!
     @IBOutlet weak var buttonPayUsingNewCard: UIButton!
     
@@ -186,6 +185,9 @@ extension ManagePaymentMethodsViewController {
         alert.addAction(UIAlertAction(title: LocalizedText.ManagePaymentMethods.alertRemoveConfirm, style: .destructive, handler: { _ in
             onConfrim()
         }))
+        if #available(iOS 13.0, *) {
+            alert.overrideUserInterfaceStyle = theme.lightStyleForDefaultElements == true ? .light : .dark
+        }
         alert.addAction(UIAlertAction(title: LocalizedText.ManagePaymentMethods.alertRemoveCancel, style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }

@@ -21,7 +21,11 @@ enum UIImageCardIcon: String {
 
 extension UIImage {
     static func getCardIcon(icon: UIImageCardIcon) -> UIImage? {
-        UIImage(named: icon.rawValue,
+        getImage(named: icon.rawValue)
+    }
+    
+    private static func getImage(named: String) -> UIImage? {
+        UIImage(named: named,
                 in: Bundle(for: BaseUIViewController.self),
                 compatibleWith: nil)
     }
@@ -39,5 +43,9 @@ extension UIImage {
         default:
             return nil
         }
+    }
+    
+    static func getFieldErrorIcon(lightVersion: Bool = true) -> UIImage? {
+        lightVersion ? getImage(named: "icon-field-error") : getImage(named: "icon-field-error-dark")
     }
 }

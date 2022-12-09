@@ -62,14 +62,20 @@ class SelectedPaymentMethodView: UIView {
         labelMainTitle.textColor = theme.primaryLabelTextColor
         
         labelSubtitle1.font = theme.fontBody2
-        labelSubtitle1.textColor = theme.colorPoweredByButtons //TODO:
+        labelSubtitle1.textColor = theme.primaryLabelTextColor
         
         labelSubtitle2.font = theme.fontSubtitle2
-        labelSubtitle2.textColor = UIColor.black.withAlphaComponent(0.87) //TODO:
+        labelSubtitle2.textColor = theme.secondaryLabelTextColor
         
         let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: 16))
         mainTextField.leftView = paddingView
         mainTextField.leftViewMode = .always
+        mainTextField.keyboardAppearance = theme.lightStyleForDefaultElements ? .light : .dark
+        mainTextField.textColor = theme.primaryLabelTextColor
+        mainTextField.backgroundColor = theme.inputFieldBackgroundColor
+        mainTextField.layer.borderColor = theme.inputElementDefaultTintColor.cgColor
+        mainTextField.layer.borderWidth = 1.0
+        mainTextField.layer.cornerRadius = 4
     }
     
     func setStyle(_ style: SelectedPaymentMethodViewStyle = .applePay) {

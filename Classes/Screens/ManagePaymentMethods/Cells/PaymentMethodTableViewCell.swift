@@ -19,6 +19,7 @@ class PaymentMethodTableViewCell: UITableViewCell {
     
     var cellType: PaymentMethodType?
     var paymentMethodId: String?
+    var theme: ThemeSettings?
     
     public static func register(tableView: UITableView) {
         tableView.register(UINib(nibName: PaymentMethodTableViewCell.cellId,
@@ -27,22 +28,26 @@ class PaymentMethodTableViewCell: UITableViewCell {
     }
     
     func setTheme(theme: ThemeSettings) {
+        self.theme = theme
         labelMainTitle.font = theme.fontSubtitle1
         labelMainTitle.textColor = theme.primaryLabelTextColor
         
         labelSubtitle1.font = theme.fontBody2
-        labelSubtitle1.textColor = theme.colorPoweredByButtons //TODO:
+        labelSubtitle1.textColor = theme.secondaryLabelTextColor
         
         labelSubtitle2.font = theme.fontSubtitle2
         labelSubtitle2.textColor = theme.primaryLabelTextColor
         backgroundColor = theme.primarySurfaceBackgroundColor
+        imageViewSelection.tintColor = theme.inputElementDefaultTintColor
     }
     
     func setSelected(_ selected: Bool) {
         if selected {
             imageViewSelection.image = UIImage(named: "icon-button-radio-selected", in: Bundle(for: type(of: self)), compatibleWith: nil)
+            imageViewSelection.tintColor = theme?.inputElementActiveTintColor
         } else {
             imageViewSelection.image = UIImage(named: "icon-button-radio", in: Bundle(for: type(of: self)), compatibleWith: nil)
+            imageViewSelection.tintColor = theme?.inputElementDefaultTintColor
         }
     }
     

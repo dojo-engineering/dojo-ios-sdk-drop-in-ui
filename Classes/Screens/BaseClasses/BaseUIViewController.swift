@@ -19,7 +19,7 @@ class BaseUIViewController: UIViewController {
     var displayCloseButton: Bool = true // display 'X' (close button) in the header
     var displayBackButton: Bool = true // display '<' (back button) in the header
     var diableCloseButton: Bool = false
-    var theme: ThemeSettings = ThemeSettings.getLightTheme() // Light theme by default
+    var theme: ThemeSettings = ThemeSettings(dojoTheme: DojoThemeSettings.getLightTheme()) // Light theme by default
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -28,6 +28,8 @@ class ThemeSettings {
     var colorPoweredBySeparator: UIColor
     var colorPoweredByButtons: UIColor
     var inputElementActiveTintColor: UIColor
+    var inputFieldBackgroundColor: UIColor
+    var inputElementDefaultTintColor: UIColor
     
     // Fonts
     var fontBody1: UIFont
@@ -58,10 +60,12 @@ class ThemeSettings {
         primarySurfaceBackgroundColor = dojoTheme.primarySurfaceBackgroundColor
         primaryCTAButtonActiveTextColor = dojoTheme.primaryCTAButtonActiveTextColor
         separatorColor = dojoTheme.separatorColor
-        colorPoweredBySeparator = UIColor(hex: "#A5A5A5FF") ?? separatorColor
-        colorPoweredByButtons = .black.withAlphaComponent(0.6)
-        errorTextColor = UIColor(hex: "#B00020FF") ?? .systemRed
+        colorPoweredBySeparator = separatorColor
+        colorPoweredByButtons = dojoTheme.primaryLabelTextColor
+        errorTextColor = dojoTheme.errorTextColor
         inputElementActiveTintColor = dojoTheme.inputElementActiveTintColor
+        inputFieldBackgroundColor = dojoTheme.inputFieldBackgroundColor
+        inputElementDefaultTintColor = dojoTheme.inputElementDefaultTintColor
         
         // Other
         loadingIndicatorColor = dojoTheme.loadingIndicatorColor
@@ -108,31 +112,6 @@ class ThemeSettings {
 }
 
 extension ThemeSettings {
-    static func getLightTheme() -> ThemeSettings {
-        return ThemeSettings(dojoTheme: DojoThemeSettings.getLightTheme())
-    }
-    
-    static func getDarkTheme() -> ThemeSettings {
-        // get initial dojoTheme object and update properties
-        var dojoTheme = DojoThemeSettings.getLightTheme()
-        dojoTheme.primaryLabelTextColor = UIColor.white
-        dojoTheme.secondaryLabelTextColor = UIColor.white
-        dojoTheme.headerButtonTintColor = UIColor.white
-        dojoTheme.headerTintColor = UIColor.white
-        dojoTheme.primaryCTAButtonActiveBackgroundColor = UIColor.white
-        // create internal theme
-        let theme = ThemeSettings(dojoTheme: dojoTheme)
-        // modify items that are inaccessible by public API
-        theme.primarySurfaceBackgroundColor = UIColor.black
-        theme.primaryCTAButtonActiveTextColor = UIColor.black
-        theme.colorPoweredByDojo = .white
-        theme.applePayButtonStyle = .white
-        theme.separatorColor = .white.withAlphaComponent(0.3)
-        theme.loadingIndicatorColor = .white
-        theme.colorPoweredBySeparator = .white.withAlphaComponent(0.3)
-        theme.colorPoweredByButtons = .white.withAlphaComponent(0.6)
-        return theme
-    }
     
     private func registerFonts() {
         loadFont(RobotoFont.regular.rawValue)

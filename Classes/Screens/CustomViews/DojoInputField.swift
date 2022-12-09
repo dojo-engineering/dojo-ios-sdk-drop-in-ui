@@ -44,6 +44,7 @@ class DojoInputField: UIView {
     var picker: UIPickerView?
     var selectedPickerPosition: Int = 0
     var currentCardSchema: UIImageCardIcon = .visa
+    var theme: ThemeSettings?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -104,11 +105,18 @@ class DojoInputField: UIView {
     }
     
     func setTheme(theme: ThemeSettings) {
+        self.theme = theme
         labelTop.font = theme.fontSubtitle1
         labelTop.textColor = theme.primaryLabelTextColor
         
         labelBottom.font = theme.fontSubtitle2
         labelBottom.textColor = theme.errorTextColor
+        
+        textFieldMain.backgroundColor = theme.inputFieldBackgroundColor
+        textFieldMain.textColor = theme.primaryLabelTextColor
+        textFieldMain.keyboardAppearance = theme.lightStyleForDefaultElements ? .light : .dark
+        
+        imageViewBottom.image = UIImage.getFieldErrorIcon(lightVersion: theme.lightStyleForDefaultElements)
     }
     
     func setState(_ state: DojoInputFieldState) {
@@ -117,19 +125,19 @@ class DojoInputField: UIView {
             imageViewBottom.isHidden = true
             labelBottom.isHidden = true
             textFieldMain.layer.borderWidth = 1.0
-            textFieldMain.layer.borderColor = UIColor.black.withAlphaComponent(0.15).cgColor
+            textFieldMain.layer.borderColor = self.theme?.inputElementDefaultTintColor.cgColor ?? UIColor.black.withAlphaComponent(0.15).cgColor
             textFieldMain.layer.cornerRadius = 4
         case .activeInput:
             imageViewBottom.isHidden = true
             labelBottom.isHidden = true
             textFieldMain.layer.borderWidth = 2.0
-            textFieldMain.layer.borderColor = UIColor(hex: "#00857DFF")?.cgColor ?? UIColor.systemGreen.cgColor
+            textFieldMain.layer.borderColor = self.theme?.inputElementActiveTintColor.cgColor ?? UIColor.systemGreen.cgColor
             textFieldMain.layer.cornerRadius = 4
         case .error:
             imageViewBottom.isHidden = false
             labelBottom.isHidden = false
             textFieldMain.layer.borderWidth = 1.0
-            textFieldMain.layer.borderColor = UIColor(hex: "#B00020FF")?.cgColor ?? UIColor.systemRed.cgColor
+            textFieldMain.layer.borderColor = self.theme?.errorTextColor.cgColor ?? UIColor.systemRed.cgColor
             textFieldMain.layer.cornerRadius = 4
             let isTextEmpty = textFieldMain.text?.isEmpty ?? true
             labelBottom.text = isTextEmpty ? viewModel?.fieldErrorEmpty : viewModel?.fieldError
