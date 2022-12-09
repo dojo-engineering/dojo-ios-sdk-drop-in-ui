@@ -21,6 +21,9 @@ public class DojoThemeSettings: NSObject {
     public var secondaryCTAButtonActiveBorderColor: UIColor
     public var secondaryCTAButtonActiveTextColor: UIColor
     public var separatorColor: UIColor
+    public var loadingIndicatorColor: UIColor
+    public var inputElementActiveTintColor: UIColor
+    public var lightStyleForDefaultElements: NSNumber
     
     @objc
     public init(primaryLabelTextColor: UIColor? = nil,
@@ -34,7 +37,10 @@ public class DojoThemeSettings: NSObject {
                 primaryCTAButtonDisableTextColor: UIColor? = nil,
                 secondaryCTAButtonActiveBorderColor: UIColor? = nil,
                 secondaryCTAButtonActiveTextColor: UIColor? = nil,
-                separatorColor: UIColor? = nil) {
+                separatorColor: UIColor? = nil,
+                loadingIndicatorColor: UIColor? = nil,
+                inputElementActiveTintColor: UIColor? = nil,
+                lightStyleForDefaultElements: NSNumber? = nil) {
         self.primaryLabelTextColor = primaryLabelTextColor ?? UIColor.init(hexaARGB: "#DD000000") ?? .black
         self.secondaryLabelTextColor = secondaryLabelTextColor ?? UIColor.init(hexaARGB: "#99000000") ?? .gray
         self.headerTintColor = headerTintColor ?? UIColor.init(hexaARGB: "#DD000000") ?? .black
@@ -47,6 +53,9 @@ public class DojoThemeSettings: NSObject {
         self.secondaryCTAButtonActiveBorderColor = secondaryCTAButtonActiveBorderColor ?? UIColor.init(hexaARGB: "#FF262626") ?? .black
         self.secondaryCTAButtonActiveTextColor = secondaryCTAButtonActiveTextColor ?? UIColor.init(hexaARGB: "#FF262626") ?? .black
         self.separatorColor = separatorColor ?? UIColor.init(hexaARGB: "#33000000") ?? .lightGray
+        self.loadingIndicatorColor = loadingIndicatorColor ?? UIColor.init(hexaARGB: "#FF262626") ?? .black
+        self.lightStyleForDefaultElements = lightStyleForDefaultElements ?? true
+        self.inputElementActiveTintColor = inputElementActiveTintColor ?? UIColor.init(hexaARGB: "#FF00857D") ?? .systemGreen
     }
     
     public static func getLightTheme() -> DojoThemeSettings {
@@ -56,7 +65,7 @@ public class DojoThemeSettings: NSObject {
     public static func getDarkTheme() -> DojoThemeSettings {
         let theme = DojoThemeSettings()
         theme.primaryLabelTextColor = UIColor.init(hexaARGB: "#FFFFFFFF") ?? .white
-        theme.secondaryLabelTextColor = UIColor.init(hexaARGB: "#99000000") ?? .gray
+        theme.secondaryLabelTextColor = UIColor.init(hexaARGB: "#FFFFFFFF") ?? .gray
         theme.headerTintColor = UIColor.init(hexaARGB: "#FFFFFFFF") ?? .white
         theme.headerButtonTintColor = UIColor.init(hexaARGB: "#FFFFFFFF") ?? .white
         theme.primarySurfaceBackgroundColor = UIColor.init(hexaARGB: "#FF1B1B1B") ?? .black
@@ -67,6 +76,9 @@ public class DojoThemeSettings: NSObject {
         theme.secondaryCTAButtonActiveBorderColor = UIColor.init(hexaARGB: "#FF262626") ?? .black
         theme.secondaryCTAButtonActiveTextColor = UIColor.init(hexaARGB: "#FF262626") ?? .black
         theme.separatorColor = UIColor.init(hexaARGB: "#33000000") ?? .lightGray
+        theme.loadingIndicatorColor = UIColor.init(hexaARGB: "#FFFFFFFF") ?? .white
+        theme.lightStyleForDefaultElements = false
+        theme.inputElementActiveTintColor = UIColor.init(hexaARGB: "#FFFFFFFF") ?? .systemGreen
         return theme
     }
 }

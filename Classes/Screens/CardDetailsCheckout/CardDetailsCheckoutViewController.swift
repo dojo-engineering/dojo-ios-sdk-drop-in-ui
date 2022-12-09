@@ -60,6 +60,7 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         super.setUpDesign()
         
         buttonPay.setTheme(theme)
+        imageViewSaveCardCheckbox.tintColor = theme.inputElementActiveTintColor
         
         labelYouPay.textColor = theme.primaryLabelTextColor
         labelYouPay.font = theme.fontSubtitle1Medium
@@ -68,7 +69,7 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         labelPrimaryAmount.font = theme.fontHeading3Medium
         
         labelSaveCardForFutureUse.font = theme.fontSubtitle1
-        labelSaveCardForFutureUse.textColor = UIColor.black.withAlphaComponent(0.6) //TODO
+        labelSaveCardForFutureUse.textColor = theme.secondaryLabelTextColor
         
         fieldEmail.setTheme(theme: theme)
         fieldCardholder.setTheme(theme: theme)
@@ -132,7 +133,8 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         //TODO: a better function for that
         guard let viewModel = getViewModel() else { return }
         viewModel.supportedCardSchemes.forEach({
-            if let image = UIImage.getCardIcon(type: $0) {
+            if let image = UIImage.getCardIcon(type: $0,
+                                               lightVersion: theme.lightStyleForDefaultElements) {
                 let imageView = UIImageView(frame: CGRectMake(0, 0, 40, 20))
                 imageView.image = image
                 imageView.contentMode = .scaleAspectFit

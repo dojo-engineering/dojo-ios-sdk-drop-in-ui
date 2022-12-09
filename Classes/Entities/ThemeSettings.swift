@@ -27,6 +27,7 @@ class ThemeSettings {
     var colorPoweredByDojo: UIColor
     var colorPoweredBySeparator: UIColor
     var colorPoweredByButtons: UIColor
+    var inputElementActiveTintColor: UIColor
     
     // Fonts
     var fontBody1: UIFont
@@ -45,6 +46,7 @@ class ThemeSettings {
     // Other
     var primaryCTAButtonCornerRadius: CGFloat
     var applePayButtonStyle: PKPaymentButtonStyle
+    var lightStyleForDefaultElements: Bool
     
     init (dojoTheme: DojoThemeSettings) {
         // Colors
@@ -55,19 +57,22 @@ class ThemeSettings {
         primaryCTAButtonActiveBackgroundColor = dojoTheme.primaryCTAButtonActiveBackgroundColor
         primarySurfaceBackgroundColor = dojoTheme.primarySurfaceBackgroundColor
         primaryCTAButtonActiveTextColor = dojoTheme.primaryCTAButtonActiveTextColor
-        colorPoweredByDojo = .black
         separatorColor = dojoTheme.separatorColor
         colorPoweredBySeparator = UIColor(hex: "#A5A5A5FF") ?? separatorColor
         colorPoweredByButtons = .black.withAlphaComponent(0.6)
         errorTextColor = UIColor(hex: "#B00020FF") ?? .systemRed
+        inputElementActiveTintColor = dojoTheme.inputElementActiveTintColor
         
         // Other
-        primaryCTAButtonCornerRadius = 21
-        loadingIndicatorColor = .black
-        applePayButtonStyle = .black
+        loadingIndicatorColor = dojoTheme.loadingIndicatorColor
+        lightStyleForDefaultElements = dojoTheme.lightStyleForDefaultElements == true ? true : false
+        applePayButtonStyle = dojoTheme.lightStyleForDefaultElements == true ? .black : .white
+        colorPoweredByDojo = dojoTheme.lightStyleForDefaultElements == true ? .black : .white
         
         primaryCTAButtonDisabledBackgroundColor = dojoTheme.primaryCTAButtonDisabledBackgroundColor
         primaryCTAButtonDisableTextColor = dojoTheme.primaryCTAButtonDisableTextColor
+        
+        primaryCTAButtonCornerRadius = 21
         
         // Fonts
         // Set fall-back fonts if custom fonts are not available

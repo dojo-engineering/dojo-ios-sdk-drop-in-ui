@@ -8,11 +8,15 @@ import UIKit
 
 enum UIImageCardIcon: String {
     case amex = "icon-card-amex"
+    case amexDark = "icon-card-amex-dark"
     case diner = "icon-card-diner"
     case discover = "icon-card-discover"
     case maestro = "icon-card-maestro"
+    case maestroDark = "icon-card-maestro-dark"
     case mastercard = "icon-card-mastercard"
+    case mastercardDark = "icon-card-mastercard-dark"
     case visa = "icon-card-visa"
+    case visaDark = "icon-card-visa-dark"
 }
 
 extension UIImage {
@@ -22,16 +26,16 @@ extension UIImage {
                 compatibleWith: nil)
     }
     
-    static func getCardIcon(type: CardSchemes) -> UIImage? {
+    static func getCardIcon(type: CardSchemes, lightVersion: Bool = true) -> UIImage? {
         switch type {
         case.visa:
-            return getCardIcon(icon: .visa)
+            return getCardIcon(icon: lightVersion ? .visa : .visaDark)
         case .mastercard:
-            return getCardIcon(icon: .mastercard)
+            return getCardIcon(icon: lightVersion ? .mastercard : .mastercardDark)
         case .maestro:
-            return getCardIcon(icon: .maestro)
+            return getCardIcon(icon: lightVersion ? .maestro : .maestroDark)
         case .amex:
-            return getCardIcon(icon: .amex)
+            return getCardIcon(icon: lightVersion ? .amex : .amexDark)
         default:
             return nil
         }
