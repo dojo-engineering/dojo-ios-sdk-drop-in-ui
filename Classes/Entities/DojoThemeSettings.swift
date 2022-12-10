@@ -25,6 +25,8 @@ public class DojoThemeSettings: NSObject {
     public var inputElementActiveTintColor: UIColor
     public var inputFieldBackgroundColor: UIColor
     public var inputElementDefaultTintColor: UIColor
+    public var inputFieldSelectedBorderColor: UIColor
+    public var inputFieldDefaultBorderColor: UIColor
     public var errorTextColor: UIColor
     public var lightStyleForDefaultElements: NSNumber
     
@@ -45,6 +47,7 @@ public class DojoThemeSettings: NSObject {
                 inputElementActiveTintColor: UIColor? = nil,
                 inputFieldBackgroundColor: UIColor? = nil,
                 inputElementDefaultTintColor: UIColor? = nil,
+                inputFieldSelectedBorderColor: UIColor? = nil,
                 errorTextColor: UIColor? = nil,
                 lightStyleForDefaultElements: NSNumber? = nil) {
         self.primaryLabelTextColor = primaryLabelTextColor ?? UIColor.init(hexaARGB: "#DD000000") ?? .black
@@ -62,8 +65,10 @@ public class DojoThemeSettings: NSObject {
         self.loadingIndicatorColor = loadingIndicatorColor ?? UIColor.init(hexaARGB: "#FF262626") ?? .black
         self.lightStyleForDefaultElements = lightStyleForDefaultElements ?? true
         self.inputElementActiveTintColor = inputElementActiveTintColor ?? UIColor.init(hexaARGB: "#FF00857D") ?? .systemGreen
+        self.inputFieldSelectedBorderColor = inputFieldSelectedBorderColor ?? UIColor.init(hexaARGB: "#FF00857D") ?? .systemGreen
         self.inputFieldBackgroundColor = inputFieldBackgroundColor ?? UIColor.init(hexaARGB: "#FFFFFFFF") ?? .white
         self.inputElementDefaultTintColor = inputElementDefaultTintColor ?? UIColor.init(hexaARGB: "#26000000") ?? .gray
+        self.inputFieldDefaultBorderColor = inputElementDefaultTintColor ?? UIColor.init(hexaARGB: "#26000000") ?? .gray
         self.errorTextColor = errorTextColor ?? UIColor.init(hexaARGB: "#FFB00020") ?? .systemRed
     }
     
@@ -80,7 +85,7 @@ public class DojoThemeSettings: NSObject {
         theme.primarySurfaceBackgroundColor = UIColor.init(hexaARGB: "#FF1B1B1B") ?? .black
         theme.primaryCTAButtonActiveBackgroundColor = UIColor.init(hexaARGB: "#FFFFFFFF") ?? .white
         theme.primaryCTAButtonActiveTextColor = UIColor.init(hexaARGB: "#DD000000") ?? .black
-        theme.primaryCTAButtonDisabledBackgroundColor = UIColor.init(hexaARGB: "#FFE5E5E5") ?? .gray
+        theme.primaryCTAButtonDisabledBackgroundColor = UIColor.init(hexaARGB: "#FFC3C3C3") ?? .gray
         theme.primaryCTAButtonDisableTextColor = UIColor.init(hexaARGB: "#60000000") ?? .white
         theme.secondaryCTAButtonActiveBorderColor = UIColor.init(hexaARGB: "#FF262626") ?? .black
         theme.secondaryCTAButtonActiveTextColor = UIColor.init(hexaARGB: "#FF262626") ?? .black
@@ -88,8 +93,10 @@ public class DojoThemeSettings: NSObject {
         theme.loadingIndicatorColor = UIColor.init(hexaARGB: "#FFFFFFFF") ?? .white
         theme.lightStyleForDefaultElements = false
         theme.inputElementActiveTintColor = UIColor.init(hexaARGB: "#FFFFFFFF") ?? .systemGreen
+        theme.inputFieldSelectedBorderColor = UIColor.init(hexaARGB: "#FFFFFFFF") ?? .systemGreen
         theme.inputFieldBackgroundColor = UIColor.init(hexaARGB: "#FF313131") ?? .black
-        theme.inputElementDefaultTintColor = UIColor.init(hexaARGB: "#26FFFFFF") ?? .gray
+        theme.inputElementDefaultTintColor = UIColor.init(hexaARGB: "#FFFFFFFF") ?? .gray
+        theme.inputFieldDefaultBorderColor = UIColor.init(hexaARGB: "#26FFFFFF") ?? .gray
         theme.errorTextColor = UIColor.init(hexaARGB: "#FFED5645") ?? .systemRed
         return theme
     }

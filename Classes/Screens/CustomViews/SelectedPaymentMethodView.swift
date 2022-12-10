@@ -73,7 +73,7 @@ class SelectedPaymentMethodView: UIView {
         mainTextField.keyboardAppearance = theme.lightStyleForDefaultElements ? .light : .dark
         mainTextField.textColor = theme.primaryLabelTextColor
         mainTextField.backgroundColor = theme.inputFieldBackgroundColor
-        mainTextField.layer.borderColor = theme.inputElementDefaultTintColor.cgColor
+        mainTextField.layer.borderColor = theme.inputFieldDefaultBorderColor.cgColor
         mainTextField.layer.borderWidth = 1.0
         mainTextField.layer.cornerRadius = 4
     }

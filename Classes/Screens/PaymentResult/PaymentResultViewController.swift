@@ -85,7 +85,7 @@ class PaymentResultViewController: BaseUIViewController {
             buttonTryAgain.isHidden = true
             labelMainText.text = LocalizedText.PaymentResult.mainTitleSuccess
             labelSubtitle.text = "\(LocalizedText.PaymentResult.orderId) \(viewModel?.paymentIntent.id ?? "")"  //TODO: the same for both cases
-            imgViewResult.image = UIImage(named: "img-result-success-light", in: Bundle(for: type(of: self)), compatibleWith: nil)
+            imgViewResult.image = UIImage(named: theme.lightStyleForDefaultElements ? "img-result-success-light" : "img-result-success-dark", in: Bundle(for: type(of: self)), compatibleWith: nil)
             
             //TODO: common style
             buttonDone.backgroundColor = theme.primaryCTAButtonActiveBackgroundColor
@@ -97,7 +97,7 @@ class PaymentResultViewController: BaseUIViewController {
             labelMainText.text = LocalizedText.PaymentResult.mainTitleFail
             labelSubtitle.text = "\(LocalizedText.PaymentResult.orderId) \(viewModel?.paymentIntent.id ?? "")"
             labelSubtitle2.text = LocalizedText.PaymentResult.mainErrorMessage
-            imgViewResult.image = UIImage(named: "img-result-error-light", in: Bundle(for: type(of: self)), compatibleWith: nil)
+            imgViewResult.image = UIImage(named: theme.lightStyleForDefaultElements ? "img-result-error-light" : "img-result-error-dark", in: Bundle(for: type(of: self)), compatibleWith: nil)
             
             //TODO: common style
             buttonTryAgain.backgroundColor = theme.primaryCTAButtonActiveBackgroundColor

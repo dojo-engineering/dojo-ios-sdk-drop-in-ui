@@ -28,6 +28,8 @@ class ThemeSettings {
     var colorPoweredBySeparator: UIColor
     var colorPoweredByButtons: UIColor
     var inputElementActiveTintColor: UIColor
+    var inputFieldSelectedBorderColor: UIColor
+    var inputFieldDefaultBorderColor: UIColor
     var inputFieldBackgroundColor: UIColor
     var inputElementDefaultTintColor: UIColor
     
@@ -66,6 +68,8 @@ class ThemeSettings {
         inputElementActiveTintColor = dojoTheme.inputElementActiveTintColor
         inputFieldBackgroundColor = dojoTheme.inputFieldBackgroundColor
         inputElementDefaultTintColor = dojoTheme.inputElementDefaultTintColor
+        inputFieldSelectedBorderColor = dojoTheme.inputFieldSelectedBorderColor
+        inputFieldDefaultBorderColor = dojoTheme.inputFieldDefaultBorderColor
         
         // Other
         loadingIndicatorColor = dojoTheme.loadingIndicatorColor
