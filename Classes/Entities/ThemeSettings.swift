@@ -22,6 +22,8 @@ class ThemeSettings {
     var primaryCTAButtonDisabledBackgroundColor: UIColor
     var primaryCTAButtonActiveTextColor: UIColor
     var primaryCTAButtonDisableTextColor: UIColor
+    var secondaryCTAButtonActiveTextColor: UIColor
+    var secondaryCTAButtonActiveBorderColor: UIColor
     var separatorColor: UIColor
     var loadingIndicatorColor: UIColor
     var colorPoweredByDojo: UIColor
@@ -70,6 +72,8 @@ class ThemeSettings {
         inputElementDefaultTintColor = dojoTheme.inputElementDefaultTintColor
         inputFieldSelectedBorderColor = dojoTheme.inputFieldSelectedBorderColor
         inputFieldDefaultBorderColor = dojoTheme.inputFieldDefaultBorderColor
+        secondaryCTAButtonActiveTextColor = dojoTheme.secondaryCTAButtonActiveTextColor
+        secondaryCTAButtonActiveBorderColor = dojoTheme.secondaryCTAButtonActiveBorderColor
         
         // Other
         loadingIndicatorColor = dojoTheme.loadingIndicatorColor

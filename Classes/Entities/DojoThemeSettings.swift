@@ -48,6 +48,7 @@ public class DojoThemeSettings: NSObject {
                 inputFieldBackgroundColor: UIColor? = nil,
                 inputElementDefaultTintColor: UIColor? = nil,
                 inputFieldSelectedBorderColor: UIColor? = nil,
+                inputFieldDefaultBorderColor: UIColor? = nil,
                 errorTextColor: UIColor? = nil,
                 lightStyleForDefaultElements: NSNumber? = nil) {
         self.primaryLabelTextColor = primaryLabelTextColor ?? UIColor.init(hexaARGB: "#DD000000") ?? .black
@@ -68,7 +69,7 @@ public class DojoThemeSettings: NSObject {
         self.inputFieldSelectedBorderColor = inputFieldSelectedBorderColor ?? UIColor.init(hexaARGB: "#FF00857D") ?? .systemGreen
         self.inputFieldBackgroundColor = inputFieldBackgroundColor ?? UIColor.init(hexaARGB: "#FFFFFFFF") ?? .white
         self.inputElementDefaultTintColor = inputElementDefaultTintColor ?? UIColor.init(hexaARGB: "#26000000") ?? .gray
-        self.inputFieldDefaultBorderColor = inputElementDefaultTintColor ?? UIColor.init(hexaARGB: "#26000000") ?? .gray
+        self.inputFieldDefaultBorderColor = inputFieldDefaultBorderColor ?? UIColor.init(hexaARGB: "#26000000") ?? .gray
         self.errorTextColor = errorTextColor ?? UIColor.init(hexaARGB: "#FFB00020") ?? .systemRed
     }
     
@@ -87,8 +88,8 @@ public class DojoThemeSettings: NSObject {
         theme.primaryCTAButtonActiveTextColor = UIColor.init(hexaARGB: "#DD000000") ?? .black
         theme.primaryCTAButtonDisabledBackgroundColor = UIColor.init(hexaARGB: "#FFC3C3C3") ?? .gray
         theme.primaryCTAButtonDisableTextColor = UIColor.init(hexaARGB: "#60000000") ?? .white
-        theme.secondaryCTAButtonActiveBorderColor = UIColor.init(hexaARGB: "#FF262626") ?? .black
-        theme.secondaryCTAButtonActiveTextColor = UIColor.init(hexaARGB: "#FF262626") ?? .black
+        theme.secondaryCTAButtonActiveBorderColor = UIColor.init(hexaARGB: "#FFFFFFFF") ?? .white
+        theme.secondaryCTAButtonActiveTextColor = UIColor.init(hexaARGB: "#FFFFFFFF") ?? .white
         theme.separatorColor = UIColor.init(hexaARGB: "#33000000") ?? .lightGray
         theme.loadingIndicatorColor = UIColor.init(hexaARGB: "#FFFFFFFF") ?? .white
         theme.lightStyleForDefaultElements = false

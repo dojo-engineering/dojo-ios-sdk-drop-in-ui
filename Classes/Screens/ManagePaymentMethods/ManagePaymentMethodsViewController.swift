@@ -51,12 +51,12 @@ class ManagePaymentMethodsViewController: BaseUIViewController {
         
         //TODO: for demo only
         buttonPayUsingNewCard.backgroundColor = theme.primarySurfaceBackgroundColor
-        buttonPayUsingNewCard.setTitleColor(theme.primaryLabelTextColor, for: .normal)
-        buttonPayUsingNewCard.tintColor = theme.primaryLabelTextColor
+        buttonPayUsingNewCard.setTitleColor(theme.secondaryCTAButtonActiveTextColor, for: .normal)
+        buttonPayUsingNewCard.tintColor = theme.secondaryCTAButtonActiveTextColor
         buttonPayUsingNewCard.layer.cornerRadius = theme.primaryCTAButtonCornerRadius
         
         buttonPayUsingNewCard.layer.borderWidth = 1
-        buttonPayUsingNewCard.layer.borderColor = theme.primaryCTAButtonActiveBackgroundColor.cgColor
+        buttonPayUsingNewCard.layer.borderColor = theme.secondaryCTAButtonActiveBorderColor.cgColor
         
         if let _ = getViewModel()?.items.first(where: {$0.selected}) {
             //TODO: common style
