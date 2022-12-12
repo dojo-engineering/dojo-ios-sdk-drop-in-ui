@@ -39,7 +39,7 @@
 		2F5FB72621BADFBCA408D490 /* Pods-dojo-ios-sdk-drop-in-ui_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dojo-ios-sdk-drop-in-ui_Example.debug.xcconfig"; path = "Target Support Files/Pods-dojo-ios-sdk-drop-in-ui_Example/Pods-dojo-ios-sdk-drop-in-ui_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		3418D55A7DB533EAAFFAC9AA /* Pods-dojo-ios-sdk-drop-in-ui_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dojo-ios-sdk-drop-in-ui_Example.release.xcconfig"; path = "Target Support Files/Pods-dojo-ios-sdk-drop-in-ui_Example/Pods-dojo-ios-sdk-drop-in-ui_Example.release.xcconfig"; sourceTree = "<group>"; };
 		3D15DB3326900CEEB74CA2F4 /* dojo-ios-sdk-drop-in-ui.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "dojo-ios-sdk-drop-in-ui.podspec"; path = "../dojo-ios-sdk-drop-in-ui.podspec"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		607FACD01AFB9204008FA782 /* Dojo SDK UI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dojo SDK UI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		607FACD01AFB9204008FA782 /* Dojo-SDK-UI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dojo-SDK-UI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACE51AFB9204008FA782 /* dojo-ios-sdk-drop-in-ui_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "dojo-ios-sdk-drop-in-ui_Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
@@ -101,7 +101,7 @@
 		607FACD11AFB9204008FA782 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				607FACD01AFB9204008FA782 /* Dojo SDK UI.app */,
+				607FACD01AFB9204008FA782 /* Dojo-SDK-UI.app */,
 				607FACE51AFB9204008FA782 /* dojo-ios-sdk-drop-in-ui_Tests.xctest */,
 			);
 			name = Products;
@@ -159,9 +159,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		607FACCF1AFB9204008FA782 /* Dojo SDK UI */ = {
+		607FACCF1AFB9204008FA782 /* Dojo-SDK-UI */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "Dojo SDK UI" */;
+			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "Dojo-SDK-UI" */;
 			buildPhases = (
 				3C2A8191C86D62EA19CDF931 /* [CP] Check Pods Manifest.lock */,
 				607FACCC1AFB9204008FA782 /* Sources */,
@@ -173,9 +173,9 @@
 			);
 			dependencies = (
 			);
-			name = "Dojo SDK UI";
+			name = "Dojo-SDK-UI";
 			productName = "dojo-ios-sdk-drop-in-ui";
-			productReference = 607FACD01AFB9204008FA782 /* Dojo SDK UI.app */;
+			productReference = 607FACD01AFB9204008FA782 /* Dojo-SDK-UI.app */;
 			productType = "com.apple.product-type.application";
 		};
 		607FACE41AFB9204008FA782 /* dojo-ios-sdk-drop-in-ui_Tests */ = {
@@ -234,7 +234,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				607FACCF1AFB9204008FA782 /* Dojo SDK UI */,
+				607FACCF1AFB9204008FA782 /* Dojo-SDK-UI */,
 				607FACE41AFB9204008FA782 /* dojo-ios-sdk-drop-in-ui_Tests */,
 			);
 		};
@@ -352,7 +352,7 @@
 /* Begin PBXTargetDependency section */
 		607FACE71AFB9204008FA782 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 607FACCF1AFB9204008FA782 /* Dojo SDK UI */;
+			target = 607FACCF1AFB9204008FA782 /* Dojo-SDK-UI */;
 			targetProxy = 607FACE61AFB9204008FA782 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -554,7 +554,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dojo SDK UI.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Dojo SDK UI";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dojo-SDK-UI.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Dojo-SDK-UI";
 			};
 			name = Debug;
 		};
@@ -574,7 +574,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dojo SDK UI.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Dojo SDK UI";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dojo-SDK-UI.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Dojo-SDK-UI";
 			};
 			name = Release;
 		};
@@ -590,7 +590,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "Dojo SDK UI" */ = {
+		607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "Dojo-SDK-UI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				607FACF01AFB9204008FA782 /* Debug */,

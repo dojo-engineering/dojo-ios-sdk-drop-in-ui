@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-               BuildableName = "Dojo SDK UI.app"
-               BlueprintName = "Dojo SDK UI"
+               BuildableName = "Dojo-SDK-UI.app"
+               BlueprintName = "Dojo-SDK-UI"
                ReferencedContainer = "container:dojo-ios-sdk-drop-in-ui.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -55,8 +55,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-            BuildableName = "Dojo SDK UI.app"
-            BlueprintName = "Dojo SDK UI"
+            BuildableName = "Dojo-SDK-UI.app"
+            BlueprintName = "Dojo-SDK-UI"
             ReferencedContainer = "container:dojo-ios-sdk-drop-in-ui.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -72,8 +72,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-            BuildableName = "Dojo SDK UI.app"
-            BlueprintName = "Dojo SDK UI"
+            BuildableName = "Dojo-SDK-UI.app"
+            BlueprintName = "Dojo-SDK-UI"
             ReferencedContainer = "container:dojo-ios-sdk-drop-in-ui.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
