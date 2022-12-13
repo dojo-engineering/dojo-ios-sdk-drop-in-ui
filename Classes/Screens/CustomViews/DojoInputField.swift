@@ -43,7 +43,7 @@ class DojoInputField: UIView {
     var delegate: DojoInputFieldDelegate?
     var picker: UIPickerView?
     var selectedPickerPosition: Int = 0
-    var currentCardSchema: UIImageCardIcon = .visa
+    var currentCardSchema: CardSchemes = .visa
     var theme: ThemeSettings?
     
     required init?(coder aDecoder: NSCoder) {
@@ -236,7 +236,7 @@ extension DojoInputField: UITextFieldDelegate {
             guard string.compactMap({ Int(String($0)) }).count ==
                     string.count else { return false }
             if let cardScheme = viewModel?.getCardScheme(updatedString) {
-                let image = UIImage.getCardIcon(icon: cardScheme)
+                let image = UIImage.getCardIcon(type: cardScheme, lightVersion: theme?.lightStyleForDefaultElements ?? true)
                 textFieldMain.rightImage(image, imageWidth: 25, padding: 10)
                 currentCardSchema = cardScheme
                 if cardScheme == .amex {
@@ -367,7 +367,7 @@ protocol DojoInputFieldViewModelProtocol {
     var type: DojoInputFieldType {get}
     
     func validateField(_ text: String?) -> DojoInputFieldState
-    func getCardScheme(_ text: String?) -> UIImageCardIcon?
+    func getCardScheme(_ text: String?) -> CardSchemes?
 }
 
 class DojoInputFieldViewModel: DojoInputFieldViewModelProtocol {
@@ -551,7 +551,7 @@ extension DojoInputFieldViewModel {
         return sum % 10 == 0
     }
     
-    func getCardScheme(_ text: String?) -> UIImageCardIcon? {
+    func getCardScheme(_ text: String?) -> CardSchemes? {
         let amexRegEx = "^3[47].*$"
         let amexPred = NSPredicate(format:"SELF MATCHES %@", amexRegEx)
         if amexPred.evaluate(with: text) {
