@@ -3,7 +3,7 @@
 //  Created by Deniss Kaibagarovs on 05/04/2021.
 //
 
-import Foundation
+import UIKit
 
 extension NSLayoutDimension {
 

@@ -1,5 +1,4 @@
 import XCTest
-import Dojo_SDK_UI
 
 class Tests: XCTestCase {
     
@@ -16,6 +15,9 @@ class Tests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         XCTAssert(true, "Pass")
+        let inputFieldViewModel = DojoInputFieldViewModel(type: .cardNumber)
+        XCTAssertFalse(inputFieldViewModel.luhnCheck("4234234234"), "Error")
+        XCTAssert(inputFieldViewModel.luhnCheck("4976000000003436"), "Pass")
     }
     
 }
