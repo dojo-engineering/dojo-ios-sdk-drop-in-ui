@@ -4,7 +4,7 @@ platform :ios, '11.0'
 
 target 'Dojo-SDK-UI' do
   pod 'dojo-ios-sdk', :git => 'git@github.com:Dojo-Engineering/dojo-ios-sdk.git', :tag => '0.7.4'
-  pod 'dojo-ios-sdk-drop-in-ui', :path => '../'
+  pod 'dojo-ios-sdk-drop-in-ui', :path => '../', :testspecs => ['DojoSDKUI-Tests']
   pod 'CocoaDebug', :configurations => ['Debug'] #network trafic tool
 
   target 'dojo-ios-sdk-drop-in-ui_Tests' do

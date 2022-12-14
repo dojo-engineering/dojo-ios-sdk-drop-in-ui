@@ -39,6 +39,7 @@
 		2F5FB72621BADFBCA408D490 /* Pods-dojo-ios-sdk-drop-in-ui_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dojo-ios-sdk-drop-in-ui_Example.debug.xcconfig"; path = "Target Support Files/Pods-dojo-ios-sdk-drop-in-ui_Example/Pods-dojo-ios-sdk-drop-in-ui_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		3418D55A7DB533EAAFFAC9AA /* Pods-dojo-ios-sdk-drop-in-ui_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dojo-ios-sdk-drop-in-ui_Example.release.xcconfig"; path = "Target Support Files/Pods-dojo-ios-sdk-drop-in-ui_Example/Pods-dojo-ios-sdk-drop-in-ui_Example.release.xcconfig"; sourceTree = "<group>"; };
 		3D15DB3326900CEEB74CA2F4 /* dojo-ios-sdk-drop-in-ui.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "dojo-ios-sdk-drop-in-ui.podspec"; path = "../dojo-ios-sdk-drop-in-ui.podspec"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		598FF2AD9762949C674C9385 /* Pods-Dojo-SDK-UI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dojo-SDK-UI.debug.xcconfig"; path = "Target Support Files/Pods-Dojo-SDK-UI/Pods-Dojo-SDK-UI.debug.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* Dojo-SDK-UI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dojo-SDK-UI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACE51AFB9204008FA782 /* dojo-ios-sdk-drop-in-ui_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "dojo-ios-sdk-drop-in-ui_Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,6 +50,7 @@
 		AE617861993E3742BA4B04F6 /* Pods-dojo-ios-sdk-drop-in-ui_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dojo-ios-sdk-drop-in-ui_Tests.release.xcconfig"; path = "Target Support Files/Pods-dojo-ios-sdk-drop-in-ui_Tests/Pods-dojo-ios-sdk-drop-in-ui_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		B52C0F39D969A38766AAE19A /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		C3AAC0026453171A2A7AE4E1 /* Pods-Dojo SDK UI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dojo SDK UI.release.xcconfig"; path = "Target Support Files/Pods-Dojo SDK UI/Pods-Dojo SDK UI.release.xcconfig"; sourceTree = "<group>"; };
+		DC504533B71B1BE4EACB8F7B /* Pods-Dojo-SDK-UI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dojo-SDK-UI.release.xcconfig"; path = "Target Support Files/Pods-Dojo-SDK-UI/Pods-Dojo-SDK-UI.release.xcconfig"; sourceTree = "<group>"; };
 		F3D3DD6C79AEA8DC6C8573DE /* Pods_Dojo_SDK_UI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dojo_SDK_UI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -152,6 +154,8 @@
 				AE617861993E3742BA4B04F6 /* Pods-dojo-ios-sdk-drop-in-ui_Tests.release.xcconfig */,
 				92AFB2ACC90E0D268BC1B76E /* Pods-Dojo SDK UI.debug.xcconfig */,
 				C3AAC0026453171A2A7AE4E1 /* Pods-Dojo SDK UI.release.xcconfig */,
+				598FF2AD9762949C674C9385 /* Pods-Dojo-SDK-UI.debug.xcconfig */,
+				DC504533B71B1BE4EACB8F7B /* Pods-Dojo-SDK-UI.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -276,7 +280,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Dojo SDK UI-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Dojo-SDK-UI-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -311,7 +315,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Dojo SDK UI/Pods-Dojo SDK UI-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Dojo-SDK-UI/Pods-Dojo-SDK-UI-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/CocoaDebug/CocoaDebug.framework",
 				"${BUILT_PRODUCTS_DIR}/dojo-ios-sdk/dojo_ios_sdk.framework",
 				"${BUILT_PRODUCTS_DIR}/dojo-ios-sdk-drop-in-ui/dojo_ios_sdk_drop_in_ui.framework",
@@ -324,7 +328,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Dojo SDK UI/Pods-Dojo SDK UI-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Dojo-SDK-UI/Pods-Dojo-SDK-UI-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -478,7 +482,7 @@
 		};
 		607FACF01AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 92AFB2ACC90E0D268BC1B76E /* Pods-Dojo SDK UI.debug.xcconfig */;
+			baseConfigurationReference = 598FF2AD9762949C674C9385 /* Pods-Dojo-SDK-UI.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "dojo-ios-sdk-drop-in-ui_Example.entitlements";
@@ -507,7 +511,7 @@
 		};
 		607FACF11AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C3AAC0026453171A2A7AE4E1 /* Pods-Dojo SDK UI.release.xcconfig */;
+			baseConfigurationReference = DC504533B71B1BE4EACB8F7B /* Pods-Dojo-SDK-UI.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "dojo-ios-sdk-drop-in-ui_Example.entitlements";

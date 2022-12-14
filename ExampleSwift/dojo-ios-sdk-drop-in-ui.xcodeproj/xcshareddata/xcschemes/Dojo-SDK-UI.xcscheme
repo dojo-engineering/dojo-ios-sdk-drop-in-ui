@@ -29,13 +29,23 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
-            skipped = "NO">
+            skipped = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "607FACE41AFB9204008FA782"
                BuildableName = "dojo-ios-sdk-drop-in-ui_Tests.xctest"
                BlueprintName = "dojo-ios-sdk-drop-in-ui_Tests"
                ReferencedContainer = "container:dojo-ios-sdk-drop-in-ui.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B5B119A0C30C8888B60398B43B61D655"
+               BuildableName = "dojo-ios-sdk-drop-in-ui-Unit-DojoSDKUI-Tests.xctest"
+               BlueprintName = "dojo-ios-sdk-drop-in-ui-Unit-DojoSDKUI-Tests"
+               ReferencedContainer = "container:Pods/Pods.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
