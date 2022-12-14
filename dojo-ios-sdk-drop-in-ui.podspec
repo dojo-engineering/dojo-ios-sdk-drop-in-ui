@@ -44,8 +44,8 @@ TODO: Add long description of the pod here.
   s.dependency 'dojo-ios-sdk', '0.7.4' 
 
   s.test_spec 'DojoSDKUI-Tests' do |test_spec|
-    test_spec.source_files = 'Tests/**/*.{h,m,swift}'
+    test_spec.source_files = ['Tests/**/*.{h,m,swift}', 'Classes/**/*.{h,m,swift}']
     # test_spec.dependency 'OCMock' # This dependency will only be linked with your tests.
   end
-  
+
 end
