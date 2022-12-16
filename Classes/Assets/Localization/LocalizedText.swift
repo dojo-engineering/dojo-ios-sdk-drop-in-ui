@@ -64,4 +64,9 @@ enum LocalizedText {
         static let terms = "dojo_ui_sdk_footer_powered_by_terms".localized
         static let privacy = "dojo_ui_sdk_footer_powered_by_privacy".localized
     }
+    
+    enum Buttons {
+        static let next = "dojo_ui_sdk_keyboard_additional_button_next".localized
+        static let previous = "dojo_ui_sdk_keyboard_additional_button_previous".localized
+    }
 }

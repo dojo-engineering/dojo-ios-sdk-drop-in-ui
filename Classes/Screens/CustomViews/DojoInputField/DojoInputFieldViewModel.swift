@@ -129,34 +129,4 @@ class DojoInputFieldViewModel: DojoInputFieldViewModelProtocol {
             }
         }
     }
-    
-    func getCardScheme(_ text: String?) -> CardSchemes? {
-        let amexRegEx = "^3[47].*$"
-        let visaRegEx = "^4.*$"
-        let masterRegEx = "^5[12345].*$"
-        let maestroRegEx = "^(5018|5020|5038|6304|6759|6761|6763).*$"
-        
-        if evaluateRegex(regex: amexRegEx, textToVerify: text) {
-            return .amex
-        }
-        
-        if evaluateRegex(regex: visaRegEx, textToVerify: text) {
-            return .visa
-        }
-        
-        if evaluateRegex(regex: masterRegEx, textToVerify: text) {
-            return .mastercard
-        }
-        
-        if evaluateRegex(regex: maestroRegEx, textToVerify: text) {
-            return .maestro
-        }
-        
-        return nil
-    }
-    
-    private func evaluateRegex(regex: String, textToVerify: String?) -> Bool {
-        let predicate = NSPredicate(format:"SELF MATCHES %@", regex)
-        return predicate.evaluate(with: textToVerify)
-    }
 }

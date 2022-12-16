@@ -12,6 +12,7 @@ extension DojoInputFieldViewModel {
     /// - Parameter number: Card number
     /// - Returns: is valid or not
     func luhnCheck(_ number: String) -> Bool {
+        guard !number.isEmpty else {return false}
         var sum = 0
         let digitStrings = number.reversed().map { String($0) }
 
@@ -38,32 +39,20 @@ extension DojoInputFieldViewModel {
         guard let text = text, !text.isEmpty else { return .error}
         switch type {
         case .email:
-            let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-            let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-            if !emailPred.evaluate(with: text) {
+            if !isEmailValid(text) {
                 return .error
             }
         case .cardNumber:
-            if !luhnCheck(text.replacingOccurrences(of: " ", with: "")) {
+            if !isCardNumberValid(text.replacingOccurrences(of: " ", with: "")) {
                 return .error
             }
         case .expiry:
-            let textItems = text.split(separator: "/")
-            if let month = textItems.first,
-               let year = textItems.last,
-               let monthInt = Int(month),
-            let yearInt = Int(year),
-            monthInt > 0 && monthInt < 13,
-            yearInt > 21 && yearInt < 99 {
-                return .normal
-            } else {
+            if !isExpiryValid(text) {
                 return .error
             }
         case .cvv:
-            if text.count > 2 { //TODO: add amex check
-                return .normal
-            } else {
-                return  .error
+            if !isCVVValid(text) {
+                return .error
             }
         default:
             return .normal
@@ -73,7 +62,59 @@ extension DojoInputFieldViewModel {
     }
     
     func isEmailValid(_ email: String) -> Bool {
-        false
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        return evaluateRegex(regex: emailRegEx, textToVerify: email)
+    }
+    
+    func isCardNumberValid(_ cardNumber: String) -> Bool {
+        luhnCheck(cardNumber)
+    }
+    
+    func isExpiryValid(_ expiry: String) -> Bool {
+        let textItems = expiry.split(separator: "/")
+        if let month = textItems.first,
+           let year = textItems.last,
+           let monthInt = Int(month),
+        let yearInt = Int(year),
+        monthInt > 0 && monthInt < 13,
+        yearInt > 21 && yearInt < 99 {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func isCVVValid(_ cvv: String) -> Bool {
+       cvv.count > 2 && Int(cvv) != nil
+    }
+    
+    func getCardScheme(_ text: String?) -> CardSchemes? {
+        let amexRegEx = "^3[47].*$"
+        let visaRegEx = "^4.*$"
+        let masterRegEx = "^5[12345].*$"
+        let maestroRegEx = "^(5018|5020|5038|6304|6759|6761|6763).*$"
         
+        if evaluateRegex(regex: amexRegEx, textToVerify: text) {
+            return .amex
+        }
+        
+        if evaluateRegex(regex: visaRegEx, textToVerify: text) {
+            return .visa
+        }
+        
+        if evaluateRegex(regex: masterRegEx, textToVerify: text) {
+            return .mastercard
+        }
+        
+        if evaluateRegex(regex: maestroRegEx, textToVerify: text) {
+            return .maestro
+        }
+        
+        return nil
+    }
+    
+    func evaluateRegex(regex: String, textToVerify: String?) -> Bool {
+        let predicate = NSPredicate(format:"SELF MATCHES %@", regex)
+        return predicate.evaluate(with: textToVerify)
     }
 }

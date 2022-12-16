@@ -52,3 +52,5 @@
 "dojo_ui_sdk_mange_payments_dialog_message"="You are about to permanently delete this payment method.";
 "dojo_ui_sdk_mange_payments_dialog_confirm_text"="Confirm";
 "dojo_ui_sdk_mange_payments_dialog_cancel_text"="Cancel";
+"dojo_ui_sdk_keyboard_additional_button_next"="Next";
+"dojo_ui_sdk_keyboard_additional_button_previous"="Previous";
