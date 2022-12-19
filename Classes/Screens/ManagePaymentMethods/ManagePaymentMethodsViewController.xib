@@ -41,10 +41,14 @@
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Jvd-9S-Y5u">
                     <rect key="frame" x="0.0" y="48.5" width="414" height="650.5"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="width" priority="999" constant="480" id="C5D-Ld-oEW"/>
+                    </constraints>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DQi-4j-kXE" customClass="LoadingButton" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
                     <rect key="frame" x="16" y="709" width="382" height="44"/>
                     <constraints>
+                        <constraint firstAttribute="width" priority="999" constant="480" id="ROM-W8-nLv"/>
                         <constraint firstAttribute="height" constant="44" id="tZh-Df-Xky"/>
                     </constraints>
                     <state key="normal" title="Button"/>
@@ -57,6 +61,7 @@
                     <rect key="frame" x="16" y="769" width="382" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="13u-a3-9xV"/>
+                        <constraint firstAttribute="width" priority="999" constant="480" id="Lz3-rJ-94b"/>
                     </constraints>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="Pay with new card"/>
@@ -68,14 +73,17 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="NIU-8V-UnT" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="0Td-b6-uVW"/>
-                <constraint firstItem="DQi-4j-kXE" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="2Za-9h-FPy"/>
+                <constraint firstItem="NIU-8V-UnT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="0Td-b6-uVW"/>
+                <constraint firstItem="NIU-8V-UnT" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="0nQ-el-3cx"/>
+                <constraint firstItem="DQi-4j-kXE" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="2Za-9h-FPy"/>
                 <constraint firstItem="kVw-30-O4F" firstAttribute="top" secondItem="NIU-8V-UnT" secondAttribute="bottom" constant="9" id="2wL-Hc-tdm"/>
-                <constraint firstItem="Jvd-9S-Y5u" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="4ff-ps-Wj6"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Jvd-9S-Y5u" secondAttribute="trailing" id="C0O-JT-n21"/>
+                <constraint firstItem="Jvd-9S-Y5u" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="4ff-ps-Wj6"/>
+                <constraint firstItem="DQi-4j-kXE" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="4xc-Tf-8TN"/>
+                <constraint firstItem="Jvd-9S-Y5u" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="5fy-8t-kED"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Jvd-9S-Y5u" secondAttribute="trailing" id="C0O-JT-n21"/>
                 <constraint firstItem="kVw-30-O4F" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="E7g-Fw-fUM"/>
                 <constraint firstAttribute="trailing" secondItem="5qR-ae-jTa" secondAttribute="trailing" id="ENa-Dp-TUh"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="DQi-4j-kXE" secondAttribute="trailing" constant="16" id="RTo-O1-Ur0"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="DQi-4j-kXE" secondAttribute="trailing" constant="16" id="RTo-O1-Ur0"/>
                 <constraint firstItem="kVw-30-O4F" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="RsU-sB-6ts"/>
                 <constraint firstItem="DQi-4j-kXE" firstAttribute="top" secondItem="Jvd-9S-Y5u" secondAttribute="bottom" constant="10" id="Uxw-Ls-mIw"/>
                 <constraint firstItem="Jvd-9S-Y5u" firstAttribute="top" secondItem="5qR-ae-jTa" secondAttribute="bottom" id="fDe-bN-su3"/>
@@ -83,7 +91,7 @@
                 <constraint firstItem="5qR-ae-jTa" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="ud0-oa-gBX"/>
                 <constraint firstItem="NIU-8V-UnT" firstAttribute="top" secondItem="DQi-4j-kXE" secondAttribute="bottom" constant="16" id="wMv-ip-coE"/>
                 <constraint firstItem="5qR-ae-jTa" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="x21-LA-JvU"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="NIU-8V-UnT" secondAttribute="trailing" constant="16" id="xj7-hc-b7L"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="NIU-8V-UnT" secondAttribute="trailing" constant="16" id="xj7-hc-b7L"/>
             </constraints>
             <point key="canvasLocation" x="131.8840579710145" y="105.80357142857143"/>
         </view>

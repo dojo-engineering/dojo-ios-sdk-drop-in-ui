@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -31,6 +31,7 @@
                     <rect key="frame" x="16" y="769" width="382" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="NCM-Ng-77m"/>
+                        <constraint firstAttribute="width" priority="999" constant="480" id="nwd-EZ-Lq1"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -46,6 +47,7 @@
                     <rect key="frame" x="16" y="709" width="382" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="87M-GK-O6T"/>
+                        <constraint firstAttribute="width" priority="999" constant="480" id="caa-Wu-dlS"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -96,7 +98,8 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Kxd-5L-vfw" secondAttribute="trailing" constant="16" id="3WA-U7-hSg"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Kxd-5L-vfw" secondAttribute="trailing" constant="16" id="3WA-U7-hSg"/>
+                <constraint firstItem="Kxd-5L-vfw" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="A86-Qb-rtq"/>
                 <constraint firstAttribute="trailing" secondItem="yzg-D4-IOU" secondAttribute="trailing" id="CyF-aS-K0m"/>
                 <constraint firstItem="yU4-QQ-5W5" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="DaZ-LG-sWR"/>
                 <constraint firstItem="yzg-D4-IOU" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="EHl-T8-ynb"/>
@@ -105,8 +108,8 @@
                 <constraint firstItem="SiX-RT-8wU" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="40" id="HeS-aS-Drw"/>
                 <constraint firstItem="xaK-9E-AnX" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="Ihm-sg-Xp4"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="xaK-9E-AnX" secondAttribute="trailing" constant="16" id="L57-Ei-2E7"/>
-                <constraint firstItem="qw6-82-Sm5" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="OqD-Ih-jHM"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="qw6-82-Sm5" secondAttribute="trailing" constant="16" id="TAk-gy-39r"/>
+                <constraint firstItem="qw6-82-Sm5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="OqD-Ih-jHM"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qw6-82-Sm5" secondAttribute="trailing" constant="16" id="TAk-gy-39r"/>
                 <constraint firstItem="0Pj-Be-ND9" firstAttribute="top" secondItem="GI8-4z-Q43" secondAttribute="bottom" constant="32" id="Vg4-kU-KFk"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="SiX-RT-8wU" secondAttribute="trailing" constant="40" id="WEc-ra-nsI"/>
                 <constraint firstItem="xaK-9E-AnX" firstAttribute="top" secondItem="0Pj-Be-ND9" secondAttribute="bottom" constant="24" id="WqL-jU-mSN"/>
@@ -116,7 +119,7 @@
                 <constraint firstItem="qw6-82-Sm5" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="aQj-qu-Rsd"/>
                 <constraint firstItem="0Pj-Be-ND9" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="aYf-zO-LQ3"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="0Pj-Be-ND9" secondAttribute="trailing" constant="16" id="aZg-is-jRq"/>
-                <constraint firstItem="Kxd-5L-vfw" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="ioR-Th-0vT"/>
+                <constraint firstItem="Kxd-5L-vfw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="ioR-Th-0vT"/>
                 <constraint firstItem="GI8-4z-Q43" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="nPA-pt-8qx"/>
                 <constraint firstItem="yU4-QQ-5W5" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="w2X-Ak-j9N"/>
                 <constraint firstItem="yU4-QQ-5W5" firstAttribute="top" secondItem="qw6-82-Sm5" secondAttribute="bottom" constant="9" id="xVI-Wo-uRp"/>
