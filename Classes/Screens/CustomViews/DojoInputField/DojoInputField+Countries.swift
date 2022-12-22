@@ -6,6 +6,11 @@
 
 import UIKit
 
+struct CountryDropdownItem {
+    let title: String
+    let isoCode: String
+}
+
 extension DojoInputField {
     
     func setUpFieldForCountriesDropDown() {
@@ -35,11 +40,10 @@ extension DojoInputField: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if dropDownCountries.count > row {
-            return dropDownCountries[row].title
-        } else {
+        guard dropDownCountries.count > row else {
             return nil
         }
+        return dropDownCountries[row].title
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {

@@ -50,7 +50,9 @@ class DataLoadingViewController: BaseUIViewController {
             self.loadData()
         }
     }
-    
+}
+
+extension DataLoadingViewController {
     func getViewModel() -> DataLoadingViewModel? {
         viewModel as? DataLoadingViewModel
     }
@@ -63,19 +65,25 @@ class DataLoadingViewController: BaseUIViewController {
     
     func loadData() {
         getViewModel()?.fetchPaymentIntent() { paymentIntent, error in
+            // error, do not proceed next
             if let error = error {
                 self.delegate.errorLoadingPaymentIntent(error: error)
-            } else if let paymentIntent = paymentIntent {
-                if let customerId = paymentIntent.customer?.id {
-                    self.getViewModel()?.fetchCustomersPaymentMethods(customerId: customerId) { savedMethods, error in
-                        self.delegate.initialDataDownloaded(paymentIntent, savedPaymentMethods: savedMethods)
-                    }
-                } else {
-                    self.delegate.initialDataDownloaded(paymentIntent, savedPaymentMethods: nil) //TODO:
-                }
-            } else {
-                // TODO error?
-//                self.delegate.errorLoadingPaymentIntent(error: )
+                return
+            }
+            // check if payment intent exists
+            guard let paymentIntent = paymentIntent else {
+                self.delegate.errorLoadingPaymentIntent(error: NSError(domain: "DataLoadingViewController-loadData", code: 7770, userInfo: nil))
+                return
+            }
+            // payment inent exists but there is no customer so we don't need to fetch saved payment methods
+            guard let customerId = paymentIntent.customer?.id else {
+                self.delegate.initialDataDownloaded(paymentIntent, savedPaymentMethods: nil)
+                return
+            }
+            // fetch saved payment methods
+            self.getViewModel()?.fetchCustomersPaymentMethods(customerId: customerId) { savedMethods, error in
+                // optional call, do not fail if error, send empty saved methods
+                self.delegate.initialDataDownloaded(paymentIntent, savedPaymentMethods: savedMethods)
             }
         }
     }

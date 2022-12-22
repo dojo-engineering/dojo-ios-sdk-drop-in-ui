@@ -6,6 +6,23 @@
 
 import UIKit
 
+enum DojoInputFieldType {
+    case email
+    case cardHolderName
+    case cardNumber
+    case billingCountry
+    case billingPostcode
+    case expiry
+    case cvv
+}
+
+enum DojoInputFieldState {
+    case normal
+    case activeInput
+    case error
+}
+
+
 protocol DojoInputFieldViewModelProtocol {
     init(type: DojoInputFieldType)
     var fieldKeyboardType: UIKeyboardType {get}
