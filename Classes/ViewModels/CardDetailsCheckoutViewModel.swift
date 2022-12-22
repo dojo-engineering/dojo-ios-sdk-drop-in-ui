@@ -49,4 +49,8 @@ class CardDetailsCheckoutViewModel: BaseViewModel {
     var supportedCardSchemes: [CardSchemes] {
         paymentIntent.merchantConfig?.supportedPaymentMethods?.cardSchemes ?? []
     }
+    
+    func showBillingPostcode(_ countryCode: String) -> Bool {
+        ["GB", "US", "CA"].contains(countryCode)
+    }
 }

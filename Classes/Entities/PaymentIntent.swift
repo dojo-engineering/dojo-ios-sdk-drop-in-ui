@@ -56,8 +56,8 @@ enum Wallets: String, Codable {
 }
 
 struct PaymentIntentConfig: Codable {
-    let customerEmail: ConfigurationRequired?
-    let billingAddress: ConfigurationRequired?
+    var customerEmail: ConfigurationRequired?
+    var billingAddress: ConfigurationRequired?
 }
 
 struct CustomerConfig: Codable {
@@ -65,15 +65,15 @@ struct CustomerConfig: Codable {
 }
 
 struct MerchantConfig: Codable {
-    let supportedPaymentMethods: SupportedPaymentMethods?
+    var supportedPaymentMethods: SupportedPaymentMethods?
 }
 
 struct SupportedPaymentMethods: Codable {
-    let cardSchemes: [CardSchemes]?
-    let wallets: [Wallets]?
+    var cardSchemes: [CardSchemes]?
+    var wallets: [Wallets]?
 }
 
 struct ConfigurationRequired: Codable {
-    let collectionRequired: Bool
+    var collectionRequired: Bool
 }
 

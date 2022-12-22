@@ -8,7 +8,9 @@
 import UIKit
 import dojo_ios_sdk
 
-class DataLoadingViewModel: BaseViewModel {
+// Not a part of BaseViewModel because it doesn't have a full paymentIntent object
+// That's the viewModel that actually gets that object that other viewModels are required to have
+class DataLoadingViewModel {
     
     let paymentIntentId: String
     let customerSecret: String?
@@ -18,10 +20,6 @@ class DataLoadingViewModel: BaseViewModel {
         self.paymentIntentId = paymentIntentId
         self.customerSecret = customerSecret
         self.demoDelay = demoDelay
-        let emptyPaymentIntent = PaymentIntent(id: paymentIntentId,
-                                               clientSessionSecret: "",
-                                               amount: DojoPaymentIntentAmount(value: 0, currencyCode: ""))
-        super.init(paymentIntent: emptyPaymentIntent)
     }
     
     func fetchPaymentIntent(completion: ((PaymentIntent?, Error?) -> Void)?) {

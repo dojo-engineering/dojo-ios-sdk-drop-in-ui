@@ -126,33 +126,6 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
                 buttonPayCard.layer.borderColor = theme.primaryLabelTextColor.cgColor
             }
         }
-        
-       
-//        } else {
-//            selectedPaymentMethodView.isHidden = true
-//            constraintPayButtonBottom.constant = 70
-//            buttonPayCard.isHidden = false
-//
-//            let buttonPayTitle = "Pay by card"
-//            buttonPayCard.setTitle(buttonPayTitle, for: .normal)
-//            buttonPayCard.backgroundColor = theme.primarySurfaceBackgroundColor
-//            buttonPayCard.setTitleColor(theme.primaryLabelTextColor, for: .normal)
-//            buttonPayCard.layer.borderWidth = 1
-//            buttonPayCard.layer.borderColor = theme.primaryLabelTextColor.cgColor
-//        }
-        
-        //If apple pay is not availalbe but we have saved cards
-        
-//        if getViewModel()?.isApplePayAvailable() ?? false {
-//           //TODO
-//        } else {
-//            paymentButton.isHidden = true
-//            constraintPayButtonBottom.constant = 9
-//            buttonPayCard.setTheme(theme)
-//            if let navigation = (navigationController as? BaseNavigationController) {
-//                navigation.defaultHeight = 210
-//            }
-//        }
     }
     
     override func setUpDesign() {

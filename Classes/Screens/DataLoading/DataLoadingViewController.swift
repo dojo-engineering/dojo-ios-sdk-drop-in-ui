@@ -15,6 +15,7 @@ protocol DataLoadingViewControllerDelegate: BaseViewControllerDelegate {
 class DataLoadingViewController: BaseUIViewController {
     
     var delegate: DataLoadingViewControllerDelegate
+    var dataLoadingViewModel: DataLoadingViewModel
     @IBOutlet weak var materialLoadingIndicator: MaterialLoadingIndicator!
     
     public init(viewModel: DataLoadingViewModel,
@@ -23,8 +24,8 @@ class DataLoadingViewController: BaseUIViewController {
         self.delegate = delegate
         let nibName = String(describing: type(of: self))
         let podBundle = Bundle(for: type(of: self))
+        self.dataLoadingViewModel = viewModel
         super.init(nibName: nibName, bundle: podBundle)
-        self.viewModel = viewModel
         self.baseDelegate = delegate
         self.theme = theme
     }
@@ -45,7 +46,7 @@ class DataLoadingViewController: BaseUIViewController {
      
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let delay = getViewModel()?.demoDelay ?? 0
+        let delay = dataLoadingViewModel.demoDelay
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             self.loadData()
         }
@@ -53,9 +54,6 @@ class DataLoadingViewController: BaseUIViewController {
 }
 
 extension DataLoadingViewController {
-    func getViewModel() -> DataLoadingViewModel? {
-        viewModel as? DataLoadingViewModel
-    }
     
     func setupLoadingIndicator() {
         materialLoadingIndicator.radius = 15.0
@@ -64,7 +62,7 @@ extension DataLoadingViewController {
     }
     
     func loadData() {
-        getViewModel()?.fetchPaymentIntent() { paymentIntent, error in
+        dataLoadingViewModel.fetchPaymentIntent() { paymentIntent, error in
             // error, do not proceed next
             if let error = error {
                 self.delegate.errorLoadingPaymentIntent(error: error)
@@ -81,7 +79,7 @@ extension DataLoadingViewController {
                 return
             }
             // fetch saved payment methods
-            self.getViewModel()?.fetchCustomersPaymentMethods(customerId: customerId) { savedMethods, error in
+            self.dataLoadingViewModel.fetchCustomersPaymentMethods(customerId: customerId) { savedMethods, error in
                 // optional call, do not fail if error, send empty saved methods
                 self.delegate.initialDataDownloaded(paymentIntent, savedPaymentMethods: savedMethods)
             }
