@@ -43,4 +43,15 @@ class DojoInputFieldViewModelTests: XCTestCase {
         XCTAssert(inputFieldViewModelCardNumber.getCardScheme("") == nil)
         XCTAssert(inputFieldViewModelCardNumber.getCardScheme("1112") == nil)
     }
+    
+    func testCountriedPicker() {
+        let inputFieldViewBillingCountry = DojoInputFieldViewModel(type: .billingCountry)
+        guard let countries = inputFieldViewBillingCountry.getCountriesItems() else {
+            XCTFail("Can't get country items")
+            return
+        }
+        XCTAssert(countries.count > 10)
+        XCTAssert(countries[0].title == "United Kingdom")
+        XCTAssert(countries[0].isoCode == "GB")
+    }
 }

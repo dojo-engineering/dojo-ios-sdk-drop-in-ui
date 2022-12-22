@@ -9,7 +9,7 @@ import UIKit
 extension DojoInputField {
     
     func setUpFieldForCountriesDropDown() {
-        dropDownCountries = getCSVData() ?? []
+        dropDownCountries = viewModel?.getCountriesItems() ?? []
         if dropDownCountries.count > selectedPickerPosition {
             let displayingItem = dropDownCountries[selectedPickerPosition]
             textFieldMain.text = displayingItem.title
@@ -17,31 +17,11 @@ extension DojoInputField {
         }
     }
     
-    func getCSVData() -> Array<CountryDropdownItem>? {
-        let bundle = Bundle(for: type(of: self))
-        guard let countriesCSV = bundle.url(forResource: "countries", withExtension: "csv") else {
+    func getSelectedCountry() -> CountryDropdownItem? {
+        guard dropDownCountries.count > selectedPickerPosition else {
             return nil
         }
-        
-        do {
-            let content = try String(contentsOf: countriesCSV)
-            var parsedCSV: [CountryDropdownItem] = content.components(
-                separatedBy: "\n"
-            ).map{
-                CountryDropdownItem(title: $0.components(separatedBy: ",")[0], //TODO: make sure it won't crash
-                                    isoCode: $0.components(separatedBy: ",")[1])}
-            if parsedCSV.count > 0 {
-                parsedCSV.removeFirst()
-            }
-            return parsedCSV
-        }
-        catch {
-            return []
-        }
-    }
-    
-    func getSelectedCountry() -> CountryDropdownItem? {
-        getCSVData()?[selectedPickerPosition]
+        return dropDownCountries[selectedPickerPosition]
     }
 }
 

@@ -18,6 +18,8 @@ protocol DojoInputFieldViewModelProtocol {
     
     func validateField(_ text: String?) -> DojoInputFieldState
     func getCardScheme(_ text: String?) -> CardSchemes?
+    
+    func getCountriesItems() -> Array<CountryDropdownItem>?
 }
 
 class DojoInputFieldViewModel: DojoInputFieldViewModelProtocol {
@@ -128,5 +130,31 @@ class DojoInputFieldViewModel: DojoInputFieldViewModelProtocol {
                 return 120
             }
         }
+    }
+    
+    func getCountriesItems() -> Array<CountryDropdownItem>? {
+        // fetch csv with countries
+        let bundle = Bundle(for: Swift.type(of: self))
+        guard let countriesCSV = bundle.url(forResource: "countries", withExtension: "csv") else {
+            return nil
+        }
+        // convert data to string
+        guard let content = try? String(contentsOf: countriesCSV) else {
+            return nil
+        }
+        // parse string to objects
+        var parsedCSV: [CountryDropdownItem] = content.components(
+            separatedBy: "\n"
+        ).compactMap {
+            if $0.components(separatedBy: ",").count >= 2 {
+                return CountryDropdownItem(title: $0.components(separatedBy: ",")[0],
+                                           isoCode: $0.components(separatedBy: ",")[1])
+            } else {
+                return nil
+            }
+        }
+        // remove first line (name, isoCode, etc)
+        if parsedCSV.count > 0 { parsedCSV.removeFirst() }
+        return parsedCSV
     }
 }

@@ -9,7 +9,8 @@ import UIKit
 
 extension DojoInputField {
     func addLeftPaddingView() {
-        let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: 0))
+        let leftPadding = 8
+        let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: leftPadding, height: 0))
         textFieldMain.leftView = paddingView
         textFieldMain.leftViewMode = .always
     }
@@ -39,14 +40,10 @@ extension DojoInputField {
             print("textfields accessory view already set up")
             return
         }
-        
         textFieldMain.inputAccessoryView = getTextFieldAccessoryView()
     }
     
     @objc func didPressDoneKeyboardButton(button: UIButton) {
-        // Button has been pressed
-        // Process the containment of the textfield or whatever
-        
         // Hide keyboard
         textFieldMain.resignFirstResponder()
     }
