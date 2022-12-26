@@ -21,10 +21,12 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
     @IBOutlet weak var labelTotalAmount: UILabel!
     @IBOutlet weak var paymentButton: PKPaymentButton!
     @IBOutlet weak var buttonPayCard: LoadingButton!
+    @IBOutlet weak var additionalItemsTableView: UITableView!
     @IBOutlet weak var selectedPaymentMethodView: SelectedPaymentMethodView!
     
     @IBOutlet weak var constraintPayButtonCardBottom: NSLayoutConstraint!
     @IBOutlet weak var constraintPayButtonBottom: NSLayoutConstraint!
+    @IBOutlet weak var constraintAdditionalItemsHeight: NSLayoutConstraint!
     public init(viewModel: PaymentMethodCheckoutViewModel,
                 theme: ThemeSettings,
                 delegate: PaymentMethodCheckoutViewControllerDelegate) {
@@ -55,6 +57,16 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
     }
     
     func setupViews() {
+        
+        additionalItemsTableView.isHidden = true
+        additionalItemsTableView.delegate = self
+        additionalItemsTableView.dataSource = self
+        PaymentMethodCheckoutAdditonalItemCell.register(tableView: additionalItemsTableView)
+        
+        additionalItemsTableView.rowHeight = 26.0;
+        constraintAdditionalItemsHeight.constant = CGFloat((viewModel?.paymentIntent.itemLines?.count ?? 0) * 26)
+        
+        
         selectedPaymentMethodView.paymentMethod = nil
         buttonPayCard.setEnabled(true) //TODO edge case when payment method is removed
         selectedPaymentMethodView.delegate = self
@@ -274,5 +286,25 @@ extension PaymentMethodCheckoutViewController: SelectedPaymentMethodViewDelegate
     
     func onPress(_ item: PaymentMethodItem) {
         delegate?.navigateToManagePaymentMethods(item)
+    }
+}
+
+
+extension PaymentMethodCheckoutViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        viewModel?.paymentIntent.itemLines?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: PaymentMethodCheckoutAdditonalItemCell.cellId) as?
+            PaymentMethodCheckoutAdditonalItemCell {
+            cell.setTheme(theme: theme)
+            // TODO move to viewModel
+            if let item = viewModel?.paymentIntent.itemLines?[indexPath.row] {
+                cell.setUp(itemLine: item)
+            }
+            return cell
+        }
+        return UITableViewCell.init(style: .default, reuseIdentifier: "")
     }
 }

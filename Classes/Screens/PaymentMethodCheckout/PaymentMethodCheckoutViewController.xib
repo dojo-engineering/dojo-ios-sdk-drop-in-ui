@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
@@ -11,7 +11,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PaymentMethodCheckoutViewController" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
             <connections>
+                <outlet property="additionalItemsTableView" destination="Jsz-Ue-F6g" id="2j3-Cv-vBP"/>
                 <outlet property="buttonPayCard" destination="AHi-j5-5XI" id="5tS-wl-aFq"/>
+                <outlet property="constraintAdditionalItemsHeight" destination="SSh-mh-9eD" id="hkn-fh-Nww"/>
                 <outlet property="constraintPayButtonBottom" destination="LtI-6G-hW0" id="69e-1h-dkg"/>
                 <outlet property="constraintPayButtonCardBottom" destination="p1p-xY-jcv" id="Gh3-Gv-9pJ"/>
                 <outlet property="footerPoweredByDojoView" destination="Utf-dq-Cdi" id="PVT-YT-d3k"/>
@@ -55,6 +57,14 @@
                         <constraint firstAttribute="height" constant="0.5" id="Xch-hG-hX5"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bl0-mH-Tqe" userLabel="SelectedPaymentMethod" customClass="SelectedPaymentMethodView" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="634" width="414" height="55"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" priority="999" constant="480" id="7bD-kP-zLV"/>
+                        <constraint firstAttribute="height" constant="55" id="wYV-a2-VLB"/>
+                    </constraints>
+                </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Due" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nIa-N9-fws">
                     <rect key="frame" x="16" y="721" width="72" height="24"/>
                     <constraints>
@@ -73,14 +83,6 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bl0-mH-Tqe" userLabel="SelectedPaymentMethod" customClass="SelectedPaymentMethodView" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="634" width="414" height="55"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="width" priority="999" constant="480" id="7bD-kP-zLV"/>
-                        <constraint firstAttribute="height" constant="55" id="wYV-a2-VLB"/>
-                    </constraints>
-                </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AHi-j5-5XI" userLabel="Card Pay Button" customClass="LoadingButton" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
                     <rect key="frame" x="16" y="769" width="382" height="44"/>
                     <constraints>
@@ -93,12 +95,22 @@
                         <action selector="onPayUsingSavedCard:" destination="-1" eventType="touchUpInside" id="tXX-LD-Lus"/>
                     </connections>
                 </button>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jsz-Ue-F6g" userLabel="additional items">
+                    <rect key="frame" x="16" y="685" width="382" height="32"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="32" id="SSh-mh-9eD"/>
+                    </constraints>
+                </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="nIa-N9-fws" firstAttribute="top" secondItem="Jsz-Ue-F6g" secondAttribute="bottom" constant="4" id="0Ws-FB-eZp"/>
                 <constraint firstItem="DIE-VP-Mbo" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="0bE-vR-cYM"/>
                 <constraint firstItem="dgb-bS-UCe" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="2eE-vE-t35"/>
+                <constraint firstAttribute="trailing" secondItem="Jsz-Ue-F6g" secondAttribute="trailing" constant="16" id="72n-30-cQm"/>
+                <constraint firstItem="Jsz-Ue-F6g" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="74k-2p-gis"/>
                 <constraint firstItem="nIa-N9-fws" firstAttribute="leading" secondItem="AHi-j5-5XI" secondAttribute="leading" id="A9O-g0-UAJ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="AHi-j5-5XI" secondAttribute="trailing" constant="16" id="KGz-9q-BeG"/>
                 <constraint firstItem="Utf-dq-Cdi" firstAttribute="top" secondItem="DIE-VP-Mbo" secondAttribute="bottom" constant="9" id="LtI-6G-hW0"/>

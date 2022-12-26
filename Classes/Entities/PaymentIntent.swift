@@ -15,6 +15,7 @@ struct PaymentIntent: Codable {
     var config: PaymentIntentConfig? = nil
     var merchantConfig: MerchantConfig? = nil
     var customer: CustomerConfig? = nil
+    var itemLines: [ItemLine]?
     var status: String?
 }
 
@@ -62,6 +63,11 @@ struct PaymentIntentConfig: Codable {
 
 struct CustomerConfig: Codable {
     let id: String?
+}
+
+struct ItemLine: Codable {
+    let caption: String?
+    let amountTotal: DojoPaymentIntentAmount
 }
 
 struct MerchantConfig: Codable {
