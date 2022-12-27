@@ -43,4 +43,35 @@ struct CommonUtils {
             completion?(nil, error)
         }
     }
+    
+    static func getApplePayConfig(applePayConfig: DojoUIApplePayConfig?, paymentIntent: PaymentIntent) -> DojoApplePayConfig? {
+        guard let merchantIdentifier = applePayConfig?.merchantIdentifier else { return nil }
+        return DojoApplePayConfig(merchantIdentifier: merchantIdentifier,
+                                  supportedCards: getSupportedApplePayCards(paymentIntent: paymentIntent))
+    }
+    
+    static func getSupportedApplePayCards(paymentIntent: PaymentIntent) -> [String] {
+        paymentIntent.merchantConfig?.supportedPaymentMethods?.cardSchemes?.compactMap({
+            switch $0 {
+            case .visa:
+                return ApplePaySupportedCards.visa.rawValue
+            case .mastercard:
+                return ApplePaySupportedCards.mastercard.rawValue
+            case .maestro:
+                return ApplePaySupportedCards.maestro.rawValue
+            case .amex:
+                return ApplePaySupportedCards.amex.rawValue
+            case .other:
+                return nil
+            }
+        }) ?? []
+    }
+    
+    static func isApplePayAvailable(appleConfig: DojoApplePayConfig?, paymentIntent: PaymentIntent) -> Bool {
+        // ApplePay config was not passed
+        guard let appleConfig = appleConfig else { return false }
+        // ApplePay is not configured for the merchant
+        guard paymentIntent.merchantConfig?.supportedPaymentMethods?.wallets?.contains(.applePay) == true else { return false }
+        return DojoSDK.isApplePayAvailable(config: appleConfig)
+    }
 }

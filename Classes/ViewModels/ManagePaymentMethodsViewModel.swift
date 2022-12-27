@@ -60,36 +60,16 @@ class ManagePaymentMethodsViewModel: BaseViewModel {
         return nil
     }
     
-    //TODO: duplication of the method
     func isApplePayAvailable() -> Bool {
-        // ApplePay config was not passed
-        guard let appleConfig = getApplePayConfig() else { return false }
-        // ApplePay is not configured for the merchant
-        guard paymentIntent.merchantConfig?.supportedPaymentMethods?.wallets?.contains(.applePay) == true else { return false }
-        return DojoSDK.isApplePayAvailable(config: appleConfig)
+        CommonUtils.isApplePayAvailable(appleConfig: getApplePayConfig(), paymentIntent: paymentIntent)
     }
     
     func getApplePayConfig() -> DojoApplePayConfig? {
-        guard let merchantIdentifier = applePayConfig?.merchantIdentifier else { return nil }
-        return DojoApplePayConfig(merchantIdentifier: merchantIdentifier,
-                                  supportedCards: getSupportedApplePayCards())
+        CommonUtils.getApplePayConfig(applePayConfig: applePayConfig, paymentIntent: paymentIntent)
     }
     
     func getSupportedApplePayCards() -> [String] {
-        paymentIntent.merchantConfig?.supportedPaymentMethods?.cardSchemes?.compactMap({
-            switch $0 {
-            case .visa:
-                return ApplePaySupportedCards.visa.rawValue
-            case .mastercard:
-                return ApplePaySupportedCards.mastercard.rawValue
-            case .maestro:
-                return ApplePaySupportedCards.maestro.rawValue
-            case .amex:
-                return ApplePaySupportedCards.amex.rawValue
-            case .other:
-                return nil
-            }
-        }) ?? []
+        CommonUtils.getSupportedApplePayCards(paymentIntent: paymentIntent)
     }
 }
 
@@ -116,7 +96,7 @@ enum PaymentMethodType {
     }
 }
 
-class PaymentMethodItem {
+class PaymentMethodItem: Equatable {
     let id: String
     let title: String
     let type: PaymentMethodType
@@ -127,5 +107,9 @@ class PaymentMethodItem {
         self.title = title
         self.type = type
         self.selected = selected
+    }
+    
+    static func == (lhs: PaymentMethodItem, rhs: PaymentMethodItem) -> Bool {
+        lhs.id == rhs.id
     }
 }
