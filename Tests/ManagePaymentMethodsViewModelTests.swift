@@ -24,14 +24,6 @@ class ManagePaymentMethodsViewModelTests: XCTestCase {
         XCTAssertTrue(viewModelWithPaymentIntentConfigandMerchantConfigAndSupportedCards.isApplePayAvailable())
     }
     
-    func testGetSupportedApplePayCards() {
-        let viewModel = ManagePaymentMethodsViewModel(config: TestsUtils.getBaseConfig())!
-        XCTAssertEqual(viewModel.getSupportedApplePayCards(), [])
-        
-        let viewModelWithSupportedNetworks = ManagePaymentMethodsViewModel(config: TestsUtils.getBaseConfig(supportedCardSchemas: [.visa, .amex, .maestro]))!
-        XCTAssertEqual(viewModelWithSupportedNetworks.getSupportedApplePayCards(), [ApplePaySupportedCards.visa.rawValue, ApplePaySupportedCards.amex.rawValue, ApplePaySupportedCards.maestro.rawValue])
-    }
-    
     func testGetApplePayConfig() {
         let viewModel = ManagePaymentMethodsViewModel(config: TestsUtils.getBaseConfig())!
         XCTAssertNil(viewModel.getApplePayConfig())
@@ -42,21 +34,21 @@ class ManagePaymentMethodsViewModelTests: XCTestCase {
     
     func testSavedPaymentMethodItems() {
         let viewModel = ManagePaymentMethodsViewModel(config: TestsUtils.getBaseConfig())!
-        XCTAssertEqual(viewModel.items, [])
+        XCTAssertEqual(viewModel.getSavedPaymentItems(), [])
         
         let viewModelWithApplePay = ManagePaymentMethodsViewModel(config: TestsUtils.getBaseConfig(withApplePayConfig: true, withApplePayPaymentIntent: true, supportedCardSchemas: [.visa]))!
-        var savedMethoItemsApplePay = [PaymentMethodItem(id: "", title: "ApplePay", type: .applePay)]
-        XCTAssertEqual(viewModelWithApplePay.items, savedMethoItemsApplePay)
+        var savedMethoItemsApplePay = [PaymentMethodItem(id: "", title: "", type: .applePay)]
+        XCTAssertEqual(viewModelWithApplePay.getSavedPaymentItems(), savedMethoItemsApplePay)
         
         let savedPaymentMethods = [SavedPaymentMethod(id: "1", cardDetails: SavedPaymentCardDetails(pan: "1234", expiryDate: "12/23", scheme: .visa)), SavedPaymentMethod(id: "2", cardDetails: SavedPaymentCardDetails(pan: "1234", expiryDate: "12/23", scheme: .amex))]
         let savedMethodItems = savedPaymentMethods.compactMap { PaymentMethodItem(id: $0.id, title: $0.cardDetails.pan, type: PaymentMethodType($0.cardDetails.scheme)!)}
         
         let viewModelWithSavedPaymentMethods = ManagePaymentMethodsViewModel(config: TestsUtils.getBaseConfig(savedPaymentMethod: savedPaymentMethods))!
-        XCTAssertEqual(viewModelWithSavedPaymentMethods.items, savedMethodItems)
+        XCTAssertEqual(viewModelWithSavedPaymentMethods.getSavedPaymentItems(), savedMethodItems)
         
         let viewModelWithSavedPaymentMethodsAndApplePay = ManagePaymentMethodsViewModel(config: TestsUtils.getBaseConfig(withApplePayConfig: true, withApplePayPaymentIntent: true, supportedCardSchemas: [.visa], savedPaymentMethod: savedPaymentMethods))!
         savedMethoItemsApplePay.append(contentsOf: savedMethodItems)
-        XCTAssertEqual(viewModelWithSavedPaymentMethodsAndApplePay.items, savedMethoItemsApplePay)
+        XCTAssertEqual(viewModelWithSavedPaymentMethodsAndApplePay.getSavedPaymentItems(), savedMethoItemsApplePay)
     }
     
     func testRemoveItemAtIndex() {
@@ -64,17 +56,29 @@ class ManagePaymentMethodsViewModelTests: XCTestCase {
         var savedMethodItems = savedPaymentMethods.compactMap { PaymentMethodItem(id: $0.id, title: $0.cardDetails.pan, type: PaymentMethodType($0.cardDetails.scheme)!)}
         
         let viewModelWithSavedPaymentMethods = ManagePaymentMethodsViewModel(config: TestsUtils.getBaseConfig(savedPaymentMethod: savedPaymentMethods))!
-        XCTAssertEqual(viewModelWithSavedPaymentMethods.items, savedMethodItems)
+        XCTAssertEqual(viewModelWithSavedPaymentMethods.getSavedPaymentItems(), savedMethodItems)
         
-        var removedItem = viewModelWithSavedPaymentMethods.removeItemAtIndex(0)
+        let removedItem = viewModelWithSavedPaymentMethods.removeItemAtIndex(0)
         XCTAssertEqual(removedItem?.id, "1")
-        XCTAssertNotEqual(viewModelWithSavedPaymentMethods.items, savedMethodItems)
+        XCTAssertNotEqual(viewModelWithSavedPaymentMethods.getSavedPaymentItems(), savedMethodItems)
         savedMethodItems.remove(at: 0)
-        XCTAssertEqual(viewModelWithSavedPaymentMethods.items, savedMethodItems)
+        XCTAssertEqual(viewModelWithSavedPaymentMethods.getSavedPaymentItems(), savedMethodItems)
         
         // Test removing of item that doesn't exist
-        var removedItemNil = viewModelWithSavedPaymentMethods.removeItemAtIndex(100)
+        let removedItemNil = viewModelWithSavedPaymentMethods.removeItemAtIndex(100)
         XCTAssertNil(removedItemNil)
-        XCTAssertEqual(viewModelWithSavedPaymentMethods.items, savedMethodItems)
+        XCTAssertEqual(viewModelWithSavedPaymentMethods.getSavedPaymentItems(), savedMethodItems)
+    }
+    
+    func testSetItemSelected() {
+        let savedPaymentMethods = [SavedPaymentMethod(id: "1", cardDetails: SavedPaymentCardDetails(pan: "1234", expiryDate: "12/23", scheme: .visa)), SavedPaymentMethod(id: "2", cardDetails: SavedPaymentCardDetails(pan: "1234", expiryDate: "12/23", scheme: .amex))]
+        let savedMethodItems = savedPaymentMethods.compactMap { PaymentMethodItem(id: $0.id, title: $0.cardDetails.pan, type: PaymentMethodType($0.cardDetails.scheme)!)}
+        let viewModelWithSavedPaymentMethods = ManagePaymentMethodsViewModel(config: TestsUtils.getBaseConfig(savedPaymentMethod: savedPaymentMethods))!
+        XCTAssertNil(viewModelWithSavedPaymentMethods.getSavedPaymentItems().first(where: {$0.selected}))
+        viewModelWithSavedPaymentMethods.setItemSelected(savedMethodItems[1])
+        XCTAssertNotNil(viewModelWithSavedPaymentMethods.getSavedPaymentItems().first(where: {$0.selected}))
+        XCTAssertEqual(viewModelWithSavedPaymentMethods.getSavedPaymentItems().first(where: {$0.selected}), savedMethodItems[1])
+        viewModelWithSavedPaymentMethods.setItemSelected(nil)
+        XCTAssertEqual(viewModelWithSavedPaymentMethods.getSavedPaymentItems().first(where: {$0.selected}), savedMethodItems[1])
     }
 }

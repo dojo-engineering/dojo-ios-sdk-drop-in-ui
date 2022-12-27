@@ -40,8 +40,6 @@ class ManagePaymentMethodsViewController: BaseUIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
-
-        // Do any additional setup after loading the view.
     }
     
     override func setUpDesign() {
@@ -58,7 +56,7 @@ class ManagePaymentMethodsViewController: BaseUIViewController {
         buttonPayUsingNewCard.layer.borderWidth = 1
         buttonPayUsingNewCard.layer.borderColor = theme.secondaryCTAButtonActiveBorderColor.cgColor
         
-        if let _ = getViewModel()?.items.first(where: {$0.selected}) {
+        if let _ = getViewModel()?.getSavedPaymentItems().first(where: {$0.selected}) {
             //TODO: common style
             buttonUseSelectedPaymentMethod.isUserInteractionEnabled = true
             buttonUseSelectedPaymentMethod.backgroundColor = theme.primaryCTAButtonActiveBackgroundColor
@@ -69,12 +67,6 @@ class ManagePaymentMethodsViewController: BaseUIViewController {
             // if no selected item - disable "Use this payment method" button
             buttonUseSelectedPaymentMethod.setTheme(theme)
             buttonUseSelectedPaymentMethod.setEnabled(false)
-//            buttonUseSelectedPaymentMethod.isUserInteractionEnabled = false
-            
-//            buttonUseSelectedPaymentMethod.backgroundColor = theme.primaryCTAButtonActiveBackgroundColor
-//            buttonUseSelectedPaymentMethod.setTitleColor(theme.primaryCTAButtonActiveTextColor, for: .normal)
-//            buttonUseSelectedPaymentMethod.tintColor = theme.primaryCTAButtonActiveTextColor
-//            buttonUseSelectedPaymentMethod.layer.cornerRadius = theme.primaryCTAButtonCornerRadius
         }
     }
     
@@ -104,7 +96,7 @@ class ManagePaymentMethodsViewController: BaseUIViewController {
     
     @IBAction func onUseThisPaymentMethodPress(_ sender: Any) {
         if let viewModel = getViewModel(),
-           let paymentMethod = viewModel.items.first(where: {$0.selected}) {
+           let paymentMethod = viewModel.getSavedPaymentItems().first(where: {$0.selected}) {
             delegate?.onPayUsingPaymentMethod(paymentMethod)
         }
     }
@@ -116,14 +108,14 @@ class ManagePaymentMethodsViewController: BaseUIViewController {
 
 extension ManagePaymentMethodsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        getViewModel()?.items.count ?? 0
+        getViewModel()?.getSavedPaymentItems().count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: PaymentMethodTableViewCell.cellId) as?
             PaymentMethodTableViewCell {
             cell.setTheme(theme: theme)
-            if let item = getViewModel()?.items[indexPath.row] {
+            if let item = getViewModel()?.getSavedPaymentItems()[indexPath.row] {
                 cell.setType(item.type, additionalText: item.title)
                 cell.setSelected(item.selected)
             }
@@ -134,31 +126,30 @@ extension ManagePaymentMethodsViewController: UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let viewModel = getViewModel() {
-            viewModel.items.forEach({$0.selected = false})
-            viewModel.items[indexPath.row].selected = true
+            viewModel.setItemSelected(viewModel.getSavedPaymentItems()[indexPath.row])
             tableView.reloadData()
          }
-        
-        setUpDesign() // TODO: reload buttons view
+        //reload buttons view
+        setUpDesign()
     }
     
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            showRemovePaymentMethodAlert() {
-                if let removedItem = self.getViewModel()?.removeItemAtIndex(indexPath.row) {
-                    self.delegate?.onRemoveSavedPaymentMethod(removedItem.id)
-                }
-                tableView.deleteRows(at: [indexPath], with: .fade)
+        // only handle delete
+        guard editingStyle == .delete else {
+            return
+        }
+        showRemovePaymentMethodAlert() {
+            if let removedItem = self.getViewModel()?.removeItemAtIndex(indexPath.row) {
+                self.delegate?.onRemoveSavedPaymentMethod(removedItem.id)
             }
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+            tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // we can only remove items that are not WalletPayments and are not selected
-        if let item = getViewModel()?.items[indexPath.row],
+        if let item = getViewModel()?.getSavedPaymentItems()[indexPath.row],
            item.type != .applePay,
            item.selected == false {
             return true
@@ -169,7 +160,7 @@ extension ManagePaymentMethodsViewController: UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0,
            let viewModel = getViewModel() {
-            if viewModel.items.first?.type == .applePay {
+            if viewModel.getSavedPaymentItems().first?.type == .applePay {
                 return 55
             }
         }
