@@ -57,16 +57,7 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
     }
     
     func setupViews() {
-        
-        additionalItemsTableView.isHidden = true
-        additionalItemsTableView.delegate = self
-        additionalItemsTableView.dataSource = self
-        PaymentMethodCheckoutAdditonalItemCell.register(tableView: additionalItemsTableView)
-        
-        additionalItemsTableView.rowHeight = 26.0;
-        constraintAdditionalItemsHeight.constant = CGFloat((viewModel?.paymentIntent.itemLines?.count ?? 0) * 26)
-        
-        
+        setUpTableView()
         selectedPaymentMethodView.paymentMethod = nil
         buttonPayCard.setEnabled(true) //TODO edge case when payment method is removed
         selectedPaymentMethodView.delegate = self
@@ -79,7 +70,7 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
                 constraintPayButtonBottom.constant = 9
                 buttonPayCard.setTheme(theme)
                 if let navigation = (navigationController as? BaseNavigationController) {
-                    navigation.defaultHeight = 210
+                    navigation.defaultHeight = 218 + getHeightOfAdditionalLineItemsTable()
                 }
                 
                 selectedPaymentMethodView.isHidden = true
@@ -94,7 +85,9 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
                 buttonPayCard.layer.borderColor = theme.primaryCTAButtonActiveBackgroundColor.cgColor
                 
             } else {
-                //TODO
+                if let navigation = (navigationController as? BaseNavigationController) {
+                    navigation.defaultHeight = 286 + getHeightOfAdditionalLineItemsTable()
+                }
             }
         } else {
             buttonPayCard.isHidden = true //TODO
@@ -107,7 +100,7 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
                 constraintPayButtonBottom.constant = 9
                 buttonPayCard.setTheme(theme)
                 if let navigation = (navigationController as? BaseNavigationController) {
-                    navigation.defaultHeight = 210
+                    navigation.defaultHeight = 210 + getHeightOfAdditionalLineItemsTable()
                 }
                 
                 selectedPaymentMethodView.isHidden = true
@@ -138,6 +131,17 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
                 buttonPayCard.layer.borderColor = theme.primaryLabelTextColor.cgColor
             }
         }
+    }
+    
+    func setUpTableView() {
+        let showAdditinalItemsLine = getViewModel()?.showAdditionalItemsLine() ?? false
+        additionalItemsTableView.isHidden = !showAdditinalItemsLine
+        additionalItemsTableView.delegate = self
+        additionalItemsTableView.dataSource = self
+        PaymentMethodCheckoutAdditonalItemCell.register(tableView: additionalItemsTableView)
+        
+        additionalItemsTableView.rowHeight = CGFloat(getHeightOfAdditonalLineItem())
+        constraintAdditionalItemsHeight.constant = getHeightOfAdditionalLineItemsTable()
     }
     
     override func setUpDesign() {
@@ -229,7 +233,7 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
             let keyboardHeight = keyboardRectangle.height
             
             if let navigation = (navigationController as? BaseNavigationController) {
-                navigation.heightConstraint?.constant = keyboardHeight + 286 - 15
+                navigation.heightConstraint?.constant = keyboardHeight + 286 - 15 + getHeightOfAdditionalLineItemsTable()
             }
             
             constraintPayButtonBottom.constant = keyboardHeight - (UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0) - 15
@@ -240,7 +244,7 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
     @objc func keyboardWillHide(_ notification: Notification) {
         
         if let navigation = (navigationController as? BaseNavigationController) {
-            navigation.heightConstraint?.constant = 286 + navigation.safeAreaBottomHeight //TODO: move to base
+            navigation.heightConstraint?.constant = 286 + navigation.safeAreaBottomHeight + getHeightOfAdditionalLineItemsTable()//TODO: move to base
         }
         
         constraintPayButtonBottom.constant = 9
@@ -268,7 +272,7 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
             paymentButton.isHidden = true
             buttonPayCard.setEnabled(false)
             if let navigation = (navigationController as? BaseNavigationController) {
-                navigation.defaultHeight = 286
+                navigation.defaultHeight = 286 + getHeightOfAdditionalLineItemsTable()
             }
             selectedPaymentMethodView.isHidden = false
         }
@@ -306,5 +310,19 @@ extension PaymentMethodCheckoutViewController: UITableViewDelegate, UITableViewD
             return cell
         }
         return UITableViewCell.init(style: .default, reuseIdentifier: "")
+    }
+    
+    func getHeightOfAdditionalLineItemsTable() -> CGFloat {
+        let numberOfItems = viewModel?.paymentIntent.itemLines?.count ?? 0
+        let maximumNumberOfItemsBeforeScroll = 4
+        if numberOfItems > maximumNumberOfItemsBeforeScroll {
+            // cap number of lines to the limit, if limit is reached start scrolling
+            return CGFloat(maximumNumberOfItemsBeforeScroll * getHeightOfAdditonalLineItem())
+        }
+        return CGFloat(numberOfItems * getHeightOfAdditonalLineItem())
+    }
+    
+    func getHeightOfAdditonalLineItem() -> Int {
+        26
     }
 }

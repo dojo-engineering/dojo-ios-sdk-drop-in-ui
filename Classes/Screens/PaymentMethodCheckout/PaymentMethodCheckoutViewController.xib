@@ -58,13 +58,20 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bl0-mH-Tqe" userLabel="SelectedPaymentMethod" customClass="SelectedPaymentMethodView" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="634" width="414" height="55"/>
+                    <rect key="frame" x="0.0" y="602" width="414" height="55"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="width" priority="999" constant="480" id="7bD-kP-zLV"/>
                         <constraint firstAttribute="height" constant="55" id="wYV-a2-VLB"/>
                     </constraints>
                 </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jsz-Ue-F6g" userLabel="additional items">
+                    <rect key="frame" x="16" y="673" width="382" height="32"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="32" id="SSh-mh-9eD"/>
+                    </constraints>
+                </tableView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Due" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nIa-N9-fws">
                     <rect key="frame" x="16" y="721" width="72" height="24"/>
                     <constraints>
@@ -95,18 +102,11 @@
                         <action selector="onPayUsingSavedCard:" destination="-1" eventType="touchUpInside" id="tXX-LD-Lus"/>
                     </connections>
                 </button>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jsz-Ue-F6g" userLabel="additional items">
-                    <rect key="frame" x="16" y="685" width="382" height="32"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="32" id="SSh-mh-9eD"/>
-                    </constraints>
-                </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="nIa-N9-fws" firstAttribute="top" secondItem="Jsz-Ue-F6g" secondAttribute="bottom" constant="4" id="0Ws-FB-eZp"/>
+                <constraint firstItem="nIa-N9-fws" firstAttribute="top" secondItem="Jsz-Ue-F6g" secondAttribute="bottom" constant="16" id="0Ws-FB-eZp"/>
                 <constraint firstItem="DIE-VP-Mbo" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="0bE-vR-cYM"/>
                 <constraint firstItem="dgb-bS-UCe" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="2eE-vE-t35"/>
                 <constraint firstAttribute="trailing" secondItem="Jsz-Ue-F6g" secondAttribute="trailing" constant="16" id="72n-30-cQm"/>
@@ -121,7 +121,6 @@
                 <constraint firstItem="m9K-cz-gAs" firstAttribute="trailing" secondItem="AHi-j5-5XI" secondAttribute="trailing" id="ZlV-LH-MTz"/>
                 <constraint firstItem="m9K-cz-gAs" firstAttribute="centerY" secondItem="nIa-N9-fws" secondAttribute="centerY" id="azU-6n-DKD"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Utf-dq-Cdi" secondAttribute="trailing" id="cKV-Oj-dhF"/>
-                <constraint firstItem="nIa-N9-fws" firstAttribute="top" secondItem="bl0-mH-Tqe" secondAttribute="bottom" constant="32" id="eUu-dt-Tnr"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bl0-mH-Tqe" secondAttribute="trailing" id="gfc-Dn-FDH"/>
                 <constraint firstItem="DIE-VP-Mbo" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="h4Q-F5-XGc"/>
                 <constraint firstItem="DIE-VP-Mbo" firstAttribute="top" secondItem="nIa-N9-fws" secondAttribute="bottom" constant="24" id="h5v-1j-WAQ"/>
@@ -130,6 +129,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="DIE-VP-Mbo" secondAttribute="trailing" constant="16" id="qUR-G4-c4T"/>
                 <constraint firstItem="bl0-mH-Tqe" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="rV2-Jp-jop"/>
                 <constraint firstItem="Utf-dq-Cdi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="wj3-MS-U5M"/>
+                <constraint firstItem="Jsz-Ue-F6g" firstAttribute="top" secondItem="bl0-mH-Tqe" secondAttribute="bottom" constant="16" id="xNE-VP-RLE"/>
                 <constraint firstItem="dgb-bS-UCe" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="yn3-0c-VQx"/>
                 <constraint firstItem="Utf-dq-Cdi" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="zkz-iC-7S1"/>
             </constraints>

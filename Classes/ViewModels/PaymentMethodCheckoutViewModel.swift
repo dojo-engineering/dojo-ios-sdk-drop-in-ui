@@ -43,6 +43,10 @@ class PaymentMethodCheckoutViewModel: BaseViewModel {
                                   supportedCards: getSupportedApplePayCards())
     }
     
+    func showAdditionalItemsLine() -> Bool {
+        paymentIntent.itemLines?.count ?? 0 > 0
+    }
+    
     func processApplePayPayment(fromViewControlelr: UIViewController, completion: ((Int) -> Void)?) {
         guard let merchantIdentifier = applePayConfig?.merchantIdentifier else {
             completion?(5)
