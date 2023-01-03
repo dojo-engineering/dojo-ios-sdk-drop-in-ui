@@ -14,13 +14,17 @@ class ViewController: UIViewController {
     let dojoUI = DojoSDKDropInUI()
     
     @IBAction func onStartPaymentFlowPress(_ sender: Any) {
-        let paymentIntentId = "pi_sandbox_jCwQc-JXZ0qus-Mr5lq9FA"
-        let customerSecret = "cs_sandbox_E4ZriDsoEXca-a_WBje76ZBDXjB8aUPqUTekiZgF8AYOgPXJazp__YcMldRjLAafzc_uqVBfMOvQ_OCoh7PG022C8RQcJpeY0IL6okng3WeuGakXa2jVc9zEsikE0gSZ6Qvs1-G5jv-6mTRHVi0-NECBaLotcY5Udd7iKsiONPs"
+//        pi_sandbox_twcfjD36GEmQ2JN1rLSO7Q 3 lines
+        //        pi_sandbox_Xylzpg-4A0mNnN0xv9ltbg 0 lines
+        let paymentIntentId = "pi_sandbox_Xylzpg-4A0mNnN0xv9ltbg"
+        let customerSecret = "test"
         let applePayConfig = DojoUIApplePayConfig(merchantIdentifier: "merchant.uk.co.paymentsense.sdk.demo.app")
+        let theme = DojoThemeSettings.getDarkTheme()
         dojoUI.startPaymentFlow(paymentIntentId: paymentIntentId,
                                 controller: self,
                                 customerSecret: customerSecret,
-                                applePayConfig: applePayConfig) { result in
+                                applePayConfig: applePayConfig,
+                                themeSettings: theme) { result in
             print("SDK result code: \(result)")
         }
     }
