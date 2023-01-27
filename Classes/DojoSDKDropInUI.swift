@@ -25,7 +25,8 @@ public class DojoSDKDropInUI: NSObject {
                                                              customerSecret: customerSecret,
                                                              paymentIntent: nil,
                                                              themeSettings: theme,
-                                                             applePayConfig: applePayConfig)
+                                                             applePayConfig: applePayConfig,
+                                                             isDemo: false) //TODO remove
             if let configurationManager = self.configurationManager {
                 self.rootCoordinator = RootCoordinator(presentationViewController: controller,
                                                        config: configurationManager,

@@ -105,7 +105,7 @@ extension RootCoordinator {
         var controller: UIViewController?
         switch screenType {
         case .dataLoading:
-            let viewModel = DataLoadingViewModel(paymentIntentId: config.paymentIntentId, customerSecret: config.customerSecret, demoDelay: config.demoDelay)
+            let viewModel = DataLoadingViewModel(paymentIntentId: config.paymentIntentId, customerSecret: config.customerSecret, demoDelay: config.demoDelay, isDemo: config.isDemo)
             controller = DataLoadingViewController(viewModel: viewModel, theme: config.themeSettings, delegate: self)
         case .cardDeailsCheckout:
             if let viewModel = CardDetailsCheckoutViewModel(config: config) {
@@ -201,8 +201,7 @@ extension RootCoordinator: DataLoadingViewControllerDelegate {
         config.paymentIntent = paymentIntent
         config.savedPaymentMethods = savedPaymentMethods
         propagateConfigChanges()
-        //TODO: send saved payment methods to the needed controller
-        if paymentIntent.status == "Captured" { //TODO:
+        if paymentIntent.isCaptured {
             showPaymentResult(resultCode: 0)
         } else {
             showPaymentMethodCheckout()

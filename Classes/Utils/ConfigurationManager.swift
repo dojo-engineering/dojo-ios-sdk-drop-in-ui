@@ -15,5 +15,9 @@ struct ConfigurationManager {
     var savedPaymentMethods: [SavedPaymentMethod]?
     var themeSettings: ThemeSettings
     var applePayConfig: DojoUIApplePayConfig?
-    var demoDelay: Double = 0 // add delay to requests for UI demo purposes
+    var isDemo: Bool = false
+    
+    var demoDelay: Double {
+        isDemo ? 0 : 0
+    }
 }

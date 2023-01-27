@@ -17,6 +17,10 @@ struct PaymentIntent: Codable {
     var customer: CustomerConfig? = nil
     var itemLines: [ItemLine]?
     var status: String?
+    
+    var isCaptured: Bool {
+        status == "Captured"
+    }
 }
 
 enum CardSchemes: String, Codable {
