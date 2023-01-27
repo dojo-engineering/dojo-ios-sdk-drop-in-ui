@@ -56,6 +56,12 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
         setNavigationTitle(LocalizedText.PaymentMethodCheckout.title)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.view.endEditing(true)
+        removeKeyboardObservers()
+    }
+    
     func setupViews() {
         setUpTableView()
         selectedPaymentMethodView.paymentMethod = nil
@@ -122,6 +128,10 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
                 selectedPaymentMethodView.isHidden = true
                 constraintPayButtonBottom.constant = 70
                 buttonPayCard.isHidden = false
+                
+                if let navigation = (navigationController as? BaseNavigationController) {
+                    navigation.defaultHeight = 280 + getHeightOfAdditionalLineItemsTable()
+                }
 
                 let buttonPayTitle = LocalizedText.PaymentMethodCheckout.payByCard
                 buttonPayCard.setTitle(buttonPayTitle, for: .normal)
@@ -161,16 +171,12 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
         buttonPayCard.setTheme(theme)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.view.endEditing(true)
-        removeKeyboardObservers()
-    }
-    
     func setupData() {
-        //TODO: proper amount formatter
-        let value = Double(getViewModel()?.paymentIntent.amount.value ?? 0)
-        labelTotalAmount.text = "£\(String(format: "%.2f", value/100.0))"
+        if let value = getViewModel()?.paymentIntent.amount.getFormattedAmount() {
+            labelTotalAmount.text = value
+        } else {
+            print("Error - can't format amount")
+        }
     }
     
     @IBAction func onPayUsingApplePayPress(_ sender: Any) {

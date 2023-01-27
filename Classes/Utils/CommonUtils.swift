@@ -74,4 +74,8 @@ struct CommonUtils {
         guard paymentIntent.merchantConfig?.supportedPaymentMethods?.wallets?.contains(.applePay) == true else { return false }
         return DojoSDK.isApplePayAvailable(config: appleConfig)
     }
+    
+    static func getFormattedAmount(value: UInt64, currencySymbol: String = "£") -> String {
+        "\(currencySymbol)\(String(format: "%.2f", Double(value)/100.0))"
+    }
 }
