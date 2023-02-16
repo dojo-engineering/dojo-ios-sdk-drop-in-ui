@@ -24,11 +24,11 @@ class NetworkingSDKFactory {
 
 class DojoSDKMock: NetworkingSDKProtocol {
     func fetchCustomerPaymentMethods(customerId: String, customerSecret: String, completion: ((String?, Error?) -> Void)?) {
-        completion?(TestsUtils.savedMethodsString, nil)
+//        completion?(TestsUtils.savedMethodsString, nil)
     }
     
     func fetchPaymentIntent(intentId: String, completion: ((String?, Error?) -> Void)?) {
-        completion?(TestsUtils.paymentIntentString, nil)
+//        completion?(TestsUtils.paymentIntentString, nil)
     }
 }
 
