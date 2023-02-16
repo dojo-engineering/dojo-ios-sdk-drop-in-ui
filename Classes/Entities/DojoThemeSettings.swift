@@ -73,10 +73,12 @@ public class DojoThemeSettings: NSObject {
         self.errorTextColor = errorTextColor ?? UIColor.init(hexaARGB: "#FFB00020") ?? .systemRed
     }
     
+    @objc
     public static func getLightTheme() -> DojoThemeSettings {
         return DojoThemeSettings() // Light by default
     }
     
+    @objc
     public static func getDarkTheme() -> DojoThemeSettings {
         let theme = DojoThemeSettings()
         theme.primaryLabelTextColor = UIColor.init(hexaARGB: "#FFFFFFFF") ?? .white

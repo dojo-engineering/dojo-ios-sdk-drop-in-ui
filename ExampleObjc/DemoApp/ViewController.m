@@ -21,11 +21,7 @@
 
 - (IBAction)onStartPaymentFlowPress:(id)sender {
     self.dojoUI = [[DojoSDKDropInUI alloc] init];
-    DojoThemeSettings *theme = [[DojoThemeSettings alloc] initWithPrimaryLabelTextColor: UIColor.redColor
-                                                                secondaryLabelTextColor:UIColor.greenColor
-                                                                        headerTintColor:UIColor.greenColor
-                                                                  headerButtonTintColor:UIColor.orangeColor
-                                                  primaryCTAButtonActiveBackgroundColor: UIColor.blueColor];
+    DojoThemeSettings *theme = [DojoThemeSettings getLightTheme];
     [self.dojoUI startPaymentFlowWithPaymentIntentId: @"payment-intent-id"
                                           controller: self
                                       customerSecret: nil

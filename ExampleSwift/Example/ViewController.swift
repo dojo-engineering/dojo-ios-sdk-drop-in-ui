@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     let dojoUI = DojoSDKDropInUI()
     
     @IBAction func onStartPaymentFlowPress(_ sender: Any) {
-        let paymentIntentId = "pi_sandbox_3JCNQyUeO0qH8sYNcCSvGg"
+        let paymentIntentId = "payment-intent-id"
         let customerSecret = ""
         let applePayConfig = DojoUIApplePayConfig(merchantIdentifier: "merchant.uk.co.paymentsense.sdk.demo.app")
         dojoUI.startPaymentFlow(paymentIntentId: paymentIntentId,
