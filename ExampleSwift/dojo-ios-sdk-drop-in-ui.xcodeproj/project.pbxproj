@@ -319,12 +319,14 @@
 				"${BUILT_PRODUCTS_DIR}/CocoaDebug/CocoaDebug.framework",
 				"${BUILT_PRODUCTS_DIR}/dojo-ios-sdk/dojo_ios_sdk.framework",
 				"${BUILT_PRODUCTS_DIR}/dojo-ios-sdk-drop-in-ui/dojo_ios_sdk_drop_in_ui.framework",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/dojo-ios-sdk/CardinalMobile.framework/CardinalMobile",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaDebug.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/dojo_ios_sdk.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/dojo_ios_sdk_drop_in_ui.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CardinalMobile.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

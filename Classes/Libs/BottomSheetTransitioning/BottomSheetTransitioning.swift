@@ -4,7 +4,7 @@ import UIKit
 
 final class BottomSheetTransitioningDelegate: NSObject, UIViewControllerTransitioningDelegate {
 
-    private weak var bottomSheetPresentationController: BottomSheetPresentationController?
+    weak var bottomSheetPresentationController: BottomSheetPresentationController?
 
     var preferredSheetTopInset: CGFloat
     var preferredSheetCornerRadius: CGFloat

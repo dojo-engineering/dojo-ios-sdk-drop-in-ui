@@ -85,9 +85,15 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         setUpKeyboard()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        removeKeyboardObservers()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNavigationTitle(LocalizedText.CardDetailsCheckout.title)
+        setUpKeyboard()
+        
+        if let navigation = (navigationController as? BaseNavigationController) {
+            //3DS Cardinal Fix
+            navigation.bottomSheetTransitioningDelegate.bottomSheetPresentationController?.presentationTransitionWillBegin()
+        }
     }
 
     @IBAction func onPayButtonPress(_ sender: Any) {
