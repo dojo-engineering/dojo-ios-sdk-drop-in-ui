@@ -83,12 +83,6 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         super.viewWillAppear(animated)
         setNavigationTitle(LocalizedText.CardDetailsCheckout.title)
         setUpKeyboard()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setNavigationTitle(LocalizedText.CardDetailsCheckout.title)
-        setUpKeyboard()
         
         if let navigation = (navigationController as? BaseNavigationController) {
             //3DS Cardinal Fix
