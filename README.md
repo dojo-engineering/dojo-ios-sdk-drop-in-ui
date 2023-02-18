@@ -2,7 +2,7 @@
 
 ## Example
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+To run the example project, clone the repo, and run `pod install` from the ExampleSwift or ExampleObjc directory first.
 
 ## Requirements
 
@@ -15,6 +15,7 @@ it, simply add the following line to your Podfile:
 
 ```ruby
 pod 'dojo-ios-sdk-drop-in-ui' :git => 'git@github.com:dojo-engineering/dojo-ios-sdk-drop-in-ui.git', :tag => '1.0.0'
+pod 'dojo-ios-sdk', :git => 'git@github.com:Dojo-Engineering/dojo-ios-sdk.git', :tag => '1.0.0'
 ```
 
 ## SDK Capabilities
@@ -113,11 +114,7 @@ It's possible to customise the look of the sdk by providing DojoThemeSettings ob
 
 Swift
 ```swift
-let theme = DojoThemeSettings(primaryLabelTextColor: .red,
-                              secondaryLabelTextColor: .green,
-                              headerTintColor: .green,
-                              headerButtonTintColor: .orange,
-                              primaryCTAButtonActiveBackgroundColor: .blue)
+let theme = DojoThemeSettings.getLightTheme()
 dojoUI.startPaymentFlow(paymentIntentId: "payment-intent-id",
                         controller: self,
                         themeSettings: theme) { result in
@@ -126,11 +123,7 @@ dojoUI.startPaymentFlow(paymentIntentId: "payment-intent-id",
 ```
 Objective-C
 ```objc
-DojoThemeSettings *theme = [[DojoThemeSettings alloc] initWithPrimaryLabelTextColor: UIColor.redColor
-                                                            secondaryLabelTextColor: UIColor.greenColor
-                                                                    headerTintColor: UIColor.greenColor
-                                                              headerButtonTintColor: UIColor.orangeColor
-                                              primaryCTAButtonActiveBackgroundColor: UIColor.blueColor];
+DojoThemeSettings *theme = [DojoThemeSettings getLightTheme];
 [self.dojoUI startPaymentFlowWithPaymentIntentId: @"payment-intent-id"
                                       controller: self
                                   customerSecret: nil
