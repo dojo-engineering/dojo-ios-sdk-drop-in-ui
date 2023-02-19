@@ -28,7 +28,7 @@ class DojoSDKMock: NetworkingSDKProtocol {
     }
     
     func fetchPaymentIntent(intentId: String, completion: ((String?, Error?) -> Void)?) {
-//        completion?(TestsUtils.paymentIntentString, nil)
+//        completion?(TestsUtils.paymentIntentWithItemLinesWithoutApplePay, nil)
     }
 }
 

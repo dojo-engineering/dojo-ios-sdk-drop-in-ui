@@ -62,98 +62,6 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
         removeKeyboardObservers()
     }
     
-    func setupViews() {
-        setUpTableView()
-        selectedPaymentMethodView.paymentMethod = nil
-        buttonPayCard.setEnabled(true) //TODO edge case when payment method is removed
-        selectedPaymentMethodView.delegate = self
-        if getViewModel()?.isSavedPaymentMethodsAvailable() ?? false {
-            buttonPayCard.isHidden = true //TODO
-            
-            if getViewModel()?.isApplePayAvailable() ?? false == false {
-                // the same as below?
-                paymentButton.isHidden = true
-                constraintPayButtonBottom.constant = 9
-                buttonPayCard.setTheme(theme)
-                if let navigation = (navigationController as? BaseNavigationController) {
-                    navigation.defaultHeight = 218 + getHeightOfAdditionalLineItemsTable()
-                }
-                
-                selectedPaymentMethodView.isHidden = true
-    //            constraintPayButtonBottom.constant = 70
-                buttonPayCard.isHidden = false
-    //
-                let buttonPayTitle = LocalizedText.PaymentMethodCheckout.payByCard
-                buttonPayCard.setTitle(buttonPayTitle, for: .normal)
-                buttonPayCard.backgroundColor = theme.primaryCTAButtonActiveBackgroundColor
-                buttonPayCard.setTitleColor(theme.primaryCTAButtonActiveTextColor, for: .normal)
-                buttonPayCard.layer.borderWidth = 1
-                buttonPayCard.layer.borderColor = theme.primaryCTAButtonActiveBackgroundColor.cgColor
-                
-            } else {
-                if let navigation = (navigationController as? BaseNavigationController) {
-                    navigation.defaultHeight = 286 + getHeightOfAdditionalLineItemsTable()
-                }
-            }
-        } else {
-            buttonPayCard.isHidden = true //TODO
-            
-            if getViewModel()?.isApplePayAvailable() ?? false == false {
-                // ApplePay is not available
-                // No saved cards
-                
-                paymentButton.isHidden = true
-                constraintPayButtonBottom.constant = 9
-                buttonPayCard.setTheme(theme)
-                if let navigation = (navigationController as? BaseNavigationController) {
-                    navigation.defaultHeight = 210 + getHeightOfAdditionalLineItemsTable()
-                }
-                
-                selectedPaymentMethodView.isHidden = true
-    //            constraintPayButtonBottom.constant = 70
-                buttonPayCard.isHidden = false
-    //
-                let buttonPayTitle = LocalizedText.PaymentMethodCheckout.payByCard
-                buttonPayCard.setTitle(buttonPayTitle, for: .normal)
-                buttonPayCard.backgroundColor = theme.primaryCTAButtonActiveBackgroundColor
-                buttonPayCard.setTitleColor(theme.primaryCTAButtonActiveTextColor, for: .normal)
-                buttonPayCard.layer.borderWidth = 1
-                buttonPayCard.layer.borderColor = theme.primaryCTAButtonActiveBackgroundColor.cgColor
-            } else if getViewModel()?.isApplePayAvailable() ?? false {
-                // ApplePay is available
-                selectedPaymentMethodView.isHidden = false
-                selectedPaymentMethodView.delegate = self
-                selectedPaymentMethodView.setStyle(.applePay)
-                
-                selectedPaymentMethodView.isHidden = true
-                constraintPayButtonBottom.constant = 70
-                buttonPayCard.isHidden = false
-                
-                if let navigation = (navigationController as? BaseNavigationController) {
-                    navigation.defaultHeight = 280 + getHeightOfAdditionalLineItemsTable()
-                }
-
-                let buttonPayTitle = LocalizedText.PaymentMethodCheckout.payByCard
-                buttonPayCard.setTitle(buttonPayTitle, for: .normal)
-                buttonPayCard.backgroundColor = theme.primarySurfaceBackgroundColor
-                buttonPayCard.setTitleColor(theme.primaryLabelTextColor, for: .normal)
-                buttonPayCard.layer.borderWidth = 1
-                buttonPayCard.layer.borderColor = theme.primaryLabelTextColor.cgColor
-            }
-        }
-    }
-    
-    func setUpTableView() {
-        let showAdditinalItemsLine = getViewModel()?.showAdditionalItemsLine() ?? false
-        additionalItemsTableView.isHidden = !showAdditinalItemsLine
-        additionalItemsTableView.delegate = self
-        additionalItemsTableView.dataSource = self
-        PaymentMethodCheckoutAdditonalItemCell.register(tableView: additionalItemsTableView)
-        
-        additionalItemsTableView.rowHeight = CGFloat(getHeightOfAdditonalLineItem())
-        constraintAdditionalItemsHeight.constant = getHeightOfAdditionalLineItemsTable()
-    }
-    
     override func setUpDesign() {
         super.setUpDesign()
         labelTotalDue.textColor = theme.primaryLabelTextColor
@@ -171,14 +79,42 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
         buttonPayCard.setTheme(theme)
     }
     
-    func setupData() {
-        if let value = getViewModel()?.paymentIntent.amount.getFormattedAmount() {
-            labelTotalAmount.text = value
-        } else {
-            print("Error - can't format amount")
+    override func updateData(config: ConfigurationManager) {
+        super.updateData(config: config)
+        getViewModel()?.savedPaymentMethods = config.savedPaymentMethods
+        
+        if !(getViewModel()?.savedPaymentMethods?.contains(where: {$0.id == selectedPaymentMethodView.paymentMethod?.id}) ?? false) {
+            // if selected payment method was removed remove it from the UI
+            setupViews()
+        }
+    }
+   
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            
+            if let navigation = (navigationController as? BaseNavigationController) {
+                navigation.heightConstraint?.constant = keyboardHeight + 286 - 15 + getHeightOfAdditionalLineItemsTable()
+            }
+            
+            constraintPayButtonBottom.constant = keyboardHeight - (UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0) - 15
+            constraintPayButtonCardBottom.constant = constraintPayButtonBottom.constant
         }
     }
     
+    @objc func keyboardWillHide(_ notification: Notification) {
+        
+        if let navigation = (navigationController as? BaseNavigationController) {
+            navigation.heightConstraint?.constant = 286 + navigation.safeAreaBottomHeight + getHeightOfAdditionalLineItemsTable()//TODO: move to base
+        }
+        
+        constraintPayButtonBottom.constant = 9
+        constraintPayButtonCardBottom.constant = constraintPayButtonBottom.constant
+    }
+}
+
+extension PaymentMethodCheckoutViewController {
     @IBAction func onPayUsingApplePayPress(_ sender: Any) {
         guard getViewModel()?.isApplePayAvailable() ?? false else {
             print("Apple pay is not available")
@@ -218,53 +154,11 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
             self.delegate?.navigateToPaymentResult(resultCode: result)
         }
     }
-    
+}
+
+extension PaymentMethodCheckoutViewController {
     func getViewModel() -> PaymentMethodCheckoutViewModel? {
         viewModel as? PaymentMethodCheckoutViewModel
-    }
-    
-    func setUpKeyboard() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    func removeKeyboardObservers() {
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-    }
-    
-    @objc func keyboardWillShow(_ notification: Notification) {
-        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardRectangle = keyboardFrame.cgRectValue
-            let keyboardHeight = keyboardRectangle.height
-            
-            if let navigation = (navigationController as? BaseNavigationController) {
-                navigation.heightConstraint?.constant = keyboardHeight + 286 - 15 + getHeightOfAdditionalLineItemsTable()
-            }
-            
-            constraintPayButtonBottom.constant = keyboardHeight - (UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0) - 15
-            constraintPayButtonCardBottom.constant = constraintPayButtonBottom.constant
-        }
-    }
-    
-    @objc func keyboardWillHide(_ notification: Notification) {
-        
-        if let navigation = (navigationController as? BaseNavigationController) {
-            navigation.heightConstraint?.constant = 286 + navigation.safeAreaBottomHeight + getHeightOfAdditionalLineItemsTable()//TODO: move to base
-        }
-        
-        constraintPayButtonBottom.constant = 9
-        constraintPayButtonCardBottom.constant = constraintPayButtonBottom.constant
-    }
-    
-    override func updateData(config: ConfigurationManager) {
-        super.updateData(config: config)
-        getViewModel()?.savedPaymentMethods = config.savedPaymentMethods
-        
-        if !(getViewModel()?.savedPaymentMethods?.contains(where: {$0.id == selectedPaymentMethodView.paymentMethod?.id}) ?? false) {
-            // if selected payment method was removed remove it from the UI
-            setupViews()
-        }
     }
     
     func paymentMethodSelected(_ item: PaymentMethodItem) {
@@ -277,9 +171,7 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
             buttonPayCard.isHidden = false
             paymentButton.isHidden = true
             buttonPayCard.setEnabled(false)
-            if let navigation = (navigationController as? BaseNavigationController) {
-                navigation.defaultHeight = 286 + getHeightOfAdditionalLineItemsTable()
-            }
+            setupViewHeightWithAdditionaLines(baseContentHeight: 286)
             selectedPaymentMethodView.isHidden = false
         }
         
@@ -287,6 +179,123 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
         let buttonPayTitle = "Pay £\(amountText)"
         buttonPayCard.setTitle(buttonPayTitle, for: .normal)
     }
+}
+
+extension PaymentMethodCheckoutViewController {
+    
+    func setUpKeyboard() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    func removeKeyboardObservers() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+    
+    func setUpTableView() {
+        let showAdditinalItemsLine = getViewModel()?.showAdditionalItemsLine() ?? false
+        additionalItemsTableView.isHidden = !showAdditinalItemsLine
+        additionalItemsTableView.delegate = self
+        additionalItemsTableView.dataSource = self
+        PaymentMethodCheckoutAdditonalItemCell.register(tableView: additionalItemsTableView)
+        
+        additionalItemsTableView.rowHeight = CGFloat(getHeightOfAdditonalLineItem())
+        constraintAdditionalItemsHeight.constant = getHeightOfAdditionalLineItemsTable()
+    }
+    
+    func setupData() {
+        if let value = getViewModel()?.paymentIntent.amount.getFormattedAmount() {
+            labelTotalAmount.text = value
+        } else {
+            print("Error - can't format amount")
+        }
+    }
+    
+    func setUpViewStateApplePayNotAvailableWithSavedCards() {
+        paymentButton.isHidden = true
+        constraintPayButtonBottom.constant = 9
+        buttonPayCard.setTheme(theme)
+        setupViewHeightWithAdditionaLines(baseContentHeight: 218)
+        
+        selectedPaymentMethodView.isHidden = true
+        buttonPayCard.isHidden = false
+        let buttonPayTitle = LocalizedText.PaymentMethodCheckout.payByCard
+        buttonPayCard.setTitle(buttonPayTitle, for: .normal)
+        buttonPayCard.backgroundColor = theme.primaryCTAButtonActiveBackgroundColor
+        buttonPayCard.setTitleColor(theme.primaryCTAButtonActiveTextColor, for: .normal)
+        buttonPayCard.layer.borderWidth = 1
+        buttonPayCard.layer.borderColor = theme.primaryCTAButtonActiveBackgroundColor.cgColor
+    }
+    
+    func setUpViewStateApplePayNotAvailableWithoutSavedCard() {
+        paymentButton.isHidden = true
+        constraintPayButtonBottom.constant = 9
+        buttonPayCard.setTheme(theme)
+        setupViewHeightWithAdditionaLines(baseContentHeight: 210)
+        
+        selectedPaymentMethodView.isHidden = true
+        buttonPayCard.isHidden = false
+        
+        let buttonPayTitle = LocalizedText.PaymentMethodCheckout.payByCard
+        buttonPayCard.setTitle(buttonPayTitle, for: .normal)
+        buttonPayCard.backgroundColor = theme.primaryCTAButtonActiveBackgroundColor
+        buttonPayCard.setTitleColor(theme.primaryCTAButtonActiveTextColor, for: .normal)
+        buttonPayCard.layer.borderWidth = 1
+        buttonPayCard.layer.borderColor = theme.primaryCTAButtonActiveBackgroundColor.cgColor
+    }
+    
+    func setUpViewStateApplePayAvailableWitoutSavedCard() {
+        // ApplePay is available
+        selectedPaymentMethodView.isHidden = false
+        selectedPaymentMethodView.delegate = self
+        selectedPaymentMethodView.setStyle(.applePay)
+        
+        selectedPaymentMethodView.isHidden = true
+        constraintPayButtonBottom.constant = 70
+        buttonPayCard.isHidden = false
+        
+        setupViewHeightWithAdditionaLines(baseContentHeight: 280)
+
+        let buttonPayTitle = LocalizedText.PaymentMethodCheckout.payByCard
+        buttonPayCard.setTitle(buttonPayTitle, for: .normal)
+        buttonPayCard.backgroundColor = theme.primarySurfaceBackgroundColor
+        buttonPayCard.setTitleColor(theme.primaryLabelTextColor, for: .normal)
+        buttonPayCard.layer.borderWidth = 1
+        buttonPayCard.layer.borderColor = theme.primaryLabelTextColor.cgColor
+    }
+    
+    func setupViewHeightWithAdditionaLines(baseContentHeight: CGFloat) {
+        if let navigation = (navigationController as? BaseNavigationController) {
+            navigation.defaultHeight = baseContentHeight + getHeightOfAdditionalLineItemsTable()
+        }
+    }
+    
+    func setUpViewStateDefault() {
+        setUpTableView()
+        selectedPaymentMethodView.paymentMethod = nil
+        buttonPayCard.setEnabled(true)
+        selectedPaymentMethodView.delegate = self
+        buttonPayCard.isHidden = true
+    }
+    
+    func setupViews() {
+        setUpViewStateDefault()
+        if getViewModel()?.isSavedPaymentMethodsAvailable() ?? false {
+            if getViewModel()?.isApplePayAvailable() ?? false == false {
+                setUpViewStateApplePayNotAvailableWithSavedCards()
+            } else {
+                setupViewHeightWithAdditionaLines(baseContentHeight: 286)
+            }
+        } else {
+            if getViewModel()?.isApplePayAvailable() ?? false == false {
+                setUpViewStateApplePayNotAvailableWithoutSavedCard()
+            } else if getViewModel()?.isApplePayAvailable() ?? false {
+                setUpViewStateApplePayAvailableWitoutSavedCard()
+            }
+        }
+    }
+    
 }
 
 extension PaymentMethodCheckoutViewController: SelectedPaymentMethodViewDelegate {

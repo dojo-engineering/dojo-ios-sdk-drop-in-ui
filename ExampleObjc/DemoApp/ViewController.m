@@ -22,10 +22,11 @@
 - (IBAction)onStartPaymentFlowPress:(id)sender {
     self.dojoUI = [[DojoSDKDropInUI alloc] init];
     DojoThemeSettings *theme = [DojoThemeSettings getLightTheme];
+    DojoUIApplePayConfig *appleConfig = [[DojoUIApplePayConfig alloc] initWithMerchantIdentifier: @"merchant-identifier"];
     [self.dojoUI startPaymentFlowWithPaymentIntentId: @"payment-intent-id"
                                           controller: self
                                       customerSecret: nil
-                                      applePayConfig: nil
+                                      applePayConfig: appleConfig
                                        themeSettings: theme
                                           completion: ^(NSInteger result) {
         NSLog(@"%ld", (long)result);
