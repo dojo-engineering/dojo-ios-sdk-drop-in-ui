@@ -42,7 +42,7 @@ struct CardUtils {
            let monthInt = Int(month),
         let yearInt = Int(year),
         monthInt > 0 && monthInt < 13,
-        yearInt > 21 && yearInt < 99 {
+        yearInt > 22 && yearInt < 99 {
             return true
         } else {
             return false
