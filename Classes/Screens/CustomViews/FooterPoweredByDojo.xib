@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,11 +12,14 @@
             <connections>
                 <outlet property="buttonPrivacy" destination="2Av-y6-0fO" id="wJU-sG-m39"/>
                 <outlet property="buttonTerms" destination="tc2-b9-Lbk" id="Jae-B6-mO4"/>
+                <outlet property="constraintButtonByCenter" destination="ZA5-rm-qrw" id="0cF-wd-pqy"/>
+                <outlet property="constraintButtonByLeft" destination="Zb1-u2-k8d" id="tAd-zD-wUS"/>
                 <outlet property="constraintPoweredByCenter" destination="g1z-k7-JzF" id="AaY-2t-HU4"/>
                 <outlet property="constraintPoweredByTailing" destination="tfj-o4-Zhp" id="uIV-1O-41f"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="3rn-M4-zxN"/>
                 <outlet property="imageLogo" destination="A0x-8G-3ZQ" id="6Bm-H3-DRd"/>
                 <outlet property="labelPoweredBy" destination="yDT-mM-BVr" id="Esc-0f-qUC"/>
+                <outlet property="stackViewLeft" destination="sog-6R-Phj" id="srR-cR-3yB"/>
                 <outlet property="stackViewRight" destination="hWp-WM-BjF" id="fS1-Q2-tvU"/>
                 <outlet property="viewSeparator" destination="a7L-hV-CAC" id="dyw-4B-SbB"/>
             </connections>
@@ -79,6 +82,7 @@
                 <constraint firstItem="a7L-hV-CAC" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="07c-tV-d0X"/>
                 <constraint firstItem="sog-6R-Phj" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="K70-k2-JdV"/>
                 <constraint firstItem="hWp-WM-BjF" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="YIn-8j-tyu"/>
+                <constraint firstItem="hWp-WM-BjF" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ZA5-rm-qrw"/>
                 <constraint firstItem="hWp-WM-BjF" firstAttribute="leading" secondItem="a7L-hV-CAC" secondAttribute="trailing" constant="12" id="Zb1-u2-k8d"/>
                 <constraint firstItem="a7L-hV-CAC" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="d44-RN-Cx6"/>
                 <constraint firstItem="sog-6R-Phj" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="g1z-k7-JzF"/>
@@ -88,6 +92,7 @@
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="g1z-k7-JzF"/>
+                    <exclude reference="ZA5-rm-qrw"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="-383.33333333333337" y="-144.30803571428569"/>

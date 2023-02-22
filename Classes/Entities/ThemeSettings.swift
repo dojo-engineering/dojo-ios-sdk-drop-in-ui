@@ -53,6 +53,7 @@ class ThemeSettings {
     var primaryCTAButtonCornerRadius: CGFloat
     var applePayButtonStyle: PKPaymentButtonStyle
     var lightStyleForDefaultElements: Bool
+    var showBranding: Bool
     
     init (dojoTheme: DojoThemeSettings) {
         // Colors
@@ -80,6 +81,7 @@ class ThemeSettings {
         lightStyleForDefaultElements = dojoTheme.lightStyleForDefaultElements == true ? true : false
         applePayButtonStyle = dojoTheme.lightStyleForDefaultElements == true ? .black : .white
         colorPoweredByDojo = dojoTheme.lightStyleForDefaultElements == true ? .black : .white
+        showBranding = dojoTheme.showBranding.boolValue
         
         primaryCTAButtonDisabledBackgroundColor = dojoTheme.primaryCTAButtonDisabledBackgroundColor
         primaryCTAButtonDisableTextColor = dojoTheme.primaryCTAButtonDisableTextColor

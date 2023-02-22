@@ -18,4 +18,6 @@ class FooterPoweredByViewModel {
     var termsURL: URL? {
         URL(string: urlTerms)
     }
+    
+    var showBranding: Bool = true
 }

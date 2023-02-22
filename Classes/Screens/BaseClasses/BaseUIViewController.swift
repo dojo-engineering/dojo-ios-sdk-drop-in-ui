@@ -37,6 +37,7 @@ class BaseUIViewController: UIViewController {
         self.view.backgroundColor = theme.primarySurfaceBackgroundColor
         
         footerPoweredByDojoView?.setTheme(theme: theme)
+        footerPoweredByDojoView?.setStyle()
         topNavigationSeparatorView?.backgroundColor = theme.separatorColor
         navigationController?.navigationBar.tintColor = theme.headerTintColor
         navigationItem.rightBarButtonItem?.tintColor = theme.headerButtonTintColor

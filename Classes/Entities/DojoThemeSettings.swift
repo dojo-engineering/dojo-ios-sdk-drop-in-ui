@@ -29,6 +29,7 @@ public class DojoThemeSettings: NSObject {
     public var inputFieldDefaultBorderColor: UIColor
     public var errorTextColor: UIColor
     public var lightStyleForDefaultElements: NSNumber
+    public var showBranding: NSNumber
     
     @objc
     public init(primaryLabelTextColor: UIColor? = nil,
@@ -71,6 +72,7 @@ public class DojoThemeSettings: NSObject {
         self.inputElementDefaultTintColor = inputElementDefaultTintColor ?? UIColor.init(hexaARGB: "#26000000") ?? .gray
         self.inputFieldDefaultBorderColor = inputFieldDefaultBorderColor ?? UIColor.init(hexaARGB: "#26000000") ?? .gray
         self.errorTextColor = errorTextColor ?? UIColor.init(hexaARGB: "#FFB00020") ?? .systemRed
+        self.showBranding = true
     }
     
     @objc

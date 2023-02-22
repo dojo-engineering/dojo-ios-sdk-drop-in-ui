@@ -27,8 +27,11 @@ class FooterPoweredByDojo: UIView {
     @IBOutlet weak var buttonTerms: UIButton!
     @IBOutlet weak var viewSeparator: UIView!
     @IBOutlet weak var stackViewRight: UIStackView!
+    @IBOutlet weak var stackViewLeft: UIStackView!
     @IBOutlet weak var constraintPoweredByCenter: NSLayoutConstraint!
     @IBOutlet weak var constraintPoweredByTailing: NSLayoutConstraint!
+    @IBOutlet weak var constraintButtonByCenter: NSLayoutConstraint!
+    @IBOutlet weak var constraintButtonByLeft: NSLayoutConstraint!
     let viewModel = FooterPoweredByViewModel()
     
     required init?(coder aDecoder: NSCoder) {
@@ -54,6 +57,7 @@ class FooterPoweredByDojo: UIView {
         buttonTerms.titleLabel?.font = theme.fontSubtitle2
         buttonPrivacy.titleLabel?.font = theme.fontSubtitle2
         
+        viewModel.showBranding = theme.showBranding
     }
     
     func setStyle(_ styleItems: [FooterPoweredByDojoItems] = FooterPoweredByDojoStyle.default) {
@@ -62,6 +66,7 @@ class FooterPoweredByDojo: UIView {
         buttonPrivacy.isHidden = true
         viewSeparator.isHidden = true
         stackViewRight.isHidden = true
+        
         if styleItems.contains(where: {$0 == .poweredBy}) { labelPoweredBy.isHidden = false }
         if styleItems.contains(where: {$0 == .terms}) { buttonTerms.isHidden = false }
         if styleItems.contains(where: {$0 == .privacy}) { buttonPrivacy.isHidden = false }
@@ -77,6 +82,13 @@ class FooterPoweredByDojo: UIView {
         } else {
             constraintPoweredByTailing.isActive = false
             constraintPoweredByCenter.isActive = true
+        }
+        
+        if !viewModel.showBranding {
+            stackViewLeft.isHidden = true
+            viewSeparator.isHidden = true
+            constraintButtonByCenter.isActive = true
+            constraintButtonByLeft.isActive = false
         }
     }
     
