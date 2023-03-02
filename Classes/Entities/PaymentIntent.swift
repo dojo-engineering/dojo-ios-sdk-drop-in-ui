@@ -21,6 +21,10 @@ struct PaymentIntent: Codable {
     var isCaptured: Bool {
         status == "Captured"
     }
+    
+    var isSandbox: Bool {
+        id.contains("_sandbox_")
+    }
 }
 
 enum CardSchemes: String, Codable {

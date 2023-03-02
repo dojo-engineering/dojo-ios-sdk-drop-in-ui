@@ -27,7 +27,8 @@ class CardDetailsCheckoutViewModel: BaseViewModel {
         let cardPaymentPayload = DojoCardPaymentPayload(cardDetails: cardDetails,
                                                         userEmailAddress: email,
                                                         billingAddress: DojoAddressDetails(postcode: billingPostcode, countryCode: billingCountry),
-                                                        savePaymentMethod: isSaveCardSelected)
+                                                        savePaymentMethod: isSaveCardSelected,
+                                                        isSandbox: paymentIntent.isSandbox)
         DojoSDK.executeCardPayment(token: paymentIntent.clientSessionSecret,
                                     payload: cardPaymentPayload,
                                     fromViewController: fromViewController,

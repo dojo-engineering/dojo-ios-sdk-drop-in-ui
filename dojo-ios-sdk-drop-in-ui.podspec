@@ -41,7 +41,7 @@ TODO: Add long description of the pod here.
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
 
-  s.dependency 'dojo-ios-sdk', '1.0.0' 
+  s.dependency 'dojo-ios-sdk', '1.1.0' 
 
   s.test_spec 'DojoSDKUI-Tests' do |test_spec|
     test_spec.source_files = ['Tests/**/*.{h,m,swift}', 'Classes/**/*.{h,m,swift}']
