@@ -14,8 +14,8 @@ Dojo SDK Drop in UI is available through [CocoaPods](https://cocoapods.org). To 
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'dojo-ios-sdk-drop-in-ui' :git => 'git@github.com:dojo-engineering/dojo-ios-sdk-drop-in-ui.git', :tag => '1.0.0'
-pod 'dojo-ios-sdk', :git => 'git@github.com:Dojo-Engineering/dojo-ios-sdk.git', :tag => '1.0.0'
+pod 'dojo-ios-sdk-drop-in-ui', :git => 'git@github.com:dojo-engineering/dojo-ios-sdk-drop-in-ui.git', :tag => '1.1.0'
+pod 'dojo-ios-sdk', :git => 'git@github.com:Dojo-Engineering/dojo-ios-sdk.git', :tag => '1.1.0'
 ```
 
 ## SDK Capabilities
