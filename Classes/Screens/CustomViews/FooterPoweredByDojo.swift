@@ -94,7 +94,7 @@ class FooterPoweredByDojo: UIView {
     
     func initSubviews() {
         let nib = UINib(nibName: String(describing: type(of: self)),
-                        bundle: Bundle(for: type(of: self)))
+                        bundle: Bundle.libResourceBundle)
         nib.instantiate(withOwner: self, options: nil)
         contentView.frame = bounds
         addSubview(contentView)

@@ -32,8 +32,7 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
                 delegate: PaymentMethodCheckoutViewControllerDelegate) {
         self.delegate = delegate
         let nibName = String(describing: type(of: self))
-        let podBundle = Bundle(for: type(of: self))
-        super.init(nibName: nibName, bundle: podBundle)
+        super.init(nibName: nibName, bundle: Bundle.libResourceBundle)
         self.viewModel = viewModel
         self.baseDelegate = delegate
         self.theme = theme

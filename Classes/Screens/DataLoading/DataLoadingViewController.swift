@@ -22,10 +22,9 @@ class DataLoadingViewController: BaseUIViewController {
                 theme: ThemeSettings,
                 delegate: DataLoadingViewControllerDelegate) {
         self.delegate = delegate
-        let nibName = String(describing: type(of: self))
-        let podBundle = Bundle(for: type(of: self))
         self.dataLoadingViewModel = viewModel
-        super.init(nibName: nibName, bundle: podBundle)
+        let nibName = String(describing: type(of: self))
+        super.init(nibName: nibName, bundle: Bundle.libResourceBundle)
         self.baseDelegate = delegate
         self.theme = theme
     }

@@ -172,6 +172,7 @@
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
 				C266038732CF55C4269291C1 /* [CP] Embed Pods Frameworks */,
+				2B4F2374D6F40E5B69657F67 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -265,6 +266,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		2B4F2374D6F40E5B69657F67 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Dojo-SDK-UI/Pods-Dojo-SDK-UI-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/dojo-ios-sdk-drop-in-ui/DojoSDKUIResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/DojoSDKUIResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Dojo-SDK-UI/Pods-Dojo-SDK-UI-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		3C2A8191C86D62EA19CDF931 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -318,14 +337,12 @@
 				"${PODS_ROOT}/Target Support Files/Pods-Dojo-SDK-UI/Pods-Dojo-SDK-UI-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/CocoaDebug/CocoaDebug.framework",
 				"${BUILT_PRODUCTS_DIR}/dojo-ios-sdk/dojo_ios_sdk.framework",
-				"${BUILT_PRODUCTS_DIR}/dojo-ios-sdk-drop-in-ui/dojo_ios_sdk_drop_in_ui.framework",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/dojo-ios-sdk/CardinalMobile.framework/CardinalMobile",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaDebug.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/dojo_ios_sdk.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/dojo_ios_sdk_drop_in_ui.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CardinalMobile.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;

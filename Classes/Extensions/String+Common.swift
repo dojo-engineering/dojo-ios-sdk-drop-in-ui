@@ -8,7 +8,10 @@ import Foundation
 
 extension String {
     var localized: String {
-        NSLocalizedString(self, bundle: Bundle(for: BaseUIViewController.self), comment: "")
+        if let bundle = Bundle.libResourceBundle {
+            return NSLocalizedString(self, bundle: bundle, comment: "")
+        }
+        return self
     }
     
     func chunkFormatted(withChunkSize chunkSize: Int = 4,

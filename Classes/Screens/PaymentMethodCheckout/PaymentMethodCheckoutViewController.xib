@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PaymentMethodCheckoutViewController" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PaymentMethodCheckoutViewController" customModule="DojoSDKUIResources" customModuleProvider="target">
             <connections>
                 <outlet property="additionalItemsTableView" destination="Jsz-Ue-F6g" id="2j3-Cv-vBP"/>
                 <outlet property="buttonPayCard" destination="AHi-j5-5XI" id="5tS-wl-aFq"/>
@@ -43,7 +43,7 @@
                         <action selector="onPayUsingApplePayPress:" destination="-1" eventType="touchUpInside" id="x3f-7L-VOj"/>
                     </connections>
                 </button>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Utf-dq-Cdi" customClass="FooterPoweredByDojo" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Utf-dq-Cdi" customClass="FooterPoweredByDojo" customModule="dojo_ios_sdk_drop_in_ui">
                     <rect key="frame" x="0.0" y="822" width="414" height="40"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -57,7 +57,7 @@
                         <constraint firstAttribute="height" constant="0.5" id="Xch-hG-hX5"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bl0-mH-Tqe" userLabel="SelectedPaymentMethod" customClass="SelectedPaymentMethodView" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bl0-mH-Tqe" userLabel="SelectedPaymentMethod" customClass="SelectedPaymentMethodView" customModule="dojo_ios_sdk_drop_in_ui">
                     <rect key="frame" x="0.0" y="602" width="414" height="55"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -90,7 +90,7 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AHi-j5-5XI" userLabel="Card Pay Button" customClass="LoadingButton" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AHi-j5-5XI" userLabel="Card Pay Button" customClass="LoadingButton" customModule="dojo_ios_sdk_drop_in_ui">
                     <rect key="frame" x="16" y="769" width="382" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="H5X-03-0qr"/>
