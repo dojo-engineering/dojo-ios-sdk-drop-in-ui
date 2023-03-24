@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CardDetailsCheckoutViewController" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CardDetailsCheckoutViewController" customModule="DojoSDKUIResources" customModuleProvider="target">
             <connections>
                 <outlet property="buttonPay" destination="Swm-bR-QtT" id="sMQ-gK-Oss"/>
                 <outlet property="constraintPayButtonBottom" destination="Qgg-Dw-3jc" id="4WN-ne-y2K"/>
@@ -37,7 +37,7 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Swm-bR-QtT" customClass="LoadingButton" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Swm-bR-QtT" customClass="LoadingButton" customModule="dojo_ios_sdk_drop_in_ui">
                     <rect key="frame" x="16" y="766" width="382" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="bYb-5z-Bgb"/>
@@ -49,7 +49,7 @@
                         <action selector="onPayButtonPress:" destination="-1" eventType="touchUpInside" id="iaw-eQ-KMV"/>
                     </connections>
                 </button>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FRT-lp-E1d" customClass="FooterPoweredByDojo" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FRT-lp-E1d" customClass="FooterPoweredByDojo" customModule="dojo_ios_sdk_drop_in_ui">
                     <rect key="frame" x="0.0" y="822" width="414" height="40"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -119,35 +119,35 @@
                                         <constraint firstAttribute="height" constant="20" id="C5n-6R-1ma"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6gL-di-Oc5" userLabel="Email" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6gL-di-Oc5" userLabel="Email" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui">
                                     <rect key="frame" x="0.0" y="186" width="379" height="104"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="104" id="RAk-Oj-nEh"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uYT-ur-wBA" userLabel="Billing - Country" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uYT-ur-wBA" userLabel="Billing - Country" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui">
                                     <rect key="frame" x="0.0" y="295" width="379" height="104"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="104" id="fiD-Pu-Wlu"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PMf-IG-Igc" userLabel="Billing - Postcode" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PMf-IG-Igc" userLabel="Billing - Postcode" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui">
                                     <rect key="frame" x="0.0" y="404" width="379" height="104"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="104" id="9ng-sC-JpH"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K1F-SH-mec" userLabel="Cardholder" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K1F-SH-mec" userLabel="Cardholder" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui">
                                     <rect key="frame" x="0.0" y="513" width="379" height="104"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="104" id="vIj-9e-Aw8"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HYC-gQ-ZCU" userLabel="CardNumber" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HYC-gQ-ZCU" userLabel="CardNumber" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui">
                                     <rect key="frame" x="0.0" y="622" width="379" height="104"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
@@ -157,14 +157,14 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="VKl-s2-HV7">
                                     <rect key="frame" x="0.0" y="731" width="379" height="104"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zfe-AI-Fj8" userLabel="Expiry" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zfe-AI-Fj8" userLabel="Expiry" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui">
                                             <rect key="frame" x="0.0" y="0.0" width="179.5" height="104"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="104" id="2AO-eI-FMd"/>
                                             </constraints>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VmM-dZ-fl3" userLabel="CVV" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VmM-dZ-fl3" userLabel="CVV" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui">
                                             <rect key="frame" x="199.5" y="0.0" width="179.5" height="104"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>

@@ -26,7 +26,7 @@ extension UIImage {
     
     private static func getImage(named: String) -> UIImage? {
         UIImage(named: named,
-                in: Bundle(for: BaseUIViewController.self),
+                in: Bundle.libResourceBundle,
                 compatibleWith: nil)
     }
     

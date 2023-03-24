@@ -100,7 +100,7 @@ class SelectedPaymentMethodView: UIView {
         switch item.type {
         case .applePay:
             setStyle(.applePay) //TODO: refactor
-            imageViewCardIcon.image = UIImage(named: "img-apple-pay-logo", in: Bundle(for: type(of: self)), compatibleWith: nil)
+            imageViewCardIcon.image = UIImage(named: "img-apple-pay-logo", in:Bundle.libResourceBundle, compatibleWith: nil)
         case .visa:
             setStyle(.card)
             labelSubtitle1.text = "Visa"

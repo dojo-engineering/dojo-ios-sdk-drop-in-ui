@@ -37,8 +37,7 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
                 delegate : CardDetailsCheckoutViewControllerDelegate) {
         self.delegate = delegate
         let nibName = String(describing: type(of: self))
-        let podBundle = Bundle(for: type(of: self))
-        super.init(nibName: nibName, bundle: podBundle)
+        super.init(nibName: nibName, bundle: Bundle.libResourceBundle)
         self.viewModel = viewModel
         self.baseDelegate = delegate
         self.theme = theme
@@ -210,9 +209,9 @@ extension CardDetailsCheckoutViewController {
         guard let viewModel = getViewModel() else { return }
         viewModel.isSaveCardSelected = !viewModel.isSaveCardSelected
         if viewModel.isSaveCardSelected {
-            imageViewSaveCardCheckbox.image = UIImage(named: "icon-checkbox-checked", in: Bundle(for: type(of: self)), compatibleWith: nil)
+            imageViewSaveCardCheckbox.image = UIImage(named: "icon-checkbox-checked", in: Bundle.libResourceBundle, compatibleWith: nil)
         } else {
-            imageViewSaveCardCheckbox.image = UIImage(named: "icon-checkbox-unchecked", in: Bundle(for: type(of: self)), compatibleWith: nil)
+            imageViewSaveCardCheckbox.image = UIImage(named: "icon-checkbox-unchecked", in: Bundle.libResourceBundle, compatibleWith: nil)
         }
         print("On saved card pressed")
     }

@@ -26,8 +26,7 @@ class ManagePaymentMethodsViewController: BaseUIViewController {
                 delegate: ManagePaymentMethodsViewControllerDelegate) {
         self.delegate = delegate
         let nibName = String(describing: type(of: self))
-        let podBundle = Bundle(for: type(of: self))
-        super.init(nibName: nibName, bundle: podBundle)
+        super.init(nibName: nibName, bundle: Bundle.libResourceBundle)
         self.baseDelegate = delegate
         self.viewModel = viewModel
         self.theme = theme

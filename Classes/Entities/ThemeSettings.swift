@@ -136,8 +136,7 @@ extension ThemeSettings {
     }
     
     private func loadFont(_ fontName: String) {
-        let bundle = Bundle(for: type(of: self))
-        guard
+        guard let bundle = Bundle.libResourceBundle,
           let fontURL = bundle.url(forResource: fontName, withExtension: "ttf"),
           let fontData = try? Data(contentsOf: fontURL) as CFData,
           let provider = CGDataProvider(data: fontData),

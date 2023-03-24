@@ -43,10 +43,10 @@ class PaymentMethodTableViewCell: UITableViewCell {
     
     func setSelected(_ selected: Bool) {
         if selected {
-            imageViewSelection.image = UIImage(named: "icon-button-radio-selected", in: Bundle(for: type(of: self)), compatibleWith: nil)
+            imageViewSelection.image = UIImage(named: "icon-button-radio-selected", in: Bundle.libResourceBundle, compatibleWith: nil)
             imageViewSelection.tintColor = theme?.inputElementActiveTintColor
         } else {
-            imageViewSelection.image = UIImage(named: "icon-button-radio", in: Bundle(for: type(of: self)), compatibleWith: nil)
+            imageViewSelection.image = UIImage(named: "icon-button-radio", in: Bundle.libResourceBundle, compatibleWith: nil)
             imageViewSelection.tintColor = theme?.inputElementDefaultTintColor
         }
     }
@@ -61,7 +61,7 @@ class PaymentMethodTableViewCell: UITableViewCell {
         case .applePay: //TODO: text to loc
             labelMainTitle.isHidden = false
             labelMainTitle.text = "Apple Pay"
-            imageViewMain.image = UIImage(named: "img-apple-pay-logo", in: Bundle(for: type(of: self)), compatibleWith: nil)
+            imageViewMain.image = UIImage(named: "img-apple-pay-logo", in: Bundle.libResourceBundle, compatibleWith: nil)
         case .mastercard:
             labelSubtitle1.isHidden = false
             labelSubtitle2.isHidden = false

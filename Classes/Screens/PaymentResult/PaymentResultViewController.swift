@@ -28,8 +28,7 @@ class PaymentResultViewController: BaseUIViewController {
                 delegate: PaymentResultViewControllerDelegate) {
         self.delegate = delegate
         let nibName = String(describing: type(of: self))
-        let podBundle = Bundle(for: type(of: self))
-        super.init(nibName: nibName, bundle: podBundle)
+        super.init(nibName: nibName, bundle: Bundle.libResourceBundle)
         self.displayCloseButton = true
         self.displayBackButton = false
         self.viewModel = viewModel
@@ -85,7 +84,7 @@ class PaymentResultViewController: BaseUIViewController {
             buttonTryAgain.isHidden = true
             labelMainText.text = LocalizedText.PaymentResult.mainTitleSuccess
             labelSubtitle.text = "\(LocalizedText.PaymentResult.orderId) \(viewModel?.paymentIntent.id ?? "")"  //TODO: the same for both cases
-            imgViewResult.image = UIImage(named: theme.lightStyleForDefaultElements ? "img-result-success-light" : "img-result-success-dark", in: Bundle(for: type(of: self)), compatibleWith: nil)
+            imgViewResult.image = UIImage(named: theme.lightStyleForDefaultElements ? "img-result-success-light" : "img-result-success-dark", in: Bundle.libResourceBundle, compatibleWith: nil)
             
             //TODO: common style
             buttonDone.backgroundColor = theme.primaryCTAButtonActiveBackgroundColor
@@ -97,7 +96,7 @@ class PaymentResultViewController: BaseUIViewController {
             labelMainText.text = LocalizedText.PaymentResult.mainTitleFail
             labelSubtitle.text = "\(LocalizedText.PaymentResult.orderId) \(viewModel?.paymentIntent.id ?? "")"
             labelSubtitle2.text = LocalizedText.PaymentResult.mainErrorMessage
-            imgViewResult.image = UIImage(named: theme.lightStyleForDefaultElements ? "img-result-error-light" : "img-result-error-dark", in: Bundle(for: type(of: self)), compatibleWith: nil)
+            imgViewResult.image = UIImage(named: theme.lightStyleForDefaultElements ? "img-result-error-light" : "img-result-error-dark", in: Bundle.libResourceBundle, compatibleWith: nil)
             
             //TODO: common style
             buttonTryAgain.backgroundColor = theme.primaryCTAButtonActiveBackgroundColor
