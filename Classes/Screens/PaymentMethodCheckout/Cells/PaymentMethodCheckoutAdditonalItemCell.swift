@@ -16,7 +16,7 @@ class PaymentMethodCheckoutAdditonalItemCell: UITableViewCell {
     
     public static func register(tableView: UITableView) {
         tableView.register(UINib(nibName: PaymentMethodCheckoutAdditonalItemCell.cellId,
-                                 bundle: Bundle(for: PaymentMethodCheckoutAdditonalItemCell.self)),
+                                 bundle: Bundle.libResourceBundle),
                            forCellReuseIdentifier: PaymentMethodCheckoutAdditonalItemCell.cellId)
     }
     

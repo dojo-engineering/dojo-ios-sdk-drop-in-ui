@@ -151,8 +151,9 @@ class DojoInputFieldViewModel: DojoInputFieldViewModelProtocol {
     
     func getCountriesItems() -> Array<CountryDropdownItem>? {
         // fetch csv with countries
-        let bundle = Bundle(for: Swift.type(of: self))
-        guard let countriesCSV = bundle.url(forResource: "countries", withExtension: "csv") else {
+        
+        guard let bundle = Bundle.libResourceBundle,
+              let countriesCSV = bundle.url(forResource: "countries", withExtension: "csv") else {
             return nil
         }
         // convert data to string

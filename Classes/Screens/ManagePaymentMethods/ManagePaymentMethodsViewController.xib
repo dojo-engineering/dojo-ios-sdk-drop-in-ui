@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ManagePaymentMethodsViewController" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ManagePaymentMethodsViewController" customModule="DojoSDKUIResources" customModuleProvider="target">
             <connections>
                 <outlet property="buttonPayUsingNewCard" destination="NIU-8V-UnT" id="Y5S-Cu-WyD"/>
                 <outlet property="buttonUseSelectedPaymentMethod" destination="DQi-4j-kXE" id="sSy-hL-7n0"/>
@@ -24,7 +24,7 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kVw-30-O4F" customClass="FooterPoweredByDojo" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kVw-30-O4F" customClass="FooterPoweredByDojo" customModule="dojo_ios_sdk_drop_in_ui">
                     <rect key="frame" x="0.0" y="822" width="414" height="40"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -45,7 +45,7 @@
                         <constraint firstAttribute="width" priority="999" constant="480" id="C5D-Ld-oEW"/>
                     </constraints>
                 </tableView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DQi-4j-kXE" customClass="LoadingButton" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DQi-4j-kXE" customClass="LoadingButton" customModule="dojo_ios_sdk_drop_in_ui">
                     <rect key="frame" x="16" y="709" width="382" height="44"/>
                     <constraints>
                         <constraint firstAttribute="width" priority="999" constant="480" id="ROM-W8-nLv"/>

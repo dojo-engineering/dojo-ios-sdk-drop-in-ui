@@ -23,7 +23,7 @@ class PaymentMethodTableViewCell: UITableViewCell {
     
     public static func register(tableView: UITableView) {
         tableView.register(UINib(nibName: PaymentMethodTableViewCell.cellId,
-                                 bundle: Bundle(for: PaymentMethodTableViewCell.self)),
+                                 bundle: Bundle.libResourceBundle),
                            forCellReuseIdentifier: PaymentMethodTableViewCell.cellId)
     }
     
