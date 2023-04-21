@@ -17,6 +17,7 @@ public class DojoSDKDropInUI: NSObject {
                                  customerSecret: String? = nil,
                                  applePayConfig: DojoUIApplePayConfig? = nil,
                                  themeSettings: DojoThemeSettings? = nil,
+                                 debugConfig: DojoSDKDebugConfig? = nil,
                                  completion: ((Int) -> Void)?) {
         DispatchQueue.main.async {
             let theme = ThemeSettings(dojoTheme: themeSettings ?? DojoThemeSettings.getLightTheme())
@@ -26,6 +27,7 @@ public class DojoSDKDropInUI: NSObject {
                                                              paymentIntent: nil,
                                                              themeSettings: theme,
                                                              applePayConfig: applePayConfig,
+                                                             debugConfig: debugConfig,
                                                              isDemo: false)
             if let configurationManager = self.configurationManager {
                 self.rootCoordinator = RootCoordinator(presentationViewController: controller,

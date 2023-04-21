@@ -15,6 +15,7 @@ struct ConfigurationManager {
     var savedPaymentMethods: [SavedPaymentMethod]?
     var themeSettings: ThemeSettings
     var applePayConfig: DojoUIApplePayConfig?
+    var debugConfig: DojoSDKDebugConfig?
     var isDemo: Bool = false
     
     var demoDelay: Double {

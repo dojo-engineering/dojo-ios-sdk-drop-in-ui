@@ -12,11 +12,13 @@ class PaymentResultViewModel: BaseViewModel {
     
     let resultCode: Int
     let demoDelay: Double
+    let debugConfig: DojoSDKDebugConfig?
     
     init?(config: ConfigurationManager,
          resultCode: Int) {
         self.resultCode = resultCode
         self.demoDelay = config.demoDelay
+        self.debugConfig = config.debugConfig
         if let paymentIntent = config.paymentIntent {
             super.init(paymentIntent: paymentIntent)
         } else {
@@ -26,6 +28,6 @@ class PaymentResultViewModel: BaseViewModel {
     }
     
     func refreshToken(completion: ((String?,Error?)-> Void)?) {
-        DojoSDK.refreshPaymentIntent(intentId: paymentIntent.id, completion: completion)
+        DojoSDK.refreshPaymentIntent(intentId: paymentIntent.id, debugConfig: debugConfig, completion: completion)
     }
 }
