@@ -12,10 +12,12 @@ class PaymentMethodCheckoutViewModel: BaseViewModel {
     
     let applePayConfig: DojoUIApplePayConfig?
     var savedPaymentMethods: [SavedPaymentMethod]?
+    var debugConfig: DojoSDKDebugConfig?
     
     init?(config: ConfigurationManager) {
         self.applePayConfig = config.applePayConfig
         self.savedPaymentMethods = config.savedPaymentMethods
+        self.debugConfig = config.debugConfig
         if let paymentIntent = config.paymentIntent {
             super.init(paymentIntent: paymentIntent)
         } else {
@@ -41,6 +43,7 @@ class PaymentMethodCheckoutViewModel: BaseViewModel {
                                                                   paymentMethodId: paymentId)
         DojoSDK.executeSavedCardPayment(token: paymentIntent.clientSessionSecret,
                                         payload: savedCardPaymentPayload,
+                                        debugConfig: debugConfig,
                                         fromViewController: fromViewControlelr,
                                         completion: completion)
     }
@@ -57,6 +60,7 @@ class PaymentMethodCheckoutViewModel: BaseViewModel {
                                                                                   collectEmail: self.paymentIntent.config?.customerEmail?.collectionRequired ?? false))
         DojoSDK.executeApplePayPayment(paymentIntent: paymentIntent,
                                        payload: applePayload,
+                                       debugConfig: debugConfig,
                                        fromViewController: fromViewControlelr) { result in
                 guard result == 0 else { return }
                 completion?(result)

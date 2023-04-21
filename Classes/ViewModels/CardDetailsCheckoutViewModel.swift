@@ -13,9 +13,11 @@ class CardDetailsCheckoutViewModel: BaseViewModel {
     var billingCountry: String?
     var billingPostcode: String?
     var isSaveCardSelected = true
+    var debugConfig: DojoSDKDebugConfig?
     
     init?(config: ConfigurationManager) {
         if let paymentIntent = config.paymentIntent {
+            self.debugConfig = config.debugConfig
             super.init(paymentIntent: paymentIntent)
         } else {
             // payment intent is required for this screen
@@ -27,12 +29,12 @@ class CardDetailsCheckoutViewModel: BaseViewModel {
         let cardPaymentPayload = DojoCardPaymentPayload(cardDetails: cardDetails,
                                                         userEmailAddress: email,
                                                         billingAddress: DojoAddressDetails(postcode: billingPostcode, countryCode: billingCountry),
-                                                        savePaymentMethod: isSaveCardSelected,
-                                                        isSandbox: paymentIntent.isSandbox)
+                                                        savePaymentMethod: isSaveCardSelected)
         DojoSDK.executeCardPayment(token: paymentIntent.clientSessionSecret,
-                                    payload: cardPaymentPayload,
-                                    fromViewController: fromViewController,
-                                    completion: completion)
+                                   payload: cardPaymentPayload,
+                                   debugConfig: debugConfig ?? DojoSDKDebugConfig(isSandboxIntent: paymentIntent.isSandbox),
+                                   fromViewController: fromViewController,
+                                   completion: completion)
     }
     
     var showFieldEmail: Bool {

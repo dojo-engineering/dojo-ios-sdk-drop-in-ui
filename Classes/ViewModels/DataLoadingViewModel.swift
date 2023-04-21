@@ -16,12 +16,15 @@ class DataLoadingViewModel {
     let customerSecret: String?
     let demoDelay: Double
     let isDemo: Bool
+    let debugConfig: DojoSDKDebugConfig?
     
     init(paymentIntentId: String,
          customerSecret: String? = nil,
+         debugConfig: DojoSDKDebugConfig?,
          demoDelay: Double,
          isDemo: Bool) {
         self.paymentIntentId = paymentIntentId
+        self.debugConfig = debugConfig
         self.customerSecret = customerSecret
         self.demoDelay = demoDelay
         self.isDemo = isDemo
@@ -29,7 +32,7 @@ class DataLoadingViewModel {
     
     func fetchPaymentIntent(completion: ((PaymentIntent?, Error?) -> Void)?) {
         NetworkingSDKFactory.getNetworkingSDK(isMock: self.isDemo)
-            .fetchPaymentIntent(intentId: paymentIntentId) { stringData, fetchError in
+            .fetchPaymentIntent(intentId: paymentIntentId, debugConfig: debugConfig) { stringData, fetchError in
             CommonUtils.parseResponseToCompletion(stringData: stringData,
                                                   fetchError: fetchError,
                                                   objectType: PaymentIntent.self,
@@ -43,7 +46,7 @@ class DataLoadingViewModel {
             return
         }
         NetworkingSDKFactory.getNetworkingSDK(isMock: self.isDemo)
-            .fetchCustomerPaymentMethods(customerId: customerId, customerSecret: customerSecret, completion: { stringData, error in
+            .fetchCustomerPaymentMethods(customerId: customerId, customerSecret: customerSecret, debugConfig: debugConfig, completion: { stringData, error in
             CommonUtils.parseResponseToCompletion(stringData: stringData,
                                                   fetchError: error,
                                                   objectType: SavedPaymentRoot.self) { result, error in

@@ -54,11 +54,13 @@ class ManagePaymentMethodsViewModel: BaseViewModel {
     
     let applePayConfig: DojoUIApplePayConfig?
     let customerSecret: String?
+    let debugConfig: DojoSDKDebugConfig?
     
     init?(config: ConfigurationManager,
          selectedPaymentMethod: PaymentMethodItem? = nil) {
         self.applePayConfig = config.applePayConfig
         self.customerSecret = config.customerSecret
+        self.debugConfig = config.debugConfig
         if let paymentIntent = config.paymentIntent {
             super.init(paymentIntent: paymentIntent)
         } else {
@@ -98,6 +100,7 @@ class ManagePaymentMethodsViewModel: BaseViewModel {
                 DojoSDK.deleteCustomerPaymentMethod(customerId: customerId,
                                                     paymentMethodId: item.id,
                                                     customerSecret: customerSecret,
+                                                    debugConfig: debugConfig,
                                                     completion: nil)
             }
             savedPaymentItems.remove(at: index)
