@@ -46,7 +46,7 @@ TODO: Add long description of the pod here.
   # s.frameworks = 'UIKit', 'MapKit'
 
   s.static_framework = true
-  s.dependency 'dojo-ios-sdk', '1.2.1' 
+  s.dependency 'dojo-ios-sdk', '1.3.0' 
 
   s.test_spec 'DojoSDKUI-Tests' do |test_spec|
     test_spec.source_files = ['Sources/dojo-ios-sdk-drop-in-ui/Tests/**/*.{h,m,swift}', 'Sources/dojo-ios-sdk-drop-in-ui/Classes/**/*.{h,m,swift}']
