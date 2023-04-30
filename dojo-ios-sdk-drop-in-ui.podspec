@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'dojo-ios-sdk-drop-in-ui'
-  s.version          = '1.2.0'
+  s.version          = '1.2.1'
   s.summary          = 'UI version of Dojo SDK to take payments'
 
 # This description is used to generate tags and improve search results.
@@ -30,7 +30,7 @@ TODO: Add long description of the pod here.
 
   s.ios.deployment_target = '11.0'
 
-  s.source_files = 'Classes/**/*.{h,m,swift}'
+  s.source_files = 'Sources/dojo-ios-sdk-drop-in-ui/Classes/**/*.{h,m,swift}'
 
   #s.resources = 'Classes/**/*.{xcassets,xib,strings,ttf,csv}'
 
@@ -39,17 +39,17 @@ TODO: Add long description of the pod here.
   # }
 
   s.resource_bundles = {
-      'DojoSDKUIResources' => ['Classes/**/*.{xcassets,xib,strings,ttf,csv}']
+      'DojoSDKUIResources' => ['Sources/dojo-ios-sdk-drop-in-ui/Classes/**/*.{xcassets,xib,strings,ttf,csv}']
   }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
 
   s.static_framework = true
-  s.dependency 'dojo-ios-sdk', '1.2.0' 
+  s.dependency 'dojo-ios-sdk', '1.2.1' 
 
   s.test_spec 'DojoSDKUI-Tests' do |test_spec|
-    test_spec.source_files = ['Tests/**/*.{h,m,swift}', 'Classes/**/*.{h,m,swift}']
+    test_spec.source_files = ['Sources/dojo-ios-sdk-drop-in-ui/Tests/**/*.{h,m,swift}', 'Sources/dojo-ios-sdk-drop-in-ui/Classes/**/*.{h,m,swift}']
     # test_spec.dependency 'OCMock' # This dependency will only be linked with your tests.
   end
 
