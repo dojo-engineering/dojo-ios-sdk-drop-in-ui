@@ -23,8 +23,14 @@ let package = Package(
         .target(
             name: "dojo-ios-sdk-drop-in-ui",
             dependencies: [
-                .product(name: "dojo-ios-sdk", package: "dojo-ios-sdk")
+                .product(name: "dojo-ios-sdk", package: "dojo-ios-sdk"),
             ],
-            path: "Sources/dojo-ios-sdk-drop-in-ui/Classes")
+            path: "Sources/dojo-ios-sdk-drop-in-ui/Classes",
+            resources: [
+                .process("Assets/Fonts"), .process("Assets/Other")],
+            swiftSettings: [
+                .define("SPM")
+            ]
+        )
     ]
 )
