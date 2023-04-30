@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "dojo-ios-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:dojo-engineering/dojo-ios-sdk",
+      "state" : {
+        "revision" : "da2b67a6b3eb7de6837cc4d4a3085566dd1a84be",
+        "version" : "1.3.0"
+      }
+    }
+  ],
+  "version" : 2
+}
