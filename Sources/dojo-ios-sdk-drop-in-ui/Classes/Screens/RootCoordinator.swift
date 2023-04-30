@@ -203,6 +203,8 @@ extension RootCoordinator: DataLoadingViewControllerDelegate {
         propagateConfigChanges()
         if paymentIntent.isCaptured {
             showPaymentResult(resultCode: 0)
+        } else if paymentIntent.isVirtualTerminalPayment {
+            showCardDetailsCheckout()
         } else {
             showPaymentMethodCheckout()
         }
