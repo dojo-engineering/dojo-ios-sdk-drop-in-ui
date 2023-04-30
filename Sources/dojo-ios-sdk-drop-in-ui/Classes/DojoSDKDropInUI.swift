@@ -1,5 +1,7 @@
 
 import dojo_ios_sdk
+import Foundation
+import UIKit
 
 @objc
 public class DojoSDKDropInUI: NSObject {
