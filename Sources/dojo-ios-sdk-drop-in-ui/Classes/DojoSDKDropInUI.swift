@@ -53,7 +53,7 @@ public class DojoSDKDropInUI: NSObject {
                                                     isDemo: false)
         dataLoadingModel.fetchPaymentIntent() { pi, error in
             if let pi = pi {
-                var themeSettings = DojoThemeSettings.getLightTheme()
+                let themeSettings = DojoThemeSettings.getLightTheme()
                 themeSettings.showBranding = false
                 let configManager = ConfigurationManager(paymentIntentId: paymentIntentId, paymentIntent: pi, themeSettings: ThemeSettings(dojoTheme: themeSettings))
                 if let viewModel = CardDetailsCheckoutViewModel(config: configManager) {

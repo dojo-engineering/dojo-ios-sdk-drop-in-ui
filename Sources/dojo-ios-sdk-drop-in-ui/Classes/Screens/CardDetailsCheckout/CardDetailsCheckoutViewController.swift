@@ -144,6 +144,8 @@ extension CardDetailsCheckoutViewController {
     func setUpViews() {
         footerPoweredByDojoView?.setStyle(FooterPoweredByDojoStyle.checkoutPage)
         
+        labelYouPay.text = getViewModel()?.topTitle
+        
         fieldEmail.setType(.email, delegate: self)
         fieldCardholder.setType(.cardHolderName, delegate: self)
         fieldCardNumber.setType(.cardNumber, delegate: self)

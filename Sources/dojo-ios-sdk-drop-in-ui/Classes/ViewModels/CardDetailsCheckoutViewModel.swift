@@ -60,6 +60,10 @@ class CardDetailsCheckoutViewModel: BaseViewModel {
         paymentIntent.merchantConfig?.supportedPaymentMethods?.cardSchemes ?? []
     }
     
+    var topTitle: String? {
+        paymentIntent.isVirtualTerminalPayment ? paymentIntent.config?.tradingName : "You Pay"
+    }
+    
     func showBillingPostcode(_ countryCode: String) -> Bool {
         ["GB", "US", "CA"].contains(countryCode)
     }

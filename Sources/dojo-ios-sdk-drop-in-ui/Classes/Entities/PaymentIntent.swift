@@ -72,6 +72,7 @@ enum Wallets: String, Codable {
 struct PaymentIntentConfig: Codable {
     var customerEmail: ConfigurationRequired?
     var billingAddress: ConfigurationRequired?
+    var tradingName: String?
 }
 
 struct CustomerConfig: Codable {
