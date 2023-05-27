@@ -17,6 +17,7 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     
     @IBOutlet weak var labelPrimaryAmount: UILabel!
     @IBOutlet weak var labelYouPay: UILabel!
+    @IBOutlet weak var labelOrderReference: UILabel!
     @IBOutlet weak var labelSaveCardForFutureUse: UILabel!
     @IBOutlet weak var buttonPay: LoadingButton!
     @IBOutlet weak var imageViewSaveCardCheckbox: UIImageView!
@@ -129,7 +130,12 @@ extension CardDetailsCheckoutViewController {
     
     func setUpCardsStrip() {
         //TODO: a better function for that
-        guard let viewModel = getViewModel() else { return }
+        guard let viewModel = getViewModel(),
+            !viewModel.paymentIntent.isVirtualTerminalPayment else {
+            containerCardsStrip.isHidden = true
+            return
+        }
+        containerCardsStrip.isHidden = false
         viewModel.supportedCardSchemes.forEach({
             if let image = UIImage.getCardIcon(type: $0,
                                                lightVersion: theme.lightStyleForDefaultElements) {
@@ -139,6 +145,16 @@ extension CardDetailsCheckoutViewController {
                 containerCardsStrip.addArrangedSubview(imageView)
             }
         })
+    }
+    
+    func setUpOrderReference() {
+        guard let viewModel = getViewModel(),
+            viewModel.paymentIntent.isVirtualTerminalPayment else {
+            labelOrderReference.isHidden = true
+            return
+        }
+        labelOrderReference.isHidden = false
+        labelOrderReference.text = "Order \(viewModel.paymentIntent.reference ?? "")" 
     }
     
     func setUpViews() {
@@ -170,6 +186,7 @@ extension CardDetailsCheckoutViewController {
         
         setUpSaveCardCheckbox()
         setUpCardsStrip()
+        setUpOrderReference()
         buttonPay.setEnabled(false)
     }
 }
