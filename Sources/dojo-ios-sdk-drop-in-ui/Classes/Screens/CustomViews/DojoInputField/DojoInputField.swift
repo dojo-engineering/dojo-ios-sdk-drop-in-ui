@@ -59,7 +59,9 @@ class DojoInputField: UIView {
         return viewModel.type
     }
     
-    func setType(_ type: DojoInputFieldType, showSubtitle: Bool = false, delegate: DojoInputFieldDelegate) {
+    func setType(_ type: DojoInputFieldType,
+                 showSubtitle: Bool = false,
+                 delegate: DojoInputFieldDelegate) {
         self.viewModel = DojoInputFieldViewModel(type: type, withSubtitle: showSubtitle)
         self.delegate = delegate
         setUpFieldForCurrentType()
@@ -99,7 +101,7 @@ class DojoInputField: UIView {
     
     func setUpFieldForCurrentType() {
         switch viewModel?.type {
-        case .billingCountry:
+        case .billingCountry, .shippingCountry:
             setUpFieldForCountriesDropDown()
         default:
             break

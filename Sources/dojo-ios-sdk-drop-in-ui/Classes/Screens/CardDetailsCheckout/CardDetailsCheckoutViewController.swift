@@ -32,6 +32,18 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     @IBOutlet weak var containerSavedCard: UIView!
     @IBOutlet weak var containerCardsStrip: UIStackView!
     @IBOutlet weak var constraintPayButtonBottom: NSLayoutConstraint!
+    @IBOutlet weak var fieldShippingName: DojoInputField!
+    @IBOutlet weak var fieldShippingLine1: DojoInputField!
+    @IBOutlet weak var fieldShippingLine2: DojoInputField!
+    @IBOutlet weak var fieldShippingCity: DojoInputField!
+    @IBOutlet weak var fieldShippingPostcode: DojoInputField!
+    
+    @IBOutlet weak var fieldShippingNotes: DojoInputField!
+    @IBOutlet weak var fieldShippingCountry: DojoInputField!
+    
+    @IBOutlet weak var imageViewBillingSameAsShipping: UIImageView!
+    @IBOutlet weak var labelBillingSameAsShipping: UILabel!
+    @IBOutlet weak var labelAllTransactionsAreSecure: UILabel!
     
     public init(viewModel: CardDetailsCheckoutViewModel,
                 theme: ThemeSettings,
@@ -59,6 +71,7 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         
         buttonPay.setTheme(theme)
         imageViewSaveCardCheckbox.tintColor = theme.inputElementActiveTintColor
+        imageViewBillingSameAsShipping.tintColor = theme.inputElementActiveTintColor
         
         labelYouPay.textColor = theme.primaryLabelTextColor
         labelYouPay.font = theme.fontSubtitle1Medium
@@ -69,6 +82,12 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         labelSaveCardForFutureUse.font = theme.fontSubtitle1
         labelSaveCardForFutureUse.textColor = theme.secondaryLabelTextColor
         
+        labelBillingSameAsShipping.font = theme.fontSubtitle1
+        labelBillingSameAsShipping.textColor = theme.secondaryLabelTextColor
+        
+        labelAllTransactionsAreSecure.font = theme.fontSubtitle1
+        labelAllTransactionsAreSecure.textColor = theme.secondaryLabelTextColor
+        
         fieldEmail.setTheme(theme: theme)
         fieldCardholder.setTheme(theme: theme)
         fieldCardNumber.setTheme(theme: theme) // TODO refactor
@@ -77,6 +96,14 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         fieldBillingPostcode.setTheme(theme: theme)
         fieldExpiry.setTheme(theme: theme)
         fieldCVV.setTheme(theme: theme)
+        
+        fieldShippingName.setTheme(theme: theme)
+        fieldShippingLine1.setTheme(theme: theme)
+        fieldShippingLine2.setTheme(theme: theme)
+        fieldShippingCity.setTheme(theme: theme)
+        fieldShippingPostcode.setTheme(theme: theme)
+        fieldShippingCountry.setTheme(theme: theme)
+        fieldShippingNotes.setTheme(theme: theme)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -130,8 +157,8 @@ extension CardDetailsCheckoutViewController {
     
     func setUpCardsStrip() {
         //TODO: a better function for that
-        guard let viewModel = getViewModel(),
-            !viewModel.paymentIntent.isVirtualTerminalPayment else {
+        guard let viewModel = getViewModel() else {
+//            !viewModel.paymentIntent.isVirtualTerminalPayment else {
             containerCardsStrip.isHidden = true
             return
         }
@@ -169,6 +196,14 @@ extension CardDetailsCheckoutViewController {
         fieldBillingPostcode.setType(.billingPostcode, delegate: self)
         fieldExpiry.setType(.expiry, delegate: self)
         fieldCVV.setType(.cvv, delegate: self)
+        
+        fieldShippingName.setType(.shippingName, delegate: self)
+        fieldShippingLine1.setType(.shippingAddressLine1, delegate: self)
+        fieldShippingLine2.setType(.shippingAddressLine2, delegate: self)
+        fieldShippingCity.setType(.shippingCity, delegate: self)
+        fieldShippingPostcode.setType(.shippingPostcode, delegate: self)
+        fieldShippingCountry.setType(.shippingCountry, delegate: self)
+        fieldShippingNotes.setType(.shippingDeliveryNotes, delegate: self)
         
         let billingIsHidden = !(getViewModel()?.showFieldBilling ?? false)
         let emailIsHidden = !(getViewModel()?.showFieldEmail ?? false)

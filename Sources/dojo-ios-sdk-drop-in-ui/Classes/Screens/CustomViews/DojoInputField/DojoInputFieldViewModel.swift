@@ -14,6 +14,14 @@ enum DojoInputFieldType {
     case billingPostcode
     case expiry
     case cvv
+    
+    case shippingName
+    case shippingAddressLine1
+    case shippingAddressLine2
+    case shippingCity
+    case shippingPostcode
+    case shippingCountry
+    case shippingDeliveryNotes
 }
 
 enum DojoInputFieldState {
@@ -96,6 +104,20 @@ class DojoInputFieldViewModel: DojoInputFieldViewModelProtocol {
                 return LocalizedText.CardDetailsCheckout.fieldExpiryDate
             case .cvv:
                 return LocalizedText.CardDetailsCheckout.fieldCVV
+            case .shippingName:
+                return "Name"
+            case .shippingAddressLine1:
+                return "Address line 1"
+            case .shippingAddressLine2:
+                return "Address line 2"
+            case .shippingCity:
+                return "City"
+            case .shippingPostcode:
+                return "Postcode"
+            case .shippingCountry:
+                return "Country"
+            case .shippingDeliveryNotes:
+                return "Delivey notes"
             }
         }
     }
@@ -117,6 +139,8 @@ class DojoInputFieldViewModel: DojoInputFieldViewModelProtocol {
     var isRequired: Bool {
         get {
             switch type {
+            case .shippingAddressLine2, .shippingDeliveryNotes:
+                return false
             default:
                 return true
             }

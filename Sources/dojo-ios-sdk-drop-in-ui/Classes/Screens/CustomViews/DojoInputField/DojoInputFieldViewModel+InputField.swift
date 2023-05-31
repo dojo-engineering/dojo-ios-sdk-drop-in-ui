@@ -20,7 +20,7 @@ extension DojoInputField: UITextFieldDelegate {
         delegate?.onTextFieldBeginEditing(self)
         guard let viewModel = viewModel else { return } 
         // Handle country selection
-        if viewModel.type == .billingCountry {
+        if viewModel.type == .billingCountry || viewModel.type == .shippingCountry  {
             self.picker = UIPickerView()
             self.picker?.delegate = self
             self.picker?.dataSource = self
@@ -105,7 +105,7 @@ extension DojoInputField: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         delegate?.onTextFieldDidFinishEditing(self)
         guard let viewModel = viewModel else { return } //TODO: notify about an error
-        guard viewModel.type != .billingCountry else {
+        guard viewModel.type != .billingCountry && viewModel.type != .shippingCountry else {
             // country selection is pre-defined and doesn't need to be validated
             setState(.normal)
             return
