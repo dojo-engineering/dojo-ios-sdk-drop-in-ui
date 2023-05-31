@@ -22,6 +22,7 @@ class DojoInputField: UIView {
     @IBOutlet weak var textFieldMain: UITextField!
     @IBOutlet weak var imageViewBottom: UIImageView!
     @IBOutlet weak var labelBottom: UILabel!
+    @IBOutlet weak var labelSubtitle: UILabel!
     @IBOutlet weak var constrainLabelBottomLeft: NSLayoutConstraint!
     
     var viewModel: DojoInputFieldViewModelProtocol?
@@ -58,8 +59,8 @@ class DojoInputField: UIView {
         return viewModel.type
     }
     
-    func setType(_ type: DojoInputFieldType, delegate: DojoInputFieldDelegate) {
-        self.viewModel = DojoInputFieldViewModel(type: type)
+    func setType(_ type: DojoInputFieldType, showSubtitle: Bool = false, delegate: DojoInputFieldDelegate) {
+        self.viewModel = DojoInputFieldViewModel(type: type, withSubtitle: showSubtitle)
         self.delegate = delegate
         setUpFieldForCurrentType()
         setState(.normal)
@@ -72,6 +73,10 @@ class DojoInputField: UIView {
         textFieldMain.placeholder = viewModel.fieldPlaceholder
         labelTop.text = viewModel.fieldName
         labelBottom.text = viewModel.fieldError
+        
+        if !viewModel.isRequired {
+           addOptional(label: labelTop)
+        }
     }
     
     func setTheme(theme: ThemeSettings) {
@@ -81,6 +86,9 @@ class DojoInputField: UIView {
         
         labelBottom.font = theme.fontSubtitle2
         labelBottom.textColor = theme.errorTextColor
+        
+        labelSubtitle.font = theme.fontSubtitle2
+        labelSubtitle.textColor = theme.secondaryLabelTextColor
         
         textFieldMain.backgroundColor = theme.inputFieldBackgroundColor
         textFieldMain.textColor = theme.primaryLabelTextColor
@@ -102,12 +110,14 @@ class DojoInputField: UIView {
         switch state {
         case .normal:
             imageViewBottom.isHidden = true
+            labelSubtitle.isHidden = !showSubtitle()
             labelBottom.isHidden = true
             textFieldMain.layer.borderWidth = 1.0
             textFieldMain.layer.borderColor = self.theme?.inputFieldDefaultBorderColor.cgColor ?? UIColor.black.withAlphaComponent(0.15).cgColor
             textFieldMain.layer.cornerRadius = 4
         case .activeInput:
             imageViewBottom.isHidden = true
+            labelSubtitle.isHidden = !showSubtitle()
             labelBottom.isHidden = true
             textFieldMain.layer.borderWidth = 2.0
             textFieldMain.layer.borderColor = self.theme?.inputFieldSelectedBorderColor.cgColor ?? UIColor.systemGreen.cgColor
@@ -115,6 +125,7 @@ class DojoInputField: UIView {
         case .error:
             imageViewBottom.isHidden = false
             labelBottom.isHidden = false
+            labelSubtitle.isHidden = true
             textFieldMain.layer.borderWidth = 1.0
             textFieldMain.layer.borderColor = self.theme?.errorTextColor.cgColor ?? UIColor.systemRed.cgColor
             textFieldMain.layer.cornerRadius = 4
@@ -125,5 +136,19 @@ class DojoInputField: UIView {
     
     func isValid() -> Bool {
         viewModel?.validateField(textFieldMain.text) == .normal
+    }
+    
+    func showSubtitle() -> Bool {
+        viewModel?.subtitle != nil
+    }
+    
+    func addOptional(label: UILabel) {
+        label.text?.append(" (optional)")
+        if let range = (label.text as? NSString)?.range(of: "(optional)"),
+        let mainString = label.text {
+            let mutableAttributedString = NSMutableAttributedString.init(string: mainString)
+            mutableAttributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: theme?.secondaryLabelTextColor ?? .lightGray, range: range)
+            label.attributedText = mutableAttributedString
+        }
     }
 }

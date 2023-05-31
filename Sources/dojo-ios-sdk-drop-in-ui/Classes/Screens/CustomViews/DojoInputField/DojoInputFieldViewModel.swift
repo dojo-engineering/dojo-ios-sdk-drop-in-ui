@@ -24,14 +24,16 @@ enum DojoInputFieldState {
 
 
 protocol DojoInputFieldViewModelProtocol {
-    init(type: DojoInputFieldType)
+    init(type: DojoInputFieldType, withSubtitle: Bool)
     var fieldKeyboardType: UIKeyboardType {get}
     var fieldPlaceholder: String {get}
     var fieldName: String {get}
     var fieldError: String {get}
     var fieldErrorEmpty: String {get}
     var fieldMaxLimit: Int {get}
+    var subtitle: String? {get}
     var type: DojoInputFieldType {get}
+    var isRequired: Bool {get}
     
     func validateField(_ text: String?) -> DojoInputFieldState
     func getCardScheme(_ text: String?) -> CardSchemes?
@@ -42,9 +44,11 @@ protocol DojoInputFieldViewModelProtocol {
 class DojoInputFieldViewModel: DojoInputFieldViewModelProtocol {
     
     let type: DojoInputFieldType
+    let showSubtitle: Bool
     
-    required init(type: DojoInputFieldType) {
+    required init(type: DojoInputFieldType, withSubtitle: Bool = false) {
         self.type = type
+        self.showSubtitle = withSubtitle
     }
     
     var fieldKeyboardType: UIKeyboardType {
@@ -92,6 +96,29 @@ class DojoInputFieldViewModel: DojoInputFieldViewModelProtocol {
                 return LocalizedText.CardDetailsCheckout.fieldExpiryDate
             case .cvv:
                 return LocalizedText.CardDetailsCheckout.fieldCVV
+            }
+        }
+    }
+    
+    var subtitle: String? {
+        get {
+            guard showSubtitle else {
+                return nil
+            }
+            switch type {
+            case .email:
+                return "A copy of your receipt will be emailed"
+            default:
+                return nil
+            }
+        }
+    }
+    
+    var isRequired: Bool {
+        get {
+            switch type {
+            default:
+                return true
             }
         }
     }

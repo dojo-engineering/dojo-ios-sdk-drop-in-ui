@@ -162,7 +162,7 @@ extension CardDetailsCheckoutViewController {
         
         labelYouPay.text = getViewModel()?.topTitle
         
-        fieldEmail.setType(.email, delegate: self)
+        fieldEmail.setType(.email, showSubtitle: viewModel?.paymentIntent.isVirtualTerminalPayment ?? false, delegate: self)
         fieldCardholder.setType(.cardHolderName, delegate: self)
         fieldCardNumber.setType(.cardNumber, delegate: self)
         fieldBillingCountry.setType(.billingCountry, delegate: self)

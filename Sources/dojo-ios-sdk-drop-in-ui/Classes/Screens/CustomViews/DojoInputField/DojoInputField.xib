@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DojoInputField" customModule="DojoSDKUIResources" customModuleProvider="target">
             <connections>
                 <outlet property="constrainLabelBottomLeft" destination="Jyt-DP-eOw" id="vBd-6x-AkW"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="WOU-G6-D5B"/>
                 <outlet property="imageViewBottom" destination="p7z-NC-R3c" id="eJK-Ju-Ar1"/>
                 <outlet property="labelBottom" destination="5Gf-80-a6P" id="YDC-mV-07l"/>
+                <outlet property="labelSubtitle" destination="obb-j6-Uhk" id="F6P-lY-Lf9"/>
                 <outlet property="labelTop" destination="tZW-dB-FsF" id="RNm-He-od6"/>
                 <outlet property="textFieldMain" destination="HJ6-IX-Yqe" id="oru-ND-bLi"/>
             </connections>
@@ -56,16 +57,28 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A copy of your receipt will be emailed " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="obb-j6-Uhk" userLabel="Subtitle">
+                    <rect key="frame" x="0.0" y="78" width="323" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="gcd-cC-Yah"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="tZW-dB-FsF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="3SW-c9-lUP"/>
                 <constraint firstItem="p7z-NC-R3c" firstAttribute="top" secondItem="HJ6-IX-Yqe" secondAttribute="bottom" constant="5" id="6Gm-lw-QUR"/>
+                <constraint firstAttribute="trailing" secondItem="obb-j6-Uhk" secondAttribute="trailing" constant="14" id="70k-jn-Z4U"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="5Gf-80-a6P" secondAttribute="trailing" id="8bW-xz-rjD"/>
+                <constraint firstItem="obb-j6-Uhk" firstAttribute="centerY" secondItem="5Gf-80-a6P" secondAttribute="centerY" id="A4w-g2-o53"/>
                 <constraint firstItem="5Gf-80-a6P" firstAttribute="centerY" secondItem="p7z-NC-R3c" secondAttribute="centerY" id="DAo-s2-qv0"/>
                 <constraint firstItem="5Gf-80-a6P" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="28" id="Jyt-DP-eOw"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="HJ6-IX-Yqe" secondAttribute="trailing" id="LWi-Z6-hgf"/>
+                <constraint firstItem="obb-j6-Uhk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="OCR-dF-gaD"/>
                 <constraint firstItem="p7z-NC-R3c" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="WyS-v9-8A4"/>
                 <constraint firstItem="HJ6-IX-Yqe" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="aqM-yD-aR7"/>
                 <constraint firstItem="HJ6-IX-Yqe" firstAttribute="top" secondItem="tZW-dB-FsF" secondAttribute="bottom" constant="4" id="vHD-ot-Enm"/>
