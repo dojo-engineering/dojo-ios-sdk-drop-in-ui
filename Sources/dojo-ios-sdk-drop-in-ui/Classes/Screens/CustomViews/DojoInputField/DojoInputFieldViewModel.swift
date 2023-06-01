@@ -180,7 +180,7 @@ class DojoInputFieldViewModel: DojoInputFieldViewModelProtocol {
             case .cvv:
                 return LocalizedText.CardDetailsCheckout.errorEmptyCvv
             default:
-                return ""
+                return "Please fill in this field" // TODO a specific error for a field
             }
         }
     }
@@ -194,6 +194,8 @@ class DojoInputFieldViewModel: DojoInputFieldViewModelProtocol {
                 return 4 //TOOD: not relevant
             case .billingPostcode:
                 return 50
+            case .shippingDeliveryNotes:
+                return 120
             default:
                 return 120
             }

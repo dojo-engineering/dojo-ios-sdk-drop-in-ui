@@ -23,7 +23,9 @@ class DojoInputField: UIView {
     @IBOutlet weak var imageViewBottom: UIImageView!
     @IBOutlet weak var labelBottom: UILabel!
     @IBOutlet weak var labelSubtitle: UILabel!
+    @IBOutlet weak var labelCounter: UILabel!
     @IBOutlet weak var constrainLabelBottomLeft: NSLayoutConstraint!
+    @IBOutlet weak var textViewMain: UITextView!
     
     var viewModel: DojoInputFieldViewModelProtocol?
     var delegate: DojoInputFieldDelegate?
@@ -50,6 +52,8 @@ class DojoInputField: UIView {
         contentView.frame = bounds
         textFieldMain.delegate = self
         textFieldMain.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        
+        textViewMain.delegate = self
         addSubview(contentView)
         addLeftPaddingView()
     }
@@ -79,6 +83,8 @@ class DojoInputField: UIView {
         if !viewModel.isRequired {
            addOptional(label: labelTop)
         }
+        
+        textViewMain.contentInset = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10); 
     }
     
     func setTheme(theme: ThemeSettings) {
@@ -91,6 +97,9 @@ class DojoInputField: UIView {
         
         labelSubtitle.font = theme.fontSubtitle2
         labelSubtitle.textColor = theme.secondaryLabelTextColor
+        
+        labelCounter.font = theme.fontSubtitle2
+        labelCounter.textColor = theme.secondaryLabelTextColor
         
         textFieldMain.backgroundColor = theme.inputFieldBackgroundColor
         textFieldMain.textColor = theme.primaryLabelTextColor
@@ -112,25 +121,47 @@ class DojoInputField: UIView {
         switch state {
         case .normal:
             imageViewBottom.isHidden = true
+            textViewMain.isHidden = !isTextViewField()
+            textFieldMain.isHidden = !textViewMain.isHidden
             labelSubtitle.isHidden = !showSubtitle()
+            labelCounter.isHidden = !showSymolsCounter()
             labelBottom.isHidden = true
             textFieldMain.layer.borderWidth = 1.0
             textFieldMain.layer.borderColor = self.theme?.inputFieldDefaultBorderColor.cgColor ?? UIColor.black.withAlphaComponent(0.15).cgColor
             textFieldMain.layer.cornerRadius = 4
+            
+            textViewMain.layer.borderWidth = 1.0
+            textViewMain.layer.borderColor = self.theme?.inputFieldDefaultBorderColor.cgColor ?? UIColor.black.withAlphaComponent(0.15).cgColor
+            textViewMain.layer.cornerRadius = 4
         case .activeInput:
             imageViewBottom.isHidden = true
             labelSubtitle.isHidden = !showSubtitle()
+            labelCounter.isHidden = !showSymolsCounter()
+            textViewMain.isHidden = !isTextViewField()
+            textFieldMain.isHidden = !textViewMain.isHidden
             labelBottom.isHidden = true
             textFieldMain.layer.borderWidth = 2.0
             textFieldMain.layer.borderColor = self.theme?.inputFieldSelectedBorderColor.cgColor ?? UIColor.systemGreen.cgColor
             textFieldMain.layer.cornerRadius = 4
+            
+            textViewMain.layer.borderWidth = 2.0
+            textViewMain.layer.borderColor = self.theme?.inputFieldSelectedBorderColor.cgColor ?? UIColor.systemGreen.cgColor
+            textViewMain.layer.cornerRadius = 4
         case .error:
             imageViewBottom.isHidden = false
             labelBottom.isHidden = false
             labelSubtitle.isHidden = true
+            labelCounter.isHidden = true
+            textViewMain.isHidden = !isTextViewField()
+            textFieldMain.isHidden = !textViewMain.isHidden
             textFieldMain.layer.borderWidth = 1.0
             textFieldMain.layer.borderColor = self.theme?.errorTextColor.cgColor ?? UIColor.systemRed.cgColor
             textFieldMain.layer.cornerRadius = 4
+            
+            textViewMain.layer.borderWidth = 1.0
+            textViewMain.layer.borderColor = self.theme?.errorTextColor.cgColor ?? UIColor.systemRed.cgColor
+            textViewMain.layer.cornerRadius = 4
+            
             let isTextEmpty = textFieldMain.text?.isEmpty ?? true
             labelBottom.text = isTextEmpty ? viewModel?.fieldErrorEmpty : viewModel?.fieldError
         }
@@ -142,6 +173,18 @@ class DojoInputField: UIView {
     
     func showSubtitle() -> Bool {
         viewModel?.subtitle != nil
+    }
+    
+    func showSymolsCounter() -> Bool {
+        viewModel?.type == .shippingDeliveryNotes
+    }
+    
+    func updateSymbolsCounter(symbols: Int, max: Int) {
+        labelCounter.text = "\(symbols)/\(max)"
+    }
+    
+    func isTextViewField() -> Bool {
+        viewModel?.type == .shippingDeliveryNotes
     }
     
     func addOptional(label: UILabel) {

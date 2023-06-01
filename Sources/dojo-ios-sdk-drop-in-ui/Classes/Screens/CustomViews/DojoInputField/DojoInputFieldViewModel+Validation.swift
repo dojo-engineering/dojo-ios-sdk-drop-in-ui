@@ -9,7 +9,9 @@ import UIKit
 extension DojoInputFieldViewModel {
     
     func validateField(_ text: String?) -> DojoInputFieldState {
-        guard let text = text, !text.isEmpty else { return .error}
+        
+        
+        guard let text = text, !text.isEmpty || !isRequired else { return .error}
         switch type {
         case .email:
             if !isEmailValid(text) {

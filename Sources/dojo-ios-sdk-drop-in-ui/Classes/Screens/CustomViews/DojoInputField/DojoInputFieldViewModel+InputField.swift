@@ -84,6 +84,7 @@ extension DojoInputField: UITextFieldDelegate {
                 textField.text = newText.chunkFormatted()
             }
             delegate?.onTextChange(self)
+            
             return false
         }
         
@@ -96,10 +97,15 @@ extension DojoInputField: UITextFieldDelegate {
         if getType() == .cvv {
             let shouldChange = count <= (currentCardSchema == .amex ? 4 : 3)
             return shouldChange
-        } else {
-            let shouldChange = count <= viewModel?.fieldMaxLimit ?? 120 //Todo
-            return shouldChange
         }
+        
+        let shouldChange = count <= viewModel?.fieldMaxLimit ?? 120 //Todo
+        
+        if getType() == .shippingDeliveryNotes {
+            updateSymbolsCounter(symbols: textField.text?.count ?? 0, max: viewModel?.fieldMaxLimit ?? 120)
+        }
+        
+        return shouldChange
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -112,5 +118,28 @@ extension DojoInputField: UITextFieldDelegate {
         }
         let fieldState = viewModel.validateField(textField.text)
         setState(fieldState)
+    }
+}
+
+extension DojoInputField: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        textFieldDidBeginEditing(UITextField()) //TODO
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        textFieldDidEndEditing(UITextField()) // TODO
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        
+        guard let textFieldText = textView.text,
+              let rangeOfTextToReplace = Range(range, in: textFieldText) else {
+            return false
+        }
+        let substringToReplace = textFieldText[rangeOfTextToReplace]
+        let count = textFieldText.count - substringToReplace.count + text.count
+        let shouldChange = count <= viewModel?.fieldMaxLimit ?? 120 //Todo
+        updateSymbolsCounter(symbols: textView.text?.count ?? 0, max: viewModel?.fieldMaxLimit ?? 120)
+        return shouldChange
     }
 }
