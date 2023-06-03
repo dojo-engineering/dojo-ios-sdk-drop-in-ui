@@ -149,17 +149,23 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
 
     @IBAction func onPayButtonPress(_ sender: Any) {
         setStateLoading()
-        let cardDetails = fetchDataFromFields()
-        if let selectedCountry = fieldBillingCountry.getSelectedCountry() {
-            getViewModel()?.billingCountry = selectedCountry.isoCode
+        let cardDetails = fetchCardDataFromFields()
+        let shippingDetails = fetchShippingAddressFromFields()
+        var billingDetails = fetchBillingAddressFromFields()
+        let metadata = fetchMetadataFromFields()
+        let email = fieldEmail.textFieldMain.text
+        
+        if getViewModel()?.showFieldShipping ?? false
+            && getViewModel()?.showFieldBilling ?? false
+            && getViewModel()?.isBillingSameAsShippingSelected ?? false {
+            billingDetails = shippingDetails.address
         }
-        getViewModel()?.email = fieldEmail.textFieldMain.text
-        getViewModel()?.billingPostcode = fieldBillingPostcode.textFieldMain.text
         
         getViewModel()?.processPayment(cardDetails: cardDetails,
-                                       shippingDetails: nil,
-                                       billingDetails: nil,
-                                       metadata: nil,
+                                       shippingDetails: shippingDetails,
+                                       billingDetails: billingDetails,
+                                       metadata: metadata,
+                                       email: email,
                                        fromViewController: self) { result in
             self.delegate?.navigateToPaymentResult(resultCode: result)
             self.setStateNormal()
@@ -258,6 +264,7 @@ extension CardDetailsCheckoutViewController {
             // if shipping and billing is not hidden, hide billing initially because
             // we have an option selected that billing is the same is shipping
             containerBillingAddress.isHidden = true
+            getViewModel()?.isBillingSameAsShippingSelected = true
         }
         containerSavedCard.isHidden = saveCardCheckboxIsHidden
         getViewModel()?.isSaveCardSelected = !saveCardCheckboxIsHidden
@@ -297,7 +304,7 @@ extension CardDetailsCheckoutViewController {
         diableCloseButton = false
     }
     
-    func fetchDataFromFields() -> DojoCardDetails {
+    func fetchCardDataFromFields() -> DojoCardDetails {
         //TODO:
         let cardNumber = fieldCardNumber.textFieldMain.text?.replacingOccurrences(of: " ", with: "") ?? ""
         let cardName = fieldCardholder.textFieldMain.text
@@ -305,6 +312,40 @@ extension CardDetailsCheckoutViewController {
         let cvv = fieldCVV.textFieldMain.text
         let cardDetails = DojoCardDetails(cardNumber: cardNumber, cardName: cardName, expiryDate: expiryDate, cv2: cvv)
         return cardDetails
+    }
+    
+    func fetchShippingAddressFromFields() -> DojoShippingDetails {
+        let name = fieldShippingName.textFieldMain.text
+        let addressLine1 = fieldShippingLine1.textFieldMain.text
+        let addressLine2 = fieldShippingLine2.textFieldMain.text
+        let city = fieldShippingCity.textFieldMain.text
+        let postcode = fieldShippingPostcode.textFieldMain.text
+        var country: String?
+        
+        if let selectedCountry = fieldShippingCountry.getSelectedCountry() {
+            country = selectedCountry.isoCode
+        }
+        
+        return DojoShippingDetails(name: name, address: DojoAddressDetails(address1: addressLine1, address2: addressLine2, city: city, postcode: postcode, countryCode: country))
+    }
+    
+    func fetchBillingAddressFromFields() -> DojoAddressDetails? {
+        let addressLine1 = fieldBillingLine1.textFieldMain.text
+        let addressLine2 = fieldBillingLine2.textFieldMain.text
+        let city = fieldBillingCity.textFieldMain.text
+        let postcode = fieldBillingPostcode.textFieldMain.text
+        var country: String?
+        
+        if let selectedCountry = fieldBillingCountry.getSelectedCountry() {
+            country = selectedCountry.isoCode
+        }
+        
+        return DojoAddressDetails(address1: addressLine1, address2: addressLine2, city: city, postcode: postcode, countryCode: country)
+    }
+    
+    func fetchMetadataFromFields() -> [String: String] {
+        let deliveryNotes = fieldShippingNotes.textViewMain.text ?? ""
+        return ["DeliveryNotes": deliveryNotes]
     }
     
     @objc func handleOnSaveCardCheckboxPress() {

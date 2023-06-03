@@ -9,9 +9,6 @@ import UIKit
 import dojo_ios_sdk
 
 class CardDetailsCheckoutViewModel: BaseViewModel {
-    var email: String?
-    var billingCountry: String?
-    var billingPostcode: String?
     var isSaveCardSelected = true
     var isBillingSameAsShippingSelected = true
     var debugConfig: DojoSDKDebugConfig?
@@ -30,6 +27,7 @@ class CardDetailsCheckoutViewModel: BaseViewModel {
                         shippingDetails: DojoShippingDetails?,
                         billingDetails: DojoAddressDetails?,
                         metadata: [String: String]?,
+                        email: String?,
                         fromViewController: UIViewController, completion: ((Int) -> Void)?) {
         let cardPaymentPayload = DojoCardPaymentPayload(cardDetails: cardDetails,
                                                         userEmailAddress: email,
