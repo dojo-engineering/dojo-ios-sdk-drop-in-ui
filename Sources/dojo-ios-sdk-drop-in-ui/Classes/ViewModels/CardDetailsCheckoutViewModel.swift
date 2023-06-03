@@ -13,6 +13,7 @@ class CardDetailsCheckoutViewModel: BaseViewModel {
     var billingCountry: String?
     var billingPostcode: String?
     var isSaveCardSelected = true
+    var isBillingSameAsShippingSelected = true
     var debugConfig: DojoSDKDebugConfig?
     
     init?(config: ConfigurationManager) {
@@ -25,10 +26,16 @@ class CardDetailsCheckoutViewModel: BaseViewModel {
         }
     }
     
-    func processPayment(cardDetails: DojoCardDetails, fromViewController: UIViewController, completion: ((Int) -> Void)?) {
+    func processPayment(cardDetails: DojoCardDetails,
+                        shippingDetails: DojoShippingDetails?,
+                        billingDetails: DojoAddressDetails?,
+                        metadata: [String: String]?,
+                        fromViewController: UIViewController, completion: ((Int) -> Void)?) {
         let cardPaymentPayload = DojoCardPaymentPayload(cardDetails: cardDetails,
                                                         userEmailAddress: email,
-                                                        billingAddress: DojoAddressDetails(postcode: billingPostcode, countryCode: billingCountry),
+                                                        billingAddress: billingDetails,
+                                                        shippingDetails: shippingDetails,
+                                                        metaData: metadata,
                                                         savePaymentMethod: isSaveCardSelected)
         if paymentIntent.isVirtualTerminalPayment {
             DojoSDK.executeVirtualTerminalPayment(token: paymentIntent.clientSessionSecret,

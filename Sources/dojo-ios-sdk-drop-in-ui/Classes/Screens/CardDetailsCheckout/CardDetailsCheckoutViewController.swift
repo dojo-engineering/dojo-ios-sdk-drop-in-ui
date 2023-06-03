@@ -41,6 +41,10 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     @IBOutlet weak var fieldShippingCity: DojoInputField!
     @IBOutlet weak var fieldShippingPostcode: DojoInputField!
     
+    @IBOutlet weak var containerBillingSameAsShipping: UIView!
+    @IBOutlet weak var labelPaymentDetails: UILabel!
+    @IBOutlet weak var labelShippingDetails: UILabel!
+    @IBOutlet weak var labelBillingDetails: UILabel!
     @IBOutlet weak var containerBillingAddress: UIStackView!
     @IBOutlet weak var containerShippingAddress: UIStackView!
     @IBOutlet weak var fieldShippingNotes: DojoInputField!
@@ -69,6 +73,14 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         super.viewDidLoad()
         setUpData()
         setUpViews()
+        setUpTranslations()
+    }
+    
+    func setUpTranslations() {
+        labelShippingDetails.text = LocalizedText.CardDetailsCheckout.titleShippingAddress
+        labelBillingDetails.text = LocalizedText.CardDetailsCheckout.titleBillingAddress
+        labelPaymentDetails.text = LocalizedText.CardDetailsCheckout.titlePaymentDetails
+        labelAllTransactionsAreSecure.text = LocalizedText.CardDetailsCheckout.titleTransactionsSecure
     }
     
     override func setUpDesign() {
@@ -92,6 +104,15 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         
         labelAllTransactionsAreSecure.font = theme.fontSubtitle1
         labelAllTransactionsAreSecure.textColor = theme.secondaryLabelTextColor
+        
+        labelShippingDetails.font = theme.fontHeading5Medium
+        labelShippingDetails.textColor = theme.primaryLabelTextColor
+        
+        labelBillingDetails.font = theme.fontHeading5Medium
+        labelBillingDetails.textColor = theme.primaryLabelTextColor
+        
+        labelPaymentDetails.font = theme.fontHeading5Medium
+        labelPaymentDetails.textColor = theme.primaryLabelTextColor
         
         fieldEmail.setTheme(theme: theme)
         fieldCardholder.setTheme(theme: theme)
@@ -134,7 +155,11 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         }
         getViewModel()?.email = fieldEmail.textFieldMain.text
         getViewModel()?.billingPostcode = fieldBillingPostcode.textFieldMain.text
+        
         getViewModel()?.processPayment(cardDetails: cardDetails,
+                                       shippingDetails: nil,
+                                       billingDetails: nil,
+                                       metadata: nil,
                                        fromViewController: self) { result in
             self.delegate?.navigateToPaymentResult(resultCode: result)
             self.setStateNormal()
@@ -159,9 +184,11 @@ extension CardDetailsCheckoutViewController {
         labelPrimaryAmount.attributedText = gbpString
     }
     
-    func setUpSaveCardCheckbox() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleOnSaveCardCheckboxPress))
-        containerSavedCard.addGestureRecognizer(tap)
+    func setUpCheckboxes() {
+        containerSavedCard.addGestureRecognizer(UITapGestureRecognizer(target: self,
+                                                                       action: #selector(handleOnSaveCardCheckboxPress)))
+        containerBillingSameAsShipping.addGestureRecognizer(UITapGestureRecognizer(target: self,
+                                                                                   action: #selector(handleOnBillingSameAsShippingCheckboxPress)))
     }
     
     func setUpCardsStrip() {
@@ -227,15 +254,21 @@ extension CardDetailsCheckoutViewController {
         containerShippingAddress.isHidden = shippingIsHidden
         fieldEmail.isHidden = emailIsHidden
         containerBillingAddress.isHidden = billingIsHidden
+        if !shippingIsHidden && !billingIsHidden {
+            // if shipping and billing is not hidden, hide billing initially because
+            // we have an option selected that billing is the same is shipping
+            containerBillingAddress.isHidden = true
+        }
         containerSavedCard.isHidden = saveCardCheckboxIsHidden
         getViewModel()?.isSaveCardSelected = !saveCardCheckboxIsHidden
+        
         
         if !emailIsHidden { inputFields.append(fieldEmail) }
 //        if !billingIsHidden { inputFields.append(contentsOf: [fieldBillingCountry, fieldBillingPostcode]) }
         //TODO: next navigation for billing fields
         inputFields.append(contentsOf: [fieldCardholder, fieldCardNumber, fieldExpiry, fieldCVV])
         
-        setUpSaveCardCheckbox()
+        setUpCheckboxes()
         setUpCardsStrip()
         setUpOrderReference()
         buttonPay.setEnabled(false)
@@ -284,5 +317,18 @@ extension CardDetailsCheckoutViewController {
             imageViewSaveCardCheckbox.image = UIImage(named: "icon-checkbox-unchecked", in: Bundle.libResourceBundle, compatibleWith: nil)
         }
         print("On saved card pressed")
+    }
+    
+    @objc func handleOnBillingSameAsShippingCheckboxPress() {
+        guard let viewModel = getViewModel() else { return }
+        viewModel.isBillingSameAsShippingSelected = !viewModel.isBillingSameAsShippingSelected
+        if viewModel.isBillingSameAsShippingSelected {
+            imageViewBillingSameAsShipping.image = UIImage(named: "icon-checkbox-checked", in: Bundle.libResourceBundle, compatibleWith: nil)
+            containerBillingAddress.isHidden = true // Fill in billing address from shipping
+        } else {
+            imageViewBillingSameAsShipping.image = UIImage(named: "icon-checkbox-unchecked", in: Bundle.libResourceBundle, compatibleWith: nil)
+            containerBillingAddress.isHidden = false
+        }
+        print("On billing same as shipping pressed")
     }
 }

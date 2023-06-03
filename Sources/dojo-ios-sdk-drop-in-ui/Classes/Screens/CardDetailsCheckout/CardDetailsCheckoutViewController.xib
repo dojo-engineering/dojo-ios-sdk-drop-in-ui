@@ -14,6 +14,7 @@
                 <outlet property="buttonPay" destination="Swm-bR-QtT" id="sMQ-gK-Oss"/>
                 <outlet property="constraintPayButtonBottom" destination="Qgg-Dw-3jc" id="4WN-ne-y2K"/>
                 <outlet property="containerBillingAddress" destination="5aj-ae-dLf" id="a6s-eZ-PoW"/>
+                <outlet property="containerBillingSameAsShipping" destination="0a2-38-YRQ" id="B1l-MD-m2s"/>
                 <outlet property="containerCardsStrip" destination="Av9-to-bSP" id="jze-mn-nI8"/>
                 <outlet property="containerSavedCard" destination="RfQ-Ax-Vd4" id="HqT-XP-kbx"/>
                 <outlet property="containerShippingAddress" destination="ZMx-Nw-v61" id="JcT-7a-ate"/>
@@ -38,10 +39,13 @@
                 <outlet property="imageViewBillingSameAsShipping" destination="eyd-dc-hB0" id="5Mp-y0-lZw"/>
                 <outlet property="imageViewSaveCardCheckbox" destination="u98-ls-or9" id="4gY-Jn-FxZ"/>
                 <outlet property="labelAllTransactionsAreSecure" destination="1PU-Lc-LKF" id="3mu-J5-JGp"/>
+                <outlet property="labelBillingDetails" destination="Jlb-pi-C8k" id="fiv-fr-cK6"/>
                 <outlet property="labelBillingSameAsShipping" destination="PWj-YC-KQz" id="7TI-S6-je5"/>
                 <outlet property="labelOrderReference" destination="EvI-yp-385" id="IJu-nj-N03"/>
+                <outlet property="labelPaymentDetails" destination="kOE-lR-UAM" id="w6E-UC-J83"/>
                 <outlet property="labelPrimaryAmount" destination="sNy-Ak-ZDx" id="VS5-Gl-yYa"/>
                 <outlet property="labelSaveCardForFutureUse" destination="DqQ-ba-SrD" id="hPE-6d-2we"/>
+                <outlet property="labelShippingDetails" destination="FMi-YG-3cL" id="Gsu-pW-OIU"/>
                 <outlet property="labelYouPay" destination="yWi-LP-owe" id="GLL-Ju-xmb"/>
                 <outlet property="mainContentScrollView" destination="AND-dd-xoI" id="tK7-Yw-yrM"/>
                 <outlet property="topNavigationSeparatorView" destination="xKB-Pt-sx7" id="O5n-fd-Hfh"/>
@@ -233,7 +237,7 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="5aj-ae-dLf" userLabel="Billing details">
                                     <rect key="frame" x="0.0" y="1033" width="379" height="585"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Billing details" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jlb-pi-C8k" userLabel="Shipping Address">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Billing details" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jlb-pi-C8k" userLabel="Billing Address">
                                             <rect key="frame" x="0.0" y="0.0" width="379" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="ezc-gm-cIn"/>
