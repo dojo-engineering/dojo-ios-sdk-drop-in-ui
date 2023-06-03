@@ -3,7 +3,7 @@
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="constrainLabelBottomLeft" destination="Jyt-DP-eOw" id="vBd-6x-AkW"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="WOU-G6-D5B"/>
+                <outlet property="imageViewArrowDown" destination="C7A-up-4cK" id="caR-Ur-XeD"/>
                 <outlet property="imageViewBottom" destination="p7z-NC-R3c" id="eJK-Ju-Ar1"/>
                 <outlet property="labelBottom" destination="5Gf-80-a6P" id="YDC-mV-07l"/>
                 <outlet property="labelCounter" destination="iLm-y5-CoP" id="Wqh-aS-7s4"/>
@@ -44,6 +45,9 @@
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
+                <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-button-arrow-down" translatesAutoresizingMaskIntoConstraints="NO" id="C7A-up-4cK">
+                    <rect key="frame" x="301" y="37" width="24" height="24"/>
+                </imageView>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-field-error" translatesAutoresizingMaskIntoConstraints="NO" id="p7z-NC-R3c">
                     <rect key="frame" x="0.0" y="78" width="20" height="20"/>
                     <constraints>
@@ -100,10 +104,12 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="5Gf-80-a6P" secondAttribute="trailing" id="8bW-xz-rjD"/>
                 <constraint firstItem="obb-j6-Uhk" firstAttribute="centerY" secondItem="5Gf-80-a6P" secondAttribute="centerY" id="A4w-g2-o53"/>
                 <constraint firstItem="5Gf-80-a6P" firstAttribute="centerY" secondItem="p7z-NC-R3c" secondAttribute="centerY" id="DAo-s2-qv0"/>
+                <constraint firstItem="C7A-up-4cK" firstAttribute="centerY" secondItem="HJ6-IX-Yqe" secondAttribute="centerY" id="Dnp-ME-iQV"/>
                 <constraint firstItem="5Gf-80-a6P" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="28" id="Jyt-DP-eOw"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="HJ6-IX-Yqe" secondAttribute="trailing" id="LWi-Z6-hgf"/>
                 <constraint firstItem="Sfx-jE-FtK" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="LaC-3F-laK"/>
                 <constraint firstItem="obb-j6-Uhk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="OCR-dF-gaD"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="C7A-up-4cK" secondAttribute="trailing" constant="12" id="RwZ-M9-Nmy"/>
                 <constraint firstItem="p7z-NC-R3c" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="WyS-v9-8A4"/>
                 <constraint firstItem="HJ6-IX-Yqe" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="aqM-yD-aR7"/>
                 <constraint firstItem="iLm-y5-CoP" firstAttribute="top" secondItem="Sfx-jE-FtK" secondAttribute="bottom" constant="4" id="cq4-CW-0HT"/>
@@ -117,6 +123,7 @@
         </view>
     </objects>
     <resources>
+        <image name="icon-button-arrow-down" width="24" height="24"/>
         <image name="icon-field-error" width="20" height="20"/>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

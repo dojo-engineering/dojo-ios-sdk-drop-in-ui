@@ -10,8 +10,6 @@ enum DojoInputFieldType {
     case email
     case cardHolderName
     case cardNumber
-    case billingCountry
-    case billingPostcode
     case expiry
     case cvv
     
@@ -22,6 +20,12 @@ enum DojoInputFieldType {
     case shippingPostcode
     case shippingCountry
     case shippingDeliveryNotes
+    
+    case billingAddressLine1
+    case billingAddressLine2
+    case billingCity
+    case billingPostcode
+    case billingCountry
 }
 
 enum DojoInputFieldState {
@@ -106,11 +110,11 @@ class DojoInputFieldViewModel: DojoInputFieldViewModelProtocol {
                 return LocalizedText.CardDetailsCheckout.fieldCVV
             case .shippingName:
                 return LocalizedText.CardDetailsCheckout.fieldShippingName
-            case .shippingAddressLine1:
+            case .shippingAddressLine1, .billingAddressLine1:
                 return LocalizedText.CardDetailsCheckout.fieldShippingLine1
-            case .shippingAddressLine2:
+            case .shippingAddressLine2, .billingAddressLine2:
                 return LocalizedText.CardDetailsCheckout.fieldShippingLine2
-            case .shippingCity:
+            case .shippingCity, .billingCity:
                 return LocalizedText.CardDetailsCheckout.fieldShippingCity
             case .shippingPostcode:
                 return LocalizedText.CardDetailsCheckout.fieldShippingPostcode

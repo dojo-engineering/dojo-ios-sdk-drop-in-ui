@@ -14,6 +14,7 @@ struct CountryDropdownItem {
 extension DojoInputField {
     
     func setUpFieldForCountriesDropDown() {
+        imageViewArrowDown.isHidden = false
         dropDownCountries = viewModel?.getCountriesItems() ?? []
         if dropDownCountries.count > selectedPickerPosition {
             let displayingItem = dropDownCountries[selectedPickerPosition]

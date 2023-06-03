@@ -28,6 +28,9 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     @IBOutlet weak var fieldCVV: DojoInputField!
     @IBOutlet weak var fieldBillingCountry: DojoInputField!
     @IBOutlet weak var fieldBillingPostcode: DojoInputField!
+    @IBOutlet weak var fieldBillingCity: DojoInputField!
+    @IBOutlet weak var fieldBillingLine1: DojoInputField!
+    @IBOutlet weak var fieldBillingLine2: DojoInputField!
     @IBOutlet weak var mainContentScrollView: UIScrollView!
     @IBOutlet weak var containerSavedCard: UIView!
     @IBOutlet weak var containerCardsStrip: UIStackView!
@@ -38,6 +41,8 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     @IBOutlet weak var fieldShippingCity: DojoInputField!
     @IBOutlet weak var fieldShippingPostcode: DojoInputField!
     
+    @IBOutlet weak var containerBillingAddress: UIStackView!
+    @IBOutlet weak var containerShippingAddress: UIStackView!
     @IBOutlet weak var fieldShippingNotes: DojoInputField!
     @IBOutlet weak var fieldShippingCountry: DojoInputField!
     
@@ -92,8 +97,6 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         fieldCardholder.setTheme(theme: theme)
         fieldCardNumber.setTheme(theme: theme) // TODO refactor
         
-        fieldBillingCountry.setTheme(theme: theme)
-        fieldBillingPostcode.setTheme(theme: theme)
         fieldExpiry.setTheme(theme: theme)
         fieldCVV.setTheme(theme: theme)
         
@@ -104,6 +107,12 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         fieldShippingPostcode.setTheme(theme: theme)
         fieldShippingCountry.setTheme(theme: theme)
         fieldShippingNotes.setTheme(theme: theme)
+        
+        fieldBillingCity.setTheme(theme: theme)
+        fieldBillingLine1.setTheme(theme: theme)
+        fieldBillingLine2.setTheme(theme: theme)
+        fieldBillingCountry.setTheme(theme: theme)
+        fieldBillingPostcode.setTheme(theme: theme)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -192,8 +201,6 @@ extension CardDetailsCheckoutViewController {
         fieldEmail.setType(.email, showSubtitle: viewModel?.paymentIntent.isVirtualTerminalPayment ?? false, delegate: self)
         fieldCardholder.setType(.cardHolderName, delegate: self)
         fieldCardNumber.setType(.cardNumber, delegate: self)
-        fieldBillingCountry.setType(.billingCountry, delegate: self)
-        fieldBillingPostcode.setType(.billingPostcode, delegate: self)
         fieldExpiry.setType(.expiry, delegate: self)
         fieldCVV.setType(.cvv, delegate: self)
         
@@ -205,17 +212,26 @@ extension CardDetailsCheckoutViewController {
         fieldShippingCountry.setType(.shippingCountry, delegate: self)
         fieldShippingNotes.setType(.shippingDeliveryNotes, delegate: self)
         
+        fieldBillingLine1.setType(.billingAddressLine1, delegate: self)
+        fieldBillingLine2.setType(.billingAddressLine2, delegate: self)
+        fieldBillingCity.setType(.billingCity, delegate: self)
+        fieldBillingCountry.setType(.billingCountry, delegate: self)
+        fieldBillingPostcode.setType(.billingPostcode, delegate: self)
+        
+        
         let billingIsHidden = !(getViewModel()?.showFieldBilling ?? false)
         let emailIsHidden = !(getViewModel()?.showFieldEmail ?? false)
         let saveCardCheckboxIsHidden = !(getViewModel()?.showSaveCardCheckbox ?? false)
+        let shippingIsHidden = !(getViewModel()?.showFieldShipping ?? false)
+        
+        containerShippingAddress.isHidden = shippingIsHidden
         fieldEmail.isHidden = emailIsHidden
-        fieldBillingCountry.isHidden = billingIsHidden
-        fieldBillingPostcode.isHidden = billingIsHidden
+        containerBillingAddress.isHidden = billingIsHidden
         containerSavedCard.isHidden = saveCardCheckboxIsHidden
         getViewModel()?.isSaveCardSelected = !saveCardCheckboxIsHidden
         
         if !emailIsHidden { inputFields.append(fieldEmail) }
-        if !billingIsHidden { inputFields.append(contentsOf: [fieldBillingCountry, fieldBillingPostcode]) }
+//        if !billingIsHidden { inputFields.append(contentsOf: [fieldBillingCountry, fieldBillingPostcode]) }
         //TODO: next navigation for billing fields
         inputFields.append(contentsOf: [fieldCardholder, fieldCardNumber, fieldExpiry, fieldCVV])
         

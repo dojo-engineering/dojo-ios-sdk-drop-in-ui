@@ -21,6 +21,7 @@ class DojoInputField: UIView {
     @IBOutlet weak var labelTop: UILabel!
     @IBOutlet weak var textFieldMain: UITextField!
     @IBOutlet weak var imageViewBottom: UIImageView!
+    @IBOutlet weak var imageViewArrowDown: UIImageView!
     @IBOutlet weak var labelBottom: UILabel!
     @IBOutlet weak var labelSubtitle: UILabel!
     @IBOutlet weak var labelCounter: UILabel!
@@ -100,6 +101,8 @@ class DojoInputField: UIView {
         
         labelCounter.font = theme.fontSubtitle2
         labelCounter.textColor = theme.secondaryLabelTextColor
+        
+        imageViewArrowDown.tintColor = theme.headerButtonTintColor
         
         textFieldMain.backgroundColor = theme.inputFieldBackgroundColor
         textFieldMain.textColor = theme.primaryLabelTextColor

@@ -52,6 +52,10 @@ class CardDetailsCheckoutViewModel: BaseViewModel {
         paymentIntent.config?.billingAddress?.collectionRequired ?? false
     }
     
+    var showFieldShipping: Bool {
+        paymentIntent.config?.shippingDetails?.collectionRequired ?? false
+    }
+    
     var showSaveCardCheckbox: Bool {
         paymentIntent.customer?.id != nil
     }
