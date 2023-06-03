@@ -105,19 +105,19 @@ class DojoInputFieldViewModel: DojoInputFieldViewModelProtocol {
             case .cvv:
                 return LocalizedText.CardDetailsCheckout.fieldCVV
             case .shippingName:
-                return "Name"
+                return LocalizedText.CardDetailsCheckout.fieldShippingName
             case .shippingAddressLine1:
-                return "Address line 1"
+                return LocalizedText.CardDetailsCheckout.fieldShippingLine1
             case .shippingAddressLine2:
-                return "Address line 2"
+                return LocalizedText.CardDetailsCheckout.fieldShippingLine2
             case .shippingCity:
-                return "City"
+                return LocalizedText.CardDetailsCheckout.fieldShippingCity
             case .shippingPostcode:
-                return "Postcode"
+                return LocalizedText.CardDetailsCheckout.fieldShippingPostcode
             case .shippingCountry:
-                return "Country"
+                return LocalizedText.CardDetailsCheckout.fieldShippingCountry
             case .shippingDeliveryNotes:
-                return "Delivey notes"
+                return LocalizedText.CardDetailsCheckout.fieldShippingDeliveryNotes
             }
         }
     }
@@ -129,7 +129,7 @@ class DojoInputFieldViewModel: DojoInputFieldViewModelProtocol {
             }
             switch type {
             case .email:
-                return "A copy of your receipt will be emailed"
+                return LocalizedText.CardDetailsCheckout.fieldEmailSubtitleVT
             default:
                 return nil
             }

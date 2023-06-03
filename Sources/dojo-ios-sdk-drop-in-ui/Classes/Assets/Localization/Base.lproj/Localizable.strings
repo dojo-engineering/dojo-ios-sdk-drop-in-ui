@@ -54,3 +54,12 @@
 "dojo_ui_sdk_mange_payments_dialog_cancel_text"="Cancel";
 "dojo_ui_sdk_keyboard_additional_button_next"="Next";
 "dojo_ui_sdk_keyboard_additional_button_previous"="Previous";
+"dojo_ui_sdk_dojo_ui_sdk_card_details_checkout_optional"="optional";
+"dojo_ui_sdk_card_details_checkout_field_shipping_name"="Name";
+"dojo_ui_sdk_card_details_checkout_field_shipping_line_1"="Address line 1";
+"dojo_ui_sdk_card_details_checkout_field_shipping_line_2"="Address line 2";
+"dojo_ui_sdk_card_details_checkout_field_shipping_city"="City";
+"dojo_ui_sdk_card_details_checkout_field_shipping_postcode"="Postcode";
+"dojo_ui_sdk_card_details_checkout_field_shipping_country"="Country";
+"dojo_ui_sdk_card_details_checkout_field_shipping_delivery_notes"="Delivey notes";
+"dojo_ui_sdk_card_details_checkout_field_subtitle_email_vt"="Enter your customer's email address";

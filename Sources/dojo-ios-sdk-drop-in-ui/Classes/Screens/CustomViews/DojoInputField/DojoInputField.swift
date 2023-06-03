@@ -188,8 +188,8 @@ class DojoInputField: UIView {
     }
     
     func addOptional(label: UILabel) {
-        label.text?.append(" (optional)")
-        if let range = (label.text as? NSString)?.range(of: "(optional)"),
+        label.text?.append(" (\(LocalizedText.CardDetailsCheckout.optionalField))")
+        if let range = (label.text as? NSString)?.range(of: "(\(LocalizedText.CardDetailsCheckout.optionalField))"),
         let mainString = label.text {
             let mutableAttributedString = NSMutableAttributedString.init(string: mainString)
             mutableAttributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: theme?.secondaryLabelTextColor ?? .lightGray, range: range)

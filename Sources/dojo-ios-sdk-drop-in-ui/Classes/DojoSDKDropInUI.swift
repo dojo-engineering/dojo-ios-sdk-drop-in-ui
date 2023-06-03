@@ -55,7 +55,8 @@ public class DojoSDKDropInUI: NSObject {
             if let pi = pi {
                 let themeSettings = DojoThemeSettings.getLightTheme()
                 themeSettings.showBranding = false
-                let configManager = ConfigurationManager(paymentIntentId: paymentIntentId, paymentIntent: pi, themeSettings: ThemeSettings(dojoTheme: themeSettings))
+                var configManager = ConfigurationManager(paymentIntentId: paymentIntentId, paymentIntent: pi, themeSettings: ThemeSettings(dojoTheme: themeSettings))
+                configManager.debugConfig = debugConfig
                 if let viewModel = CardDetailsCheckoutViewModel(config: configManager) {
                     let checkoutController = CardDetailsCheckoutViewController(viewModel: viewModel, theme: configManager.themeSettings, delegate: self)
                     completion?(checkoutController)
