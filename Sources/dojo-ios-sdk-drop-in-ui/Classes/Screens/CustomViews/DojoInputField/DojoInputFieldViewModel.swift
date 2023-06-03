@@ -179,8 +179,16 @@ class DojoInputFieldViewModel: DojoInputFieldViewModelProtocol {
                 return LocalizedText.CardDetailsCheckout.errorEmptyExpiry
             case .cvv:
                 return LocalizedText.CardDetailsCheckout.errorEmptyCvv
+            case .shippingName:
+                return LocalizedText.CardDetailsCheckout.errorEmptyShippingName
+            case .shippingAddressLine1:
+                return LocalizedText.CardDetailsCheckout.errorEmptyShippingLine1
+            case .shippingCity:
+                return LocalizedText.CardDetailsCheckout.errorEmptyShippingCity
+            case .shippingPostcode:
+                return LocalizedText.CardDetailsCheckout.errorEmptyShippingPostal
             default:
-                return "Please fill in this field" // TODO a specific error for a field
+                return "Please fill in this field"
             }
         }
     }

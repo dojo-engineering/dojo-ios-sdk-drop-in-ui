@@ -55,6 +55,15 @@ enum LocalizedText {
         static let fieldShippingCountry = "dojo_ui_sdk_card_details_checkout_field_shipping_country".localized
         static let fieldShippingDeliveryNotes = "dojo_ui_sdk_card_details_checkout_field_shipping_delivery_notes".localized
         static let fieldEmailSubtitleVT = "dojo_ui_sdk_card_details_checkout_field_subtitle_email_vt".localized
+        static let titleShippingAddress = "dojo_ui_sdk_card_details_checkout_title_shipping".localized
+        static let titleBillingAddress = "dojo_ui_sdk_card_details_checkout_title_billing".localized
+        static let titleBillingSameAsShipping = "dojo_ui_sdk_card_details_checkout_billing_same_as_shipping".localized
+        static let titlePaymentDetails = "dojo_ui_sdk_card_details_checkout_title_payment_details".localized
+        static let titleTransactionsSecure = "dojo_ui_sdk_card_details_checkout_transactions_are_secure".localized
+        static let errorEmptyShippingName = "dojo_ui_sdk_card_details_checkout_error_empty_shipping_name".localized
+        static let errorEmptyShippingLine1 = "dojo_ui_sdk_card_details_checkout_error_empty_shipping_line_1".localized
+        static let errorEmptyShippingCity = "dojo_ui_sdk_card_details_checkout_error_empty_shipping_city".localized
+        static let errorEmptyShippingPostal = "dojo_ui_sdk_card_details_checkout_error_empty_shipping_postal".localized
     }
     
     enum PaymentResult {

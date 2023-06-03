@@ -63,3 +63,12 @@
 "dojo_ui_sdk_card_details_checkout_field_shipping_country"="Country";
 "dojo_ui_sdk_card_details_checkout_field_shipping_delivery_notes"="Delivey notes";
 "dojo_ui_sdk_card_details_checkout_field_subtitle_email_vt"="Enter your customer's email address";
+"dojo_ui_sdk_card_details_checkout_title_shipping"="Shipping address";
+"dojo_ui_sdk_card_details_checkout_title_billing"="Billing address";
+"dojo_ui_sdk_card_details_checkout_billing_same_as_shipping"="Billing address is same as shipping";
+"dojo_ui_sdk_card_details_checkout_title_payment_details"="Payment details";
+"dojo_ui_sdk_card_details_checkout_transactions_are_secure"="All transactions are secure and encrypted";
+"dojo_ui_sdk_card_details_checkout_error_empty_shipping_name"="Please fill in your name or company name";
+"dojo_ui_sdk_card_details_checkout_error_empty_shipping_line_1"="Please fill in address";
+"dojo_ui_sdk_card_details_checkout_error_empty_shipping_city"="Please fill in your city";
+"dojo_ui_sdk_card_details_checkout_error_empty_shipping_postal"="Please fill in your postal code";
