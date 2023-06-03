@@ -115,6 +115,8 @@ class DojoInputField: UIView {
         switch viewModel?.type {
         case .billingCountry, .shippingCountry:
             setUpFieldForCountriesDropDown()
+        case .email:
+            labelSubtitle.text = LocalizedText.CardDetailsCheckout.fieldEmailSubtitleVT
         default:
             break
         }
