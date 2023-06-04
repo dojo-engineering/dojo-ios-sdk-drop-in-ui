@@ -23,8 +23,10 @@ class BaseUIViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpCloseButton()
-        setUpBackButton()
+        if !(viewModel?.paymentIntent.isVirtualTerminalPayment ?? false) {
+            setUpCloseButton()
+            setUpCloseButton()
+        }
         setUpDesign()
     }
     

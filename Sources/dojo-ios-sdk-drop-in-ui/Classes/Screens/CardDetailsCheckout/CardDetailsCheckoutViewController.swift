@@ -138,7 +138,11 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setNavigationTitle(LocalizedText.CardDetailsCheckout.title)
+        if !(getViewModel()?.paymentIntent.isVirtualTerminalPayment ?? false) {
+            setNavigationTitle(LocalizedText.CardDetailsCheckout.title)
+        } else {
+            self.title = "Payment details"
+        }
         setUpKeyboard()
         
         if let navigation = (navigationController as? BaseNavigationController) {
