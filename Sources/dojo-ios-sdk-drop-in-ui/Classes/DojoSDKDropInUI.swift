@@ -46,7 +46,9 @@ public class DojoSDKDropInUI: NSObject {
     @objc
     public func getVTCheckout(paymentIntentId: String,
                               debugConfig: DojoSDKDebugConfig? = nil,
-                              completion: ((UIViewController?) -> Void)?) {
+                              completion: ((UIViewController?) -> Void)?,
+                              paymentResult: ((Int) -> Void)?) {
+        self.completionCallback = paymentResult
         let dataLoadingModel = DataLoadingViewModel(paymentIntentId: paymentIntentId,
                                                     debugConfig: debugConfig,
                                                     demoDelay: 0,
@@ -85,7 +87,7 @@ public class DojoSDKDropInUI: NSObject {
                 themeSettings.showBranding = false
                 var configManager = ConfigurationManager(paymentIntentId: paymentIntentId, paymentIntent: pi, themeSettings: ThemeSettings(dojoTheme: themeSettings))
                 configManager.debugConfig = debugConfig
-                if let viewModel = PaymentResultViewModel(config: configManager, resultCode: 0) { //TODO result code fetch
+                if let viewModel = PaymentResultViewModel(config: configManager, resultCode: pi.isCaptured ? 0 : 5) {
                     let controller = PaymentResultViewController(viewModel: viewModel,
                                                                  theme: configManager.themeSettings,
                                                                  delegate: self)
@@ -113,7 +115,7 @@ extension DojoSDKDropInUI: CardDetailsCheckoutViewControllerDelegate, PaymentRes
     }
     
     func navigateToPaymentResult(resultCode: Int) {
-        
+        completionCallback?(resultCode)
     }
 }
 
