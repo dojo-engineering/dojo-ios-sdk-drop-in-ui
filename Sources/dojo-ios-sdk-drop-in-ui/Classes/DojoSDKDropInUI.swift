@@ -70,9 +70,44 @@ public class DojoSDKDropInUI: NSObject {
             }
         }
     }
+    
+    @objc
+    public func getResultController(paymentIntentId: String,
+                                    debugConfig: DojoSDKDebugConfig? = nil,
+                                    completion: ((UIViewController?) -> Void)?) {
+        let dataLoadingModel = DataLoadingViewModel(paymentIntentId: paymentIntentId,
+                                                    debugConfig: debugConfig,
+                                                    demoDelay: 0,
+                                                    isDemo: false)
+        dataLoadingModel.fetchPaymentIntent() { pi, error in
+            if let pi = pi {
+                let themeSettings = DojoThemeSettings.getLightTheme()
+                themeSettings.showBranding = false
+                var configManager = ConfigurationManager(paymentIntentId: paymentIntentId, paymentIntent: pi, themeSettings: ThemeSettings(dojoTheme: themeSettings))
+                configManager.debugConfig = debugConfig
+                if let viewModel = PaymentResultViewModel(config: configManager, resultCode: 0) { //TODO result code fetch
+                    let controller = PaymentResultViewController(viewModel: viewModel,
+                                                                 theme: configManager.themeSettings,
+                                                                 delegate: self)
+                    completion?(controller)
+                }
+            } else {
+                // TODO return
+                completion?(nil)
+            }
+        }
+    }
 }
 
-extension DojoSDKDropInUI: CardDetailsCheckoutViewControllerDelegate {
+extension DojoSDKDropInUI: CardDetailsCheckoutViewControllerDelegate, PaymentResultViewControllerDelegate {
+    func onDonePress(resultCode: Int) {
+        
+    }
+    
+    func onPaymentIntentRefreshSucess(paymentIntent: PaymentIntent) {
+        
+    }
+    
     func onForceClosePress() {
         
     }
