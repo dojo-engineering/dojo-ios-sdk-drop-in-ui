@@ -47,11 +47,18 @@ class PaymentResultViewController: BaseUIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //TODO: move to a better place
-        if getViewModal()?.resultCode == 0 {
-            setNavigationTitle(LocalizedText.PaymentResult.titleSuccess)
+        if getViewModel()?.resultCode == 0 {
+            if !(getViewModel()?.paymentIntent.isVirtualTerminalPayment ?? false) {
+                setNavigationTitle(LocalizedText.PaymentResult.titleSuccess)
+            } else {
+                self.title = LocalizedText.PaymentResult.titleSuccess
+            }
         } else {
-            setNavigationTitle(LocalizedText.PaymentResult.titleFail)
+            if !(getViewModel()?.paymentIntent.isVirtualTerminalPayment ?? false) {
+                setNavigationTitle(LocalizedText.PaymentResult.titleFail)
+            } else {
+                self.title = LocalizedText.PaymentResult.titleFail
+            }
         }
     }
     
@@ -61,7 +68,7 @@ class PaymentResultViewController: BaseUIViewController {
         buttonDone.titleLabel?.font = theme.fontPrimaryCTAButtonActive
     }
     
-    func getViewModal() -> PaymentResultViewModel? {
+    func getViewModel() -> PaymentResultViewModel? {
         viewModel as? PaymentResultViewModel
     }
     
@@ -80,7 +87,7 @@ class PaymentResultViewController: BaseUIViewController {
     }
     
     func updateUIState() {
-        if getViewModal()?.resultCode == 0 {
+        if getViewModel()?.resultCode == 0 {
             buttonTryAgain.isHidden = true
             labelMainText.text = LocalizedText.PaymentResult.mainTitleSuccess
             labelSubtitle.text = "\(LocalizedText.PaymentResult.orderId) \(viewModel?.paymentIntent.id ?? "")"  //TODO: the same for both cases
@@ -126,9 +133,9 @@ class PaymentResultViewController: BaseUIViewController {
     @IBAction func onButtonTryAgainPress(_ sender: Any) {
         buttonTryAgain.showLoading(LocalizedText.PaymentResult.buttonPleaseWait)
         disableScreen()
-        let delay = getViewModal()?.demoDelay ?? 0
+        let delay = getViewModel()?.demoDelay ?? 0
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-            self.getViewModal()?.refreshToken { result, error in
+            self.getViewModel()?.refreshToken { result, error in
                 self.enableScreen()
                 
                 if let _ = error {
@@ -148,6 +155,6 @@ class PaymentResultViewController: BaseUIViewController {
     }
     
     private func exitFromTheScreen() {
-        delegate?.onDonePress(resultCode: getViewModal()?.resultCode ?? 5) //TODO
+        delegate?.onDonePress(resultCode: getViewModel()?.resultCode ?? 5) //TODO
     }
 }
