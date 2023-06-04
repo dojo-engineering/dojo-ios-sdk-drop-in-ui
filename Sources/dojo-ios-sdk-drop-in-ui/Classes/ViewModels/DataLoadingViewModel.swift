@@ -30,13 +30,23 @@ class DataLoadingViewModel {
         self.isDemo = isDemo
     }
     
-    func fetchPaymentIntent(completion: ((PaymentIntent?, Error?) -> Void)?) {
-        NetworkingSDKFactory.getNetworkingSDK(isMock: self.isDemo)
-            .fetchPaymentIntent(intentId: paymentIntentId, debugConfig: debugConfig) { stringData, fetchError in
-            CommonUtils.parseResponseToCompletion(stringData: stringData,
-                                                  fetchError: fetchError,
-                                                  objectType: PaymentIntent.self,
-                                                  completion: completion)
+    func fetchPaymentIntent(refreshBeforeFetch: Bool = false, completion: ((PaymentIntent?, Error?) -> Void)?) {
+        if refreshBeforeFetch {
+            NetworkingSDKFactory.getNetworkingSDK(isMock: self.isDemo)
+                .refreshPaymetnIntent(intentId: paymentIntentId, debugConfig: debugConfig) { stringData, fetchError in
+                CommonUtils.parseResponseToCompletion(stringData: stringData,
+                                                      fetchError: fetchError,
+                                                      objectType: PaymentIntent.self,
+                                                      completion: completion)
+            }
+        } else {
+            NetworkingSDKFactory.getNetworkingSDK(isMock: self.isDemo)
+                .fetchPaymentIntent(intentId: paymentIntentId, debugConfig: debugConfig) { stringData, fetchError in
+                CommonUtils.parseResponseToCompletion(stringData: stringData,
+                                                      fetchError: fetchError,
+                                                      objectType: PaymentIntent.self,
+                                                      completion: completion)
+            }
         }
     }
     
