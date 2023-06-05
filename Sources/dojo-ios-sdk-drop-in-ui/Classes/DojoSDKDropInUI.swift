@@ -47,6 +47,7 @@ public class DojoSDKDropInUI: NSObject {
     @objc
     public func getVTCheckout(paymentIntentId: String,
                               debugConfig: DojoSDKDebugConfig? = nil,
+                              themeSettings: DojoThemeSettings = DojoThemeSettings.getLightTheme(),
                               completion: ((UIViewController?) -> Void)?,
                               paymentResult: ((Int) -> Void)?) {
         self.completionCallback = paymentResult
@@ -56,8 +57,6 @@ public class DojoSDKDropInUI: NSObject {
                                                     isDemo: false)
         dataLoadingModel.fetchPaymentIntent(refreshBeforeFetch: true) { pi, error in
             if let pi = pi {
-                let themeSettings = DojoThemeSettings.getLightTheme()
-                themeSettings.showBranding = false
                 var configManager = ConfigurationManager(paymentIntentId: paymentIntentId, paymentIntent: pi, themeSettings: ThemeSettings(dojoTheme: themeSettings))
                 configManager.debugConfig = debugConfig
                 if let viewModel = CardDetailsCheckoutViewModel(config: configManager) {
@@ -77,6 +76,7 @@ public class DojoSDKDropInUI: NSObject {
     @objc
     public func getResultController(paymentIntentId: String,
                                     debugConfig: DojoSDKDebugConfig? = nil,
+                                    themeSettings: DojoThemeSettings = DojoThemeSettings.getLightTheme(),
                                     completion: ((UIViewController?) -> Void)?,
                                     actionsCompletion: ((Int) -> Void)?) {
         self.actionsCallback = actionsCompletion
@@ -86,8 +86,6 @@ public class DojoSDKDropInUI: NSObject {
                                                     isDemo: false)
         dataLoadingModel.fetchPaymentIntent() { pi, error in
             if let pi = pi {
-                let themeSettings = DojoThemeSettings.getLightTheme()
-                themeSettings.showBranding = false
                 var configManager = ConfigurationManager(paymentIntentId: paymentIntentId, paymentIntent: pi, themeSettings: ThemeSettings(dojoTheme: themeSettings))
                 configManager.debugConfig = debugConfig
                 if let viewModel = PaymentResultViewModel(config: configManager, resultCode: pi.isCaptured ? 0 : 5) {

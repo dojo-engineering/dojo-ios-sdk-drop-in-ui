@@ -141,6 +141,7 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         if !(getViewModel()?.paymentIntent.isVirtualTerminalPayment ?? false) {
             setNavigationTitle(LocalizedText.CardDetailsCheckout.title)
         } else {
+            self.navigationController?.navigationBar.tintColor = theme.headerButtonTintColor
             self.title = "Payment details"
         }
         setUpKeyboard()
