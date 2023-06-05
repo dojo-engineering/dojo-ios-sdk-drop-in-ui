@@ -41,14 +41,15 @@ extension CardDetailsCheckoutViewController: DojoInputFieldDelegate {
         if let fieldType = from.getType() {
             switch fieldType {
             case .billingCountry:
-                if let selectedCountryCode = from.getSelectedCountry()?.isoCode,
-                   getViewModel()?.showBillingPostcode(selectedCountryCode) ?? false {
-                    fieldBillingPostcode.isHidden = false
-                    inputFields.insert(fieldBillingPostcode, at: 2) //TODO: if email is hidden, that should be a different position
-                } else {
-                    fieldBillingPostcode.isHidden = true
-                    inputFields.removeAll(where: {$0.getType() == .billingPostcode})
-                }
+                break
+//                if let selectedCountryCode = from.getSelectedCountry()?.isoCode,
+//                   getViewModel()?.showBillingPostcode(selectedCountryCode) ?? false {
+//                    fieldBillingPostcode.isHidden = false
+//                    inputFields.insert(fieldBillingPostcode, at: 2) //TODO: if email is hidden, that should be a different position
+//                } else {
+//                    fieldBillingPostcode.isHidden = true
+//                    inputFields.removeAll(where: {$0.getType() == .billingPostcode})
+//                }
             case .cardNumber:
                 inputFields.forEach({
                     if $0.getType() == .cvv {

@@ -114,8 +114,8 @@ class PaymentResultViewController: BaseUIViewController {
             buttonTryAgain.layer.cornerRadius = theme.primaryCTAButtonCornerRadius
             
             buttonDone.backgroundColor = theme.primarySurfaceBackgroundColor
-            buttonDone.setTitleColor(theme.primaryLabelTextColor, for: .normal)
-            buttonDone.tintColor = theme.primaryLabelTextColor
+            buttonDone.setTitleColor(theme.secondaryCTAButtonActiveTextColor, for: .normal)
+            buttonDone.tintColor = theme.secondaryCTAButtonActiveTextColor
             buttonDone.layer.cornerRadius = theme.primaryCTAButtonCornerRadius
             buttonDone.layer.borderWidth = 1
             buttonDone.layer.borderColor = theme.primaryCTAButtonActiveBackgroundColor.cgColor

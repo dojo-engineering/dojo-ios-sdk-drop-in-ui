@@ -42,7 +42,7 @@
 "dojo_ui_sdk_payment_result_button_try_again"="Try again";
 "dojo_ui_sdk_payment_ressult_button_please_wait"="Please wait...";
 "dojo_ui_sdk_footer_dojo"="Dojo";
-"dojo_ui_sdk_payment_result_order_info"="payment Id  ";
+"dojo_ui_sdk_payment_result_order_info"="Payment ID";
 "dojo_ui_sdk_payment_result_successful_description"="you have paid ";
 "dojo_ui_sdk_payment_result_failed_description"="We could not verify your payment details";
 "dojo_ui_sdk_pay_with_this_method"="Use this payment method";
