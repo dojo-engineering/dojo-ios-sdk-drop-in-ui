@@ -81,7 +81,7 @@ class PaymentResultViewController: BaseUIViewController {
     override func setUpDesign() {
         super.setUpDesign()
         labelMainText.textColor = theme.primaryLabelTextColor
-        labelMainText.font = theme.fontHeading4
+        labelMainText.font = theme.fontHeading4Medium
         labelSubtitle.textColor = theme.primaryLabelTextColor
         labelSubtitle.font = theme.fontHeading5
         labelSubtitle2.textColor = theme.secondaryLabelTextColor
@@ -92,7 +92,8 @@ class PaymentResultViewController: BaseUIViewController {
         if getViewModel()?.resultCode == 0 {
             buttonTryAgain.isHidden = true
             labelMainText.text = LocalizedText.PaymentResult.mainTitleSuccess
-            labelSubtitle.text = "\(LocalizedText.PaymentResult.orderId) \(viewModel?.paymentIntent.id ?? "")"  //TODO: the same for both cases
+            
+            labelSubtitle.text = "Order \(viewModel?.paymentIntent.reference ?? "")"
             imgViewResult.image = UIImage(named: theme.lightStyleForDefaultElements ? "img-result-success-light" : "img-result-success-dark", in: Bundle.libResourceBundle, compatibleWith: nil)
             
             //TODO: common style
