@@ -52,12 +52,14 @@ class PaymentResultViewController: BaseUIViewController {
                 setNavigationTitle(LocalizedText.PaymentResult.titleSuccess)
             } else {
                 self.title = LocalizedText.PaymentResult.titleSuccess
+                navigationItem.hidesBackButton = true
             }
         } else {
             if !(getViewModel()?.paymentIntent.isVirtualTerminalPayment ?? false) {
                 setNavigationTitle(LocalizedText.PaymentResult.titleFail)
             } else {
                 self.title = LocalizedText.PaymentResult.titleFail
+                navigationItem.hidesBackButton = true
             }
         }
     }
