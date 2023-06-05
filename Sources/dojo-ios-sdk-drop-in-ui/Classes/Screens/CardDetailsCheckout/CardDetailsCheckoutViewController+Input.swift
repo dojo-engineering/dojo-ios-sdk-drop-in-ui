@@ -104,7 +104,14 @@ extension CardDetailsCheckoutViewController {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
             
-            constraintPayButtonBottom.constant = keyboardHeight - (UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0) + 12
+            let buffer = 12.0
+            var offset = keyboardHeight - (UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0)
+            if let tabBarHeight = self.tabBarController?.tabBar.frame.height {
+                offset -= tabBarHeight / 2
+            } else {
+                offset += buffer
+            }
+            constraintPayButtonBottom.constant = offset
         }
     }
 }
