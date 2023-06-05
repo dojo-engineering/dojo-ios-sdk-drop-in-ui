@@ -102,7 +102,7 @@ class DojoInputField: UIView {
         labelCounter.font = theme.fontSubtitle2
         labelCounter.textColor = theme.secondaryLabelTextColor
         
-        imageViewArrowDown.tintColor = theme.headerButtonTintColor
+        imageViewArrowDown.tintColor = theme.primaryLabelTextColor
         
         textFieldMain.backgroundColor = theme.inputFieldBackgroundColor
         textFieldMain.textColor = theme.primaryLabelTextColor
