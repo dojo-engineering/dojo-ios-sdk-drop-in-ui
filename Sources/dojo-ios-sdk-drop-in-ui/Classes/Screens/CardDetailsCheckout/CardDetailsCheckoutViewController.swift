@@ -274,11 +274,10 @@ extension CardDetailsCheckoutViewController {
         containerSavedCard.isHidden = saveCardCheckboxIsHidden
         getViewModel()?.isSaveCardSelected = !saveCardCheckboxIsHidden
         
-        
-        if !emailIsHidden { inputFields.append(fieldEmail) }
-//        if !billingIsHidden { inputFields.append(contentsOf: [fieldBillingCountry, fieldBillingPostcode]) }
-        //TODO: next navigation for billing fields
+        if !shippingIsHidden { inputFields.append(contentsOf: [fieldShippingName, fieldShippingLine1, fieldShippingLine2, fieldShippingCity, fieldShippingPostcode, fieldShippingCountry, fieldShippingNotes]) }
+        if shippingIsHidden && !billingIsHidden { inputFields.append(contentsOf: [fieldBillingLine1, fieldBillingLine2, fieldBillingCity, fieldBillingPostcode, fieldBillingCountry]) }
         inputFields.append(contentsOf: [fieldCardholder, fieldCardNumber, fieldExpiry, fieldCVV])
+        if !emailIsHidden { inputFields.append(fieldEmail) }
         
         setUpCheckboxes()
         setUpCardsStrip()
