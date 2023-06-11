@@ -303,6 +303,7 @@ extension CardDetailsCheckoutViewController {
         mainContentScrollView.isUserInteractionEnabled = false
         mainContentScrollView.alpha = 0.4
         diableCloseButton = true
+        buttonPay.isUserInteractionEnabled = false
         
     }
     
@@ -311,6 +312,7 @@ extension CardDetailsCheckoutViewController {
         mainContentScrollView.isUserInteractionEnabled = true
         mainContentScrollView.alpha = 1
         diableCloseButton = false
+        buttonPay.isUserInteractionEnabled = true
     }
     
     func fetchCardDataFromFields() -> DojoCardDetails {
