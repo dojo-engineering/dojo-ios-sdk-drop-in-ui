@@ -87,7 +87,12 @@ extension CardDetailsCheckoutViewController: DojoInputFieldDelegate {
 // MARK: Keyboard Delegate
 extension CardDetailsCheckoutViewController {
     @objc func keyboardWillHide(_ notification: Notification) {
-        constraintPayButtonBottom.constant = 52
+        movePayButtonToDefaultLocation()
+    }
+    
+    func movePayButtonToDefaultLocation() {
+        let constant: CGFloat = (getViewModel()?.paymentIntent.isVirtualTerminalPayment ?? false) ? 20 : 52
+        constraintPayButtonBottom.constant = constant
     }
     
     func setUpKeyboard() {

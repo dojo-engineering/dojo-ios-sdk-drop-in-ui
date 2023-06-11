@@ -143,7 +143,9 @@ class DojoInputFieldViewModel: DojoInputFieldViewModelProtocol {
     var isRequired: Bool {
         get {
             switch type {
-            case .shippingAddressLine2, .shippingDeliveryNotes:
+            case .shippingAddressLine2,
+                    .billingAddressLine2,
+                    .shippingDeliveryNotes:
                 return false
             default:
                 return true

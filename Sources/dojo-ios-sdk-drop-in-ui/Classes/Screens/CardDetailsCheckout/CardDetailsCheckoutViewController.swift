@@ -151,6 +151,10 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
             navigation.bottomSheetTransitioningDelegate.bottomSheetPresentationController?.presentationTransitionWillBegin()
         }
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+    }
 
     @IBAction func onPayButtonPress(_ sender: Any) {
         setStateLoading()
@@ -283,6 +287,7 @@ extension CardDetailsCheckoutViewController {
         setUpCardsStrip()
         setUpOrderReference()
         buttonPay.setEnabled(false)
+        movePayButtonToDefaultLocation()
     }
 }
 

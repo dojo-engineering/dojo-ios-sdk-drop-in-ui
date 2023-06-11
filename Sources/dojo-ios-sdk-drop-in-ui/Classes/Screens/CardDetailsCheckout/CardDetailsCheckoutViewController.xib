@@ -69,13 +69,6 @@
                         <action selector="onPayButtonPress:" destination="-1" eventType="touchUpInside" id="iaw-eQ-KMV"/>
                     </connections>
                 </button>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FRT-lp-E1d" customClass="FooterPoweredByDojo" customModule="dojo_ios_sdk_drop_in_ui">
-                    <rect key="frame" x="0.0" y="822" width="414" height="40"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="40" id="Wjj-3E-N4f"/>
-                    </constraints>
-                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xKB-Pt-sx7" userLabel="topSeparator">
                     <rect key="frame" x="0.0" y="48" width="414" height="0.5"/>
                     <color key="backgroundColor" systemColor="tintColor"/>
@@ -87,7 +80,7 @@
                     <rect key="frame" x="0.0" y="48.5" width="414" height="707.5"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="S7j-46-8kb">
-                            <rect key="frame" x="16" y="0.0" width="379" height="2249"/>
+                            <rect key="frame" x="16" y="0.0" width="379" height="2274"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zoo-fD-CxZ" userLabel="Spacer">
                                     <rect key="frame" x="0.0" y="0.0" width="379" height="16"/>
@@ -387,6 +380,13 @@
                                         <constraint firstAttribute="height" constant="104" id="RAk-Oj-nEh"/>
                                     </constraints>
                                 </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FRT-lp-E1d" customClass="FooterPoweredByDojo" customModule="dojo_ios_sdk_drop_in_ui">
+                                    <rect key="frame" x="0.0" y="2254" width="379" height="20"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="20" id="Wjj-3E-N4f"/>
+                                    </constraints>
+                                </view>
                             </subviews>
                             <constraints>
                                 <constraint firstItem="EvI-yp-385" firstAttribute="top" secondItem="sNy-Ak-ZDx" secondAttribute="bottom" constant="5" id="ZL8-cd-MUV"/>
@@ -409,17 +409,14 @@
             <constraints>
                 <constraint firstItem="Swm-bR-QtT" firstAttribute="top" secondItem="AND-dd-xoI" secondAttribute="bottom" constant="10" id="8kS-3e-4ke"/>
                 <constraint firstAttribute="trailing" secondItem="xKB-Pt-sx7" secondAttribute="trailing" id="9Ze-7a-p4V"/>
-                <constraint firstItem="FRT-lp-E1d" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="G2u-cq-KhT"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Swm-bR-QtT" secondAttribute="trailing" constant="16" id="KAR-AP-jLR"/>
                 <constraint firstItem="Swm-bR-QtT" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="LeY-TF-4QP"/>
                 <constraint firstItem="xKB-Pt-sx7" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="OKf-YO-hLd"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Swm-bR-QtT" secondAttribute="bottom" constant="52" id="Qgg-Dw-3jc"/>
                 <constraint firstItem="AND-dd-xoI" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Vr9-Vd-Iw4"/>
                 <constraint firstItem="AND-dd-xoI" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="XD0-nx-EwS"/>
-                <constraint firstAttribute="trailing" secondItem="FRT-lp-E1d" secondAttribute="trailing" id="ZeJ-VZ-R65"/>
                 <constraint firstItem="AND-dd-xoI" firstAttribute="top" secondItem="xKB-Pt-sx7" secondAttribute="bottom" id="hUL-QH-HmG"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="AND-dd-xoI" secondAttribute="trailing" id="pyV-bT-HU7"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="FRT-lp-E1d" secondAttribute="bottom" id="qD2-nd-jVI"/>
                 <constraint firstItem="xKB-Pt-sx7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ugv-hk-cJN"/>
                 <constraint firstItem="Swm-bR-QtT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="wBC-HS-PdW"/>
             </constraints>
