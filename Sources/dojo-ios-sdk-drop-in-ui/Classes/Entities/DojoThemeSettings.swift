@@ -9,27 +9,27 @@ import UIKit
 
 @objc
 public class DojoThemeSettings: NSObject {
-    public var primaryLabelTextColor: UIColor
-    public var secondaryLabelTextColor: UIColor
-    public var headerButtonTintColor: UIColor
-    public var headerTintColor: UIColor
-    public var primaryCTAButtonActiveBackgroundColor: UIColor
-    public var primarySurfaceBackgroundColor: UIColor
-    public var primaryCTAButtonActiveTextColor: UIColor
-    public var primaryCTAButtonDisabledBackgroundColor: UIColor
-    public var primaryCTAButtonDisableTextColor: UIColor
-    public var secondaryCTAButtonActiveBorderColor: UIColor
-    public var secondaryCTAButtonActiveTextColor: UIColor
-    public var separatorColor: UIColor
-    public var loadingIndicatorColor: UIColor
-    public var inputElementActiveTintColor: UIColor
-    public var inputFieldBackgroundColor: UIColor
-    public var inputElementDefaultTintColor: UIColor
-    public var inputFieldSelectedBorderColor: UIColor
-    public var inputFieldDefaultBorderColor: UIColor
-    public var errorTextColor: UIColor
-    public var lightStyleForDefaultElements: NSNumber
-    public var showBranding: NSNumber
+    @objc public var primaryLabelTextColor: UIColor
+    @objc public var secondaryLabelTextColor: UIColor
+    @objc public var headerButtonTintColor: UIColor
+    @objc public var headerTintColor: UIColor
+    @objc public var primaryCTAButtonActiveBackgroundColor: UIColor
+    @objc public var primarySurfaceBackgroundColor: UIColor
+    @objc public var primaryCTAButtonActiveTextColor: UIColor
+    @objc public var primaryCTAButtonDisabledBackgroundColor: UIColor
+    @objc public var primaryCTAButtonDisableTextColor: UIColor
+    @objc public var secondaryCTAButtonActiveBorderColor: UIColor
+    @objc public var secondaryCTAButtonActiveTextColor: UIColor
+    @objc public var separatorColor: UIColor
+    @objc public var loadingIndicatorColor: UIColor
+    @objc public var inputElementActiveTintColor: UIColor
+    @objc public var inputFieldBackgroundColor: UIColor
+    @objc public var inputElementDefaultTintColor: UIColor
+    @objc public var inputFieldSelectedBorderColor: UIColor
+    @objc public var inputFieldDefaultBorderColor: UIColor
+    @objc public var errorTextColor: UIColor
+    @objc public var lightStyleForDefaultElements: NSNumber
+    @objc public var showBranding: NSNumber
     
     @objc
     public init(primaryLabelTextColor: UIColor? = nil,

@@ -30,11 +30,18 @@ class CardDetailsCheckoutViewModel: BaseViewModel {
                                                         userEmailAddress: email,
                                                         billingAddress: DojoAddressDetails(postcode: billingPostcode, countryCode: billingCountry),
                                                         savePaymentMethod: isSaveCardSelected)
-        DojoSDK.executeCardPayment(token: paymentIntent.clientSessionSecret,
-                                   payload: cardPaymentPayload,
-                                   debugConfig: debugConfig ?? DojoSDKDebugConfig(isSandboxIntent: paymentIntent.isSandbox),
-                                   fromViewController: fromViewController,
-                                   completion: completion)
+        if paymentIntent.isVirtualTerminalPayment {
+            DojoSDK.executeVirtualTerminalPayment(token: paymentIntent.clientSessionSecret,
+                                       payload: cardPaymentPayload,
+                                       debugConfig: debugConfig ?? DojoSDKDebugConfig(isSandboxIntent: paymentIntent.isSandbox),
+                                       completion: completion)
+        } else {
+            DojoSDK.executeCardPayment(token: paymentIntent.clientSessionSecret,
+                                       payload: cardPaymentPayload,
+                                       debugConfig: debugConfig ?? DojoSDKDebugConfig(isSandboxIntent: paymentIntent.isSandbox),
+                                       fromViewController: fromViewController,
+                                       completion: completion)
+        }
     }
     
     var showFieldEmail: Bool {
