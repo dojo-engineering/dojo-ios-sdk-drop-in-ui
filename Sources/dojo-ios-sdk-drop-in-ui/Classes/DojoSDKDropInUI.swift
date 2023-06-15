@@ -9,7 +9,7 @@ public class DojoSDKDropInUI: NSObject {
     var configurationManager: ConfigurationManager?
     var rootCoordinator: RootCoordinatorProtocol?
     var completionCallback: ((Int) -> Void)?
-    var actionsCallback: ((Int) -> Void)?
+    var actionsCallback: ((Int, Int) -> Void)?
     
     @objc
     public override init() {}
@@ -78,7 +78,7 @@ public class DojoSDKDropInUI: NSObject {
                                     debugConfig: DojoSDKDebugConfig? = nil,
                                     themeSettings: DojoThemeSettings = DojoThemeSettings.getLightTheme(),
                                     completion: ((UIViewController?) -> Void)?,
-                                    actionsCompletion: ((Int) -> Void)?) {
+                                    actionsCompletion: ((Int, Int) -> Void)?) {
         self.actionsCallback = actionsCompletion
         let dataLoadingModel = DataLoadingViewModel(paymentIntentId: paymentIntentId,
                                                     debugConfig: debugConfig,
@@ -104,11 +104,11 @@ public class DojoSDKDropInUI: NSObject {
 
 extension DojoSDKDropInUI: CardDetailsCheckoutViewControllerDelegate, PaymentResultViewControllerDelegate {
     func onDonePress(resultCode: Int) {
-        actionsCallback?(1)
+        actionsCallback?(1, resultCode)
     }
     
     func onPaymentIntentRefreshSucess(paymentIntent: PaymentIntent) {
-        actionsCallback?(0)
+        actionsCallback?(0, 5)
     }
     
     func onForceClosePress() {
