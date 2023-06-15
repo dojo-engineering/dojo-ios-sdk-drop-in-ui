@@ -21,7 +21,7 @@ struct PaymentIntent: Codable {
     var reference: String?
     
     var isCaptured: Bool {
-        status == "Captured"
+        status == "Captured" || status == "Authorized"
     }
     
     var isSandbox: Bool {
