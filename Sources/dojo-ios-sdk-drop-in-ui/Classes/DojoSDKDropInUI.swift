@@ -55,7 +55,7 @@ public class DojoSDKDropInUI: NSObject {
                                                     debugConfig: debugConfig,
                                                     demoDelay: 0,
                                                     isDemo: false)
-        dataLoadingModel.fetchPaymentIntent(refreshBeforeFetch: true) { pi, error in
+        dataLoadingModel.fetchPaymentIntent() { pi, error in
             if let pi = pi {
                 var configManager = ConfigurationManager(paymentIntentId: paymentIntentId, paymentIntent: pi, themeSettings: ThemeSettings(dojoTheme: themeSettings))
                 configManager.debugConfig = debugConfig
