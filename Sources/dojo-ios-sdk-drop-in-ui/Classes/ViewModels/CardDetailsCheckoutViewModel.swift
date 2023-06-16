@@ -36,14 +36,18 @@ class CardDetailsCheckoutViewModel: BaseViewModel {
                                                         metaData: metadata,
                                                         savePaymentMethod: isSaveCardSelected)
         if paymentIntent.isVirtualTerminalPayment {
-            DojoSDK.refreshPaymentIntent(intentId: paymentIntent.id, debugConfig: debugConfig) { token, error in
-                if let token = token {
-                    DojoSDK.executeVirtualTerminalPayment(token: token,
-                                               payload: cardPaymentPayload,
-                                                          debugConfig: self.debugConfig ?? DojoSDKDebugConfig(isSandboxIntent: self.paymentIntent.isSandbox),
-                                               completion: completion)
-                } else {
-                    completion?(5)
+            DojoSDK.refreshPaymentIntent(intentId: paymentIntent.id, debugConfig: debugConfig) { stringData, fetchError in
+                CommonUtils.parseResponseToCompletion(stringData: stringData,
+                                                      fetchError: fetchError,
+                                                      objectType: PaymentIntent.self) { result, error in
+                    if let paymentIntent = result {
+                        DojoSDK.executeVirtualTerminalPayment(token: paymentIntent.clientSessionSecret,
+                                                   payload: cardPaymentPayload,
+                                                              debugConfig: self.debugConfig ?? DojoSDKDebugConfig(isSandboxIntent: self.paymentIntent.isSandbox),
+                                                   completion: completion)
+                    } else {
+                        completion?(5)
+                    }
                 }
             }
         } else {
