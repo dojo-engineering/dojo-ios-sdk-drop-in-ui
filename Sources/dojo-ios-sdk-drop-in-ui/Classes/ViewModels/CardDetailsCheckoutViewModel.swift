@@ -36,7 +36,7 @@ class CardDetailsCheckoutViewModel: BaseViewModel {
                                                         metaData: metadata,
                                                         savePaymentMethod: isSaveCardSelected)
         if paymentIntent.isVirtualTerminalPayment {
-            DojoSDK.refreshPaymentIntent(intentId: paymentIntent.id) { token, error in
+            DojoSDK.refreshPaymentIntent(intentId: paymentIntent.id, debugConfig: debugConfig) { token, error in
                 if let token = token {
                     DojoSDK.executeVirtualTerminalPayment(token: token,
                                                payload: cardPaymentPayload,
