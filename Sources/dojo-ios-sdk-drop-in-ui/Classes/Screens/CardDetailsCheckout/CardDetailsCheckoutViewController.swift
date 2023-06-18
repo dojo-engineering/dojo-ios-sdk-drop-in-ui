@@ -119,6 +119,9 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         labelPaymentDetails.font = theme.fontHeading5Medium
         labelPaymentDetails.textColor = theme.primaryLabelTextColor
         
+        labelOrderReference.font = theme.fontSubtitle1Medium
+        labelOrderReference.textColor = theme.primaryLabelTextColor
+        
         fieldEmail.setTheme(theme: theme)
         fieldCardholder.setTheme(theme: theme)
         fieldCardNumber.setTheme(theme: theme) // TODO refactor

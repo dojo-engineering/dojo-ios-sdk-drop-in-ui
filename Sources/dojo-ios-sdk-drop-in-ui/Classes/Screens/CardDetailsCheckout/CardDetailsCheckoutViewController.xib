@@ -80,17 +80,17 @@
                     <rect key="frame" x="0.0" y="48.5" width="414" height="707.5"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="S7j-46-8kb">
-                            <rect key="frame" x="16" y="0.0" width="379" height="2274"/>
+                            <rect key="frame" x="16" y="0.0" width="379" height="2268"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zoo-fD-CxZ" userLabel="Spacer">
-                                    <rect key="frame" x="0.0" y="0.0" width="379" height="16"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="379" height="20"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="16" id="cQz-t1-QOg"/>
+                                        <constraint firstAttribute="height" constant="20" id="cQz-t1-QOg"/>
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You pay" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yWi-LP-owe">
-                                    <rect key="frame" x="0.0" y="21" width="379" height="24"/>
+                                    <rect key="frame" x="0.0" y="25" width="379" height="24"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="24" id="8gV-s0-d4C"/>
                                     </constraints>
@@ -99,100 +99,100 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="£34.34" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sNy-Ak-ZDx">
-                                    <rect key="frame" x="0.0" y="50" width="379" height="40"/>
+                                    <rect key="frame" x="0.0" y="54" width="379" height="45"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="40" id="Oy6-Jz-WYI"/>
+                                        <constraint firstAttribute="height" constant="45" id="Oy6-Jz-WYI"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order Reference" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EvI-yp-385" userLabel="Order Reference">
-                                    <rect key="frame" x="0.0" y="95" width="379" height="40"/>
+                                    <rect key="frame" x="0.0" y="104" width="379" height="22"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="40" id="eMm-Dt-dsR"/>
+                                        <constraint firstAttribute="height" constant="22" id="eMm-Dt-dsR"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p8k-vM-JQk" userLabel="Spacer">
-                                    <rect key="frame" x="0.0" y="137.5" width="379" height="16"/>
+                                    <rect key="frame" x="0.0" y="128.5" width="379" height="0.0"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="16" id="ESZ-qm-XDz"/>
-                                    </constraints>
-                                </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fRD-io-LS3" userLabel="Spacer">
-                                    <rect key="frame" x="0.0" y="140" width="379" height="20"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="20" id="C5n-6R-1ma"/>
+                                        <constraint firstAttribute="height" id="ESZ-qm-XDz"/>
                                     </constraints>
                                 </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ZMx-Nw-v61" userLabel="Shipping details">
-                                    <rect key="frame" x="0.0" y="165" width="379" height="838"/>
+                                    <rect key="frame" x="0.0" y="131" width="379" height="859"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shipping address" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FMi-YG-3cL" userLabel="Shipping Address">
-                                            <rect key="frame" x="0.0" y="0.0" width="379" height="40"/>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Gz-9n-At9" userLabel="Spacer">
+                                            <rect key="frame" x="0.0" y="0.0" width="379" height="6"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="40" id="xCQ-mU-HjL"/>
+                                                <constraint firstAttribute="height" constant="6" id="vL6-2l-d9h"/>
+                                            </constraints>
+                                        </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shipping address" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FMi-YG-3cL" userLabel="Shipping Address">
+                                            <rect key="frame" x="0.0" y="11" width="379" height="50"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="xCQ-mU-HjL"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KBK-gd-aTe" userLabel="Shipping - name" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui">
-                                            <rect key="frame" x="0.0" y="45" width="379" height="104"/>
+                                            <rect key="frame" x="0.0" y="66" width="379" height="104"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="104" id="cMb-yu-5aX"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cKk-Ck-N0m" userLabel="Shipping - line1" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui">
-                                            <rect key="frame" x="0.0" y="154" width="379" height="104"/>
+                                            <rect key="frame" x="0.0" y="175" width="379" height="104"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="104" id="FNb-Jh-JwT"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jv5-7H-AxH" userLabel="Shipping - line2" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui">
-                                            <rect key="frame" x="0.0" y="263" width="379" height="104"/>
+                                            <rect key="frame" x="0.0" y="284" width="379" height="104"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="104" id="IBP-FJ-y3y"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XP2-cy-hKP" userLabel="Shipping - City" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui">
-                                            <rect key="frame" x="0.0" y="372" width="379" height="104"/>
+                                            <rect key="frame" x="0.0" y="393" width="379" height="104"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="104" id="TbS-hw-6JN"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P9S-v9-n8j" userLabel="Shipping - Postcode" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui">
-                                            <rect key="frame" x="0.0" y="481" width="379" height="104"/>
+                                            <rect key="frame" x="0.0" y="502" width="379" height="104"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="104" id="LkX-4G-L4j"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pe5-Bd-YDz" userLabel="Shipping - Country" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui">
-                                            <rect key="frame" x="0.0" y="590" width="379" height="104"/>
+                                            <rect key="frame" x="0.0" y="611" width="379" height="104"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="104" id="2fh-5n-a1g"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="In2-yq-6MM" userLabel="Shipping - Notes" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui">
-                                            <rect key="frame" x="0.0" y="699" width="379" height="104"/>
+                                            <rect key="frame" x="0.0" y="720" width="379" height="104"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="104" id="h1P-X7-y0H"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0a2-38-YRQ" userLabel="Billing the same as shipping">
-                                            <rect key="frame" x="0.0" y="808" width="379" height="30"/>
+                                            <rect key="frame" x="0.0" y="829" width="379" height="30"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-checkbox-checked" translatesAutoresizingMaskIntoConstraints="NO" id="eyd-dc-hB0">
                                                     <rect key="frame" x="0.0" y="3" width="24" height="24"/>
@@ -220,55 +220,55 @@
                                         </view>
                                     </subviews>
                                 </stackView>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dLI-mc-Bdr" userLabel="Spacer">
-                                    <rect key="frame" x="0.0" y="1008" width="379" height="20"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="20" id="q0M-dZ-X8j"/>
-                                    </constraints>
-                                </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="5aj-ae-dLf" userLabel="Billing details">
-                                    <rect key="frame" x="0.0" y="1033" width="379" height="585"/>
+                                    <rect key="frame" x="0.0" y="995" width="379" height="606"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Billing details" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jlb-pi-C8k" userLabel="Billing Address">
-                                            <rect key="frame" x="0.0" y="0.0" width="379" height="40"/>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dLI-mc-Bdr" userLabel="Spacer">
+                                            <rect key="frame" x="0.0" y="0.0" width="379" height="6"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="40" id="ezc-gm-cIn"/>
+                                                <constraint firstAttribute="height" constant="6" id="q0M-dZ-X8j"/>
+                                            </constraints>
+                                        </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Billing details" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jlb-pi-C8k" userLabel="Billing Address">
+                                            <rect key="frame" x="0.0" y="11" width="379" height="50"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="ezc-gm-cIn"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fxc-qw-m9x" userLabel="Billing - line1" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui">
-                                            <rect key="frame" x="0.0" y="45" width="379" height="104"/>
+                                            <rect key="frame" x="0.0" y="66" width="379" height="104"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="104" id="ghM-yn-knL"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AHU-PO-dWR" userLabel="Billing - line2" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui">
-                                            <rect key="frame" x="0.0" y="154" width="379" height="104"/>
+                                            <rect key="frame" x="0.0" y="175" width="379" height="104"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="104" id="4eO-DJ-04z"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tYJ-Tu-BKV" userLabel="Billing - City" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui">
-                                            <rect key="frame" x="0.0" y="263" width="379" height="104"/>
+                                            <rect key="frame" x="0.0" y="284" width="379" height="104"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="104" id="t8P-3G-y0w"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kpr-Bz-7qe" userLabel="Billing - Postcode" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui">
-                                            <rect key="frame" x="0.0" y="372" width="379" height="104"/>
+                                            <rect key="frame" x="0.0" y="393" width="379" height="104"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="104" id="dck-mu-Xhp"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MHH-M0-hvQ" userLabel="Billing - Country" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui">
-                                            <rect key="frame" x="0.0" y="481" width="379" height="104"/>
+                                            <rect key="frame" x="0.0" y="502" width="379" height="104"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="104" id="K3u-3Q-QOK"/>
@@ -276,8 +276,15 @@
                                         </view>
                                     </subviews>
                                 </stackView>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lbr-bw-gMw" userLabel="Spacer">
+                                    <rect key="frame" x="0.0" y="1606" width="379" height="6"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="6" id="Msh-Kq-mxq"/>
+                                    </constraints>
+                                </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Payment details" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kOE-lR-UAM" userLabel="Payment Details">
-                                    <rect key="frame" x="0.0" y="1623" width="379" height="40"/>
+                                    <rect key="frame" x="0.0" y="1617" width="379" height="40"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="oeC-8L-6Aa"/>
                                     </constraints>
@@ -286,7 +293,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All transactions are secure and encrypted " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1PU-Lc-LKF" userLabel="All transactions are secure and encrypted ">
-                                    <rect key="frame" x="0.0" y="1668" width="379" height="40"/>
+                                    <rect key="frame" x="0.0" y="1662" width="379" height="40"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="hQa-9y-K5P"/>
                                     </constraints>
@@ -295,7 +302,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="MT6-B5-RJK" userLabel="Card Strip container">
-                                    <rect key="frame" x="0.0" y="1713" width="379" height="40"/>
+                                    <rect key="frame" x="0.0" y="1707" width="379" height="40"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Av9-to-bSP" userLabel="Cards Strip">
                                             <rect key="frame" x="0.0" y="0.0" width="378.5" height="40"/>
@@ -306,28 +313,28 @@
                                     </subviews>
                                 </stackView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FTZ-GZ-Tdr" userLabel="Spacer">
-                                    <rect key="frame" x="0.0" y="1758" width="379" height="20"/>
+                                    <rect key="frame" x="0.0" y="1752" width="379" height="20"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="20" id="6Du-1f-7x3"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K1F-SH-mec" userLabel="Cardholder" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui">
-                                    <rect key="frame" x="0.0" y="1783" width="379" height="104"/>
+                                    <rect key="frame" x="0.0" y="1777" width="379" height="104"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="104" id="vIj-9e-Aw8"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HYC-gQ-ZCU" userLabel="CardNumber" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui">
-                                    <rect key="frame" x="0.0" y="1892" width="379" height="104"/>
+                                    <rect key="frame" x="0.0" y="1886" width="379" height="104"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="104" id="Ybp-Hy-WqZ"/>
                                     </constraints>
                                 </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="VKl-s2-HV7">
-                                    <rect key="frame" x="0.0" y="2001" width="379" height="104"/>
+                                    <rect key="frame" x="0.0" y="1995" width="379" height="104"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zfe-AI-Fj8" userLabel="Expiry" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui">
                                             <rect key="frame" x="0.0" y="0.0" width="179.5" height="104"/>
@@ -347,7 +354,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </stackView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RfQ-Ax-Vd4" userLabel="Save Card Checkbox">
-                                    <rect key="frame" x="0.0" y="2110" width="379" height="30"/>
+                                    <rect key="frame" x="0.0" y="2104" width="379" height="30"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-checkbox-checked" translatesAutoresizingMaskIntoConstraints="NO" id="u98-ls-or9">
                                             <rect key="frame" x="0.0" y="3" width="24" height="24"/>
@@ -374,14 +381,14 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6gL-di-Oc5" userLabel="Email" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui">
-                                    <rect key="frame" x="0.0" y="2145" width="379" height="104"/>
+                                    <rect key="frame" x="0.0" y="2139" width="379" height="104"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="104" id="RAk-Oj-nEh"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FRT-lp-E1d" customClass="FooterPoweredByDojo" customModule="dojo_ios_sdk_drop_in_ui">
-                                    <rect key="frame" x="0.0" y="2254" width="379" height="20"/>
+                                    <rect key="frame" x="0.0" y="2248" width="379" height="20"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="20" id="Wjj-3E-N4f"/>
