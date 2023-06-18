@@ -76,6 +76,11 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         setUpTranslations()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        footerPoweredByDojoView?.setStyle(FooterPoweredByDojoStyle.checkoutPage)
+    }
+    
     func setUpTranslations() {
         labelShippingDetails.text = LocalizedText.CardDetailsCheckout.titleShippingAddress
         labelBillingDetails.text = LocalizedText.CardDetailsCheckout.titleBillingAddress
@@ -236,8 +241,6 @@ extension CardDetailsCheckoutViewController {
     }
     
     func setUpViews() {
-        footerPoweredByDojoView?.setStyle(FooterPoweredByDojoStyle.checkoutPage)
-        
         labelYouPay.text = getViewModel()?.topTitle
         
         fieldEmail.setType(.email, showSubtitle: viewModel?.paymentIntent.isVirtualTerminalPayment ?? false, delegate: self)
