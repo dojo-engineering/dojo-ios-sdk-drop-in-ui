@@ -199,10 +199,12 @@ extension CardDetailsCheckoutViewController {
         buttonPay.setTitle(buttonPayTitle, for: .normal)
         
         
-        let fontCurrency = [NSAttributedString.Key.font : theme.fontBody1] // TODO: correct font
+        let fontCurrency = [NSAttributedString.Key.font : theme.fontHeading4Medium]
         let fontAmount = [NSAttributedString.Key.font : theme.fontHeading3Medium]
         let gbpString = NSMutableAttributedString(string:"£", attributes: fontCurrency)
         let attributedString = NSMutableAttributedString(string: amountText, attributes: fontAmount)
+        let space = NSMutableAttributedString(string: " ", attributes: [NSAttributedString.Key.font : theme.fontBody1])
+        gbpString.append(space)
         gbpString.append(attributedString)
         labelPrimaryAmount.attributedText = gbpString
     }
