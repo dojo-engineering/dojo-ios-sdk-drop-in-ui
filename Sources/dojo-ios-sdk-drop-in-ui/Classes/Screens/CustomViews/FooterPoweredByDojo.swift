@@ -51,11 +51,11 @@ class FooterPoweredByDojo: UIView {
         imageLogo.tintColor = theme.colorPoweredByDojo
         viewSeparator.backgroundColor = theme.colorPoweredBySeparator
         
-        buttonTerms.tintColor = theme.colorPoweredByButtons
-        buttonPrivacy.tintColor = theme.colorPoweredByButtons
-        
         buttonTerms.titleLabel?.font = theme.fontSubtitle2
         buttonPrivacy.titleLabel?.font = theme.fontSubtitle2
+        
+        buttonTerms.setTitleColor(theme.colorPoweredByButtons, for: .normal)
+        buttonPrivacy.setTitleColor(theme.colorPoweredByButtons, for: .normal)
         
         viewModel.showBranding = theme.showBranding
     }

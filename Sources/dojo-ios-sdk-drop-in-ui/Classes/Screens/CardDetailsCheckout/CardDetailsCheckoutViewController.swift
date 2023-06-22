@@ -17,7 +17,6 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     
     @IBOutlet weak var labelPrimaryAmount: UILabel!
     @IBOutlet weak var labelYouPay: UILabel!
-    @IBOutlet weak var labelOrderReference: UILabel!
     @IBOutlet weak var labelSaveCardForFutureUse: UILabel!
     @IBOutlet weak var buttonPay: LoadingButton!
     @IBOutlet weak var imageViewSaveCardCheckbox: UIImageView!
@@ -62,6 +61,9 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         super.init(nibName: nibName, bundle: Bundle.libResourceBundle)
         self.viewModel = viewModel
         self.baseDelegate = delegate
+        if viewModel.paymentIntent.isVirtualTerminalPayment {
+            theme.colorPoweredByButtons = theme.secondaryLabelTextColor
+        }
         self.theme = theme
     }
     
@@ -119,9 +121,6 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         labelPaymentDetails.font = theme.fontHeading5Medium
         labelPaymentDetails.textColor = theme.primaryLabelTextColor
         
-        labelOrderReference.font = theme.fontSubtitle1Medium
-        labelOrderReference.textColor = theme.primaryLabelTextColor
-        
         fieldEmail.setTheme(theme: theme)
         fieldCardholder.setTheme(theme: theme)
         fieldCardNumber.setTheme(theme: theme) // TODO refactor
@@ -142,6 +141,8 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         fieldBillingLine2.setTheme(theme: theme)
         fieldBillingCountry.setTheme(theme: theme)
         fieldBillingPostcode.setTheme(theme: theme)
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -235,16 +236,6 @@ extension CardDetailsCheckoutViewController {
         })
     }
     
-    func setUpOrderReference() {
-        guard let viewModel = getViewModel(),
-            viewModel.paymentIntent.isVirtualTerminalPayment else {
-            labelOrderReference.isHidden = true
-            return
-        }
-        labelOrderReference.isHidden = false
-        labelOrderReference.text = "Order \(viewModel.paymentIntent.reference ?? "")" 
-    }
-    
     func setUpViews() {
         labelYouPay.text = getViewModel()?.topTitle
         
@@ -293,7 +284,6 @@ extension CardDetailsCheckoutViewController {
         
         setUpCheckboxes()
         setUpCardsStrip()
-        setUpOrderReference()
         buttonPay.setEnabled(false)
         movePayButtonToDefaultLocation()
     }
