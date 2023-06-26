@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="buttonDone" destination="qw6-82-Sm5" id="W5W-uW-PCR"/>
                 <outlet property="buttonTryAgain" destination="Kxd-5L-vfw" id="9Z2-LF-pcz"/>
+                <outlet property="constraintBottomButtonBottom" destination="xVI-Wo-uRp" id="kBe-77-RIs"/>
                 <outlet property="footerPoweredByDojoView" destination="yU4-QQ-5W5" id="F1b-3I-Yo9"/>
                 <outlet property="imgViewResult" destination="GI8-4z-Q43" id="BqD-7S-iD1"/>
                 <outlet property="labelMainText" destination="0Pj-Be-ND9" id="D7M-6Z-BaF"/>

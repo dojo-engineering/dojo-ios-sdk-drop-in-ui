@@ -20,7 +20,7 @@ class PaymentResultViewController: BaseUIViewController {
     @IBOutlet weak var buttonDone: UIButton!
     @IBOutlet weak var buttonTryAgain: LoadingButton!
     @IBOutlet weak var imgViewResult: UIImageView!
-    
+    @IBOutlet weak var constraintBottomButtonBottom: NSLayoutConstraint!
     var delegate: PaymentResultViewControllerDelegate?
     
     public init(viewModel: PaymentResultViewModel,
@@ -62,6 +62,10 @@ class PaymentResultViewController: BaseUIViewController {
                 navigationItem.hidesBackButton = true
             }
         }
+        
+        if !theme.showBranding {
+            constraintBottomButtonBottom.constant = -10
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -93,7 +97,7 @@ class PaymentResultViewController: BaseUIViewController {
             buttonTryAgain.isHidden = true
             labelMainText.text = LocalizedText.PaymentResult.mainTitleSuccess
             
-            labelSubtitle.text = "Order \(viewModel?.paymentIntent.reference ?? "")"
+            labelSubtitle.text = ""
             imgViewResult.image = UIImage(named: theme.lightStyleForDefaultElements ? "img-result-success-light" : "img-result-success-dark", in: Bundle.libResourceBundle, compatibleWith: nil)
             
             //TODO: common style

@@ -34,7 +34,7 @@
 "dojo_ui_sdk_card_details_checkout_error_invalid_expiry"="Enter a valid expiry date";
 "dojo_ui_sdk_card_details_checkout_error_invalid_cvv"="Enter a valid security code";
 "dojo_ui_sdk_card_details_checkout_save_card"="Save card for future use";
-"dojo_ui_sdk_payment_result_title_success"="Payment completed";
+"dojo_ui_sdk_payment_result_title_success"="Payment successful";
 "dojo_ui_sdk_payment_result_title_fail"="Payment failed";
 "dojo_ui_sdk_payment_result_main_title_success"="Payment successful";
 "dojo_ui_sdk_payment_result_main_title_fail"="Payment failed";
