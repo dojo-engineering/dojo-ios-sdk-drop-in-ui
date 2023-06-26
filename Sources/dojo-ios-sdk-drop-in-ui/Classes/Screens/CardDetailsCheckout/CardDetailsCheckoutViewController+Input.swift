@@ -91,7 +91,7 @@ extension CardDetailsCheckoutViewController {
     }
     
     func movePayButtonToDefaultLocation() {
-        let constant: CGFloat = (getViewModel()?.paymentIntent.isVirtualTerminalPayment ?? false) ? 30 : 52
+        let constant: CGFloat = (getViewModel()?.paymentIntent.isVirtualTerminalPayment ?? false) ? 26 : 52
         constraintPayButtonBottom.constant = constant
     }
     
