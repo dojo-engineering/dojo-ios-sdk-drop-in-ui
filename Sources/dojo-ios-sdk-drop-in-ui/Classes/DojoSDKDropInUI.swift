@@ -9,7 +9,7 @@ public class DojoSDKDropInUI: NSObject {
     var configurationManager: ConfigurationManager?
     var rootCoordinator: RootCoordinatorProtocol?
     var completionCallback: ((Int) -> Void)?
-    var actionsCallback: ((Int, Int) -> Void)?
+    var actionsCallback: ((VTResultActions, Int) -> Void)?
     
     @objc
     public override init() {}
@@ -38,8 +38,7 @@ public class DojoSDKDropInUI: NSObject {
                                                        delegate: self)
                 self.rootCoordinator?.beginFlow()
             } else {
-                // SDK internal error
-                self.completionCallback?(7770)
+                self.completionCallback?(DojoSDKResponseCode.sdkInternalError.rawValue)
             }
         }
     }
@@ -64,10 +63,8 @@ public class DojoSDKDropInUI: NSObject {
                     completion?(checkoutController)
                 } else {
                     completion?(nil)
-                    // TODO return
                 }
             } else {
-                // TODO return
                 completion?(nil)
             }
         }
@@ -78,7 +75,7 @@ public class DojoSDKDropInUI: NSObject {
                                     debugConfig: DojoSDKDebugConfig? = nil,
                                     themeSettings: DojoThemeSettings = DojoThemeSettings.getLightTheme(),
                                     completion: ((UIViewController?) -> Void)?,
-                                    actionsCompletion: ((Int, Int) -> Void)?) {
+                                    actionsCompletion: ((VTResultActions, Int) -> Void)?) {
         self.actionsCallback = actionsCompletion
         let dataLoadingModel = DataLoadingViewModel(paymentIntentId: paymentIntentId,
                                                     debugConfig: debugConfig,
@@ -86,29 +83,40 @@ public class DojoSDKDropInUI: NSObject {
                                                     isDemo: false)
         dataLoadingModel.fetchPaymentIntent() { pi, error in
             if let pi = pi {
-                var configManager = ConfigurationManager(paymentIntentId: paymentIntentId, paymentIntent: pi, themeSettings: ThemeSettings(dojoTheme: themeSettings))
+                var configManager = ConfigurationManager(paymentIntentId: paymentIntentId,
+                                                         paymentIntent: pi,
+                                                         themeSettings: ThemeSettings(dojoTheme: themeSettings))
                 configManager.debugConfig = debugConfig
-                if let viewModel = PaymentResultViewModel(config: configManager, resultCode: pi.isCaptured ? 0 : 5) {
+                if let viewModel = PaymentResultViewModel(config: configManager,
+                                                          resultCode: pi.isCaptured ? DojoSDKResponseCode.successful.rawValue : DojoSDKResponseCode.declined.rawValue) {
                     let controller = PaymentResultViewController(viewModel: viewModel,
                                                                  theme: configManager.themeSettings,
                                                                  delegate: self)
                     completion?(controller)
+                } else {
+                    completion?(nil)
                 }
             } else {
-                // TODO return
                 completion?(nil)
             }
         }
     }
 }
 
-extension DojoSDKDropInUI: CardDetailsCheckoutViewControllerDelegate, PaymentResultViewControllerDelegate {
+extension DojoSDKDropInUI: CardDetailsCheckoutViewControllerDelegate,
+                            PaymentResultViewControllerDelegate {
+    @objc
+    public enum VTResultActions: Int {
+        case done = 0
+        case tryAgain = 1
+    }
+    
     func onDonePress(resultCode: Int) {
-        actionsCallback?(1, resultCode)
+        actionsCallback?(.done, resultCode)
     }
     
     func onPaymentIntentRefreshSucess(paymentIntent: PaymentIntent) {
-        actionsCallback?(0, 5)
+        actionsCallback?(.tryAgain, -1)
     }
     
     func onForceClosePress() {
@@ -132,7 +140,7 @@ public class DojoUIApplePayConfig: NSObject {
 
 extension DojoSDKDropInUI: RootCoordinatorDelegate {
     func userForceClosedFlow() {
-        completionCallback?(5) // 5 for decline
+        completionCallback?(DojoSDKResponseCode.declined.rawValue)
         completionCallback = nil
     }
     
