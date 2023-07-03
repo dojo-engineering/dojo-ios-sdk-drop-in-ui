@@ -79,7 +79,7 @@
                     <rect key="frame" x="0.0" y="48.5" width="414" height="707.5"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="S7j-46-8kb">
-                            <rect key="frame" x="16" y="0.0" width="379" height="2272"/>
+                            <rect key="frame" x="16" y="0.0" width="379" height="2262"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zoo-fD-CxZ" userLabel="Spacer">
                                     <rect key="frame" x="0.0" y="0.0" width="379" height="20"/>
@@ -290,16 +290,16 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All transactions are secure and encrypted " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1PU-Lc-LKF" userLabel="All transactions are secure and encrypted ">
-                                    <rect key="frame" x="0.0" y="1650" width="379" height="40"/>
+                                    <rect key="frame" x="0.0" y="1650" width="379" height="35"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="40" id="hQa-9y-K5P"/>
+                                        <constraint firstAttribute="height" constant="35" id="hQa-9y-K5P"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                     <color key="textColor" systemColor="secondaryLabelColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="MT6-B5-RJK" userLabel="Card Strip container">
-                                    <rect key="frame" x="0.0" y="1695" width="379" height="40"/>
+                                    <rect key="frame" x="0.0" y="1690" width="379" height="40"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Av9-to-bSP" userLabel="Cards Strip">
                                             <rect key="frame" x="0.0" y="0.0" width="378.5" height="40"/>
@@ -310,28 +310,28 @@
                                     </subviews>
                                 </stackView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FTZ-GZ-Tdr" userLabel="Spacer">
-                                    <rect key="frame" x="0.0" y="1740" width="379" height="20"/>
+                                    <rect key="frame" x="0.0" y="1735" width="379" height="15"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="20" id="6Du-1f-7x3"/>
+                                        <constraint firstAttribute="height" constant="15" id="6Du-1f-7x3"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K1F-SH-mec" userLabel="Cardholder" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui">
-                                    <rect key="frame" x="0.0" y="1765" width="379" height="104"/>
+                                    <rect key="frame" x="0.0" y="1755" width="379" height="104"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="104" id="vIj-9e-Aw8"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HYC-gQ-ZCU" userLabel="CardNumber" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui">
-                                    <rect key="frame" x="0.0" y="1874" width="379" height="104"/>
+                                    <rect key="frame" x="0.0" y="1864" width="379" height="104"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="104" id="Ybp-Hy-WqZ"/>
                                     </constraints>
                                 </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="VKl-s2-HV7">
-                                    <rect key="frame" x="0.0" y="1983" width="379" height="104"/>
+                                    <rect key="frame" x="0.0" y="1973" width="379" height="104"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zfe-AI-Fj8" userLabel="Expiry" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui">
                                             <rect key="frame" x="0.0" y="0.0" width="179.5" height="104"/>
@@ -351,7 +351,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </stackView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RfQ-Ax-Vd4" userLabel="Save Card Checkbox">
-                                    <rect key="frame" x="0.0" y="2092" width="379" height="30"/>
+                                    <rect key="frame" x="0.0" y="2082" width="379" height="30"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-checkbox-checked" translatesAutoresizingMaskIntoConstraints="NO" id="u98-ls-or9">
                                             <rect key="frame" x="0.0" y="3" width="24" height="24"/>
@@ -378,21 +378,21 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6gL-di-Oc5" userLabel="Email" customClass="DojoInputField" customModule="dojo_ios_sdk_drop_in_ui">
-                                    <rect key="frame" x="0.0" y="2127" width="379" height="104"/>
+                                    <rect key="frame" x="0.0" y="2117" width="379" height="104"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="104" id="RAk-Oj-nEh"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WNM-MF-RPp" userLabel="Spacer">
-                                    <rect key="frame" x="0.0" y="2236" width="379" height="4"/>
+                                    <rect key="frame" x="0.0" y="2226" width="379" height="4"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="4" id="gMr-55-rhw"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FRT-lp-E1d" customClass="FooterPoweredByDojo" customModule="dojo_ios_sdk_drop_in_ui">
-                                    <rect key="frame" x="0.0" y="2245" width="379" height="27"/>
+                                    <rect key="frame" x="0.0" y="2235" width="379" height="27"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="27" id="Wjj-3E-N4f"/>
