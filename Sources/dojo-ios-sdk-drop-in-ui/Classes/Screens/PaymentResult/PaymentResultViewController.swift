@@ -64,7 +64,7 @@ class PaymentResultViewController: BaseUIViewController {
         }
         
         if !theme.showBranding {
-            constraintBottomButtonBottom.constant = -4
+            constraintBottomButtonBottom.constant = -16
         }
     }
     
