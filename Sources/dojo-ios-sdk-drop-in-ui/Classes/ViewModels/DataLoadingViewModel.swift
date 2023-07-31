@@ -17,26 +17,38 @@ class DataLoadingViewModel {
     let demoDelay: Double
     let isDemo: Bool
     let debugConfig: DojoSDKDebugConfig?
+    let isSetupIntent: Bool
     
     init(paymentIntentId: String,
          customerSecret: String? = nil,
          debugConfig: DojoSDKDebugConfig?,
          demoDelay: Double,
-         isDemo: Bool) {
+         isDemo: Bool,
+         isSetupIntent: Bool) {
         self.paymentIntentId = paymentIntentId
         self.debugConfig = debugConfig
         self.customerSecret = customerSecret
         self.demoDelay = demoDelay
         self.isDemo = isDemo
+        self.isSetupIntent = isSetupIntent
     }
     
     func fetchPaymentIntent(completion: ((PaymentIntent?, Error?) -> Void)?) {
-        NetworkingSDKFactory.getNetworkingSDK(isMock: self.isDemo)
-            .fetchPaymentIntent(intentId: paymentIntentId, debugConfig: debugConfig) { stringData, fetchError in
-            CommonUtils.parseResponseToCompletion(stringData: stringData,
-                                                  fetchError: fetchError,
-                                                  objectType: PaymentIntent.self,
-                                                  completion: completion)
+        let networking = NetworkingSDKFactory.getNetworkingSDK(isMock: self.isDemo)
+        if isSetupIntent {
+            networking.fetchSetupIntent(intentId: paymentIntentId, debugConfig: debugConfig) { stringData, fetchError in
+                CommonUtils.parseResponseToCompletion(stringData: stringData,
+                                                      fetchError: fetchError,
+                                                      objectType: PaymentIntent.self,
+                                                      completion: completion)
+            }
+        } else {
+            networking.fetchPaymentIntent(intentId: paymentIntentId, debugConfig: debugConfig) { stringData, fetchError in
+                CommonUtils.parseResponseToCompletion(stringData: stringData,
+                                                      fetchError: fetchError,
+                                                      objectType: PaymentIntent.self,
+                                                      completion: completion)
+            }
         }
     }
     

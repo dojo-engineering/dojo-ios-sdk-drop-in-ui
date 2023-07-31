@@ -32,12 +32,14 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     @IBOutlet weak var containerCardsStrip: UIStackView!
     @IBOutlet weak var constraintPayButtonBottom: NSLayoutConstraint!
     
+    @IBOutlet weak var labelCOFTerms: UILabel!
     public init(viewModel: CardDetailsCheckoutViewModel,
                 theme: ThemeSettings,
                 delegate : CardDetailsCheckoutViewControllerDelegate) {
         self.delegate = delegate
         let nibName = String(describing: type(of: self))
         super.init(nibName: nibName, bundle: Bundle.libResourceBundle)
+        self.displayBackButton = !viewModel.paymentIntent.isSetupIntent
         self.viewModel = viewModel
         self.baseDelegate = delegate
         self.theme = theme
@@ -80,7 +82,7 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setNavigationTitle(LocalizedText.CardDetailsCheckout.title)
+        setNavigationTitle(getViewModel()?.paymentIntent.isSetupIntent ?? false ? "Save card details" : LocalizedText.CardDetailsCheckout.title)
         setUpKeyboard()
         
         if let navigation = (navigationController as? BaseNavigationController) {
@@ -108,18 +110,26 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
 // MARK: Setups
 extension CardDetailsCheckoutViewController {
     func setUpData() {
-        //TODO: proper formatter
-        let amountText = "\(String(format: "%.2f", Double(getViewModel()?.paymentIntent.amount.value ?? 0)/100.0))"
-        let buttonPayTitle = "Pay £\(amountText)"
-        buttonPay.setTitle(buttonPayTitle, for: .normal)
+        guard let viewModel = getViewModel() else {
+            return
+        }
         
-        
-        let fontCurrency = [NSAttributedString.Key.font : theme.fontBody1] // TODO: correct font
-        let fontAmount = [NSAttributedString.Key.font : theme.fontHeading3Medium]
-        let gbpString = NSMutableAttributedString(string:"£", attributes: fontCurrency)
-        let attributedString = NSMutableAttributedString(string: amountText, attributes: fontAmount)
-        gbpString.append(attributedString)
-        labelPrimaryAmount.attributedText = gbpString
+        if viewModel.paymentIntent.isSetupIntent {
+            buttonPay.setTitle("Save Card", for: .normal)
+        } else {
+            //TODO: proper formatter
+            let amountText = "\(String(format: "%.2f", Double(getViewModel()?.paymentIntent.amount?.value ?? 0)/100.0))"
+            let buttonPayTitle = "Pay £\(amountText)"
+            buttonPay.setTitle(buttonPayTitle, for: .normal)
+            
+            
+            let fontCurrency = [NSAttributedString.Key.font : theme.fontBody1] // TODO: correct font
+            let fontAmount = [NSAttributedString.Key.font : theme.fontHeading3Medium]
+            let gbpString = NSMutableAttributedString(string:"£", attributes: fontCurrency)
+            let attributedString = NSMutableAttributedString(string: amountText, attributes: fontAmount)
+            gbpString.append(attributedString)
+            labelPrimaryAmount.attributedText = gbpString
+        }
     }
     
     func setUpSaveCardCheckbox() {
@@ -160,11 +170,12 @@ extension CardDetailsCheckoutViewController {
         fieldBillingPostcode.isHidden = billingIsHidden
         containerSavedCard.isHidden = saveCardCheckboxIsHidden
         getViewModel()?.isSaveCardSelected = !saveCardCheckboxIsHidden
+        labelCOFTerms.isHidden = !(getViewModel()?.paymentIntent.isSetupIntent ?? false)
         
-        if !emailIsHidden { inputFields.append(fieldEmail) }
         if !billingIsHidden { inputFields.append(contentsOf: [fieldBillingCountry, fieldBillingPostcode]) }
         //TODO: next navigation for billing fields
         inputFields.append(contentsOf: [fieldCardholder, fieldCardNumber, fieldExpiry, fieldCVV])
+        if !emailIsHidden { inputFields.append(fieldEmail) }
         
         setUpSaveCardCheckbox()
         setUpCardsStrip()

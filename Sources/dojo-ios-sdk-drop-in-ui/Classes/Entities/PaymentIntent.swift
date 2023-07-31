@@ -11,13 +11,14 @@ import dojo_ios_sdk
 struct PaymentIntent: Codable {
     let id: String
     let clientSessionSecret: String
-    let amount: DojoPaymentIntentAmount
+    let amount: DojoPaymentIntentAmount?
     var config: PaymentIntentConfig? = nil
     var merchantConfig: MerchantConfig? = nil
     var customer: CustomerConfig? = nil
     var paymentSource: String?
     var itemLines: [ItemLine]?
     var status: String?
+    var merchantInitiatedType: String? = nil
     
     var isCaptured: Bool {
         status == "Captured"
@@ -29,6 +30,10 @@ struct PaymentIntent: Codable {
     
     var isVirtualTerminalPayment: Bool {
         paymentSource == "virtual-terminal"
+    }
+    
+    var isSetupIntent: Bool {
+        merchantInitiatedType != nil && paymentSource != nil
     }
 }
 
@@ -72,6 +77,7 @@ enum Wallets: String, Codable {
 struct PaymentIntentConfig: Codable {
     var customerEmail: ConfigurationRequired?
     var billingAddress: ConfigurationRequired?
+    var tradingName: String?
 }
 
 struct CustomerConfig: Codable {

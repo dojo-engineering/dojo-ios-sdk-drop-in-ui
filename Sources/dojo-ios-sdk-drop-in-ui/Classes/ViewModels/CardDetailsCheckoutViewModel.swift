@@ -53,11 +53,16 @@ class CardDetailsCheckoutViewModel: BaseViewModel {
     }
     
     var showSaveCardCheckbox: Bool {
-        paymentIntent.customer?.id != nil
+        guard !paymentIntent.isSetupIntent else { return false }
+        return paymentIntent.customer?.id != nil
     }
     
     var supportedCardSchemes: [CardSchemes] {
         paymentIntent.merchantConfig?.supportedPaymentMethods?.cardSchemes ?? []
+    }
+    
+    var tradingName: String {
+        paymentIntent.config?.tradingName ?? ""
     }
     
     func showBillingPostcode(_ countryCode: String) -> Bool {
