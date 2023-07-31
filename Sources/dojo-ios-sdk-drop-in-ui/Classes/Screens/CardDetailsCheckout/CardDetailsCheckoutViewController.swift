@@ -20,6 +20,7 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     @IBOutlet weak var labelSaveCardForFutureUse: UILabel!
     @IBOutlet weak var buttonPay: LoadingButton!
     @IBOutlet weak var imageViewSaveCardCheckbox: UIImageView!
+    @IBOutlet weak var imageViewTermsCheckbox: UIImageView!
     @IBOutlet weak var fieldEmail: DojoInputField!
     @IBOutlet weak var fieldCardholder: DojoInputField!
     @IBOutlet weak var fieldCardNumber: DojoInputField!
@@ -29,6 +30,7 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     @IBOutlet weak var fieldBillingPostcode: DojoInputField!
     @IBOutlet weak var mainContentScrollView: UIScrollView!
     @IBOutlet weak var containerSavedCard: UIView!
+    @IBOutlet weak var containerTerms: UIStackView!
     @IBOutlet weak var containerCardsStrip: UIStackView!
     @IBOutlet weak var constraintPayButtonBottom: NSLayoutConstraint!
     
@@ -137,6 +139,11 @@ extension CardDetailsCheckoutViewController {
         containerSavedCard.addGestureRecognizer(tap)
     }
     
+    func setUpTermsCardCheckbox() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleOnTermsCheckboxPress))
+        containerTerms.addGestureRecognizer(tap)
+    }
+    
     func setUpCardsStrip() {
         //TODO: a better function for that
         guard let viewModel = getViewModel() else { return }
@@ -170,7 +177,7 @@ extension CardDetailsCheckoutViewController {
         fieldBillingPostcode.isHidden = billingIsHidden
         containerSavedCard.isHidden = saveCardCheckboxIsHidden
         getViewModel()?.isSaveCardSelected = !saveCardCheckboxIsHidden
-        labelCOFTerms.isHidden = !(getViewModel()?.paymentIntent.isSetupIntent ?? false)
+        containerTerms.isHidden = !(getViewModel()?.paymentIntent.isSetupIntent ?? false)
         
         if !billingIsHidden { inputFields.append(contentsOf: [fieldBillingCountry, fieldBillingPostcode]) }
         //TODO: next navigation for billing fields
@@ -178,6 +185,7 @@ extension CardDetailsCheckoutViewController {
         if !emailIsHidden { inputFields.append(fieldEmail) }
         
         setUpSaveCardCheckbox()
+        setUpTermsCardCheckbox()
         setUpCardsStrip()
         buttonPay.setEnabled(false)
     }
@@ -225,5 +233,17 @@ extension CardDetailsCheckoutViewController {
             imageViewSaveCardCheckbox.image = UIImage(named: "icon-checkbox-unchecked", in: Bundle.libResourceBundle, compatibleWith: nil)
         }
         print("On saved card pressed")
+    }
+    
+    @objc func handleOnTermsCheckboxPress() {
+        guard let viewModel = getViewModel() else { return }
+        viewModel.isTermsSelected = !viewModel.isTermsSelected
+        if viewModel.isTermsSelected {
+            imageViewTermsCheckbox.image = UIImage(named: "icon-checkbox-checked", in: Bundle.libResourceBundle, compatibleWith: nil)
+        } else {
+            imageViewTermsCheckbox.image = UIImage(named: "icon-checkbox-unchecked", in: Bundle.libResourceBundle, compatibleWith: nil)
+        }
+        forceValidate()
+        print("On terms pressed")
     }
 }

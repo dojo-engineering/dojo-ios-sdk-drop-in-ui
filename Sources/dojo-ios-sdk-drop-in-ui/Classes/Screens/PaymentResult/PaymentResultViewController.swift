@@ -124,27 +124,7 @@ class PaymentResultViewController: BaseUIViewController {
     }
     
     @IBAction func onButtonTryAgainPress(_ sender: Any) {
-        buttonTryAgain.showLoading(LocalizedText.PaymentResult.buttonPleaseWait)
-        disableScreen()
-        let delay = getViewModal()?.demoDelay ?? 0
-        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-            self.getViewModal()?.refreshToken { result, error in
-                self.enableScreen()
-                
-                if let _ = error {
-                    // something went wrong
-                    self.buttonTryAgain.hideLoading()
-                    return
-                }
-                
-                if let data = result?.data(using: .utf8) {
-                    let decoder = JSONDecoder()
-                    if let decodedResponse = try? decoder.decode(PaymentIntent.self, from: data) {
-                        self.delegate?.onPaymentIntentRefreshSucess(paymentIntent: decodedResponse)
-                    } // TODO: log error
-                }
-            }
-        }
+        self.navigationController?.popViewController(animated: true)
     }
     
     private func exitFromTheScreen() {

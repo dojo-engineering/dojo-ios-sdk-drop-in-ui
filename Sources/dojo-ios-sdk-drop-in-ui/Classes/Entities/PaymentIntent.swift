@@ -18,6 +18,7 @@ struct PaymentIntent: Codable {
     var paymentSource: String?
     var itemLines: [ItemLine]?
     var status: String?
+    var reference: String?
     var merchantInitiatedType: String? = nil
     
     var isCaptured: Bool {
