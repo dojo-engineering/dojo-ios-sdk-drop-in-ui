@@ -62,12 +62,16 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         
         buttonPay.setTheme(theme)
         imageViewSaveCardCheckbox.tintColor = theme.inputElementActiveTintColor
+        imageViewTermsCheckbox.tintColor = theme.inputElementActiveTintColor
         
         labelYouPay.textColor = theme.primaryLabelTextColor
         labelYouPay.font = theme.fontSubtitle1Medium
+        labelCOFTerms.text = "\(getViewModel()?.tradingName ?? "") requires your payment card information to secure this booking and you may be charged for no-shows or cancellations in accordance with their booking policy."
         
         labelPrimaryAmount.textColor = theme.primaryLabelTextColor
         labelPrimaryAmount.font = theme.fontHeading3Medium
+        labelCOFTerms.font = theme.fontSubtitle2
+        labelCOFTerms.textColor = theme.secondaryLabelTextColor
         
         labelSaveCardForFutureUse.font = theme.fontSubtitle1
         labelSaveCardForFutureUse.textColor = theme.secondaryLabelTextColor
@@ -219,7 +223,12 @@ extension CardDetailsCheckoutViewController {
         let cardName = fieldCardholder.textFieldMain.text
         let expiryDate = fieldExpiry.textFieldMain.text?.replacingOccurrences(of: "/", with: " / ")
         let cvv = fieldCVV.textFieldMain.text
-        let cardDetails = DojoCardDetails(cardNumber: cardNumber, cardName: cardName, expiryDate: expiryDate, cv2: cvv)
+        let terms = getViewModel()?.isTermsSelected == true ? NSNumber(value: 1) : nil
+        let cardDetails = DojoCardDetails(cardNumber: cardNumber,
+                                          cardName: cardName,
+                                          expiryDate: expiryDate,
+                                          cv2: cvv,
+                                          mitConsentGiven: terms)
         return cardDetails
     }
     

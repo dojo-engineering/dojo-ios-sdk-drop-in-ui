@@ -47,12 +47,7 @@ class PaymentResultViewController: BaseUIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //TODO: move to a better place
-        if getViewModal()?.resultCode == 0 {
-            setNavigationTitle(LocalizedText.PaymentResult.titleSuccess)
-        } else {
-            setNavigationTitle(LocalizedText.PaymentResult.titleFail)
-        }
+        setNavigationTitle(getViewModal()?.navigationTitle ?? "")
     }
     
     override func viewDidLayoutSubviews() {
@@ -82,8 +77,9 @@ class PaymentResultViewController: BaseUIViewController {
     func updateUIState() {
         if getViewModal()?.resultCode == 0 {
             buttonTryAgain.isHidden = true
-            labelMainText.text = LocalizedText.PaymentResult.mainTitleSuccess
+            labelMainText.text = getViewModal()?.mainText
             labelSubtitle.text = "\(LocalizedText.PaymentResult.orderId) \(viewModel?.paymentIntent.id ?? "")"  //TODO: the same for both cases
+            labelSubtitle.isHidden = getViewModal()?.displaySubtitle ?? false
             imgViewResult.image = UIImage(named: theme.lightStyleForDefaultElements ? "img-result-success-light" : "img-result-success-dark", in: Bundle.libResourceBundle, compatibleWith: nil)
             
             //TODO: common style
@@ -93,8 +89,9 @@ class PaymentResultViewController: BaseUIViewController {
             buttonDone.layer.cornerRadius = theme.primaryCTAButtonCornerRadius
         } else {
             buttonTryAgain.isHidden = false
-            labelMainText.text = LocalizedText.PaymentResult.mainTitleFail
+            labelMainText.text = getViewModal()?.mainText
             labelSubtitle.text = "\(LocalizedText.PaymentResult.orderId) \(viewModel?.paymentIntent.id ?? "")"
+            labelSubtitle.isHidden = getViewModal()?.displaySubtitle ?? false
             labelSubtitle2.text = LocalizedText.PaymentResult.mainErrorMessage
             imgViewResult.image = UIImage(named: theme.lightStyleForDefaultElements ? "img-result-error-light" : "img-result-error-dark", in: Bundle.libResourceBundle, compatibleWith: nil)
             

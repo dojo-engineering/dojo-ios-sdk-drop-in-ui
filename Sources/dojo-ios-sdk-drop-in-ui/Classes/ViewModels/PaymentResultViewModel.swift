@@ -30,4 +30,26 @@ class PaymentResultViewModel: BaseViewModel {
     func refreshToken(completion: ((String?,Error?)-> Void)?) {
         DojoSDK.refreshPaymentIntent(intentId: paymentIntent.id, debugConfig: debugConfig, completion: completion)
     }
+    
+    var navigationTitle: String {
+        switch resultCode {
+        case 0:
+            return paymentIntent.isSetupIntent ? "Card saved" : LocalizedText.PaymentResult.titleSuccess
+        default:
+            return paymentIntent.isSetupIntent ? "Card was not saved" : LocalizedText.PaymentResult.mainTitleFail
+        }
+    }
+    
+    var mainText: String {
+        switch resultCode {
+        case 0:
+            return paymentIntent.isSetupIntent ? "Card saved successfully" : LocalizedText.PaymentResult.mainTitleSuccess
+        default:
+            return paymentIntent.isSetupIntent ? "Failed to save card details" : LocalizedText.PaymentResult.mainTitleFail
+        }
+    }
+    
+    var displaySubtitle: Bool {
+        !paymentIntent.isSetupIntent
+    }
 }
