@@ -96,6 +96,10 @@ class CardDetailsCheckoutViewModel: BaseViewModel {
         paymentIntent.config?.tradingName ?? ""
     }
     
+    var navigationTitle: String {
+        paymentIntent.isSetupIntent ? "Save card details" : LocalizedText.CardDetailsCheckout.title
+    }
+    
     func showBillingPostcode(_ countryCode: String) -> Bool {
         ["GB", "US", "CA"].contains(countryCode)
     }

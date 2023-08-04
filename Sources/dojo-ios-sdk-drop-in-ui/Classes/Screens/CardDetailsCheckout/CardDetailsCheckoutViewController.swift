@@ -65,13 +65,23 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         imageViewTermsCheckbox.tintColor = theme.inputElementActiveTintColor
         
         labelYouPay.textColor = theme.primaryLabelTextColor
-        labelYouPay.font = theme.fontSubtitle1Medium
-        labelCOFTerms.text = "\(getViewModel()?.tradingName ?? "") requires your payment card information to secure this booking and you may be charged for no-shows or cancellations in accordance with their booking policy."
         
-        labelPrimaryAmount.textColor = theme.primaryLabelTextColor
-        labelPrimaryAmount.font = theme.fontHeading3Medium
+        labelCOFTerms.text = "\(getViewModel()?.tradingName ?? "") \(LocalizedText.CardDetailsCheckout.consentTerms)"
         labelCOFTerms.font = theme.fontSubtitle2
         labelCOFTerms.textColor = theme.secondaryLabelTextColor
+    
+        if getViewModel()?.paymentIntent.isSetupIntent ?? false {
+            labelPrimaryAmount.textColor = theme.secondaryLabelTextColor
+            labelPrimaryAmount.font = theme.fontSubtitle2
+            labelPrimaryAmount.text = getViewModel()?.paymentIntent.reference
+            
+            labelYouPay.font = theme.fontHeading5
+            labelYouPay.text = getViewModel()?.tradingName ?? ""
+        } else {
+            labelPrimaryAmount.textColor = theme.primaryLabelTextColor
+            labelPrimaryAmount.font = theme.fontHeading3Medium
+            labelYouPay.font = theme.fontSubtitle1Medium
+        }
         
         labelSaveCardForFutureUse.font = theme.fontSubtitle1
         labelSaveCardForFutureUse.textColor = theme.secondaryLabelTextColor
@@ -88,7 +98,7 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setNavigationTitle(getViewModel()?.paymentIntent.isSetupIntent ?? false ? "Save card details" : LocalizedText.CardDetailsCheckout.title)
+        setNavigationTitle(getViewModel()?.navigationTitle ?? "")
         setUpKeyboard()
         
         if let navigation = (navigationController as? BaseNavigationController) {
