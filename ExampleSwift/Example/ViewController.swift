@@ -10,10 +10,15 @@ import UIKit
 import dojo_ios_sdk_drop_in_ui
 import dojo_ios_sdk
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var textFieldPaymentIntent: UITextField!
     let dojoUI = DojoSDKDropInUI()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        textFieldPaymentIntent.delegate = self
+    }
     
     @IBAction func onStartPaymentFlowPress(_ sender: Any) {
         var paymentIntentId = ""
@@ -21,13 +26,18 @@ class ViewController: UIViewController {
            !paymentIntent.isEmpty {
             paymentIntentId = paymentIntent
         }
-           
+        
         let customerSecret = ""
         let applePayConfig = DojoUIApplePayConfig(merchantIdentifier: "merchant.uk.co.paymentsense.sdk.demo.app")
         dojoUI.startSetupFlow(setupIntentId: paymentIntentId,
                               controller: self) { result in
             print("SDK result code: \(result)")
         }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
 }
 
