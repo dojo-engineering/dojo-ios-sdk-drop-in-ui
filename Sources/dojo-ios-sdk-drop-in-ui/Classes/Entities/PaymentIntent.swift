@@ -22,7 +22,7 @@ struct PaymentIntent: Codable {
     var merchantInitiatedType: String? = nil
     
     var isCaptured: Bool {
-        status == "Captured"
+        status == "Captured" || status == "Authorized"
     }
     
     var isSandbox: Bool {

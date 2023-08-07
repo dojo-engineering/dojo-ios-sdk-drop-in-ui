@@ -78,8 +78,8 @@ class PaymentResultViewController: BaseUIViewController {
         if getViewModal()?.resultCode == 0 {
             buttonTryAgain.isHidden = true
             labelMainText.text = getViewModal()?.mainText
-            labelSubtitle.text = "\(LocalizedText.PaymentResult.orderId) \(viewModel?.paymentIntent.id ?? "")"  //TODO: the same for both cases
-            labelSubtitle.isHidden = getViewModal()?.displaySubtitle ?? false
+            labelSubtitle.text = "\(LocalizedText.PaymentResult.orderId) \(viewModel?.paymentIntent.reference ?? "")"  //TODO: the same for both cases
+            labelSubtitle.isHidden = false
             imgViewResult.image = UIImage(named: theme.lightStyleForDefaultElements ? "img-result-success-light" : "img-result-success-dark", in: Bundle.libResourceBundle, compatibleWith: nil)
             
             //TODO: common style
@@ -90,9 +90,9 @@ class PaymentResultViewController: BaseUIViewController {
         } else {
             buttonTryAgain.isHidden = false
             labelMainText.text = getViewModal()?.mainText
-            labelSubtitle.text = "\(LocalizedText.PaymentResult.orderId) \(viewModel?.paymentIntent.id ?? "")"
-            labelSubtitle.isHidden = getViewModal()?.displaySubtitle ?? false
-            labelSubtitle2.text = LocalizedText.PaymentResult.mainErrorMessage
+            labelSubtitle.text = "\(LocalizedText.PaymentResult.orderId) \(viewModel?.paymentIntent.reference ?? "")"
+            labelSubtitle.isHidden = getViewModal()?.displaySubtitle ?? true
+            labelSubtitle2.text = (viewModel?.paymentIntent.isSetupIntent ?? false) ? "We could not save your card details." : LocalizedText.PaymentResult.mainErrorMessage
             imgViewResult.image = UIImage(named: theme.lightStyleForDefaultElements ? "img-result-error-light" : "img-result-error-dark", in: Bundle.libResourceBundle, compatibleWith: nil)
             
             //TODO: common style

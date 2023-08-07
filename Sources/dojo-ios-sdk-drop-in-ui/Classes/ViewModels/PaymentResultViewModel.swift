@@ -50,6 +50,6 @@ class PaymentResultViewModel: BaseViewModel {
     }
     
     var displaySubtitle: Bool {
-        !paymentIntent.isSetupIntent
+        paymentIntent.isSetupIntent
     }
 }
