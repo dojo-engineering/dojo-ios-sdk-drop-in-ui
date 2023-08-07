@@ -91,8 +91,17 @@ class PaymentResultViewController: BaseUIViewController {
             buttonTryAgain.isHidden = false
             labelMainText.text = getViewModal()?.mainText
             labelSubtitle.text = "\(LocalizedText.PaymentResult.orderId) \(viewModel?.paymentIntent.reference ?? "")"
-            labelSubtitle.isHidden = getViewModal()?.displaySubtitle ?? true
-            labelSubtitle2.text = (viewModel?.paymentIntent.isSetupIntent ?? false) ? "We could not save your card details." : LocalizedText.PaymentResult.mainErrorMessage
+            if let viewModel = viewModel,
+               viewModel.paymentIntent.isSetupIntent {
+                labelSubtitle.text = "We could not save your card details."
+                labelSubtitle2.isHidden = true
+                labelSubtitle.textColor = theme.secondaryLabelTextColor
+                labelSubtitle.font = theme.fontBody1
+            } else {
+                labelSubtitle2.text =  LocalizedText.PaymentResult.mainErrorMessage
+            }
+            
+            labelSubtitle.isHidden = false
             imgViewResult.image = UIImage(named: theme.lightStyleForDefaultElements ? "img-result-error-light" : "img-result-error-dark", in: Bundle.libResourceBundle, compatibleWith: nil)
             
             //TODO: common style

@@ -31,7 +31,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let applePayConfig = DojoUIApplePayConfig(merchantIdentifier: "merchant.uk.co.paymentsense.sdk.demo.app")
         dojoUI.startSetupFlow(setupIntentId: paymentIntentId,
                               controller: self) { result in
-            print("SDK result code: \(result)")
+            let dialogMessage = UIAlertController(title: "Finish", message:"SDK result code: \(result)", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+            dialogMessage.addAction(ok)
+            self.present(dialogMessage, animated: true, completion: nil)
         }
     }
     
