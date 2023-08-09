@@ -513,7 +513,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Dojo SDK UI";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 0.0.2;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.paymentsense.sdk.demo.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -542,7 +542,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Dojo SDK UI";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 0.0.2;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.paymentsense.sdk.demo.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
