@@ -22,7 +22,7 @@
 "dojo_ui_sdk_card_details_checkout_billing_postcode"="Postcode";
 "dojo_ui_sdk_card_details_checkout_billing_zipcode"="Zipcode";
 "dojo_ui_sdk_card_details_checkout_expiry_date"="Expiry date";
-"dojo_ui_sdk_card_details_checkout_cvv"="CVC";
+"dojo_ui_sdk_card_details_checkout_cvv"="CVV";
 "dojo_ui_sdk_card_details_checkout_error_empty_email"="Please fill in an email address";
 "dojo_ui_sdk_card_details_checkout_error_empty_card_holder"="Enter your name exactly as it’s written on your card";
 "dojo_ui_sdk_card_details_checkout_error_empty_card_number"="Enter your card number";
