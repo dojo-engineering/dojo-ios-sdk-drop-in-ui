@@ -65,6 +65,10 @@ extension CardDetailsCheckoutViewController: DojoInputFieldDelegate {
                 isValid = false
             }
         })
+        if let viewModel = getViewModel(),
+           viewModel.paymentIntent.isSetupIntent {
+            isValid = isValid && viewModel.isTermsSelected
+        }
         buttonPay.setEnabled(isValid)
     }
     
