@@ -20,22 +20,37 @@ class ViewController: UIViewController, UITextFieldDelegate {
         textFieldPaymentIntent.delegate = self
     }
     
+    @IBAction func onStartSetupFlowPress(_ sender: Any) {
+        var paymentIntentId = ""
+        if let paymentIntent = textFieldPaymentIntent.text,
+           !paymentIntent.isEmpty {
+            paymentIntentId = paymentIntent
+        }
+        dojoUI.startSetupFlow(setupIntentId: paymentIntentId,
+                              controller: self) { result in
+            self.displayResult(resultCode: result)
+        }
+    }
+    
     @IBAction func onStartPaymentFlowPress(_ sender: Any) {
         var paymentIntentId = ""
         if let paymentIntent = textFieldPaymentIntent.text,
            !paymentIntent.isEmpty {
             paymentIntentId = paymentIntent
         }
-        
-        let customerSecret = ""
         let applePayConfig = DojoUIApplePayConfig(merchantIdentifier: "merchant.uk.co.paymentsense.sdk.demo.app")
-        dojoUI.startSetupFlow(setupIntentId: paymentIntentId,
-                              controller: self) { result in
-            let dialogMessage = UIAlertController(title: "Finish", message:"SDK result code: \(result)", preferredStyle: .alert)
-            let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
-            dialogMessage.addAction(ok)
-            self.present(dialogMessage, animated: true, completion: nil)
+        dojoUI.startPaymentFlow(paymentIntentId: paymentIntentId,
+                                controller: self,
+                                applePayConfig: applePayConfig) { result in
+            self.displayResult(resultCode: result)
         }
+    }
+    
+    func displayResult(resultCode: Int) {
+        let dialogMessage = UIAlertController(title: "Finish", message:"SDK result code: \(resultCode)", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+        dialogMessage.addAction(ok)
+        self.present(dialogMessage, animated: true, completion: nil)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
