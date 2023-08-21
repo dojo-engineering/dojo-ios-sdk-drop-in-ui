@@ -187,8 +187,18 @@ extension CardDetailsCheckoutViewController {
         let emailIsHidden = !(getViewModel()?.showFieldEmail ?? false)
         let saveCardCheckboxIsHidden = !(getViewModel()?.showSaveCardCheckbox ?? false)
         fieldEmail.isHidden = emailIsHidden
+        if !fieldEmail.isHidden {
+            fieldEmail.textFieldMain.text = getViewModel()?.paymentIntent.customer?.emailAddress
+        }
         fieldBillingCountry.isHidden = billingIsHidden
+        if !fieldBillingCountry.isHidden {
+            fieldBillingCountry.setCountryCode(countryCode: getViewModel()?.paymentIntent.billingAddress?.countryCode)
+            fieldBillingCountry.setType(.billingCountry, delegate: self)
+        }
         fieldBillingPostcode.isHidden = billingIsHidden
+        if !fieldBillingPostcode.isHidden {
+            fieldBillingPostcode.textFieldMain.text = getViewModel()?.paymentIntent.billingAddress?.postcode
+        }
         containerSavedCard.isHidden = saveCardCheckboxIsHidden
         getViewModel()?.isSaveCardSelected = !saveCardCheckboxIsHidden
         containerTerms.isHidden = !(getViewModel()?.paymentIntent.isSetupIntent ?? false)

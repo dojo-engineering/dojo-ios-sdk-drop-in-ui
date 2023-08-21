@@ -20,6 +20,7 @@ struct PaymentIntent: Codable {
     var status: String?
     var reference: String?
     var merchantInitiatedType: String? = nil
+    var billingAddress: BillingAddress?
     
     var isCaptured: Bool {
         status == "Captured" || status == "Authorized"
@@ -81,8 +82,14 @@ struct PaymentIntentConfig: Codable {
     var tradingName: String?
 }
 
+struct BillingAddress: Codable {
+    let postcode: String?
+    let countryCode: String?
+}
+
 struct CustomerConfig: Codable {
     let id: String?
+    let emailAddress: String?
 }
 
 struct ItemLine: Codable {
