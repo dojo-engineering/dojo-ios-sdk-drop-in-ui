@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'dojo-ios-sdk-drop-in-ui'
-  s.version          = '1.2.2'
+  s.version          = '1.3.0'
   s.summary          = 'UI version of Dojo SDK to take payments'
 
 # This description is used to generate tags and improve search results.
@@ -46,7 +46,7 @@ TODO: Add long description of the pod here.
   # s.frameworks = 'UIKit', 'MapKit'
 
   s.static_framework = true
-  s.dependency 'dojo-ios-sdk', '1.3.0' 
+  s.dependency 'dojo-ios-sdk', '1.4.0' 
 
   s.test_spec 'DojoSDKUI-Tests' do |test_spec|
     test_spec.source_files = ['Sources/dojo-ios-sdk-drop-in-ui/Tests/**/*.{h,m,swift}', 'Sources/dojo-ios-sdk-drop-in-ui/Classes/**/*.{h,m,swift}']

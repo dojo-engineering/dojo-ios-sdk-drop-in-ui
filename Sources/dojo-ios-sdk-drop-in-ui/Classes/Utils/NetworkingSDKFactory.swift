@@ -9,6 +9,7 @@ import dojo_ios_sdk
 
 protocol NetworkingSDKProtocol {
     func fetchPaymentIntent(intentId: String, debugConfig: DojoSDKDebugConfig?, completion: ((String?, Error?) -> Void)?)
+    func fetchSetupIntent(intentId: String, debugConfig: DojoSDKDebugConfig?, completion: ((String?, Error?) -> Void)?)
     func fetchCustomerPaymentMethods(customerId: String, customerSecret: String, debugConfig: DojoSDKDebugConfig?, completion: ((String?, Error?) -> Void)?)
 }
 
@@ -30,6 +31,10 @@ class DojoSDKMock: NetworkingSDKProtocol {
     func fetchCustomerPaymentMethods(customerId: String, customerSecret: String, debugConfig: DojoSDKDebugConfig?, completion: ((String?, Error?) -> Void)?) {
 //        completion?(TestsUtils.paymentIntentWithItemLinesWithoutApplePay, nil)
     }
+    
+    func fetchSetupIntent(intentId: String, debugConfig: DojoSDKDebugConfig?, completion: ((String?, Error?) -> Void)?) {
+        
+    }
 }
 
 extension DojoSDK: NetworkingSDKProtocol {
@@ -39,5 +44,9 @@ extension DojoSDK: NetworkingSDKProtocol {
     
     func fetchCustomerPaymentMethods(customerId: String, customerSecret: String, debugConfig: DojoSDKDebugConfig?, completion: ((String?, Error?) -> Void)?) {
         DojoSDK.fetchCustomerPaymentMethods(customerId: customerId, customerSecret: customerSecret, debugConfig: debugConfig, completion: completion)
+    }
+    
+    func fetchSetupIntent(intentId: String, debugConfig: DojoSDKDebugConfig?, completion: ((String?, Error?) -> Void)?) {
+        DojoSDK.fetchSetupIntent(intentId: intentId, debugConfig: debugConfig, completion: completion)
     }
 }

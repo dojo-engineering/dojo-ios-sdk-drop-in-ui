@@ -20,6 +20,7 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     @IBOutlet weak var labelSaveCardForFutureUse: UILabel!
     @IBOutlet weak var buttonPay: LoadingButton!
     @IBOutlet weak var imageViewSaveCardCheckbox: UIImageView!
+    @IBOutlet weak var imageViewTermsCheckbox: UIImageView!
     @IBOutlet weak var fieldEmail: DojoInputField!
     @IBOutlet weak var fieldCardholder: DojoInputField!
     @IBOutlet weak var fieldCardNumber: DojoInputField!
@@ -29,15 +30,18 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     @IBOutlet weak var fieldBillingPostcode: DojoInputField!
     @IBOutlet weak var mainContentScrollView: UIScrollView!
     @IBOutlet weak var containerSavedCard: UIView!
+    @IBOutlet weak var containerTerms: UIStackView!
     @IBOutlet weak var containerCardsStrip: UIStackView!
     @IBOutlet weak var constraintPayButtonBottom: NSLayoutConstraint!
     
+    @IBOutlet weak var labelCOFTerms: UILabel!
     public init(viewModel: CardDetailsCheckoutViewModel,
                 theme: ThemeSettings,
                 delegate : CardDetailsCheckoutViewControllerDelegate) {
         self.delegate = delegate
         let nibName = String(describing: type(of: self))
         super.init(nibName: nibName, bundle: Bundle.libResourceBundle)
+        self.displayBackButton = !viewModel.paymentIntent.isSetupIntent
         self.viewModel = viewModel
         self.baseDelegate = delegate
         self.theme = theme
@@ -58,12 +62,26 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         
         buttonPay.setTheme(theme)
         imageViewSaveCardCheckbox.tintColor = theme.inputElementActiveTintColor
+        imageViewTermsCheckbox.tintColor = theme.inputElementActiveTintColor
         
         labelYouPay.textColor = theme.primaryLabelTextColor
-        labelYouPay.font = theme.fontSubtitle1Medium
         
-        labelPrimaryAmount.textColor = theme.primaryLabelTextColor
-        labelPrimaryAmount.font = theme.fontHeading3Medium
+        labelCOFTerms.text = "\(getViewModel()?.tradingName ?? "") \(LocalizedText.CardDetailsCheckout.consentTerms)"
+        labelCOFTerms.font = theme.fontSubtitle2
+        labelCOFTerms.textColor = theme.secondaryLabelTextColor
+    
+        if getViewModel()?.paymentIntent.isSetupIntent ?? false {
+            labelPrimaryAmount.textColor = theme.secondaryLabelTextColor
+            labelPrimaryAmount.font = theme.fontSubtitle2
+            labelPrimaryAmount.text = getViewModel()?.paymentIntent.reference
+            
+            labelYouPay.font = theme.fontHeading5
+            labelYouPay.text = getViewModel()?.tradingName ?? ""
+        } else {
+            labelPrimaryAmount.textColor = theme.primaryLabelTextColor
+            labelPrimaryAmount.font = theme.fontHeading3Medium
+            labelYouPay.font = theme.fontSubtitle1Medium
+        }
         
         labelSaveCardForFutureUse.font = theme.fontSubtitle1
         labelSaveCardForFutureUse.textColor = theme.secondaryLabelTextColor
@@ -80,7 +98,7 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setNavigationTitle(LocalizedText.CardDetailsCheckout.title)
+        setNavigationTitle(getViewModel()?.navigationTitle ?? "")
         setUpKeyboard()
         
         if let navigation = (navigationController as? BaseNavigationController) {
@@ -108,23 +126,36 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
 // MARK: Setups
 extension CardDetailsCheckoutViewController {
     func setUpData() {
-        //TODO: proper formatter
-        let amountText = "\(String(format: "%.2f", Double(getViewModel()?.paymentIntent.amount.value ?? 0)/100.0))"
-        let buttonPayTitle = "Pay £\(amountText)"
-        buttonPay.setTitle(buttonPayTitle, for: .normal)
+        guard let viewModel = getViewModel() else {
+            return
+        }
         
-        
-        let fontCurrency = [NSAttributedString.Key.font : theme.fontBody1] // TODO: correct font
-        let fontAmount = [NSAttributedString.Key.font : theme.fontHeading3Medium]
-        let gbpString = NSMutableAttributedString(string:"£", attributes: fontCurrency)
-        let attributedString = NSMutableAttributedString(string: amountText, attributes: fontAmount)
-        gbpString.append(attributedString)
-        labelPrimaryAmount.attributedText = gbpString
+        if viewModel.paymentIntent.isSetupIntent {
+            buttonPay.setTitle(LocalizedText.CardDetailsCheckout.buttonPaySetupIntent, for: .normal)
+        } else {
+            //TODO: proper formatter
+            let amountText = "\(String(format: "%.2f", Double(getViewModel()?.paymentIntent.amount?.value ?? 0)/100.0))"
+            let buttonPayTitle = "Pay £\(amountText)"
+            buttonPay.setTitle(buttonPayTitle, for: .normal)
+            
+            
+            let fontCurrency = [NSAttributedString.Key.font : theme.fontBody1] // TODO: correct font
+            let fontAmount = [NSAttributedString.Key.font : theme.fontHeading3Medium]
+            let gbpString = NSMutableAttributedString(string:"£", attributes: fontCurrency)
+            let attributedString = NSMutableAttributedString(string: amountText, attributes: fontAmount)
+            gbpString.append(attributedString)
+            labelPrimaryAmount.attributedText = gbpString
+        }
     }
     
     func setUpSaveCardCheckbox() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleOnSaveCardCheckboxPress))
         containerSavedCard.addGestureRecognizer(tap)
+    }
+    
+    func setUpTermsCardCheckbox() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleOnTermsCheckboxPress))
+        containerTerms.addGestureRecognizer(tap)
     }
     
     func setUpCardsStrip() {
@@ -156,17 +187,29 @@ extension CardDetailsCheckoutViewController {
         let emailIsHidden = !(getViewModel()?.showFieldEmail ?? false)
         let saveCardCheckboxIsHidden = !(getViewModel()?.showSaveCardCheckbox ?? false)
         fieldEmail.isHidden = emailIsHidden
+        if !fieldEmail.isHidden {
+            fieldEmail.textFieldMain.text = getViewModel()?.paymentIntent.customer?.emailAddress
+        }
         fieldBillingCountry.isHidden = billingIsHidden
+        if !fieldBillingCountry.isHidden {
+            fieldBillingCountry.setCountryCode(countryCode: getViewModel()?.paymentIntent.billingAddress?.countryCode)
+            fieldBillingCountry.setType(.billingCountry, delegate: self)
+        }
         fieldBillingPostcode.isHidden = billingIsHidden
+        if !fieldBillingPostcode.isHidden {
+            fieldBillingPostcode.textFieldMain.text = getViewModel()?.paymentIntent.billingAddress?.postcode
+        }
         containerSavedCard.isHidden = saveCardCheckboxIsHidden
         getViewModel()?.isSaveCardSelected = !saveCardCheckboxIsHidden
+        containerTerms.isHidden = !(getViewModel()?.paymentIntent.isSetupIntent ?? false)
         
-        if !emailIsHidden { inputFields.append(fieldEmail) }
         if !billingIsHidden { inputFields.append(contentsOf: [fieldBillingCountry, fieldBillingPostcode]) }
         //TODO: next navigation for billing fields
         inputFields.append(contentsOf: [fieldCardholder, fieldCardNumber, fieldExpiry, fieldCVV])
+        if !emailIsHidden { inputFields.append(fieldEmail) }
         
         setUpSaveCardCheckbox()
+        setUpTermsCardCheckbox()
         setUpCardsStrip()
         buttonPay.setEnabled(false)
     }
@@ -184,6 +227,7 @@ extension CardDetailsCheckoutViewController {
         mainContentScrollView.isUserInteractionEnabled = false
         mainContentScrollView.alpha = 0.4
         diableCloseButton = true
+        buttonPay.isUserInteractionEnabled = false
         
     }
     
@@ -192,6 +236,7 @@ extension CardDetailsCheckoutViewController {
         mainContentScrollView.isUserInteractionEnabled = true
         mainContentScrollView.alpha = 1
         diableCloseButton = false
+        buttonPay.isUserInteractionEnabled = true
     }
     
     func fetchDataFromFields() -> DojoCardDetails {
@@ -200,7 +245,12 @@ extension CardDetailsCheckoutViewController {
         let cardName = fieldCardholder.textFieldMain.text
         let expiryDate = fieldExpiry.textFieldMain.text?.replacingOccurrences(of: "/", with: " / ")
         let cvv = fieldCVV.textFieldMain.text
-        let cardDetails = DojoCardDetails(cardNumber: cardNumber, cardName: cardName, expiryDate: expiryDate, cv2: cvv)
+        let terms = getViewModel()?.isTermsSelected == true ? NSNumber(value: 1) : nil
+        let cardDetails = DojoCardDetails(cardNumber: cardNumber,
+                                          cardName: cardName,
+                                          expiryDate: expiryDate,
+                                          cv2: cvv,
+                                          mitConsentGiven: terms)
         return cardDetails
     }
     
@@ -214,5 +264,17 @@ extension CardDetailsCheckoutViewController {
             imageViewSaveCardCheckbox.image = UIImage(named: "icon-checkbox-unchecked", in: Bundle.libResourceBundle, compatibleWith: nil)
         }
         print("On saved card pressed")
+    }
+    
+    @objc func handleOnTermsCheckboxPress() {
+        guard let viewModel = getViewModel() else { return }
+        viewModel.isTermsSelected = !viewModel.isTermsSelected
+        if viewModel.isTermsSelected {
+            imageViewTermsCheckbox.image = UIImage(named: "icon-checkbox-checked", in: Bundle.libResourceBundle, compatibleWith: nil)
+        } else {
+            imageViewTermsCheckbox.image = UIImage(named: "icon-checkbox-unchecked", in: Bundle.libResourceBundle, compatibleWith: nil)
+        }
+        forceValidate()
+        print("On terms pressed")
     }
 }

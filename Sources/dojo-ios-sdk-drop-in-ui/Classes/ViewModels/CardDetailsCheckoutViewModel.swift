@@ -13,6 +13,7 @@ class CardDetailsCheckoutViewModel: BaseViewModel {
     var billingCountry: String?
     var billingPostcode: String?
     var isSaveCardSelected = true
+    var isTermsSelected = false
     var debugConfig: DojoSDKDebugConfig?
     
     init?(config: ConfigurationManager) {
@@ -32,15 +33,45 @@ class CardDetailsCheckoutViewModel: BaseViewModel {
                                                         savePaymentMethod: isSaveCardSelected)
         if paymentIntent.isVirtualTerminalPayment {
             DojoSDK.executeVirtualTerminalPayment(token: paymentIntent.clientSessionSecret,
-                                       payload: cardPaymentPayload,
-                                       debugConfig: debugConfig ?? DojoSDKDebugConfig(isSandboxIntent: paymentIntent.isSandbox),
-                                       completion: completion)
-        } else {
-            DojoSDK.executeCardPayment(token: paymentIntent.clientSessionSecret,
-                                       payload: cardPaymentPayload,
-                                       debugConfig: debugConfig ?? DojoSDKDebugConfig(isSandboxIntent: paymentIntent.isSandbox),
-                                       fromViewController: fromViewController,
-                                       completion: completion)
+                                                  payload: cardPaymentPayload,
+                                                  debugConfig: debugConfig ?? DojoSDKDebugConfig(isSandboxIntent: paymentIntent.isSandbox),
+                                                  completion: completion)
+        } else if paymentIntent.isSetupIntent {
+            DojoSDK.refreshSetupIntent(intentId: paymentIntent.id, debugConfig: debugConfig) { stringData, fetchError in
+                self.performPayment(stringData: stringData,
+                                    error: fetchError,
+                                    cardPaymentPayload: cardPaymentPayload,
+                                    fromViewController: fromViewController,
+                                    completion: completion)
+            }
+        }  else {
+            DojoSDK.refreshPaymentIntent(intentId: paymentIntent.id, debugConfig: debugConfig) { stringData, fetchError in
+                self.performPayment(stringData: stringData,
+                                    error: fetchError,
+                                    cardPaymentPayload: cardPaymentPayload,
+                                    fromViewController: fromViewController,
+                                    completion: completion)
+            }
+        }
+    }
+    
+    private func performPayment(stringData: String?,
+                                error: Error?,
+                                cardPaymentPayload: DojoCardPaymentPayload,
+                                fromViewController: UIViewController,
+                                completion: ((Int) -> Void)?) {
+        CommonUtils.parseResponseToCompletion(stringData: stringData,
+                                              fetchError: error,
+                                              objectType: PaymentIntent.self) { result, error in
+            if let paymentIntent = result {
+                DojoSDK.executeCardPayment(token: paymentIntent.clientSessionSecret,
+                                           payload: cardPaymentPayload,
+                                           debugConfig: self.debugConfig ?? DojoSDKDebugConfig(isSandboxIntent: paymentIntent.isSandbox),
+                                           fromViewController: fromViewController,
+                                           completion: completion)
+            } else {
+                completion?(5)
+            }
         }
     }
     
@@ -53,11 +84,20 @@ class CardDetailsCheckoutViewModel: BaseViewModel {
     }
     
     var showSaveCardCheckbox: Bool {
-        paymentIntent.customer?.id != nil
+        guard !paymentIntent.isSetupIntent else { return false }
+        return paymentIntent.customer?.id != nil
     }
     
     var supportedCardSchemes: [CardSchemes] {
         paymentIntent.merchantConfig?.supportedPaymentMethods?.cardSchemes ?? []
+    }
+    
+    var tradingName: String {
+        paymentIntent.config?.tradingName ?? ""
+    }
+    
+    var navigationTitle: String {
+        paymentIntent.isSetupIntent ? LocalizedText.CardDetailsCheckout.titleSetupIntent : LocalizedText.CardDetailsCheckout.title
     }
     
     func showBillingPostcode(_ countryCode: String) -> Bool {
