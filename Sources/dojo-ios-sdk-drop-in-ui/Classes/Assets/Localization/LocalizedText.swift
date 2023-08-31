@@ -64,6 +64,7 @@ enum LocalizedText {
         static let titleSetupIntentFail = "dojo_ui_sdk_payment_result_title_setup_intent_fail".localized
         static let mainTitleSetupIntentSucces = "dojo_ui_sdk_payment_result_main_title_setup_intent_success".localized
         static let mainTitleSetupIntentFail = "dojo_ui_sdk_payment_result_main_title_setup_intent_fail".localized
+        static let mainSubtitleSetupFail = "dojo_ui_sdk_payment_result_main_message_setup_intent_fail".localized
     }
     
     enum PoweredBy {

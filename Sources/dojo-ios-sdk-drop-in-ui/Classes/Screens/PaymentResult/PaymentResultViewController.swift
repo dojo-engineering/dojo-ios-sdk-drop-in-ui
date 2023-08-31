@@ -93,7 +93,7 @@ class PaymentResultViewController: BaseUIViewController {
             labelSubtitle.text = "\(LocalizedText.PaymentResult.orderId) \(viewModel?.paymentIntent.reference ?? "")"
             if let viewModel = viewModel,
                viewModel.paymentIntent.isSetupIntent {
-                labelSubtitle.text = "We could not save your card details."
+                labelSubtitle.text = LocalizedText.PaymentResult.mainSubtitleSetupFail
                 labelSubtitle2.isHidden = true
                 labelSubtitle.textColor = theme.secondaryLabelTextColor
                 labelSubtitle.font = theme.fontBody1

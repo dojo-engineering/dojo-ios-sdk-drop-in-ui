@@ -97,7 +97,7 @@ class CardDetailsCheckoutViewModel: BaseViewModel {
     }
     
     var navigationTitle: String {
-        paymentIntent.isSetupIntent ? "Save card details" : LocalizedText.CardDetailsCheckout.title
+        paymentIntent.isSetupIntent ? LocalizedText.CardDetailsCheckout.titleSetupIntent : LocalizedText.CardDetailsCheckout.title
     }
     
     func showBillingPostcode(_ countryCode: String) -> Bool {

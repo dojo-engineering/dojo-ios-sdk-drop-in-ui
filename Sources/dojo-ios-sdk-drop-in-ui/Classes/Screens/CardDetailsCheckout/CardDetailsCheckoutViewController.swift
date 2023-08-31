@@ -131,7 +131,7 @@ extension CardDetailsCheckoutViewController {
         }
         
         if viewModel.paymentIntent.isSetupIntent {
-            buttonPay.setTitle("Save Card", for: .normal)
+            buttonPay.setTitle(LocalizedText.CardDetailsCheckout.buttonPaySetupIntent, for: .normal)
         } else {
             //TODO: proper formatter
             let amountText = "\(String(format: "%.2f", Double(getViewModel()?.paymentIntent.amount?.value ?? 0)/100.0))"

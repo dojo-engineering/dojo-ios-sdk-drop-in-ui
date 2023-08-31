@@ -34,18 +34,18 @@ class PaymentResultViewModel: BaseViewModel {
     var navigationTitle: String {
         switch resultCode {
         case 0:
-            return paymentIntent.isSetupIntent ? "Card saved" : LocalizedText.PaymentResult.titleSuccess
+            return paymentIntent.isSetupIntent ? LocalizedText.PaymentResult.titleSetupIntentSuccess : LocalizedText.PaymentResult.titleSuccess
         default:
-            return paymentIntent.isSetupIntent ? "Card was not saved" : LocalizedText.PaymentResult.mainTitleFail
+            return paymentIntent.isSetupIntent ? LocalizedText.PaymentResult.titleSetupIntentFail : LocalizedText.PaymentResult.mainTitleFail
         }
     }
     
     var mainText: String {
         switch resultCode {
         case 0:
-            return paymentIntent.isSetupIntent ? "Card saved successfully" : LocalizedText.PaymentResult.mainTitleSuccess
+            return paymentIntent.isSetupIntent ? LocalizedText.PaymentResult.mainTitleSetupIntentSucces : LocalizedText.PaymentResult.mainTitleSuccess
         default:
-            return paymentIntent.isSetupIntent ? "Failed to save card details" : LocalizedText.PaymentResult.mainTitleFail
+            return paymentIntent.isSetupIntent ? LocalizedText.PaymentResult.mainTitleSetupIntentFail : LocalizedText.PaymentResult.mainTitleFail
         }
     }
     
