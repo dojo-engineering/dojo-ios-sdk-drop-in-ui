@@ -123,6 +123,13 @@ class DojoInputField: UIView {
         }
     }
     
+    func setCountryCode(countryCode: String?) {
+        guard let countryCode = countryCode else { return }
+        if let selectedIndex = dropDownCountries.firstIndex(where: {$0.isoCode == countryCode}){
+            selectedPickerPosition = selectedIndex
+        }
+    }
+    
     func isValid() -> Bool {
         viewModel?.validateField(textFieldMain.text) == .normal
     }

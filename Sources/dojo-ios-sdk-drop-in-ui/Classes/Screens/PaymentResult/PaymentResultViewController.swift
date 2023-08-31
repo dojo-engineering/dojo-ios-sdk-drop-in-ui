@@ -47,12 +47,7 @@ class PaymentResultViewController: BaseUIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //TODO: move to a better place
-        if getViewModal()?.resultCode == 0 {
-            setNavigationTitle(LocalizedText.PaymentResult.titleSuccess)
-        } else {
-            setNavigationTitle(LocalizedText.PaymentResult.titleFail)
-        }
+        setNavigationTitle(getViewModal()?.navigationTitle ?? "")
     }
     
     override func viewDidLayoutSubviews() {
@@ -82,8 +77,9 @@ class PaymentResultViewController: BaseUIViewController {
     func updateUIState() {
         if getViewModal()?.resultCode == 0 {
             buttonTryAgain.isHidden = true
-            labelMainText.text = LocalizedText.PaymentResult.mainTitleSuccess
-            labelSubtitle.text = "\(LocalizedText.PaymentResult.orderId) \(viewModel?.paymentIntent.id ?? "")"  //TODO: the same for both cases
+            labelMainText.text = getViewModal()?.mainText
+            labelSubtitle.text = "\(LocalizedText.PaymentResult.orderId) \(viewModel?.paymentIntent.reference ?? "")"  //TODO: the same for both cases
+            labelSubtitle.isHidden = false
             imgViewResult.image = UIImage(named: theme.lightStyleForDefaultElements ? "img-result-success-light" : "img-result-success-dark", in: Bundle.libResourceBundle, compatibleWith: nil)
             
             //TODO: common style
@@ -93,9 +89,19 @@ class PaymentResultViewController: BaseUIViewController {
             buttonDone.layer.cornerRadius = theme.primaryCTAButtonCornerRadius
         } else {
             buttonTryAgain.isHidden = false
-            labelMainText.text = LocalizedText.PaymentResult.mainTitleFail
-            labelSubtitle.text = "\(LocalizedText.PaymentResult.orderId) \(viewModel?.paymentIntent.id ?? "")"
-            labelSubtitle2.text = LocalizedText.PaymentResult.mainErrorMessage
+            labelMainText.text = getViewModal()?.mainText
+            labelSubtitle.text = "\(LocalizedText.PaymentResult.orderId) \(viewModel?.paymentIntent.reference ?? "")"
+            if let viewModel = viewModel,
+               viewModel.paymentIntent.isSetupIntent {
+                labelSubtitle.text = LocalizedText.PaymentResult.mainSubtitleSetupFail
+                labelSubtitle2.isHidden = true
+                labelSubtitle.textColor = theme.secondaryLabelTextColor
+                labelSubtitle.font = theme.fontBody1
+            } else {
+                labelSubtitle2.text =  LocalizedText.PaymentResult.mainErrorMessage
+            }
+            
+            labelSubtitle.isHidden = false
             imgViewResult.image = UIImage(named: theme.lightStyleForDefaultElements ? "img-result-error-light" : "img-result-error-dark", in: Bundle.libResourceBundle, compatibleWith: nil)
             
             //TODO: common style
@@ -124,27 +130,7 @@ class PaymentResultViewController: BaseUIViewController {
     }
     
     @IBAction func onButtonTryAgainPress(_ sender: Any) {
-        buttonTryAgain.showLoading(LocalizedText.PaymentResult.buttonPleaseWait)
-        disableScreen()
-        let delay = getViewModal()?.demoDelay ?? 0
-        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-            self.getViewModal()?.refreshToken { result, error in
-                self.enableScreen()
-                
-                if let _ = error {
-                    // something went wrong
-                    self.buttonTryAgain.hideLoading()
-                    return
-                }
-                
-                if let data = result?.data(using: .utf8) {
-                    let decoder = JSONDecoder()
-                    if let decodedResponse = try? decoder.decode(PaymentIntent.self, from: data) {
-                        self.delegate?.onPaymentIntentRefreshSucess(paymentIntent: decodedResponse)
-                    } // TODO: log error
-                }
-            }
-        }
+        self.navigationController?.popViewController(animated: true)
     }
     
     private func exitFromTheScreen() {

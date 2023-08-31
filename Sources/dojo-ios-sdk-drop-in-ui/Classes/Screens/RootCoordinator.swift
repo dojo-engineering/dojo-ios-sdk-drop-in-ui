@@ -105,7 +105,7 @@ extension RootCoordinator {
         var controller: UIViewController?
         switch screenType {
         case .dataLoading:
-            let viewModel = DataLoadingViewModel(paymentIntentId: config.paymentIntentId, customerSecret: config.customerSecret, debugConfig: config.debugConfig, demoDelay: config.demoDelay, isDemo: config.isDemo)
+            let viewModel = DataLoadingViewModel(paymentIntentId: config.paymentIntentId, customerSecret: config.customerSecret, debugConfig: config.debugConfig, demoDelay: config.demoDelay, isDemo: config.isDemo, isSetupIntent: config.isSetupIntent)
             controller = DataLoadingViewController(viewModel: viewModel, theme: config.themeSettings, delegate: self)
         case .cardDeailsCheckout:
             if let viewModel = CardDetailsCheckoutViewModel(config: config) {
@@ -204,6 +204,8 @@ extension RootCoordinator: DataLoadingViewControllerDelegate {
         if paymentIntent.isCaptured {
             showPaymentResult(resultCode: 0)
         } else if paymentIntent.isVirtualTerminalPayment {
+            showCardDetailsCheckout()
+        } else if paymentIntent.isSetupIntent {
             showCardDetailsCheckout()
         } else {
             showPaymentMethodCheckout()

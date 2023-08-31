@@ -42,6 +42,35 @@ public class DojoSDKDropInUI: NSObject {
             }
         }
     }
+    
+    @objc
+    public func startSetupFlow(setupIntentId: String,
+                               controller: UIViewController,
+                               themeSettings: DojoThemeSettings? = nil,
+                               debugConfig: DojoSDKDebugConfig? = nil,
+                               completion: ((Int) -> Void)?) {
+        DispatchQueue.main.async {
+            let theme = ThemeSettings(dojoTheme: themeSettings ?? DojoThemeSettings.getLightTheme())
+            self.completionCallback = completion
+            self.configurationManager = ConfigurationManager(paymentIntentId: setupIntentId,
+                                                             customerSecret: nil,
+                                                             paymentIntent: nil,
+                                                             themeSettings: theme,
+                                                             applePayConfig: nil,
+                                                             debugConfig: debugConfig,
+                                                             isDemo: false,
+                                                             isSetupIntent: true)
+            if let configurationManager = self.configurationManager {
+                self.rootCoordinator = RootCoordinator(presentationViewController: controller,
+                                                       config: configurationManager,
+                                                       delegate: self)
+                self.rootCoordinator?.beginFlow()
+            } else {
+                // SDK internal error
+                self.completionCallback?(7770)
+            }
+        }
+    }
 }
 
 @objc

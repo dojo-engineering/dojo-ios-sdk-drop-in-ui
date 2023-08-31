@@ -46,6 +46,9 @@ enum LocalizedText {
         static let errorInvalidExpiry = "dojo_ui_sdk_card_details_checkout_error_invalid_expiry".localized
         static let errorInvalidCVV = "dojo_ui_sdk_card_details_checkout_error_invalid_cvv".localized
         static let saveCardForFutureUse = "dojo_ui_sdk_card_details_checkout_save_card".localized
+        static let buttonPaySetupIntent = "dojo_ui_sdk_card_details_checkout_pay_button_setup_intent".localized
+        static let titleSetupIntent = "dojo_ui_sdk_card_details_checkout_title_setup_intent".localized
+        static let consentTerms = "dojo_ui_sdk_card_details_checkout_consent_terms".localized
     }
     
     enum PaymentResult {
@@ -57,6 +60,11 @@ enum LocalizedText {
         static let buttonPleaseWait = "dojo_ui_sdk_payment_ressult_button_please_wait".localized
         static let orderId = "dojo_ui_sdk_payment_result_order_info".localized
         static let mainErrorMessage = "dojo_ui_sdk_payment_result_failed_description".localized
+        static let titleSetupIntentSuccess = "dojo_ui_sdk_payment_result_title_setup_intent_success".localized
+        static let titleSetupIntentFail = "dojo_ui_sdk_payment_result_title_setup_intent_fail".localized
+        static let mainTitleSetupIntentSucces = "dojo_ui_sdk_payment_result_main_title_setup_intent_success".localized
+        static let mainTitleSetupIntentFail = "dojo_ui_sdk_payment_result_main_title_setup_intent_fail".localized
+        static let mainSubtitleSetupFail = "dojo_ui_sdk_payment_result_main_message_setup_intent_fail".localized
     }
     
     enum PoweredBy {
