@@ -109,6 +109,9 @@ class DojoInputField: UIView {
         textFieldMain.keyboardAppearance = theme.lightStyleForDefaultElements ? .light : .dark
         
         imageViewBottom.image = UIImage.getFieldErrorIcon(lightVersion: theme.lightStyleForDefaultElements)
+        
+        textFieldMain.accessibilityIdentifier = theme.analyticsExcludedFieldsIdentifier
+        textViewMain.accessibilityIdentifier = theme.analyticsExcludedFieldsIdentifier
     }
     
     func setUpFieldForCurrentType() {

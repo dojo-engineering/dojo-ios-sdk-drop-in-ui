@@ -55,6 +55,7 @@ class ThemeSettings {
     var applePayButtonStyle: PKPaymentButtonStyle
     var lightStyleForDefaultElements: Bool
     var showBranding: Bool
+    var analyticsExcludedFieldsIdentifier: String
     
     init (dojoTheme: DojoThemeSettings) {
         // Colors
@@ -83,6 +84,7 @@ class ThemeSettings {
         applePayButtonStyle = dojoTheme.lightStyleForDefaultElements == true ? .black : .white
         colorPoweredByDojo = dojoTheme.lightStyleForDefaultElements == true ? .black : .white
         showBranding = dojoTheme.showBranding.boolValue
+        analyticsExcludedFieldsIdentifier = dojoTheme.analyticsExcludedFieldsIdentifier
         
         primaryCTAButtonDisabledBackgroundColor = dojoTheme.primaryCTAButtonDisabledBackgroundColor
         primaryCTAButtonDisableTextColor = dojoTheme.primaryCTAButtonDisableTextColor

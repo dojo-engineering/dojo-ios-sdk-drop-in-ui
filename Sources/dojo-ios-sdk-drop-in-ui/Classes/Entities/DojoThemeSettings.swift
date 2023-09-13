@@ -30,6 +30,7 @@ public class DojoThemeSettings: NSObject {
     public var errorTextColor: UIColor
     public var lightStyleForDefaultElements: NSNumber
     public var showBranding: NSNumber
+    public var analyticsExcludedFieldsIdentifier: String
     
     @objc
     public init(primaryLabelTextColor: UIColor? = nil,
@@ -51,7 +52,8 @@ public class DojoThemeSettings: NSObject {
                 inputFieldSelectedBorderColor: UIColor? = nil,
                 inputFieldDefaultBorderColor: UIColor? = nil,
                 errorTextColor: UIColor? = nil,
-                lightStyleForDefaultElements: NSNumber? = nil) {
+                lightStyleForDefaultElements: NSNumber? = nil,
+                analyticsExcludedFieldsIdentifier: String? = nil) {
         self.primaryLabelTextColor = primaryLabelTextColor ?? UIColor.init(hexaARGB: "#DD000000") ?? .black
         self.secondaryLabelTextColor = secondaryLabelTextColor ?? UIColor.init(hexaARGB: "#99000000") ?? .gray
         self.headerTintColor = headerTintColor ?? UIColor.init(hexaARGB: "#DD000000") ?? .black
@@ -73,6 +75,7 @@ public class DojoThemeSettings: NSObject {
         self.inputFieldDefaultBorderColor = inputFieldDefaultBorderColor ?? UIColor.init(hexaARGB: "#26000000") ?? .gray
         self.errorTextColor = errorTextColor ?? UIColor.init(hexaARGB: "#FFB00020") ?? .systemRed
         self.showBranding = true
+        self.analyticsExcludedFieldsIdentifier = analyticsExcludedFieldsIdentifier ?? ""
     }
     
     @objc
