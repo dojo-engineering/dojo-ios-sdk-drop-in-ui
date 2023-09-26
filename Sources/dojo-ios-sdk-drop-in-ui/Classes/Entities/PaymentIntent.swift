@@ -19,7 +19,7 @@ struct PaymentIntent: Codable {
     var itemLines: [ItemLine]?
     var status: String?
     var reference: String?
-    var merchantInitiatedType: String? = nil
+    var merchantInitiatedTransactionType: String? = nil
     var billingAddress: BillingAddress?
     
     var isCaptured: Bool {
@@ -35,7 +35,7 @@ struct PaymentIntent: Codable {
     }
     
     var isSetupIntent: Bool {
-        merchantInitiatedType != nil && paymentSource != nil
+        merchantInitiatedTransactionType != nil && paymentSource != nil
     }
 }
 
