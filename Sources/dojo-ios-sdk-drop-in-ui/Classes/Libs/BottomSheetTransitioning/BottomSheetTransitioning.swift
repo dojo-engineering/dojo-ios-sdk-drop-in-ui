@@ -102,7 +102,6 @@ final class BottomSheetPresentationController: UIPresentationController {
         return gesture
     }()
     
-    private lazy var panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(onPan))
     var panToDismissEnabled: Bool = true
 
     init(
@@ -128,37 +127,8 @@ final class BottomSheetPresentationController: UIPresentationController {
         else {
             return
         }
-
+        
         presentingViewController.dismiss(animated: true)
-    }
-
-    @objc private func onPan(_ gestureRecognizer: UIPanGestureRecognizer) {
-        guard let presentedView = presentedView else {
-            return
-        }
-
-        let translation = gestureRecognizer.translation(in: presentedView)
-
-        let progress = translation.y / presentedView.frame.height
-
-        switch gestureRecognizer.state {
-        case .began:
-            bottomSheetInteractiveDismissalTransition.start(
-                moving: presentedView, interactiveDismissal: panToDismissEnabled
-            )
-        case .changed:
-            if panToDismissEnabled && progress > 0 && !presentedViewController.isBeingDismissed {
-                presentingViewController.dismiss(animated: true)
-            }
-            bottomSheetInteractiveDismissalTransition.move(
-                presentedView, using: translation.y
-            )
-        default:
-            let velocity = gestureRecognizer.velocity(in: presentedView)
-            bottomSheetInteractiveDismissalTransition.stop(
-                moving: presentedView, at: translation.y, with: velocity
-            )
-        }
     }
 
     // MARK: UIPresentationController
@@ -167,8 +137,6 @@ final class BottomSheetPresentationController: UIPresentationController {
         guard let presentedView = presentedView else {
             return
         }
-
-        presentedView.addGestureRecognizer(panGestureRecognizer)
 
         presentedView.layer.cornerRadius = sheetCornerRadius
         presentedView.layer.maskedCorners = [
@@ -255,7 +223,6 @@ final class BottomSheetPresentationController: UIPresentationController {
     override func presentationTransitionDidEnd(_ completed: Bool) {
         if !completed {
             backdropView.removeFromSuperview()
-            presentedView?.removeGestureRecognizer(panGestureRecognizer)
             containerView?.removeGestureRecognizer(tapGestureRecognizer)
         }
     }
@@ -273,16 +240,12 @@ final class BottomSheetPresentationController: UIPresentationController {
     override func dismissalTransitionDidEnd(_ completed: Bool) {
         if completed {
             backdropView.removeFromSuperview()
-            presentedView?.removeGestureRecognizer(panGestureRecognizer)
             containerView?.removeGestureRecognizer(tapGestureRecognizer)
         }
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        panGestureRecognizer.isEnabled = false // This will cancel any ongoing pan gesture
-        coordinator.animate(alongsideTransition: nil) { context in
-            self.panGestureRecognizer.isEnabled = true
-        }
+        coordinator.animate(alongsideTransition: nil) { _ in }
     }
 }
 
