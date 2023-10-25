@@ -172,9 +172,12 @@ extension CardDetailsCheckoutViewController {
         })
     }
     
-    func setUpViews() {
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         footerPoweredByDojoView?.setStyle(FooterPoweredByDojoStyle.checkoutPage)
-        
+    }
+    
+    func setUpViews() {
         fieldEmail.setType(.email, delegate: self)
         fieldCardholder.setType(.cardHolderName, delegate: self)
         fieldCardNumber.setType(.cardNumber, delegate: self)
