@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "05885419A79205918BC4A7FBB096EC17"
-               BuildableName = "Pods_dojo_ios_sdk_drop_in_ui_Tests.framework"
-               BlueprintName = "Pods-dojo-ios-sdk-drop-in-ui_Tests"
+               BlueprintIdentifier = "B5B119A0C30C8888B60398B43B61D655"
+               BuildableName = "dojo-ios-sdk-drop-in-ui-Unit-DojoSDKUI-Tests.xctest"
+               BlueprintName = "dojo-ios-sdk-drop-in-ui-Unit-DojoSDKUI-Tests"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,6 +28,16 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B5B119A0C30C8888B60398B43B61D655"
+               BuildableName = "dojo-ios-sdk-drop-in-ui-Unit-DojoSDKUI-Tests.xctest"
+               BlueprintName = "dojo-ios-sdk-drop-in-ui-Unit-DojoSDKUI-Tests"
+               ReferencedContainer = "container:Pods/Pods.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
