@@ -33,6 +33,12 @@ class BaseUIViewController: UIViewController {
         baseDelegate?.onForceClosePress()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        footerPoweredByDojoView?.setTheme(theme: theme)
+        footerPoweredByDojoView?.setStyle()
+    }
+    
     func setUpDesign() {
         self.view.backgroundColor = theme.primarySurfaceBackgroundColor
         

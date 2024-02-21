@@ -35,7 +35,7 @@ class TestsUtils {
                              themeSettings: ThemeSettings(dojoTheme: DojoThemeSettings.getLightTheme()))
         config.paymentIntent?.merchantConfig = MerchantConfig()
         config.paymentIntent?.merchantConfig?.supportedPaymentMethods = SupportedPaymentMethods()
-        config.paymentIntent?.customer = CustomerConfig(id: customerId)
+        config.paymentIntent?.customer = CustomerConfig(id: customerId, emailAddress: nil)
         config.savedPaymentMethods = savedPaymentMethod
         config.paymentIntent?.itemLines = additionalItemsLine
         
