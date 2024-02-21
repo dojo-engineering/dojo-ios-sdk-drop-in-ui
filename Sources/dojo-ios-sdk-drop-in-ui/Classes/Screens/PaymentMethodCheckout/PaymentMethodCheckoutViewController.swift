@@ -173,10 +173,7 @@ extension PaymentMethodCheckoutViewController {
             setupViewHeightWithAdditionaLines(baseContentHeight: 286)
             selectedPaymentMethodView.isHidden = false
         }
-        
-        let amountText = "\(String(format: "%.2f", Double(getViewModel()?.paymentIntent.totalAmount?.value ?? 0)/100.0))"
-        let buttonPayTitle = "Pay £\(amountText)"
-        buttonPayCard.setTitle(buttonPayTitle, for: .normal)
+        buttonPayCard.setTitle(getViewModel()?.paymentIntent.payButtonFormatted, for: .normal)
     }
 }
 

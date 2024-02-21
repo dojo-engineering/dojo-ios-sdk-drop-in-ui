@@ -133,15 +133,13 @@ extension CardDetailsCheckoutViewController {
         if viewModel.paymentIntent.isSetupIntent {
             buttonPay.setTitle(LocalizedText.CardDetailsCheckout.buttonPaySetupIntent, for: .normal)
         } else {
-            //TODO: proper formatter
-            let amountText = "\(String(format: "%.2f", Double(getViewModel()?.paymentIntent.totalAmount?.value ?? 0)/100.0))"
-            let buttonPayTitle = "Pay £\(amountText)"
-            buttonPay.setTitle(buttonPayTitle, for: .normal)
             
+            buttonPay.setTitle(getViewModel()?.paymentIntent.payButtonFormatted, for: .normal)
             
-            let fontCurrency = [NSAttributedString.Key.font : theme.fontBody1] // TODO: correct font
+            let fontCurrency = [NSAttributedString.Key.font : theme.fontBody1]
             let fontAmount = [NSAttributedString.Key.font : theme.fontHeading3Medium]
             let gbpString = NSMutableAttributedString(string:"£", attributes: fontCurrency)
+            let amountText = getViewModel()?.paymentIntent.amountText ?? ""
             let attributedString = NSMutableAttributedString(string: amountText, attributes: fontAmount)
             gbpString.append(attributedString)
             labelPrimaryAmount.attributedText = gbpString
