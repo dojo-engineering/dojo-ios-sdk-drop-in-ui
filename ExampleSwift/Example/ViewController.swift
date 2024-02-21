@@ -33,7 +33,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func onStartPaymentFlowPress(_ sender: Any) {
-        var paymentIntentId = ""
+        var paymentIntentId = "pi_sandbox_VpDgIsd3uEOxHLZEm7xT8w"
         if let paymentIntent = textFieldPaymentIntent.text,
            !paymentIntent.isEmpty {
             paymentIntentId = paymentIntent

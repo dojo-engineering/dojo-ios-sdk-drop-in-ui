@@ -134,7 +134,7 @@ extension CardDetailsCheckoutViewController {
             buttonPay.setTitle(LocalizedText.CardDetailsCheckout.buttonPaySetupIntent, for: .normal)
         } else {
             //TODO: proper formatter
-            let amountText = "\(String(format: "%.2f", Double(getViewModel()?.paymentIntent.amount?.value ?? 0)/100.0))"
+            let amountText = "\(String(format: "%.2f", Double(getViewModel()?.paymentIntent.totalAmount?.value ?? 0)/100.0))"
             let buttonPayTitle = "Pay £\(amountText)"
             buttonPay.setTitle(buttonPayTitle, for: .normal)
             
