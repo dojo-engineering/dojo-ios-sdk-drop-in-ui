@@ -173,10 +173,7 @@ extension PaymentMethodCheckoutViewController {
             setupViewHeightWithAdditionaLines(baseContentHeight: 286)
             selectedPaymentMethodView.isHidden = false
         }
-        
-        let amountText = "\(String(format: "%.2f", Double(getViewModel()?.paymentIntent.amount?.value ?? 0)/100.0))"
-        let buttonPayTitle = "Pay £\(amountText)"
-        buttonPayCard.setTitle(buttonPayTitle, for: .normal)
+        buttonPayCard.setTitle(getViewModel()?.paymentIntent.payButtonFormatted, for: .normal)
     }
 }
 
@@ -204,7 +201,7 @@ extension PaymentMethodCheckoutViewController {
     }
     
     func setupData() {
-        if let value = getViewModel()?.paymentIntent.amount?.getFormattedAmount() {
+        if let value = getViewModel()?.paymentIntent.totalAmount?.getFormattedAmount() {
             labelTotalAmount.text = value
         } else {
             print("Error - can't format amount")

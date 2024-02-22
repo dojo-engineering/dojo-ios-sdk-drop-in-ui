@@ -11,7 +11,7 @@ import dojo_ios_sdk
 struct PaymentIntent: Codable {
     let id: String
     let clientSessionSecret: String
-    let amount: DojoPaymentIntentAmount?
+    let totalAmount: DojoPaymentIntentAmount?
     var config: PaymentIntentConfig? = nil
     var merchantConfig: MerchantConfig? = nil
     var customer: CustomerConfig? = nil

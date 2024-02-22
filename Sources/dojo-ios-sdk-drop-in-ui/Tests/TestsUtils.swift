@@ -31,7 +31,7 @@ class TestsUtils {
         var config = ConfigurationManager(paymentIntentId: "",
                              paymentIntent: PaymentIntent(id: "",
                                                           clientSessionSecret: "",
-                                                          amount: DojoPaymentIntentAmount(value: 10, currencyCode: "GBP")),
+                                                          totalAmount: DojoPaymentIntentAmount(value: 10, currencyCode: "GBP")),
                              themeSettings: ThemeSettings(dojoTheme: DojoThemeSettings.getLightTheme()))
         config.paymentIntent?.merchantConfig = MerchantConfig()
         config.paymentIntent?.merchantConfig?.supportedPaymentMethods = SupportedPaymentMethods()
