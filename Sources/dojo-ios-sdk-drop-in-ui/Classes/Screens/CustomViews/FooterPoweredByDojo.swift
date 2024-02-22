@@ -28,8 +28,8 @@ class FooterPoweredByDojo: UIView {
     @IBOutlet weak var viewSeparator: UIView!
     @IBOutlet weak var stackViewRight: UIStackView!
     @IBOutlet weak var stackViewLeft: UIStackView!
-    @IBOutlet weak var constraintPoweredByCenter: NSLayoutConstraint!
-    @IBOutlet weak var constraintPoweredByTailing: NSLayoutConstraint!
+    @IBOutlet var constraintPoweredByCenter: NSLayoutConstraint!
+    @IBOutlet var constraintPoweredByTailing: NSLayoutConstraint!
     @IBOutlet weak var constraintButtonByCenter: NSLayoutConstraint!
     @IBOutlet weak var constraintButtonByLeft: NSLayoutConstraint!
     let viewModel = FooterPoweredByViewModel()
