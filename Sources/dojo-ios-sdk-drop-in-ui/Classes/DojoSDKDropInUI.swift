@@ -85,7 +85,7 @@ public class DojoUIApplePayConfig: NSObject {
 
 extension DojoSDKDropInUI: RootCoordinatorDelegate {
     func userForceClosedFlow() {
-        completionCallback?(5) // 5 for decline
+        completionCallback?(7780) // user force closed payment flow
         completionCallback = nil
     }
     
