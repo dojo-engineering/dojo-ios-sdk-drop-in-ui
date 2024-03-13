@@ -55,6 +55,9 @@ class ThemeSettings {
     var lightStyleForDefaultElements: Bool
     var showBranding: Bool
     
+    var backdropViewColor: UIColor
+    var backdropViewAlpha: CGFloat
+    
     init (dojoTheme: DojoThemeSettings) {
         // Colors
         primaryLabelTextColor = dojoTheme.primaryLabelTextColor
@@ -87,6 +90,9 @@ class ThemeSettings {
         primaryCTAButtonDisableTextColor = dojoTheme.primaryCTAButtonDisableTextColor
         
         primaryCTAButtonCornerRadius = 21
+        
+        backdropViewColor = dojoTheme.backdropViewColor
+        backdropViewAlpha = dojoTheme.backdropViewAlpha.doubleValue
         
         // Fonts
         // Set fall-back fonts if custom fonts are not available

@@ -10,6 +10,7 @@ final class BottomSheetTransitioningDelegate: NSObject, UIViewControllerTransiti
     var preferredSheetCornerRadius: CGFloat
     var preferredSheetSizingFactor: CGFloat
     var preferredSheetBackdropColor: UIColor
+    var preferredSheetBackdropAlpha: CGFloat
 
     var tapToDismissEnabled: Bool = true {
         didSet {
@@ -27,12 +28,14 @@ final class BottomSheetTransitioningDelegate: NSObject, UIViewControllerTransiti
         preferredSheetTopInset: CGFloat,
         preferredSheetCornerRadius: CGFloat,
         preferredSheetSizingFactor: CGFloat,
-        preferredSheetBackdropColor: UIColor
+        preferredSheetBackdropColor: UIColor,
+        preferredSheetBackdropAlpha: CGFloat
     ) {
         self.preferredSheetTopInset = preferredSheetTopInset
         self.preferredSheetCornerRadius = preferredSheetCornerRadius
         self.preferredSheetSizingFactor = preferredSheetSizingFactor
         self.preferredSheetBackdropColor = preferredSheetBackdropColor
+        self.preferredSheetBackdropAlpha = preferredSheetBackdropAlpha
         super.init()
     }
 
@@ -47,7 +50,8 @@ final class BottomSheetTransitioningDelegate: NSObject, UIViewControllerTransiti
             sheetTopInset: preferredSheetTopInset,
             sheetCornerRadius: preferredSheetCornerRadius,
             sheetSizingFactor: preferredSheetSizingFactor,
-            sheetBackdropColor: preferredSheetBackdropColor
+            sheetBackdropColor: preferredSheetBackdropColor,
+            backdropViewAlpha: preferredSheetBackdropAlpha
         )
 
         bottomSheetPresentationController.tapGestureRecognizer.isEnabled = tapToDismissEnabled
@@ -95,6 +99,7 @@ final class BottomSheetPresentationController: UIPresentationController {
     let sheetCornerRadius: CGFloat
     let sheetSizingFactor: CGFloat
     let sheetBackdropColor: UIColor
+    var backdropViewAlpha: CGFloat
 
     private(set) lazy var tapGestureRecognizer: UITapGestureRecognizer = {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(onTap))
@@ -110,12 +115,14 @@ final class BottomSheetPresentationController: UIPresentationController {
         sheetTopInset: CGFloat,
         sheetCornerRadius: CGFloat,
         sheetSizingFactor: CGFloat,
-        sheetBackdropColor: UIColor
+        sheetBackdropColor: UIColor,
+        backdropViewAlpha: CGFloat
     ) {
         self.sheetTopInset = sheetTopInset
         self.sheetCornerRadius = sheetCornerRadius
         self.sheetSizingFactor = sheetSizingFactor
         self.sheetBackdropColor = sheetBackdropColor
+        self.backdropViewAlpha = backdropViewAlpha
         super.init(presentedViewController: presentedViewController, presenting: presentingViewController)
     }
 
@@ -216,7 +223,7 @@ final class BottomSheetPresentationController: UIPresentationController {
         }
 
         transitionCoordinator.animate { context in
-            self.backdropView.alpha = 0.3
+            self.backdropView.alpha = self.backdropViewAlpha
         }
     }
 

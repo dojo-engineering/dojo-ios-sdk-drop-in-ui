@@ -78,7 +78,8 @@ class BaseNavigationController: UINavigationController, UINavigationControllerDe
         preferredSheetTopInset: preferredSheetTopInset,
         preferredSheetCornerRadius: preferredSheetCornerRadius,
         preferredSheetSizingFactor: preferredSheetSizing.rawValue,
-        preferredSheetBackdropColor: preferredSheetBackdropColor
+        preferredSheetBackdropColor: preferredSheetBackdropColor,
+        preferredSheetBackdropAlpha: preferredSheetBackdropAlpha
     )
 
     override var additionalSafeAreaInsets: UIEdgeInsets {
@@ -132,7 +133,13 @@ class BaseNavigationController: UINavigationController, UINavigationControllerDe
             bottomSheetTransitioningDelegate.preferredSheetBackdropColor = preferredSheetBackdropColor
         }
     }
-
+    
+    var preferredSheetBackdropAlpha: CGFloat = 0.3 {
+        didSet {
+            bottomSheetTransitioningDelegate.preferredSheetBackdropAlpha = preferredSheetBackdropAlpha
+        }
+    }
+    
     var tapToDismissEnabled: Bool = true {
         didSet {
             bottomSheetTransitioningDelegate.tapToDismissEnabled = tapToDismissEnabled

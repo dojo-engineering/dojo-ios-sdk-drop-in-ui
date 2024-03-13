@@ -30,6 +30,8 @@ public class DojoThemeSettings: NSObject {
     @objc public var errorTextColor: UIColor
     @objc public var lightStyleForDefaultElements: NSNumber
     @objc public var showBranding: NSNumber
+    @objc public var backdropViewColor: UIColor
+    @objc public var backdropViewAlpha: NSDecimalNumber
     
     @objc
     public init(primaryLabelTextColor: UIColor? = nil,
@@ -51,7 +53,9 @@ public class DojoThemeSettings: NSObject {
                 inputFieldSelectedBorderColor: UIColor? = nil,
                 inputFieldDefaultBorderColor: UIColor? = nil,
                 errorTextColor: UIColor? = nil,
-                lightStyleForDefaultElements: NSNumber? = nil) {
+                lightStyleForDefaultElements: NSNumber? = nil,
+                backdropViewColor: UIColor? = nil,
+                backdropViewAlpha: NSDecimalNumber? = nil) {
         self.primaryLabelTextColor = primaryLabelTextColor ?? UIColor.init(hexaARGB: "#DD000000") ?? .black
         self.secondaryLabelTextColor = secondaryLabelTextColor ?? UIColor.init(hexaARGB: "#99000000") ?? .gray
         self.headerTintColor = headerTintColor ?? UIColor.init(hexaARGB: "#DD000000") ?? .black
@@ -73,6 +77,8 @@ public class DojoThemeSettings: NSObject {
         self.inputFieldDefaultBorderColor = inputFieldDefaultBorderColor ?? UIColor.init(hexaARGB: "#26000000") ?? .gray
         self.errorTextColor = errorTextColor ?? UIColor.init(hexaARGB: "#FFB00020") ?? .systemRed
         self.showBranding = true
+        self.backdropViewColor = backdropViewColor ?? UIColor.black.withAlphaComponent(0.6)
+        self.backdropViewAlpha = backdropViewAlpha ?? 0.3
     }
     
     @objc
