@@ -43,6 +43,8 @@ class RootCoordinator: RootCoordinatorProtocol {
         self.rootNavController.tapToDismissEnabled = false
         self.rootNavController.panToDismissEnabled = false
         self.rootNavController.preferredSheetSizing = .fit
+        self.rootNavController.preferredSheetBackdropColor = config.themeSettings.backdropViewColor
+        self.rootNavController.preferredSheetBackdropAlpha = config.themeSettings.backdropViewAlpha
         self.config = config
         self.delegate = delegate
     }
