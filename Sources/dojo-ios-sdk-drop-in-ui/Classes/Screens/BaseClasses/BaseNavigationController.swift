@@ -128,7 +128,7 @@ class BaseNavigationController: UINavigationController, UINavigationControllerDe
         }
     }
 
-    var preferredSheetBackdropColor: UIColor = .black.withAlphaComponent(0.6) {
+    var preferredSheetBackdropColor: UIColor = .black {
         didSet {
             bottomSheetTransitioningDelegate.preferredSheetBackdropColor = preferredSheetBackdropColor
         }

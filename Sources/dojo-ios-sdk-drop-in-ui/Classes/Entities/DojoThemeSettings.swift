@@ -77,7 +77,7 @@ public class DojoThemeSettings: NSObject {
         self.inputFieldDefaultBorderColor = inputFieldDefaultBorderColor ?? UIColor.init(hexaARGB: "#26000000") ?? .gray
         self.errorTextColor = errorTextColor ?? UIColor.init(hexaARGB: "#FFB00020") ?? .systemRed
         self.showBranding = true
-        self.backdropViewColor = backdropViewColor ?? UIColor.black.withAlphaComponent(0.6)
+        self.backdropViewColor = backdropViewColor ?? UIColor.black
         self.backdropViewAlpha = backdropViewAlpha ?? 0.3
     }
     
