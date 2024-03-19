@@ -19,6 +19,7 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
     
     @IBOutlet weak var labelTotalDue: UILabel!
     @IBOutlet weak var labelTotalAmount: UILabel!
+    @IBOutlet weak var labelAdditionalLegal: UILabel!
     @IBOutlet weak var paymentButton: PKPaymentButton!
     @IBOutlet weak var buttonPayCard: LoadingButton!
     @IBOutlet weak var additionalItemsTableView: UITableView!
@@ -76,6 +77,11 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
         selectedPaymentMethodView.setTheme(theme: theme)
         
         buttonPayCard.setTheme(theme)
+        
+        labelAdditionalLegal.text = theme.additionalLegalText
+        labelAdditionalLegal.numberOfLines = 0
+        labelAdditionalLegal.font = theme.fontSubtitle2
+        labelAdditionalLegal.textColor = theme.secondaryLabelTextColor
     }
     
     override func updateData(config: ConfigurationManager) {
@@ -94,7 +100,7 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
             let keyboardHeight = keyboardRectangle.height
             
             if let navigation = (navigationController as? BaseNavigationController) {
-                navigation.heightConstraint?.constant = keyboardHeight + 286 - 15 + getHeightOfAdditionalLineItemsTable()
+                navigation.heightConstraint?.constant = keyboardHeight + 286 - 15 + getHeightOfAdditionalLineItemsTable() + getHeightOfAdditionalLegalText()
             }
             
             constraintPayButtonBottom.constant = keyboardHeight - (UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0) - 15
@@ -263,7 +269,7 @@ extension PaymentMethodCheckoutViewController {
     
     func setupViewHeightWithAdditionaLines(baseContentHeight: CGFloat) {
         if let navigation = (navigationController as? BaseNavigationController) {
-            navigation.defaultHeight = baseContentHeight + getHeightOfAdditionalLineItemsTable()
+            navigation.defaultHeight = baseContentHeight + getHeightOfAdditionalLineItemsTable() + getHeightOfAdditionalLegalText()
         }
     }
     
@@ -331,6 +337,21 @@ extension PaymentMethodCheckoutViewController: UITableViewDelegate, UITableViewD
             return CGFloat(maximumNumberOfItemsBeforeScroll * getHeightOfAdditonalLineItem())
         }
         return CGFloat(numberOfItems * getHeightOfAdditonalLineItem())
+    }
+    
+    func getHeightOfAdditionalLegalText() -> CGFloat {
+        guard let text = labelAdditionalLegal.text,
+              !text.isEmpty else {
+            return 0
+        }
+        // 32 = 16 x 2 which is view's padding from both sides
+        return heightOf(text: text, withConstrainedWidth: self.view.frame.width - 32, font: labelAdditionalLegal.font)
+    }
+    
+    func heightOf(text: String, withConstrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
+        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
+        let boundingBox = text.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
+        return ceil(boundingBox.height)
     }
     
     func getHeightOfAdditonalLineItem() -> Int {
