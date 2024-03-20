@@ -23,12 +23,17 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func onStartSetupFlowPress(_ sender: Any) {
-        var paymentIntentId = ""
-        if let paymentIntent = textFieldPaymentIntent.text,
-           !paymentIntent.isEmpty {
-            paymentIntentId = paymentIntent
+        var setupIntentId = ""
+        if let setupIntent = textFieldPaymentIntent.text,
+           !setupIntent.isEmpty {
+            setupIntentId = setupIntent
         }
-        dojoUI.startSetupFlow(setupIntentId: paymentIntentId,
+        guard !setupIntentId.isEmpty else {
+            self.displayMessage(message: "SI is not supplied")
+            return
+        }
+        
+        dojoUI.startSetupFlow(setupIntentId: setupIntentId,
                               controller: self) { result in
             self.displayResult(resultCode: result)
         }
@@ -40,7 +45,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
            !paymentIntent.isEmpty {
             paymentIntentId = paymentIntent
         }
-        
+        guard !paymentIntentId.isEmpty else {
+            self.displayMessage(message: "PI is not supplied")
+            return
+        }
         let theme = DojoThemeSettings.getLightTheme()
         let customerSecret = textFieldCustomerSecret.text
         if switchShowAdditionalLegal.isOn {
@@ -57,7 +65,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func displayResult(resultCode: Int) {
-        let dialogMessage = UIAlertController(title: "Finish", message:"SDK result code: \(resultCode)", preferredStyle: .alert)
+        displayMessage(message: "SDK result code: \(resultCode)")
+    }
+    
+    func displayMessage(message: String) {
+        let dialogMessage = UIAlertController(title: "Finish", message: message, preferredStyle: .alert)
         let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
         dialogMessage.addAction(ok)
         self.present(dialogMessage, animated: true, completion: nil)
