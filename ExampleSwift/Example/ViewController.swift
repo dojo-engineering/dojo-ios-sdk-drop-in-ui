@@ -20,6 +20,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         textFieldPaymentIntent.delegate = self
+        textFieldCustomerSecret.delegate = self
     }
     
     @IBAction func onStartSetupFlowPress(_ sender: Any) {
