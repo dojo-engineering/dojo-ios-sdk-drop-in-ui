@@ -134,10 +134,6 @@ class PaymentResultViewController: BaseUIViewController {
     }
     
     private func exitFromTheScreen() {
-        var resultcode = getViewModal()?.resultCode ?? 5
-        if resultcode == 7770 {
-            resultcode = 5 // TODO
-        }
-        delegate?.onDonePress(resultCode: resultcode)
+        delegate?.onDonePress(resultCode: getViewModal()?.resultCode ?? 5)
     }
 }

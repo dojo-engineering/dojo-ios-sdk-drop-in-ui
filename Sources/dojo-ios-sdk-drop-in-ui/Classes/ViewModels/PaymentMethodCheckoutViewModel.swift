@@ -43,9 +43,16 @@ class PaymentMethodCheckoutViewModel: BaseViewModel {
                                                                   paymentMethodId: paymentId)
         DojoSDK.executeSavedCardPayment(token: paymentIntent.clientSessionSecret,
                                         payload: savedCardPaymentPayload,
-                                        debugConfig: debugConfig,
+                                        debugConfig: debugConfig ?? DojoSDKDebugConfig(isSandboxIntent: paymentIntent.isSandbox),
                                         fromViewController: fromViewControlelr,
-                                        completion: completion)
+                                        completion: { result in
+            // map internal error as decline for the outside world
+            if result == DojoSDKResponseCode.sdkInternalError.rawValue {
+                completion?(DojoSDKResponseCode.declined.rawValue)
+            } else {
+                completion?(result)
+            }
+        })
     }
     
     func processApplePayPayment(fromViewControlelr: UIViewController, completion: ((Int) -> Void)?) {
