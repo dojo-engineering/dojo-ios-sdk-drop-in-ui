@@ -98,20 +98,20 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
-            
+            self.labelAdditionalLegal.text = "" // will be hidden below the keyboard
             if let navigation = (navigationController as? BaseNavigationController) {
-                navigation.heightConstraint?.constant = keyboardHeight + 286 - 15 + getHeightOfAdditionalLineItemsTable() + getHeightOfAdditionalLegalText()
+                navigation.heightConstraint?.constant = keyboardHeight + 286 - 15 + getHeightOfAdditionalLineItemsTable()
             }
             
             constraintPayButtonBottom.constant = keyboardHeight - (UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0) - 15
-            constraintPayButtonCardBottom.constant = constraintPayButtonBottom.constant
+            constraintPayButtonCardBottom.constant = constraintPayButtonBottom.constant - getHeightOfAdditionalLegalText()
         }
     }
     
     @objc func keyboardWillHide(_ notification: Notification) {
-        
+        self.labelAdditionalLegal.text = theme.additionalLegalText // restore legal text as it would now be visible without the keyboard
         if let navigation = (navigationController as? BaseNavigationController) {
-            navigation.heightConstraint?.constant = 286 + navigation.safeAreaBottomHeight + getHeightOfAdditionalLineItemsTable()//TODO: move to base
+            navigation.heightConstraint?.constant = 286 + navigation.safeAreaBottomHeight + getHeightOfAdditionalLineItemsTable() + getHeightOfAdditionalLegalText()
         }
         
         constraintPayButtonBottom.constant = 9
