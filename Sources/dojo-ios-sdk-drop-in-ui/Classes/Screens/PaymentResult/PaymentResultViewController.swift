@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import dojo_ios_sdk
 
 protocol PaymentResultViewControllerDelegate: BaseViewControllerDelegate {
     func onDonePress(resultCode: Int)
@@ -134,6 +135,7 @@ class PaymentResultViewController: BaseUIViewController {
     }
     
     private func exitFromTheScreen() {
-        delegate?.onDonePress(resultCode: getViewModal()?.resultCode ?? 5) //TODO
+        let result = getViewModal()?.resultCode ?? DojoSDKResponseCode.declined.rawValue
+        delegate?.onDonePress(resultCode: result)
     }
 }

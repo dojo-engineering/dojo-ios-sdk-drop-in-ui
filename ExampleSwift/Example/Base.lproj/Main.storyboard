@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -40,20 +40,44 @@
                                     <action selector="onStartSetupFlowPress:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="H8V-is-LON"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="CustomerSecret" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5dy-8P-QMg">
+                                <rect key="frame" x="26" y="366" width="323" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="0NL-jT-d5i">
+                                <rect key="frame" x="26" y="38" width="51" height="31"/>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="show additional legal text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZQ3-57-qG5">
+                                <rect key="frame" x="90" y="43" width="209" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="ZQ3-57-qG5" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="23" id="2rj-yk-TSz"/>
                             <constraint firstItem="vOc-2M-yBI" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="4id-UV-T2Q"/>
                             <constraint firstItem="TAa-em-XQj" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="68q-hx-ktv"/>
+                            <constraint firstItem="5dy-8P-QMg" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="7jr-hQ-Tvp"/>
+                            <constraint firstItem="0NL-jT-d5i" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="10" id="EmD-2Z-gld"/>
+                            <constraint firstItem="5dy-8P-QMg" firstAttribute="top" secondItem="wao-Qi-wqs" secondAttribute="bottom" constant="15.5" id="Iuh-Bf-SBz"/>
                             <constraint firstAttribute="trailingMargin" secondItem="wao-Qi-wqs" secondAttribute="trailing" constant="10" id="L8m-aK-0gO"/>
+                            <constraint firstItem="0NL-jT-d5i" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="18" id="PWb-8V-jKH"/>
+                            <constraint firstItem="ZQ3-57-qG5" firstAttribute="leading" secondItem="0NL-jT-d5i" secondAttribute="trailing" constant="15" id="VkB-gJ-LIm"/>
                             <constraint firstItem="wao-Qi-wqs" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="10" id="Wb9-on-sja"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="TAa-em-XQj" secondAttribute="bottom" constant="87" id="euT-1B-eg7"/>
                             <constraint firstItem="wao-Qi-wqs" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="ibV-La-PtU"/>
                             <constraint firstItem="TAa-em-XQj" firstAttribute="top" secondItem="vOc-2M-yBI" secondAttribute="bottom" constant="21" id="jSu-SV-U7F"/>
                             <constraint firstItem="wao-Qi-wqs" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="laa-tj-Orr"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ZQ3-57-qG5" secondAttribute="trailing" constant="60" id="qZC-OD-oWT"/>
+                            <constraint firstItem="5dy-8P-QMg" firstAttribute="width" secondItem="wao-Qi-wqs" secondAttribute="width" id="xzC-7K-1qI"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="switchShowAdditionalLegal" destination="0NL-jT-d5i" id="mAy-0f-mZ7"/>
+                        <outlet property="textFieldCustomerSecret" destination="5dy-8P-QMg" id="lFo-M6-hZ2"/>
                         <outlet property="textFieldPaymentIntent" destination="wao-Qi-wqs" id="uMU-5j-XSv"/>
                     </connections>
                 </viewController>

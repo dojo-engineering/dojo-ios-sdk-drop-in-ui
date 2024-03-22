@@ -32,6 +32,7 @@ public class DojoThemeSettings: NSObject {
     @objc public var showBranding: NSNumber
     @objc public var backdropViewColor: UIColor
     @objc public var backdropViewAlpha: NSDecimalNumber
+    @objc public var additionalLegalText: String?
     
     @objc
     public init(primaryLabelTextColor: UIColor? = nil,
@@ -55,7 +56,8 @@ public class DojoThemeSettings: NSObject {
                 errorTextColor: UIColor? = nil,
                 lightStyleForDefaultElements: NSNumber? = nil,
                 backdropViewColor: UIColor? = nil,
-                backdropViewAlpha: NSDecimalNumber? = nil) {
+                backdropViewAlpha: NSDecimalNumber? = nil,
+                additionalLegalText: String? = nil) {
         self.primaryLabelTextColor = primaryLabelTextColor ?? UIColor.init(hexaARGB: "#DD000000") ?? .black
         self.secondaryLabelTextColor = secondaryLabelTextColor ?? UIColor.init(hexaARGB: "#99000000") ?? .gray
         self.headerTintColor = headerTintColor ?? UIColor.init(hexaARGB: "#DD000000") ?? .black
@@ -79,6 +81,7 @@ public class DojoThemeSettings: NSObject {
         self.showBranding = true
         self.backdropViewColor = backdropViewColor ?? UIColor.black
         self.backdropViewAlpha = backdropViewAlpha ?? 0.3
+        self.additionalLegalText = additionalLegalText
     }
     
     @objc
