@@ -23,7 +23,7 @@ struct PaymentIntent: Codable {
     var billingAddress: BillingAddress?
     
     var isCaptured: Bool {
-        status == "Captured" || status == "Authorized"
+        status != "Created"
     }
     
     var isSandbox: Bool {
