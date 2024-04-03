@@ -178,7 +178,7 @@ extension CardDetailsCheckoutViewController {
     func setUpViews() {
         fieldEmail.setType(.email, delegate: self)
         fieldCardholder.setType(.cardHolderName, delegate: self)
-        fieldCardNumber.setType(.cardNumber, delegate: self)
+        fieldCardNumber.setType(.cardNumber, delegate: self, supportedCardSchemas: getViewModel()?.supportedCardSchemes)
         fieldBillingCountry.setType(.billingCountry, delegate: self)
         fieldBillingPostcode.setType(.billingPostcode, delegate: self)
         fieldExpiry.setType(.expiry, delegate: self)

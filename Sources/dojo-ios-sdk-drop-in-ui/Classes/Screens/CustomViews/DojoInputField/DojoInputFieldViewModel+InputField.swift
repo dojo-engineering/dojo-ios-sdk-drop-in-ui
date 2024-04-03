@@ -64,7 +64,8 @@ extension DojoInputField: UITextFieldDelegate {
             var maxNumberOfCharacters = 16
             guard string.compactMap({ Int(String($0)) }).count ==
                     string.count else { return false }
-            if let cardScheme = viewModel?.getCardScheme(updatedString) {
+            if let cardScheme = viewModel?.getCardScheme(updatedString),
+               viewModel?.supportedCardSchemas.contains(cardScheme) ?? false {
                 let image = UIImage.getCardIcon(type: cardScheme, lightVersion: theme?.lightStyleForDefaultElements ?? true)
                 textFieldMain.rightImage(image, imageWidth: 25, padding: 10)
                 currentCardSchema = cardScheme
