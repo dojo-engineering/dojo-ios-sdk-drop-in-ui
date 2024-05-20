@@ -114,33 +114,33 @@ class ThemeSettings {
         // Custom fonts
         registerFonts() // register custom fonts to use inside the SDK
         
-        if let customFontBody1 = UIFont(name: RobotoFont.regular.rawValue, size: 16) { fontBody1 = customFontBody1 }
-        if let customFontBody2 = UIFont(name: RobotoFont.regular.rawValue, size: 14) { fontBody2 = customFontBody2 }
-        if let customfontSubtitle1 = UIFont(name: RobotoFont.regular.rawValue, size: 16) { fontSubtitle1 = customfontSubtitle1 }
-        if let customfontSubtitle1Medium = UIFont(name: RobotoFont.medium.rawValue, size: 16) { fontSubtitle1Medium = customfontSubtitle1Medium }
-        if let customFontSubtitle2 = UIFont(name: RobotoFont.regular.rawValue, size: 14) { fontSubtitle2 = customFontSubtitle2 }
-        if let customFontHeading3Medium = UIFont(name: RobotoFont.medium.rawValue, size: 32) { fontHeading3Medium = customFontHeading3Medium }
-        if let customFontHeading4 = UIFont(name: RobotoFont.bold.rawValue, size: 24) { fontHeading4 = customFontHeading4 }
-        if let customFontHeading5 = UIFont(name: RobotoFont.regular.rawValue, size: 20) { fontHeading5 = customFontHeading5 }
-        if let customFontHeading5Bold = UIFont(name: RobotoFont.bold.rawValue, size: 20) { fontHeading5Bold = customFontHeading5Bold }
-        if let customFontHeading5Medium = UIFont(name: RobotoFont.medium.rawValue, size: 20) { fontHeading5Medium = customFontHeading5Medium }
-        if let customFontPrimaryCTAButtonActive = UIFont(name: RobotoFont.regular.rawValue, size: 16) { fontPrimaryCTAButtonActive = customFontPrimaryCTAButtonActive }
-        if let customFontPoweredByDojo = UIFont(name: RobotoFont.regular.rawValue, size: 14) { fontPoweredByDojo = customFontPoweredByDojo }
+        if let customFontBody1 = UIFont(name: DojoRoobertFont.regular.rawValue, size: 16) { fontBody1 = customFontBody1 }
+        if let customFontBody2 = UIFont(name: DojoRoobertFont.regular.rawValue, size: 14) { fontBody2 = customFontBody2 }
+        if let customfontSubtitle1 = UIFont(name: DojoRoobertFont.regular.rawValue, size: 16) { fontSubtitle1 = customfontSubtitle1 }
+        if let customfontSubtitle1Medium = UIFont(name: DojoRoobertFont.medium.rawValue, size: 16) { fontSubtitle1Medium = customfontSubtitle1Medium }
+        if let customFontSubtitle2 = UIFont(name: DojoRoobertFont.regular.rawValue, size: 14) { fontSubtitle2 = customFontSubtitle2 }
+        if let customFontHeading3Medium = UIFont(name: DojoRoobertFont.medium.rawValue, size: 32) { fontHeading3Medium = customFontHeading3Medium }
+        if let customFontHeading4 = UIFont(name: DojoRoobertFont.bold.rawValue, size: 24) { fontHeading4 = customFontHeading4 }
+        if let customFontHeading5 = UIFont(name: DojoRoobertFont.regular.rawValue, size: 20) { fontHeading5 = customFontHeading5 }
+        if let customFontHeading5Bold = UIFont(name: DojoRoobertFont.bold.rawValue, size: 20) { fontHeading5Bold = customFontHeading5Bold }
+        if let customFontHeading5Medium = UIFont(name: DojoRoobertFont.medium.rawValue, size: 20) { fontHeading5Medium = customFontHeading5Medium }
+        if let customFontPrimaryCTAButtonActive = UIFont(name: DojoRoobertFont.regular.rawValue, size: 16) { fontPrimaryCTAButtonActive = customFontPrimaryCTAButtonActive }
+        if let customFontPoweredByDojo = UIFont(name: DojoRoobertFont.regular.rawValue, size: 14) { fontPoweredByDojo = customFontPoweredByDojo }
     }
 }
 
 extension ThemeSettings {
     
     private func registerFonts() {
-        loadFont(RobotoFont.regular.rawValue)
-        loadFont(RobotoFont.bold.rawValue)
-        loadFont(RobotoFont.medium.rawValue)
+        loadFont(DojoRoobertFont.regular.rawValue)
+        loadFont(DojoRoobertFont.bold.rawValue)
+        loadFont(DojoRoobertFont.medium.rawValue)
     }
     
-    private enum RobotoFont: String {
-        case regular = "Roboto-Regular"
-        case bold = "Roboto-Bold"
-        case medium = "Roboto-Medium"
+    private enum DojoRoobertFont: String {
+        case regular = "DOJORoobert-Regular"
+        case bold = "DOJORoobert-Bold"
+        case medium = "DOJORoobert-Medium"
     }
     
     private func loadFont(_ fontName: String) {
