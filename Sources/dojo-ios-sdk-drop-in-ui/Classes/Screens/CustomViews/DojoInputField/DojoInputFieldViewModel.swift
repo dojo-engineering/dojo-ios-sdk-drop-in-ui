@@ -24,13 +24,14 @@ enum DojoInputFieldState {
 
 
 protocol DojoInputFieldViewModelProtocol {
-    init(type: DojoInputFieldType)
+    init(type: DojoInputFieldType, supportedCardSchemas: [CardSchemes])
     var fieldKeyboardType: UIKeyboardType {get}
     var fieldPlaceholder: String {get}
     var fieldName: String {get}
     var fieldError: String {get}
     var fieldErrorEmpty: String {get}
     var fieldMaxLimit: Int {get}
+    var supportedCardSchemas: [CardSchemes] {set get}
     var type: DojoInputFieldType {get}
     
     func validateField(_ text: String?) -> DojoInputFieldState
@@ -40,11 +41,14 @@ protocol DojoInputFieldViewModelProtocol {
 }
 
 class DojoInputFieldViewModel: DojoInputFieldViewModelProtocol {
+
+    var supportedCardSchemas: [CardSchemes]
     
     let type: DojoInputFieldType
     
-    required init(type: DojoInputFieldType) {
+    required init(type: DojoInputFieldType, supportedCardSchemas: [CardSchemes] = []) {
         self.type = type
+        self.supportedCardSchemas = supportedCardSchemas
     }
     
     var fieldKeyboardType: UIKeyboardType {

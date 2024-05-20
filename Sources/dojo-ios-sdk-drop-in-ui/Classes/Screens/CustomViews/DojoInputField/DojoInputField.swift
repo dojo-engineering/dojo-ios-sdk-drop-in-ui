@@ -58,8 +58,8 @@ class DojoInputField: UIView {
         return viewModel.type
     }
     
-    func setType(_ type: DojoInputFieldType, delegate: DojoInputFieldDelegate) {
-        self.viewModel = DojoInputFieldViewModel(type: type)
+    func setType(_ type: DojoInputFieldType, delegate: DojoInputFieldDelegate, supportedCardSchemas: [CardSchemes]? = []) {
+        self.viewModel = DojoInputFieldViewModel(type: type, supportedCardSchemas: supportedCardSchemas ?? [])
         self.delegate = delegate
         setUpFieldForCurrentType()
         setState(.normal)
