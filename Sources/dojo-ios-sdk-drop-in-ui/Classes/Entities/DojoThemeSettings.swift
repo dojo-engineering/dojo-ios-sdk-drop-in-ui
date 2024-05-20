@@ -72,12 +72,12 @@ public class DojoThemeSettings: NSObject {
         self.separatorColor = separatorColor ?? UIColor.init(hexaARGB: "#33000000") ?? .lightGray
         self.loadingIndicatorColor = loadingIndicatorColor ?? UIColor.init(hexaARGB: "#FF262626") ?? .black
         self.lightStyleForDefaultElements = lightStyleForDefaultElements ?? true
-        self.inputElementActiveTintColor = inputElementActiveTintColor ?? UIColor.init(hexaARGB: "#FF00857D") ?? .systemGreen
-        self.inputFieldSelectedBorderColor = inputFieldSelectedBorderColor ?? UIColor.init(hexaARGB: "#FF00857D") ?? .systemGreen
+        self.inputElementActiveTintColor = inputElementActiveTintColor ?? UIColor.init(hexaARGB: "#FF003F33") ?? .systemGreen
+        self.inputFieldSelectedBorderColor = inputFieldSelectedBorderColor ?? UIColor.init(hexaARGB: "#FF003F33") ?? .systemGreen
         self.inputFieldBackgroundColor = inputFieldBackgroundColor ?? UIColor.init(hexaARGB: "#FFFFFFFF") ?? .white
         self.inputElementDefaultTintColor = inputElementDefaultTintColor ?? UIColor.init(hexaARGB: "#26000000") ?? .gray
         self.inputFieldDefaultBorderColor = inputFieldDefaultBorderColor ?? UIColor.init(hexaARGB: "#26000000") ?? .gray
-        self.errorTextColor = errorTextColor ?? UIColor.init(hexaARGB: "#FFB00020") ?? .systemRed
+        self.errorTextColor = errorTextColor ?? UIColor.init(hexaARGB: "#FFB34351") ?? .systemRed
         self.showBranding = true
         self.backdropViewColor = backdropViewColor ?? UIColor.black
         self.backdropViewAlpha = backdropViewAlpha ?? 0.3
@@ -106,12 +106,12 @@ public class DojoThemeSettings: NSObject {
         theme.separatorColor = UIColor.init(hexaARGB: "#33000000") ?? .lightGray
         theme.loadingIndicatorColor = UIColor.init(hexaARGB: "#FFFFFFFF") ?? .white
         theme.lightStyleForDefaultElements = false
-        theme.inputElementActiveTintColor = UIColor.init(hexaARGB: "#FFFFFFFF") ?? .systemGreen
-        theme.inputFieldSelectedBorderColor = UIColor.init(hexaARGB: "#FFFFFFFF") ?? .systemGreen
+        theme.inputElementActiveTintColor = UIColor.init(hexaARGB: "#FF3CEAC7") ?? .systemGreen
+        theme.inputFieldSelectedBorderColor = UIColor.init(hexaARGB: "#FF3CEAC7") ?? .systemGreen
         theme.inputFieldBackgroundColor = UIColor.init(hexaARGB: "#FF313131") ?? .black
         theme.inputElementDefaultTintColor = UIColor.init(hexaARGB: "#FFFFFFFF") ?? .gray
         theme.inputFieldDefaultBorderColor = UIColor.init(hexaARGB: "#26FFFFFF") ?? .gray
-        theme.errorTextColor = UIColor.init(hexaARGB: "#FFED5645") ?? .systemRed
+        theme.errorTextColor = UIColor.init(hexaARGB: "#FFFF8066") ?? .systemRed
         return theme
     }
 }
