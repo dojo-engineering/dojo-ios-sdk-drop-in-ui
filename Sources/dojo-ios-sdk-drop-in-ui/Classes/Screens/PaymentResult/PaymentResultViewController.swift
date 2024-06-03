@@ -91,6 +91,7 @@ class PaymentResultViewController: BaseUIViewController {
             
         } else {
             buttonTryAgain.isHidden = false
+            buttonTryAgain.setTitle(LocalizedText.PaymentResult.buttonTryAgain, for: .normal)
             labelMainText.text = getViewModal()?.mainText
             labelSubtitle.text = "\(LocalizedText.PaymentResult.orderId) \(viewModel?.paymentIntent.reference ?? "")"
             if let viewModel = viewModel,
