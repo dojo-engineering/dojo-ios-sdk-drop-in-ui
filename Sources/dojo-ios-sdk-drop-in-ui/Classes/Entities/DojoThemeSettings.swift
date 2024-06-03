@@ -61,7 +61,7 @@ public class DojoThemeSettings: NSObject {
         self.primaryLabelTextColor = primaryLabelTextColor ?? UIColor.init(hexaARGB: "#DD000000") ?? .black
         self.secondaryLabelTextColor = secondaryLabelTextColor ?? UIColor.init(hexaARGB: "#99000000") ?? .gray
         self.headerTintColor = headerTintColor ?? UIColor.init(hexaARGB: "#DD000000") ?? .black
-        self.headerButtonTintColor = headerButtonTintColor ?? UIColor.init(hexaARGB: "#99000000") ?? .gray
+        self.headerButtonTintColor = headerButtonTintColor ?? .black
         self.primaryCTAButtonActiveBackgroundColor = primaryCTAButtonActiveBackgroundColor ?? UIColor.init(hexaARGB: "#FF000000") ?? .black
         self.primarySurfaceBackgroundColor = primarySurfaceBackgroundColor ?? UIColor.init(hexaARGB: "#FFFFFFFF") ?? .white
         self.primaryCTAButtonActiveTextColor = primaryCTAButtonActiveTextColor ?? UIColor.init(hexaARGB: "#FFFFFFFF") ?? .white

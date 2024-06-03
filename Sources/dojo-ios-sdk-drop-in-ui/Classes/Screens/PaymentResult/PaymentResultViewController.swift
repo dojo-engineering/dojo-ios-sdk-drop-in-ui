@@ -68,7 +68,7 @@ class PaymentResultViewController: BaseUIViewController {
     override func setUpDesign() {
         super.setUpDesign()
         labelMainText.textColor = theme.primaryLabelTextColor
-        labelMainText.font = theme.fontHeading4
+        labelMainText.font = theme.fontHeading4Bold
         labelSubtitle.textColor = theme.primaryLabelTextColor
         labelSubtitle.font = theme.fontHeading5
         labelSubtitle2.textColor = theme.secondaryLabelTextColor

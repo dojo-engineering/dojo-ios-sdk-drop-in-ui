@@ -43,6 +43,7 @@ class ThemeSettings {
     var fontSubtitle2: UIFont
     var fontHeading3Medium: UIFont
     var fontHeading4: UIFont
+    var fontHeading4Bold: UIFont
     var fontHeading5: UIFont
     var fontHeading5Bold: UIFont //TODO: speak with Designers
     var fontHeading5Medium: UIFont //TODO: speak with Designers
@@ -104,7 +105,8 @@ class ThemeSettings {
         fontSubtitle1Medium = UIFont.systemFont(ofSize: 16, weight: .medium)
         fontSubtitle2 = UIFont.systemFont(ofSize: 14, weight: .regular)
         fontHeading3Medium = UIFont.systemFont(ofSize: 32, weight: .medium)
-        fontHeading4 = UIFont.systemFont(ofSize: 24, weight: .bold)
+        fontHeading4 = UIFont.systemFont(ofSize: 24, weight: .regular)
+        fontHeading4Bold = UIFont.systemFont(ofSize: 24, weight: .bold)
         fontHeading5 = UIFont.systemFont(ofSize: 20, weight: .regular)
         fontHeading5Bold = UIFont.systemFont(ofSize: 20, weight: .bold)
         fontHeading5Medium = UIFont.systemFont(ofSize: 20, weight: .medium)
@@ -120,7 +122,8 @@ class ThemeSettings {
         if let customfontSubtitle1Medium = UIFont(name: DojoRoobertFont.medium.rawValue, size: 16) { fontSubtitle1Medium = customfontSubtitle1Medium }
         if let customFontSubtitle2 = UIFont(name: DojoRoobertFont.regular.rawValue, size: 14) { fontSubtitle2 = customFontSubtitle2 }
         if let customFontHeading3Medium = UIFont(name: DojoRoobertFont.medium.rawValue, size: 32) { fontHeading3Medium = customFontHeading3Medium }
-        if let customFontHeading4 = UIFont(name: DojoRoobertFont.bold.rawValue, size: 24) { fontHeading4 = customFontHeading4 }
+        if let customFontHeading4Bold = UIFont(name: DojoRoobertFont.bold.rawValue, size: 24) { fontHeading4Bold = customFontHeading4Bold }
+        if let customFontHeading4 = UIFont(name: DojoRoobertFont.medium.rawValue, size: 24) { fontHeading4 = customFontHeading4 }
         if let customFontHeading5 = UIFont(name: DojoRoobertFont.regular.rawValue, size: 20) { fontHeading5 = customFontHeading5 }
         if let customFontHeading5Bold = UIFont(name: DojoRoobertFont.bold.rawValue, size: 20) { fontHeading5Bold = customFontHeading5Bold }
         if let customFontHeading5Medium = UIFont(name: DojoRoobertFont.medium.rawValue, size: 20) { fontHeading5Medium = customFontHeading5Medium }
