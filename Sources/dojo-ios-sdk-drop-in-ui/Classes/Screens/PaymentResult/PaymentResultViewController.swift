@@ -17,7 +17,7 @@ class PaymentResultViewController: BaseUIViewController {
     @IBOutlet weak var labelMainText: UILabel!
     @IBOutlet weak var labelSubtitle: UILabel!
     @IBOutlet weak var labelSubtitle2: UILabel!
-    @IBOutlet weak var buttonDone: UIButton!
+    @IBOutlet weak var buttonDone: CustomFontButton!
     @IBOutlet weak var buttonTryAgain: LoadingButton!
     @IBOutlet weak var imgViewResult: UIImageView!
     @IBOutlet weak var constraintBottomButtonBottom: NSLayoutConstraint!
@@ -107,6 +107,7 @@ class PaymentResultViewController: BaseUIViewController {
             buttonDone.layer.cornerRadius = theme.primaryCTAButtonCornerRadius
         } else {
             buttonTryAgain.isHidden = false
+            buttonTryAgain.setTitle(LocalizedText.PaymentResult.buttonTryAgain, for: .normal)
             labelMainText.text = LocalizedText.PaymentResult.mainTitleFail
             labelSubtitle.text = "\(LocalizedText.PaymentResult.orderId) \(viewModel?.paymentIntent.id ?? "")"
             labelSubtitle2.text = LocalizedText.PaymentResult.mainErrorMessage

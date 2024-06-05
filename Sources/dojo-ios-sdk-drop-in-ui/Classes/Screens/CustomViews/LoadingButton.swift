@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoadingButton: UIButton {
+class LoadingButton: CustomFontButton {
 
     struct ButtonState {
         var state: UIControl.State
@@ -22,6 +22,7 @@ class LoadingButton: UIButton {
     
     func setTheme(_ theme: ThemeSettings) {
         self.theme = theme
+        self.setFont(theme.fontBody1)
         if isUserInteractionEnabled {
             backgroundColor = theme.primaryCTAButtonActiveBackgroundColor
             layer.borderColor = theme.primaryCTAButtonActiveBackgroundColor.cgColor
@@ -77,3 +78,6 @@ class LoadingButton: UIButton {
 //        }
     }
 }
+
+
+

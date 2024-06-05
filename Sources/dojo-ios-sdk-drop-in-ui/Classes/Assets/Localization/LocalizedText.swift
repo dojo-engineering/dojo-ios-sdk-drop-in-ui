@@ -72,6 +72,7 @@ enum LocalizedText {
         static let mainTitleSuccess = "dojo_ui_sdk_payment_result_main_title_success".localized
         static let mainTitleFail = "dojo_ui_sdk_payment_result_main_title_fail".localized
         static let buttonDone = "dojo_ui_sdk_payment_result_button_done".localized
+        static let buttonTryAgain = "dojo_ui_sdk_payment_result_button_try_again".localized
         static let buttonPleaseWait = "dojo_ui_sdk_payment_ressult_button_please_wait".localized
         static let orderId = "dojo_ui_sdk_payment_result_order_info".localized
         static let mainErrorMessage = "dojo_ui_sdk_payment_result_failed_description".localized

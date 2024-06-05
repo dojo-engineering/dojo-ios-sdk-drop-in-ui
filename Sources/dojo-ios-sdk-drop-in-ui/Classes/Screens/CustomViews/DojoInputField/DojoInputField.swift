@@ -107,6 +107,7 @@ class DojoInputField: UIView {
         textFieldMain.backgroundColor = theme.inputFieldBackgroundColor
         textFieldMain.textColor = theme.primaryLabelTextColor
         textFieldMain.keyboardAppearance = theme.lightStyleForDefaultElements ? .light : .dark
+        textFieldMain.font = theme.fontBody1
         
         imageViewBottom.image = UIImage.getFieldErrorIcon(lightVersion: theme.lightStyleForDefaultElements)
         
