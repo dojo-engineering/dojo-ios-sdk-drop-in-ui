@@ -26,7 +26,8 @@ class ThemeSettings {
     var secondaryCTAButtonActiveBorderColor: UIColor
     var separatorColor: UIColor
     var loadingIndicatorColor: UIColor
-    var colorPoweredByDojo: UIColor
+    var colorPoweredByDojoText: UIColor
+    var colorPoweredByDojoLogo: UIColor
     var colorPoweredBySeparator: UIColor
     var colorPoweredByButtons: UIColor
     var inputElementActiveTintColor: UIColor
@@ -85,7 +86,8 @@ class ThemeSettings {
         loadingIndicatorColor = dojoTheme.loadingIndicatorColor
         lightStyleForDefaultElements = dojoTheme.lightStyleForDefaultElements == true ? true : false
         applePayButtonStyle = dojoTheme.lightStyleForDefaultElements == true ? .black : .white
-        colorPoweredByDojo = dojoTheme.lightStyleForDefaultElements == true ? .black : .white
+        colorPoweredByDojoText = dojoTheme.lightStyleForDefaultElements == true ? (UIColor.init(hexaARGB: "#FF003F33") ?? .black) : .white
+        colorPoweredByDojoLogo = dojoTheme.lightStyleForDefaultElements == true ? .black : .white
         showBranding = dojoTheme.showBranding.boolValue
         additionalLegalText = dojoTheme.additionalLegalText
         
@@ -128,7 +130,7 @@ class ThemeSettings {
         if let customFontHeading5Bold = UIFont(name: DojoRoobertFont.bold.rawValue, size: 20) { fontHeading5Bold = customFontHeading5Bold }
         if let customFontHeading5Medium = UIFont(name: DojoRoobertFont.medium.rawValue, size: 20) { fontHeading5Medium = customFontHeading5Medium }
         if let customFontPrimaryCTAButtonActive = UIFont(name: DojoRoobertFont.regular.rawValue, size: 16) { fontPrimaryCTAButtonActive = customFontPrimaryCTAButtonActive }
-        if let customFontPoweredByDojo = UIFont(name: DojoRoobertFont.regular.rawValue, size: 14) { fontPoweredByDojo = customFontPoweredByDojo }
+        if let customFontPoweredByDojo = UIFont(name: DojoRoobertFont.medium.rawValue, size: 14) { fontPoweredByDojo = customFontPoweredByDojo }
     }
 }
 
