@@ -96,6 +96,10 @@ class CardDetailsCheckoutViewModel: BaseViewModel {
         paymentIntent.config?.tradingName ?? ""
     }
     
+    var companyName: String? {
+        paymentIntent.config?.title ?? paymentIntent.config?.tradingName
+    }
+    
     var navigationTitle: String {
         paymentIntent.isSetupIntent ? LocalizedText.CardDetailsCheckout.titleSetupIntent : LocalizedText.CardDetailsCheckout.title
     }

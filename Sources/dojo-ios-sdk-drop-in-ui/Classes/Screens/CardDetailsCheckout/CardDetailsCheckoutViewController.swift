@@ -15,6 +15,7 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     var delegate: CardDetailsCheckoutViewControllerDelegate?
     var inputFields: [DojoInputField] = []
     
+    @IBOutlet weak var labelCompanyName: UILabel!
     @IBOutlet weak var labelPrimaryAmount: UILabel!
     @IBOutlet weak var labelYouPay: UILabel!
     @IBOutlet weak var labelSaveCardForFutureUse: UILabel!
@@ -65,6 +66,15 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         imageViewTermsCheckbox.tintColor = theme.inputElementActiveTintColor
         
         labelYouPay.textColor = theme.primaryLabelTextColor
+        
+        labelCompanyName.textColor = theme.primaryLabelTextColor
+        labelCompanyName.font = theme.fontBody1
+        
+        if let companyName = getViewModel()?.companyName {
+            labelCompanyName.text = companyName
+        } else {
+            labelCompanyName.isHidden = true
+        }
         
         labelCOFTerms.text = "\(getViewModel()?.tradingName ?? "") \(LocalizedText.CardDetailsCheckout.consentTerms)"
         labelCOFTerms.font = theme.fontSubtitle2
