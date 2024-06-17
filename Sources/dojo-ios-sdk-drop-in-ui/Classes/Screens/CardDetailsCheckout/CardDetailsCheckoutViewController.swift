@@ -15,6 +15,7 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     var delegate: CardDetailsCheckoutViewControllerDelegate?
     var inputFields: [DojoInputField] = []
     
+    @IBOutlet weak var labelCompanyName: UILabel!
     @IBOutlet weak var labelPrimaryAmount: UILabel!
     @IBOutlet weak var labelYouPay: UILabel!
     @IBOutlet weak var labelSaveCardForFutureUse: UILabel!
@@ -66,6 +67,15 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         
         labelYouPay.textColor = theme.primaryLabelTextColor
         
+        labelCompanyName.textColor = theme.primaryLabelTextColor
+        labelCompanyName.font = theme.fontBody1
+        
+        if let companyName = getViewModel()?.companyName {
+            labelCompanyName.text = companyName
+        } else {
+            labelCompanyName.isHidden = true
+        }
+        
         labelCOFTerms.text = "\(getViewModel()?.tradingName ?? "") \(LocalizedText.CardDetailsCheckout.consentTerms)"
         labelCOFTerms.font = theme.fontSubtitle2
         labelCOFTerms.textColor = theme.secondaryLabelTextColor
@@ -75,8 +85,9 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
             labelPrimaryAmount.font = theme.fontSubtitle2
             labelPrimaryAmount.text = getViewModel()?.paymentIntent.reference
             
-            labelYouPay.font = theme.fontHeading5
-            labelYouPay.text = getViewModel()?.tradingName ?? ""
+            // Setup Intent has a bit different UI for company Name label
+            labelCompanyName.font = theme.fontHeading5
+            labelYouPay.isHidden = true
         } else {
             labelPrimaryAmount.textColor = theme.primaryLabelTextColor
             labelPrimaryAmount.font = theme.fontHeading3Medium
