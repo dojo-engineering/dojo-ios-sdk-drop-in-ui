@@ -85,8 +85,9 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
             labelPrimaryAmount.font = theme.fontSubtitle2
             labelPrimaryAmount.text = getViewModel()?.paymentIntent.reference
             
-            labelYouPay.font = theme.fontHeading5
-            labelYouPay.text = getViewModel()?.tradingName ?? ""
+            // Setup Intent has a bit different UI for company Name label
+            labelCompanyName.font = theme.fontHeading5
+            labelYouPay.isHidden = true
         } else {
             labelPrimaryAmount.textColor = theme.primaryLabelTextColor
             labelPrimaryAmount.font = theme.fontHeading3Medium
