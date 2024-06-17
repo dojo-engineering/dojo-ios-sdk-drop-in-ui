@@ -10,12 +10,13 @@ class DojoInputFieldViewModelTests: XCTestCase {
         XCTAssert(inputFieldViewModelEmail.validateField("test998@test.com") != .error)
         XCTAssert(inputFieldViewModelEmail.validateField("test+work@test.com") != .error)
         
-        let inputFieldViewModelCardNumber = DojoInputFieldViewModel(type: .cardNumber)
+        let inputFieldViewModelCardNumber = DojoInputFieldViewModel(type: .cardNumber, supportedCardSchemas: [.visa, .amex])
         XCTAssert(inputFieldViewModelCardNumber.validateField("4234234234") == .error)
         XCTAssert(inputFieldViewModelCardNumber.validateField("abc") == .error)
         XCTAssert(inputFieldViewModelCardNumber.validateField("4976000000003436") != .error)
         XCTAssert(inputFieldViewModelCardNumber.validateField("497 60000 00003 436") != .error)
         XCTAssert(inputFieldViewModelCardNumber.validateField("371449635398431") != .error)
+        XCTAssert(inputFieldViewModelCardNumber.validateField("5555 5555 5555 4444") == .error) // should give error as .mastercard is not in supportedCardSchemas
         
         let inputFieldViewModelExpiry = DojoInputFieldViewModel(type: .expiry)
         XCTAssert(inputFieldViewModelExpiry.validateField("12/20") == .error)

@@ -23,7 +23,7 @@ struct PaymentIntent: Codable {
     var billingAddress: BillingAddress?
     
     var isCaptured: Bool {
-        status == "Captured" || status == "Authorized"
+        status != "Created"
     }
     
     var isSandbox: Bool {
@@ -80,6 +80,7 @@ struct PaymentIntentConfig: Codable {
     var customerEmail: ConfigurationRequired?
     var billingAddress: ConfigurationRequired?
     var tradingName: String?
+    let title: String?
 }
 
 struct BillingAddress: Codable {

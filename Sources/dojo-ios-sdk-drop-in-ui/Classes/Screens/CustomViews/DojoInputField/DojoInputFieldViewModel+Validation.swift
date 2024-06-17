@@ -16,7 +16,8 @@ extension DojoInputFieldViewModel {
                 return .error
             }
         case .cardNumber:
-            if !isCardNumberValid(text.replacingOccurrences(of: " ", with: "")) {
+            let cardNumber = text.replacingOccurrences(of: " ", with: "")
+            if !isCardNumberValid(cardNumber) || !isCardSchemaSupported(getCardScheme(cardNumber)) {
                 return .error
             }
         case .expiry:
@@ -40,6 +41,11 @@ extension DojoInputFieldViewModel {
     
     func isCardNumberValid(_ cardNumber: String) -> Bool {
         CardUtils.luhnCheck(cardNumber)
+    }
+    
+    func isCardSchemaSupported(_ cardSchema: CardSchemes?) -> Bool {
+        guard let cardSchema = cardSchema else { return false }
+        return supportedCardSchemas.contains(cardSchema)
     }
     
     func isExpiryValid(_ expiry: String) -> Bool {
