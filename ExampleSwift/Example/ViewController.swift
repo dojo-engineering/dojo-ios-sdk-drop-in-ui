@@ -24,7 +24,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func onStartSetupFlowPress(_ sender: Any) {
-        var setupIntentId = "si_sandbox_QLaGn4ngz0KOrMjc-SOUwg"
+        var setupIntentId = ""
         if let setupIntent = textFieldPaymentIntent.text,
            !setupIntent.isEmpty {
             setupIntentId = setupIntent
@@ -41,7 +41,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func onStartPaymentFlowPress(_ sender: Any) {
-        var paymentIntentId = "pi_sandbox_ftimQ5NfE0CeozaI8mGEpw"
+        var paymentIntentId = ""
         if let paymentIntent = textFieldPaymentIntent.text,
            !paymentIntent.isEmpty {
             paymentIntentId = paymentIntent

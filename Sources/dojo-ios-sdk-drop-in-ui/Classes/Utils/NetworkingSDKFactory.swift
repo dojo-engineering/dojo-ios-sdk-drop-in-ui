@@ -25,11 +25,11 @@ class NetworkingSDKFactory {
 
 class DojoSDKMock: NetworkingSDKProtocol {
     func fetchPaymentIntent(intentId: String, debugConfig: DojoSDKDebugConfig?, completion: ((String?, Error?) -> Void)?) {
-        completion?(TestsUtils.paymentIntentWithItemLines, nil)
+//        completion?(TestsUtils.paymentIntentWithItemLines, nil)
     }
     
     func fetchCustomerPaymentMethods(customerId: String, customerSecret: String, debugConfig: DojoSDKDebugConfig?, completion: ((String?, Error?) -> Void)?) {
-        completion?(TestsUtils.savedMethodsString, nil)
+//        completion?(TestsUtils.savedMethodsString, nil)
     }
     
     func fetchSetupIntent(intentId: String, debugConfig: DojoSDKDebugConfig?, completion: ((String?, Error?) -> Void)?) {

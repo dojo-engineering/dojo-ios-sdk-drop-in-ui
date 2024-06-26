@@ -30,7 +30,7 @@ public class DojoSDKDropInUI: NSObject {
                                                              themeSettings: theme,
                                                              applePayConfig: applePayConfig,
                                                              debugConfig: debugConfig,
-                                                             isDemo: true)
+                                                             isDemo: false)
             if let configurationManager = self.configurationManager {
                 self.rootCoordinator = RootCoordinator(presentationViewController: controller,
                                                        config: configurationManager,
