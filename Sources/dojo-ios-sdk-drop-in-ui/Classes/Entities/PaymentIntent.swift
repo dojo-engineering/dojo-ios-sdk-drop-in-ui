@@ -80,6 +80,7 @@ struct PaymentIntentConfig: Codable {
     var customerEmail: ConfigurationRequired?
     var billingAddress: ConfigurationRequired?
     var tradingName: String?
+    let title: String?
 }
 
 struct BillingAddress: Codable {
