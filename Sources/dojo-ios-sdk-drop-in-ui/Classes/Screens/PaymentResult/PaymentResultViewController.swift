@@ -18,7 +18,7 @@ class PaymentResultViewController: BaseUIViewController {
     @IBOutlet weak var labelMainText: UILabel!
     @IBOutlet weak var labelSubtitle: UILabel!
     @IBOutlet weak var labelSubtitle2: UILabel!
-    @IBOutlet weak var buttonDone: UIButton!
+    @IBOutlet weak var buttonDone: CustomFontButton!
     @IBOutlet weak var buttonTryAgain: LoadingButton!
     @IBOutlet weak var imgViewResult: UIImageView!
     
@@ -68,7 +68,7 @@ class PaymentResultViewController: BaseUIViewController {
     override func setUpDesign() {
         super.setUpDesign()
         labelMainText.textColor = theme.primaryLabelTextColor
-        labelMainText.font = theme.fontHeading4
+        labelMainText.font = theme.fontHeading4Bold
         labelSubtitle.textColor = theme.primaryLabelTextColor
         labelSubtitle.font = theme.fontHeading5
         labelSubtitle2.textColor = theme.secondaryLabelTextColor
@@ -88,8 +88,10 @@ class PaymentResultViewController: BaseUIViewController {
             buttonDone.setTitleColor(theme.primaryCTAButtonActiveTextColor, for: .normal)
             buttonDone.tintColor = theme.primaryCTAButtonActiveTextColor
             buttonDone.layer.cornerRadius = theme.primaryCTAButtonCornerRadius
+            
         } else {
             buttonTryAgain.isHidden = false
+            buttonTryAgain.setTitle(LocalizedText.PaymentResult.buttonTryAgain, for: .normal)
             labelMainText.text = getViewModal()?.mainText
             labelSubtitle.text = "\(LocalizedText.PaymentResult.orderId) \(viewModel?.paymentIntent.reference ?? "")"
             if let viewModel = viewModel,

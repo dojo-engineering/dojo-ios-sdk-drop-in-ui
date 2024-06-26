@@ -62,7 +62,6 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         super.setUpDesign()
         
         buttonPay.setTheme(theme)
-        imageViewSaveCardCheckbox.tintColor = theme.inputElementActiveTintColor
         imageViewTermsCheckbox.tintColor = theme.inputElementActiveTintColor
         
         labelYouPay.textColor = theme.primaryLabelTextColor
@@ -81,6 +80,8 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         labelCOFTerms.textColor = theme.secondaryLabelTextColor
     
         if getViewModel()?.paymentIntent.isSetupIntent ?? false {
+            imageViewSaveCardCheckbox.tintColor = theme.headerButtonTintColor
+            imageViewTermsCheckbox.tintColor = theme.headerButtonTintColor
             labelPrimaryAmount.textColor = theme.secondaryLabelTextColor
             labelPrimaryAmount.font = theme.fontSubtitle2
             labelPrimaryAmount.text = getViewModel()?.paymentIntent.reference
@@ -89,6 +90,8 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
             labelCompanyName.font = theme.fontHeading5
             labelYouPay.isHidden = true
         } else {
+            imageViewSaveCardCheckbox.tintColor = theme.inputElementActiveTintColor
+            imageViewTermsCheckbox.tintColor = theme.inputElementActiveTintColor
             labelPrimaryAmount.textColor = theme.primaryLabelTextColor
             labelPrimaryAmount.font = theme.fontHeading3Medium
             labelYouPay.font = theme.fontSubtitle1Medium
@@ -147,7 +150,7 @@ extension CardDetailsCheckoutViewController {
             
             buttonPay.setTitle(getViewModel()?.paymentIntent.payButtonFormatted, for: .normal)
             
-            let fontCurrency = [NSAttributedString.Key.font : theme.fontBody1]
+            let fontCurrency = [NSAttributedString.Key.font : theme.fontHeading4]
             let fontAmount = [NSAttributedString.Key.font : theme.fontHeading3Medium]
             let gbpString = NSMutableAttributedString(string:"£", attributes: fontCurrency)
             let amountText = getViewModel()?.paymentIntent.amountText ?? ""
@@ -272,8 +275,10 @@ extension CardDetailsCheckoutViewController {
         viewModel.isSaveCardSelected = !viewModel.isSaveCardSelected
         if viewModel.isSaveCardSelected {
             imageViewSaveCardCheckbox.image = UIImage(named: "icon-checkbox-checked", in: Bundle.libResourceBundle, compatibleWith: nil)
+            imageViewSaveCardCheckbox.tintColor = theme.inputElementActiveTintColor
         } else {
             imageViewSaveCardCheckbox.image = UIImage(named: "icon-checkbox-unchecked", in: Bundle.libResourceBundle, compatibleWith: nil)
+            imageViewSaveCardCheckbox.tintColor = theme.headerButtonTintColor
         }
         print("On saved card pressed")
     }
@@ -283,8 +288,10 @@ extension CardDetailsCheckoutViewController {
         viewModel.isTermsSelected = !viewModel.isTermsSelected
         if viewModel.isTermsSelected {
             imageViewTermsCheckbox.image = UIImage(named: "icon-checkbox-checked", in: Bundle.libResourceBundle, compatibleWith: nil)
+            imageViewTermsCheckbox.tintColor = theme.inputElementActiveTintColor
         } else {
             imageViewTermsCheckbox.image = UIImage(named: "icon-checkbox-unchecked", in: Bundle.libResourceBundle, compatibleWith: nil)
+            imageViewTermsCheckbox.tintColor = theme.headerButtonTintColor
         }
         forceValidate()
         print("On terms pressed")

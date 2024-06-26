@@ -51,7 +51,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             return
         }
         let theme = DojoThemeSettings.getLightTheme()
-        let customerSecret = textFieldCustomerSecret.text
+        let customerSecret = "textFieldCustomerSecret.text"
         if switchShowAdditionalLegal.isOn {
             theme.additionalLegalText = "Dojo is a trading name of Paymentsense Limited. Copyright ©2024 Paymentsense Limited. All rights reserved. Paymentsense Limited is authorised and regulated by the Financial Conduct Authority (FCA FRN 738728) and under the Electronic Money Regulations 2011 (FCA FRN 900925) for the issuing of electronic money and provision of payment services. Our company number is 06730690 and our registered office address is The Brunel Building, 2 Canalside Walk, London W2 1DG"
         }

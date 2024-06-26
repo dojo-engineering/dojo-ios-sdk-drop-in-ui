@@ -45,10 +45,10 @@ class FooterPoweredByDojo: UIView {
     }
     
     func setTheme(theme: ThemeSettings) {
-        labelPoweredBy.textColor = theme.colorPoweredByDojo
+        labelPoweredBy.textColor = theme.colorPoweredByDojoText
         labelPoweredBy.font = theme.fontPoweredByDojo
         labelPoweredBy.setTextSpacingBy(value: 0.5)
-        imageLogo.tintColor = theme.colorPoweredByDojo
+        imageLogo.tintColor = theme.colorPoweredByDojoLogo
         viewSeparator.backgroundColor = theme.colorPoweredBySeparator
         
         buttonTerms.tintColor = theme.colorPoweredByButtons

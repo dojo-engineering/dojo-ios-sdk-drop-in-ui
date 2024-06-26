@@ -19,7 +19,7 @@ class ManagePaymentMethodsViewController: BaseUIViewController {
     
     @IBOutlet weak var tableViewPaymentMethods: UITableView!
     @IBOutlet weak var buttonUseSelectedPaymentMethod: LoadingButton!
-    @IBOutlet weak var buttonPayUsingNewCard: UIButton!
+    @IBOutlet weak var buttonPayUsingNewCard: CustomFontButton!
     
     public init(viewModel: ManagePaymentMethodsViewModel,
                 theme: ThemeSettings,
