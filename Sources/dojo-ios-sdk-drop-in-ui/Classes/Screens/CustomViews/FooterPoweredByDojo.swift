@@ -32,7 +32,8 @@ class FooterPoweredByDojo: UIView {
     @IBOutlet var constraintPoweredByTailing: NSLayoutConstraint!
     @IBOutlet var constraintButtonByCenter: NSLayoutConstraint!
     @IBOutlet var constraintButtonByLeft: NSLayoutConstraint!
-    let viewModel = FooterPoweredByViewModel()
+    private var viewModel: FooterPoweredByViewModel?
+    private var showBranding = true
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -44,6 +45,10 @@ class FooterPoweredByDojo: UIView {
         initSubviews()
     }
     
+    func setModel(paymentIntent: PaymentIntent) {
+        viewModel = .init(paymentIntent: paymentIntent)
+    }
+
     func setTheme(theme: ThemeSettings) {
         labelPoweredBy.textColor = theme.colorPoweredByDojo
         labelPoweredBy.font = theme.fontPoweredByDojo
@@ -57,7 +62,7 @@ class FooterPoweredByDojo: UIView {
         buttonTerms.setTitleColor(theme.colorPoweredByButtons, for: .normal)
         buttonPrivacy.setTitleColor(theme.colorPoweredByButtons, for: .normal)
         
-        viewModel.showBranding = theme.showBranding
+        showBranding = theme.showBranding
     }
     
     func setStyle(_ styleItems: [FooterPoweredByDojoItems] = FooterPoweredByDojoStyle.default) {
@@ -84,7 +89,7 @@ class FooterPoweredByDojo: UIView {
             constraintPoweredByCenter.isActive = true
         }
         
-        if !viewModel.showBranding {
+        if !showBranding {
             stackViewLeft.isHidden = true
             viewSeparator.isHidden = true
             constraintButtonByCenter.isActive = true
@@ -114,11 +119,13 @@ class FooterPoweredByDojo: UIView {
     }
     
     @IBAction func onPrivacyButtonPress(_ sender: Any) {
-        openURL(viewModel.privacyURL)
+        guard let url = viewModel?.privacyURL else { return }
+        openURL(url)
     }
     
     @IBAction func onTermsButtonPress(_ sender: Any) {
-        openURL(viewModel.termsURL)
+        guard let url = viewModel?.termsURL else { return }
+        openURL(url)
     }
 }
 

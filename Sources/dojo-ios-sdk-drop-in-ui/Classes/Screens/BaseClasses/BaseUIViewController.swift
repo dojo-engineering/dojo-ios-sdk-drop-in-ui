@@ -28,11 +28,18 @@ class BaseUIViewController: UIViewController {
             setUpCloseButton()
         }
         setUpDesign()
+        setupPaymentIntent()
     }
     
     @objc func onClosePress() {
         guard diableCloseButton == false else { return }
         baseDelegate?.onForceClosePress()
+    }
+    
+    private func setupPaymentIntent() {
+        if let paymentIntent = viewModel?.paymentIntent {
+            footerPoweredByDojoView?.setModel(paymentIntent: paymentIntent)
+        }
     }
     
     func setUpDesign() {

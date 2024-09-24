@@ -75,6 +75,7 @@ struct PaymentIntentConfig: Codable {
     var billingAddress: ConfigurationRequired?
     var shippingDetails: ConfigurationRequired?
     var tradingName: String?
+    var marketId: String?
 }
 
 struct CustomerConfig: Codable {
