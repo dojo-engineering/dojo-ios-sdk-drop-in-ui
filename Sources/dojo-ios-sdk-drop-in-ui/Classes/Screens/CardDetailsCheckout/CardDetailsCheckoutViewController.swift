@@ -195,19 +195,22 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
 extension CardDetailsCheckoutViewController {
     func setUpData() {
         //TODO: proper formatter
-        let amountText = "\(String(format: "%.2f", Double(getViewModel()?.paymentIntent.amount.value ?? 0)/100.0))"
-        let buttonPayTitle = "Pay £\(amountText)"
+        let paymentIntent = getViewModel()?.paymentIntent
+        let amountText = "\(String(format: "%.2f", Double(paymentIntent?.amount.value ?? 0 )/100.0))"
+        let currency = paymentIntent?.currency ?? .gbp
+        let currencySymbol = currency.currencySymbol()
+        let buttonPayTitle = "\(LocalizedText.CardDetailsCheckout.buttonPay) \(currencySymbol)\(amountText)"
         buttonPay.setTitle(buttonPayTitle, for: .normal)
         
         
         let fontCurrency = [NSAttributedString.Key.font : theme.fontHeading4Medium]
         let fontAmount = [NSAttributedString.Key.font : theme.fontHeading3Medium]
-        let gbpString = NSMutableAttributedString(string:"£", attributes: fontCurrency)
+        let result = NSMutableAttributedString(string: currencySymbol, attributes: fontCurrency)
         let attributedString = NSMutableAttributedString(string: amountText, attributes: fontAmount)
         let space = NSMutableAttributedString(string: " ", attributes: [NSAttributedString.Key.font : theme.fontBody1])
-        gbpString.append(space)
-        gbpString.append(attributedString)
-        labelPrimaryAmount.attributedText = gbpString
+        result.append(space)
+        result.append(attributedString)
+        labelPrimaryAmount.attributedText = result
     }
     
     func setUpCheckboxes() {

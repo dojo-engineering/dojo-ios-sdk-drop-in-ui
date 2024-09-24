@@ -31,6 +31,14 @@ struct PaymentIntent: Codable {
     var isVirtualTerminalPayment: Bool {
         paymentSource == "virtual-terminal"
     }
+    
+    var market: Market {
+        .init(value: config?.marketId)
+    }
+    
+    var currency: Currency {
+        .init(value: amount.currencyCode)
+    }
 }
 
 enum CardSchemes: String, Codable {

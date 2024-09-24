@@ -174,8 +174,11 @@ extension PaymentMethodCheckoutViewController {
             selectedPaymentMethodView.isHidden = false
         }
         
-        let amountText = "\(String(format: "%.2f", Double(getViewModel()?.paymentIntent.amount.value ?? 0)/100.0))"
-        let buttonPayTitle = "Pay £\(amountText)"
+        let paymentIntent = getViewModel()?.paymentIntent
+        let currency = paymentIntent?.currency ?? .gbp
+        let currencySymbol = currency.currencySymbol()
+        let amountText = "\(String(format: "%.2f", Double(paymentIntent?.amount.value ?? 0)/100.0))"
+        let buttonPayTitle = "\(LocalizedText.CardDetailsCheckout.buttonPay) \(currencySymbol)\(amountText)"
         buttonPayCard.setTitle(buttonPayTitle, for: .normal)
     }
 }
@@ -318,8 +321,10 @@ extension PaymentMethodCheckoutViewController: UITableViewDelegate, UITableViewD
             PaymentMethodCheckoutAdditonalItemCell {
             cell.setTheme(theme: theme)
             // TODO move to viewModel
-            if let item = viewModel?.paymentIntent.itemLines?[indexPath.row] {
-                cell.setUp(itemLine: item)
+            if
+                let item = viewModel?.paymentIntent.itemLines?[indexPath.row],
+                let currencySymbol = viewModel?.paymentIntent.currency.currencySymbol() {
+                cell.setUp(itemLine: item, currencySymbol: currencySymbol)
             }
             return cell
         }

@@ -8,6 +8,6 @@ import dojo_ios_sdk
 
 extension DojoPaymentIntentAmount {
     func getFormattedAmount() -> String {
-        CommonUtils.getFormattedAmount(value: value)
+        CommonUtils.getFormattedAmount(value: value, currency: .init(value: currencyCode))
     }
 }
