@@ -227,11 +227,12 @@
 			};
 			buildConfigurationList = 607FACCB1AFB9204008FA782 /* Build configuration list for PBXProject "dojo-ios-sdk-drop-in-ui" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
+				es,
+				it,
 				Base,
 			);
 			mainGroup = 607FACC71AFB9204008FA782;
