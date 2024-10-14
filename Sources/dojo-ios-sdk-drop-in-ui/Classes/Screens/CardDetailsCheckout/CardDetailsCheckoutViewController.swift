@@ -88,6 +88,7 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
         labelBillingDetails.text = LocalizedText.CardDetailsCheckout.titleBillingAddress
         labelPaymentDetails.text = LocalizedText.CardDetailsCheckout.titlePaymentDetails
         labelAllTransactionsAreSecure.text = LocalizedText.CardDetailsCheckout.titleTransactionsSecure
+        labelSaveCardForFutureUse.text = LocalizedText.CardDetailsCheckout.saveCardForFutureUse
     }
     
     override func setUpDesign() {
@@ -151,7 +152,7 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
             setNavigationTitle(LocalizedText.CardDetailsCheckout.title)
         } else {
             self.navigationController?.navigationBar.tintColor = theme.headerButtonTintColor
-            self.title = "Payment details"
+            self.title = LocalizedText.CardDetailsCheckout.titlePaymentDetails
         }
         setUpKeyboard()
         

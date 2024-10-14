@@ -80,7 +80,7 @@ class CardDetailsCheckoutViewModel: BaseViewModel {
     }
     
     var topTitle: String? {
-        paymentIntent.isVirtualTerminalPayment ? paymentIntent.config?.tradingName : "You Pay"
+        paymentIntent.isVirtualTerminalPayment ? paymentIntent.config?.tradingName : LocalizedText.CardDetailsCheckout.youPay
     }
     
     func showBillingPostcode(_ countryCode: String) -> Bool {
