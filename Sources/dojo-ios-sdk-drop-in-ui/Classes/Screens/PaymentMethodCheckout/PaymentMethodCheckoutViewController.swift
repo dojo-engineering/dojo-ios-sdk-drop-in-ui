@@ -65,6 +65,7 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
         super.setUpDesign()
         labelTotalDue.textColor = theme.primaryLabelTextColor
         labelTotalDue.font = theme.fontHeading5Medium
+        labelTotalDue.text = LocalizedText.PaymentMethodCheckout.totalDueTitle
         
         labelTotalAmount.textColor = theme.primaryLabelTextColor
         labelTotalAmount.font = theme.fontHeading5Medium

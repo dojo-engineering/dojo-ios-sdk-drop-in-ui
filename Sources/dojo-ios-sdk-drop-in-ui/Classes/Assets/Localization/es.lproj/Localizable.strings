@@ -76,3 +76,4 @@
 "dojo_ui_sdk_payment_result_main_title_setup_intent_success" = "Tarjeta guardada correctamente";
 "dojo_ui_sdk_payment_result_main_title_setup_intent_fail" = "Se ha producido un error al guardar los datos de la tarjeta";
 "dojo_ui_sdk_payment_result_main_message_setup_intent_fail" = "No hemos podido guardar los datos de tu tarjeta.";
+"dojo_ui_sdk_payment_method_total_due_title" = "Total a pagar";

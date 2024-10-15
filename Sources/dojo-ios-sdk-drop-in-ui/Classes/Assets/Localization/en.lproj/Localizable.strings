@@ -76,3 +76,4 @@
 "dojo_ui_sdk_payment_result_main_title_setup_intent_success" = "Card saved successfully";
 "dojo_ui_sdk_payment_result_main_title_setup_intent_fail" = "Failed to save card details";
 "dojo_ui_sdk_payment_result_main_message_setup_intent_fail" = "We could not save your card details.";
+"dojo_ui_sdk_payment_method_total_due_title" = "Total Due";

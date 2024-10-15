@@ -8,6 +8,7 @@ enum LocalizedText {
     enum PaymentMethodCheckout {
         static let title = "dojo_ui_sdk_payment_method_checkout_title".localized
         static let payByCard = "dojo_ui_sdk_pay_with_card_string".localized
+        static let totalDueTitle = "dojo_ui_sdk_payment_method_total_due_title".localized
     }
     
     enum ManagePaymentMethods {

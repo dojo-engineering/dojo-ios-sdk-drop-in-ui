@@ -76,3 +76,4 @@
 "dojo_ui_sdk_payment_result_main_title_setup_intent_success" = "Carta salvata correttamente";
 "dojo_ui_sdk_payment_result_main_title_setup_intent_fail" = "Errore durante il salvataggio dei dettagli della carta";
 "dojo_ui_sdk_payment_result_main_message_setup_intent_fail" = "Impossibile salvare i dettagli della carta.";
+"dojo_ui_sdk_payment_method_total_due_title" = "Totale da pagare";
