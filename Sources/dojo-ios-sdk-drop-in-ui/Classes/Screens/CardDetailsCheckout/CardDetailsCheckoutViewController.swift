@@ -112,7 +112,8 @@ class CardDetailsCheckoutViewController: BaseUIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setNavigationTitle(getViewModel()?.navigationTitle ?? "")
+        let title = getViewModel()?.navigationTitle ?? ""
+        setNavigationTitle(theme.customCardDetailsNavigationTitle ?? title)
         setUpKeyboard()
         
         if let navigation = (navigationController as? BaseNavigationController) {

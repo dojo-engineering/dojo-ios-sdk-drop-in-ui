@@ -33,6 +33,14 @@ public class DojoThemeSettings: NSObject {
     @objc public var backdropViewColor: UIColor
     @objc public var backdropViewAlpha: NSDecimalNumber
     @objc public var additionalLegalText: String?
+    @objc public var customCardDetailsNavigationTitle: String?
+    @objc public var customResultScreenTitleSuccess: String?
+    @objc public var customResultScreenTitleFail: String?
+    @objc public var customResultScreenOrderIdText: String?
+    @objc public var customResultScreenMainTextSuccess: String?
+    @objc public var customResultScreenMainTextFail: String?
+    @objc public var customResultScreenAdditionalTextSuccess: String?
+    @objc public var customResultScreenAdditionalTextFail: String?
     
     @objc
     public init(primaryLabelTextColor: UIColor? = nil,
@@ -57,7 +65,16 @@ public class DojoThemeSettings: NSObject {
                 lightStyleForDefaultElements: NSNumber? = nil,
                 backdropViewColor: UIColor? = nil,
                 backdropViewAlpha: NSDecimalNumber? = nil,
-                additionalLegalText: String? = nil) {
+                additionalLegalText: String? = nil,
+                customCardDetailsNavigationTitle: String? = nil,
+                customResultScreenTitleSuccess: String? = nil,
+                customResultScreenTitleFail: String? = nil,
+                customResultScreenOrderIdText: String? = nil,
+                customResultScreenMainTextSuccess: String? = nil,
+                customResultScreenMainTextFail: String? = nil,
+                customResultScreenAdditionalTextSuccess: String? = nil,
+                customResultScreenAdditionalTextFail: String? = nil
+    ) {
         self.primaryLabelTextColor = primaryLabelTextColor ?? UIColor.init(hexaARGB: "#DD000000") ?? .black
         self.secondaryLabelTextColor = secondaryLabelTextColor ?? UIColor.init(hexaARGB: "#99000000") ?? .gray
         self.headerTintColor = headerTintColor ?? UIColor.init(hexaARGB: "#DD000000") ?? .black
@@ -82,6 +99,14 @@ public class DojoThemeSettings: NSObject {
         self.backdropViewColor = backdropViewColor ?? UIColor.black
         self.backdropViewAlpha = backdropViewAlpha ?? 0.3
         self.additionalLegalText = additionalLegalText
+        self.customCardDetailsNavigationTitle = customCardDetailsNavigationTitle
+        self.customResultScreenTitleSuccess = customResultScreenTitleSuccess
+        self.customResultScreenTitleFail = customResultScreenTitleFail
+        self.customResultScreenOrderIdText = customResultScreenOrderIdText
+        self.customResultScreenMainTextSuccess = customResultScreenMainTextSuccess
+        self.customResultScreenMainTextFail = customResultScreenMainTextFail
+        self.customResultScreenAdditionalTextSuccess = customResultScreenAdditionalTextSuccess
+        self.customResultScreenAdditionalTextFail = customResultScreenAdditionalTextFail
     }
     
     @objc
