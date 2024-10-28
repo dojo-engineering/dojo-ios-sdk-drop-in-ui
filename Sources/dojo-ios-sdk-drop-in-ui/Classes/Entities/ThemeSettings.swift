@@ -61,6 +61,15 @@ class ThemeSettings {
     var backdropViewColor: UIColor
     var backdropViewAlpha: CGFloat
     
+    var customCardDetailsNavigationTitle: String?
+    var customResultScreenTitleSuccess: String?
+    var customResultScreenTitleFail: String?
+    var customResultScreenOrderIdText: String?
+    var customResultScreenMainTextSuccess: String?
+    var customResultScreenMainTextFail: String?
+    var customResultScreenAdditionalTextSuccess: String?
+    var customResultScreenAdditionalTextFail: String?
+    
     init (dojoTheme: DojoThemeSettings) {
         // Colors
         primaryLabelTextColor = dojoTheme.primaryLabelTextColor
@@ -90,6 +99,15 @@ class ThemeSettings {
         colorPoweredByDojoLogo = dojoTheme.lightStyleForDefaultElements == true ? .black : .white
         showBranding = dojoTheme.showBranding.boolValue
         additionalLegalText = dojoTheme.additionalLegalText
+        
+        customCardDetailsNavigationTitle = dojoTheme.customCardDetailsNavigationTitle
+        customResultScreenTitleSuccess = dojoTheme.customResultScreenTitleSuccess
+        customResultScreenTitleFail = dojoTheme.customResultScreenTitleFail
+        customResultScreenOrderIdText = dojoTheme.customResultScreenOrderIdText
+        customResultScreenMainTextSuccess = dojoTheme.customResultScreenMainTextSuccess
+        customResultScreenMainTextFail = dojoTheme.customResultScreenMainTextFail
+        customResultScreenAdditionalTextSuccess = dojoTheme.customResultScreenAdditionalTextSuccess
+        customResultScreenAdditionalTextFail = dojoTheme.customResultScreenAdditionalTextFail
         
         primaryCTAButtonDisabledBackgroundColor = dojoTheme.primaryCTAButtonDisabledBackgroundColor
         primaryCTAButtonDisableTextColor = dojoTheme.primaryCTAButtonDisableTextColor

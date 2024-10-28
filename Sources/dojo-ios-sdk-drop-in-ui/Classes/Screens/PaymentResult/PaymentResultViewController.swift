@@ -48,7 +48,13 @@ class PaymentResultViewController: BaseUIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setNavigationTitle(getViewModal()?.navigationTitle ?? "")
+        let title: String? = {
+            let viewModel = getViewModal()
+            return viewModel?.resultCode == 0
+            ? theme.customResultScreenTitleSuccess ?? viewModel?.navigationTitle
+            : theme.customResultScreenTitleFail ?? viewModel?.navigationTitle
+        }()
+        setNavigationTitle(title ?? "")
     }
     
     override func viewDidLayoutSubviews() {
@@ -76,11 +82,12 @@ class PaymentResultViewController: BaseUIViewController {
     }
     
     func updateUIState() {
+        let orderRef = "\(LocalizedText.PaymentResult.orderId) \(viewModel?.paymentIntent.reference ?? "")"
+        labelSubtitle.text = theme.customResultScreenOrderIdText ?? orderRef
         if getViewModal()?.resultCode == 0 {
             buttonTryAgain.isHidden = true
-            labelMainText.text = getViewModal()?.mainText
-            labelSubtitle.text = "\(LocalizedText.PaymentResult.orderId) \(viewModel?.paymentIntent.reference ?? "")"  //TODO: the same for both cases
-            labelSubtitle.isHidden = false
+            labelMainText.text = theme.customResultScreenMainTextSuccess ?? getViewModal()?.mainText
+            labelSubtitle.text = theme.customResultScreenAdditionalTextSuccess
             imgViewResult.image = UIImage(named: theme.lightStyleForDefaultElements ? "img-result-success-light" : "img-result-success-dark", in: Bundle.libResourceBundle, compatibleWith: nil)
             
             //TODO: common style
@@ -92,16 +99,14 @@ class PaymentResultViewController: BaseUIViewController {
         } else {
             buttonTryAgain.isHidden = false
             buttonTryAgain.setTitle(LocalizedText.PaymentResult.buttonTryAgain, for: .normal)
-            labelMainText.text = getViewModal()?.mainText
-            labelSubtitle.text = "\(LocalizedText.PaymentResult.orderId) \(viewModel?.paymentIntent.reference ?? "")"
-            if let viewModel = viewModel,
-               viewModel.paymentIntent.isSetupIntent {
-                labelSubtitle.text = LocalizedText.PaymentResult.mainSubtitleSetupFail
+            labelMainText.text = theme.customResultScreenMainTextFail ?? getViewModal()?.mainText
+            if let viewModel = viewModel, viewModel.paymentIntent.isSetupIntent {
+                labelSubtitle.text = theme.customResultScreenAdditionalTextFail ?? LocalizedText.PaymentResult.mainSubtitleSetupFail
                 labelSubtitle2.isHidden = true
                 labelSubtitle.textColor = theme.secondaryLabelTextColor
                 labelSubtitle.font = theme.fontBody1
             } else {
-                labelSubtitle2.text =  LocalizedText.PaymentResult.mainErrorMessage
+                labelSubtitle2.text = theme.customResultScreenAdditionalTextFail ?? LocalizedText.PaymentResult.mainErrorMessage
             }
             
             labelSubtitle.isHidden = false
