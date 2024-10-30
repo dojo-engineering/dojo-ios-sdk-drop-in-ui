@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'dojo-ios-sdk-drop-in-ui'
-  s.version          = '1.4.3'
+  s.version          = '1.4.4'
   s.summary          = 'UI version of Dojo SDK to take payments'
 
 # This description is used to generate tags and improve search results.
