@@ -87,7 +87,7 @@ class PaymentResultViewController: BaseUIViewController {
         if getViewModal()?.resultCode == 0 {
             buttonTryAgain.isHidden = true
             labelMainText.text = theme.customResultScreenMainTextSuccess ?? getViewModal()?.mainText
-            labelSubtitle.text = theme.customResultScreenAdditionalTextSuccess
+            labelSubtitle2.text = theme.customResultScreenAdditionalTextSuccess
             imgViewResult.image = UIImage(named: theme.lightStyleForDefaultElements ? "img-result-success-light" : "img-result-success-dark", in: Bundle.libResourceBundle, compatibleWith: nil)
             
             //TODO: common style
