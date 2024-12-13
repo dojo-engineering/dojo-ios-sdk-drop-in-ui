@@ -113,7 +113,6 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
         if let navigation = (navigationController as? BaseNavigationController) {
             navigation.heightConstraint?.constant = 286 + navigation.safeAreaBottomHeight + getHeightOfAdditionalLineItemsTable() + getHeightOfAdditionalLegalText()
         }
-        
         constraintPayButtonBottom.constant = 9
         constraintPayButtonCardBottom.constant = constraintPayButtonBottom.constant
     }
