@@ -51,14 +51,14 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setUpKeyboard()
+//        setUpKeyboard()
         setNavigationTitle(LocalizedText.PaymentMethodCheckout.title)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.view.endEditing(true)
-        removeKeyboardObservers()
+//        removeKeyboardObservers()
     }
     
     override func setUpDesign() {
