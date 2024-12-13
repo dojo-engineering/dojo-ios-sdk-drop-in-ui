@@ -109,15 +109,7 @@ extension CardDetailsCheckoutViewController {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
-            
-            let buffer = 12.0
-            var offset = keyboardHeight - (UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0)
-            if let tabBarHeight = self.tabBarController?.tabBar.frame.height {
-                offset -= tabBarHeight / 2
-            } else {
-                offset += buffer
-            }
-            constraintPayButtonBottom.constant = offset
+            constraintPayButtonBottom.constant = 12.0 + (UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0)
         }
     }
 }
