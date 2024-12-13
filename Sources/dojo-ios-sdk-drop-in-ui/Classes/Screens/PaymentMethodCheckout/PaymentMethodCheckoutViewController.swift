@@ -51,14 +51,14 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        setUpKeyboard()
+        setUpKeyboard()
         setNavigationTitle(LocalizedText.PaymentMethodCheckout.title)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.view.endEditing(true)
-//        removeKeyboardObservers()
+        removeKeyboardObservers()
     }
     
     override func setUpDesign() {
@@ -95,10 +95,10 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
             let keyboardHeight = keyboardRectangle.height
             
             if let navigation = (navigationController as? BaseNavigationController) {
-                navigation.heightConstraint?.constant = keyboardHeight + 286 - 15 + getHeightOfAdditionalLineItemsTable()
+                navigation.heightConstraint?.constant = 15 + getHeightOfAdditionalLineItemsTable()
             }
             
-            constraintPayButtonBottom.constant = keyboardHeight - (UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0) - 15
+            constraintPayButtonBottom.constant = (UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0) - 15
             constraintPayButtonCardBottom.constant = constraintPayButtonBottom.constant
         }
     }
@@ -106,7 +106,7 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
     @objc func keyboardWillHide(_ notification: Notification) {
         
         if let navigation = (navigationController as? BaseNavigationController) {
-            navigation.heightConstraint?.constant = 286 + navigation.safeAreaBottomHeight + getHeightOfAdditionalLineItemsTable()//TODO: move to base
+            navigation.heightConstraint?.constant = getHeightOfAdditionalLineItemsTable()//TODO: move to base
         }
         
         constraintPayButtonBottom.constant = 9
