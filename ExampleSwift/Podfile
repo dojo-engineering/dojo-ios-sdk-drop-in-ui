@@ -1,6 +1,6 @@
 use_frameworks!
 
-platform :ios, '11.0'
+platform :ios, '15.0'
 
 target 'Dojo-SDK-UI' do
   pod 'dojo-ios-sdk', :git => 'https://github.com/dojo-engineering/dojo-ios-sdk.git', :tag => '1.4.5'
@@ -15,7 +15,7 @@ target 'Dojo-SDK-UI' do
       installer.generated_projects.each do |project|
             project.targets.each do |target|
                 target.build_configurations.each do |config|
-                    config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.0'
+                    config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.0'
                  end
             end
      end
