@@ -1,14 +1,14 @@
 PODS:
   - CocoaDebug (1.7.2)
-  - dojo-ios-sdk (1.4.3)
-  - dojo-ios-sdk-drop-in-ui (1.4.5):
-    - dojo-ios-sdk (= 1.4.3)
-  - dojo-ios-sdk-drop-in-ui/DojoSDKUI-Tests (1.4.5):
-    - dojo-ios-sdk (= 1.4.3)
+  - dojo-ios-sdk (1.4.5)
+  - dojo-ios-sdk-drop-in-ui (1.4.6):
+    - dojo-ios-sdk (= 1.4.5)
+  - dojo-ios-sdk-drop-in-ui/DojoSDKUI-Tests (1.4.6):
+    - dojo-ios-sdk (= 1.4.5)
 
 DEPENDENCIES:
   - CocoaDebug
-  - "dojo-ios-sdk (from `git@github.com:Dojo-Engineering/dojo-ios-sdk.git`, tag `1.4.3`)"
+  - dojo-ios-sdk (from `https://github.com/dojo-engineering/dojo-ios-sdk.git`, tag `1.4.5`)
   - dojo-ios-sdk-drop-in-ui (from `../`)
   - dojo-ios-sdk-drop-in-ui/DojoSDKUI-Tests (from `../`)
 
@@ -18,21 +18,21 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   dojo-ios-sdk:
-    :git: "git@github.com:Dojo-Engineering/dojo-ios-sdk.git"
-    :tag: 1.4.3
+    :git: https://github.com/dojo-engineering/dojo-ios-sdk.git
+    :tag: 1.4.5
   dojo-ios-sdk-drop-in-ui:
     :path: "../"
 
 CHECKOUT OPTIONS:
   dojo-ios-sdk:
-    :git: "git@github.com:Dojo-Engineering/dojo-ios-sdk.git"
-    :tag: 1.4.3
+    :git: https://github.com/dojo-engineering/dojo-ios-sdk.git
+    :tag: 1.4.5
 
 SPEC CHECKSUMS:
   CocoaDebug: 61cf93ada6ce8f3407507dc01f9b874d91ac1d5c
-  dojo-ios-sdk: cc855ff5b4e0edc6c6bffc97e830e6bccc2b2a0e
-  dojo-ios-sdk-drop-in-ui: d9d8678ca3cd8a075f9c4eef8159728905bae052
+  dojo-ios-sdk: 1e67c18b802f13f2bd10e087169bb9579627c60c
+  dojo-ios-sdk-drop-in-ui: fc0a3770862ebafb8faf157d6adbfac7acba4a49
 
-PODFILE CHECKSUM: 49ec490318c2b6e70376f12441b394f28c447b1c
+PODFILE CHECKSUM: be53d6fe8a766e42fad679e458879d29344d0971
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.17.0
