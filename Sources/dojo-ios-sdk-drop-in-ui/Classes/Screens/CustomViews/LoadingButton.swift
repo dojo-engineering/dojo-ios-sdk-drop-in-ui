@@ -15,7 +15,7 @@ class LoadingButton: CustomFontButton {
         var image: UIImage?
     }
 
-    private (set) var buttonStates: [ButtonState] = []
+    private(set) var buttonStates: [ButtonState] = []
     private var beforeLoadingTitle: String = ""
     
     var theme: ThemeSettings?
