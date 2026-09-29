@@ -78,7 +78,8 @@ class BaseNavigationController: UINavigationController, UINavigationControllerDe
         preferredSheetTopInset: preferredSheetTopInset,
         preferredSheetCornerRadius: preferredSheetCornerRadius,
         preferredSheetSizingFactor: preferredSheetSizing.rawValue,
-        preferredSheetBackdropColor: preferredSheetBackdropColor
+        preferredSheetBackdropColor: preferredSheetBackdropColor,
+        preferredSheetBackdropAlpha: preferredSheetBackdropAlpha
     )
 
     override var additionalSafeAreaInsets: UIEdgeInsets {
@@ -127,9 +128,15 @@ class BaseNavigationController: UINavigationController, UINavigationControllerDe
         }
     }
 
-    var preferredSheetBackdropColor: UIColor = .black.withAlphaComponent(0.6) {
+    var preferredSheetBackdropColor: UIColor = .black {
         didSet {
             bottomSheetTransitioningDelegate.preferredSheetBackdropColor = preferredSheetBackdropColor
+        }
+    }
+
+    var preferredSheetBackdropAlpha: CGFloat = 0.3 {
+        didSet {
+            bottomSheetTransitioningDelegate.preferredSheetBackdropAlpha = preferredSheetBackdropAlpha
         }
     }
 

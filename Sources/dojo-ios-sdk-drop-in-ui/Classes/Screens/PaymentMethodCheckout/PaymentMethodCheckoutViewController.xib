@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,6 +17,7 @@
                 <outlet property="constraintPayButtonBottom" destination="LtI-6G-hW0" id="69e-1h-dkg"/>
                 <outlet property="constraintPayButtonCardBottom" destination="p1p-xY-jcv" id="Gh3-Gv-9pJ"/>
                 <outlet property="footerPoweredByDojoView" destination="Utf-dq-Cdi" id="PVT-YT-d3k"/>
+                <outlet property="labelAdditionalLegal" destination="xTS-hO-CkB" id="KOq-jX-6tM"/>
                 <outlet property="labelTotalAmount" destination="m9K-cz-gAs" id="Fac-sZ-K0t"/>
                 <outlet property="labelTotalDue" destination="nIa-N9-fws" id="PNR-ZL-mtx"/>
                 <outlet property="paymentButton" destination="DIE-VP-Mbo" id="aBb-iW-gWa"/>
@@ -31,7 +32,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DIE-VP-Mbo" userLabel="ApplePay Button" customClass="PKPaymentButton">
-                    <rect key="frame" x="16" y="769" width="382" height="44"/>
+                    <rect key="frame" x="16" y="748.5" width="382" height="44"/>
                     <color key="backgroundColor" systemColor="labelColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="RMN-Xe-nDa"/>
@@ -44,12 +45,17 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Utf-dq-Cdi" customClass="FooterPoweredByDojo" customModule="dojo_ios_sdk_drop_in_ui">
-                    <rect key="frame" x="0.0" y="822" width="414" height="40"/>
+                    <rect key="frame" x="0.0" y="801.5" width="414" height="40"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="7ZE-4z-FnV"/>
                     </constraints>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Additional Legal" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xTS-hO-CkB" userLabel="Additional legal">
+                    <rect key="frame" x="16" y="841.5" width="382" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dgb-bS-UCe" userLabel="topSeparator">
                     <rect key="frame" x="0.0" y="48" width="414" height="0.5"/>
                     <color key="backgroundColor" systemColor="tintColor"/>
@@ -58,7 +64,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bl0-mH-Tqe" userLabel="SelectedPaymentMethod" customClass="SelectedPaymentMethodView" customModule="dojo_ios_sdk_drop_in_ui">
-                    <rect key="frame" x="0.0" y="602" width="414" height="55"/>
+                    <rect key="frame" x="0.0" y="581.5" width="414" height="55"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="width" priority="999" constant="480" id="7bD-kP-zLV"/>
@@ -66,14 +72,14 @@
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jsz-Ue-F6g" userLabel="additional items">
-                    <rect key="frame" x="16" y="673" width="382" height="32"/>
+                    <rect key="frame" x="16" y="652.5" width="382" height="32"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="32" id="SSh-mh-9eD"/>
                     </constraints>
                 </tableView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Due" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nIa-N9-fws">
-                    <rect key="frame" x="16" y="721" width="72" height="24"/>
+                    <rect key="frame" x="16" y="700.5" width="72" height="24"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="g7p-Ag-vG2"/>
                     </constraints>
@@ -82,7 +88,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="£85" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m9K-cz-gAs">
-                    <rect key="frame" x="367" y="721" width="31" height="24"/>
+                    <rect key="frame" x="367" y="700.5" width="31" height="24"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="3yC-9g-Dar"/>
                     </constraints>
@@ -91,7 +97,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AHi-j5-5XI" userLabel="Card Pay Button" customClass="LoadingButton" customModule="dojo_ios_sdk_drop_in_ui">
-                    <rect key="frame" x="16" y="769" width="382" height="44"/>
+                    <rect key="frame" x="16" y="748.5" width="382" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="H5X-03-0qr"/>
                         <constraint firstAttribute="width" priority="999" constant="480" id="ZC7-PE-7Go"/>
@@ -114,7 +120,9 @@
                 <constraint firstItem="nIa-N9-fws" firstAttribute="leading" secondItem="AHi-j5-5XI" secondAttribute="leading" id="A9O-g0-UAJ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="AHi-j5-5XI" secondAttribute="trailing" constant="16" id="KGz-9q-BeG"/>
                 <constraint firstItem="Utf-dq-Cdi" firstAttribute="top" secondItem="DIE-VP-Mbo" secondAttribute="bottom" constant="9" id="LtI-6G-hW0"/>
+                <constraint firstItem="xTS-hO-CkB" firstAttribute="top" secondItem="Utf-dq-Cdi" secondAttribute="bottom" id="Lvy-iL-9rD"/>
                 <constraint firstItem="bl0-mH-Tqe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="RxK-HW-ob4"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="xTS-hO-CkB" secondAttribute="trailing" constant="16" id="ScR-Lm-RFT"/>
                 <constraint firstItem="AHi-j5-5XI" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="U18-La-MT0"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="dgb-bS-UCe" secondAttribute="trailing" id="V6L-s1-iVS"/>
                 <constraint firstItem="AHi-j5-5XI" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="YTe-6t-tgh"/>
@@ -125,26 +133,27 @@
                 <constraint firstItem="DIE-VP-Mbo" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="h4Q-F5-XGc"/>
                 <constraint firstItem="DIE-VP-Mbo" firstAttribute="top" secondItem="nIa-N9-fws" secondAttribute="bottom" constant="24" id="h5v-1j-WAQ"/>
                 <constraint firstItem="Utf-dq-Cdi" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="hNh-ob-wGa"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="xTS-hO-CkB" secondAttribute="bottom" id="iob-Rb-Jlf"/>
                 <constraint firstItem="Utf-dq-Cdi" firstAttribute="top" secondItem="AHi-j5-5XI" secondAttribute="bottom" constant="9" id="p1p-xY-jcv"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="DIE-VP-Mbo" secondAttribute="trailing" constant="16" id="qUR-G4-c4T"/>
                 <constraint firstItem="bl0-mH-Tqe" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="rV2-Jp-jop"/>
+                <constraint firstItem="xTS-hO-CkB" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="w5p-Z3-bf0"/>
                 <constraint firstItem="Utf-dq-Cdi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="wj3-MS-U5M"/>
                 <constraint firstItem="Jsz-Ue-F6g" firstAttribute="top" secondItem="bl0-mH-Tqe" secondAttribute="bottom" constant="16" id="xNE-VP-RLE"/>
                 <constraint firstItem="dgb-bS-UCe" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="yn3-0c-VQx"/>
-                <constraint firstItem="Utf-dq-Cdi" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="zkz-iC-7S1"/>
             </constraints>
             <point key="canvasLocation" x="131.8840579710145" y="32.8125"/>
         </view>
     </objects>
     <resources>
         <systemColor name="labelColor">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="tintColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

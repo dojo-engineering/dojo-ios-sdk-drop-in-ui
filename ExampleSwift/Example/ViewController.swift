@@ -10,20 +10,82 @@ import UIKit
 import dojo_ios_sdk_drop_in_ui
 import dojo_ios_sdk
 
-class ViewController: UIViewController {
-    
+class ViewController: UIViewController, UITextFieldDelegate {
+
+    @IBOutlet weak var textFieldPaymentIntent: UITextField!
+    @IBOutlet weak var textFieldCustomerSecret: UITextField!
+    @IBOutlet weak var switchShowAdditionalLegal: UISwitch!
     let dojoUI = DojoSDKDropInUI()
-    
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        textFieldPaymentIntent.delegate = self
+        textFieldCustomerSecret.delegate = self
+    }
+
+    @IBAction func onStartSetupFlowPress(_ sender: Any) {
+        var setupIntentId = ""
+        if let setupIntent = textFieldPaymentIntent.text,
+           !setupIntent.isEmpty {
+            setupIntentId = setupIntent
+        }
+        guard !setupIntentId.isEmpty else {
+            self.displayMessage(message: "SI is not supplied")
+            return
+        }
+
+        dojoUI.startSetupFlow(setupIntentId: setupIntentId,
+                              controller: self) { result in
+            self.displayResult(resultCode: result)
+        }
+    }
+
     @IBAction func onStartPaymentFlowPress(_ sender: Any) {
-        let paymentIntentId = "pi_sandbox_mDvzElFkoU2QH440cwoOEg"
-        let customerSecret = ""
+        var paymentIntentId = ""
+        if let paymentIntent = textFieldPaymentIntent.text,
+           !paymentIntent.isEmpty {
+            paymentIntentId = paymentIntent
+        }
+        guard !paymentIntentId.isEmpty else {
+            self.displayMessage(message: "PI is not supplied")
+            return
+        }
+        let theme = DojoThemeSettings.getLightTheme()
+        let customerSecret = textFieldCustomerSecret.text ?? ""
+        if switchShowAdditionalLegal.isOn {
+            theme.additionalLegalText = "Dojo is a trading name of Paymentsense Limited. Copyright ©2024 Paymentsense Limited. All rights reserved. Paymentsense Limited is authorised and regulated by the Financial Conduct Authority (FCA FRN 738728) and under the Electronic Money Regulations 2011 (FCA FRN 900925) for the issuing of electronic money and provision of payment services. Our company number is 06730690 and our registered office address is The Brunel Building, 2 Canalside Walk, London W2 1DG"
+            theme.customCardDetailsNavigationTitle = "Custom card"
+            theme.customResultScreenTitleSuccess = "Payment Succeeded"
+            theme.customResultScreenTitleFail = "Payment Failed"
+            theme.customResultScreenOrderIdText = "Order Ref here"
+            theme.customResultScreenMainTextSuccess = "Payment succeeded"
+            theme.customResultScreenMainTextFail = "Payment failed"
+            theme.customResultScreenAdditionalTextSuccess = "Transaction successfully completed"
+            theme.customResultScreenAdditionalTextFail = "There was a problem with transaction"
+        }
         let applePayConfig = DojoUIApplePayConfig(merchantIdentifier: "merchant.uk.co.paymentsense.sdk.demo.app")
         dojoUI.startPaymentFlow(paymentIntentId: paymentIntentId,
                                 controller: self,
                                 customerSecret: customerSecret,
-                                applePayConfig: applePayConfig) { result in
-            print("SDK result code: \(result)")
+                                applePayConfig: applePayConfig,
+                                themeSettings: theme) { result in
+            self.displayResult(resultCode: result)
         }
     }
-}
 
+    func displayResult(resultCode: Int) {
+        displayMessage(message: "SDK result code: \(resultCode)")
+    }
+
+    func displayMessage(message: String) {
+        let dialogMessage = UIAlertController(title: "Finish", message: message, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+        dialogMessage.addAction(ok)
+        self.present(dialogMessage, animated: true, completion: nil)
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+}

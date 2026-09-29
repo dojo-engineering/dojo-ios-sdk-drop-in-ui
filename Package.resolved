@@ -3,10 +3,10 @@
     {
       "identity" : "dojo-ios-sdk",
       "kind" : "remoteSourceControl",
-      "location" : "git@github.com:dojo-engineering/dojo-ios-sdk",
+      "location" : "https://github.com/dojo-engineering/dojo-ios-sdk",
       "state" : {
-        "revision" : "eb6aba07f7b1612cb1374a1f22dc7fc5d6baa681",
-        "version" : "1.4.2"
+        "revision" : "e15ef1597f2d356636517b8705ccfce60a41f34c",
+        "version" : "1.4.5"
       }
     }
   ],

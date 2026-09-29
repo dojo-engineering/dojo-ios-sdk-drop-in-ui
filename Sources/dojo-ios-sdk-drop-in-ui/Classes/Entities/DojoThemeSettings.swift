@@ -9,28 +9,39 @@ import UIKit
 
 @objc
 public class DojoThemeSettings: NSObject {
-    public var primaryLabelTextColor: UIColor
-    public var secondaryLabelTextColor: UIColor
-    public var headerButtonTintColor: UIColor
-    public var headerTintColor: UIColor
-    public var primaryCTAButtonActiveBackgroundColor: UIColor
-    public var primarySurfaceBackgroundColor: UIColor
-    public var primaryCTAButtonActiveTextColor: UIColor
-    public var primaryCTAButtonDisabledBackgroundColor: UIColor
-    public var primaryCTAButtonDisableTextColor: UIColor
-    public var secondaryCTAButtonActiveBorderColor: UIColor
-    public var secondaryCTAButtonActiveTextColor: UIColor
-    public var separatorColor: UIColor
-    public var loadingIndicatorColor: UIColor
-    public var inputElementActiveTintColor: UIColor
-    public var inputFieldBackgroundColor: UIColor
-    public var inputElementDefaultTintColor: UIColor
-    public var inputFieldSelectedBorderColor: UIColor
-    public var inputFieldDefaultBorderColor: UIColor
-    public var errorTextColor: UIColor
-    public var lightStyleForDefaultElements: NSNumber
-    public var showBranding: NSNumber
-    public var analyticsExcludedFieldsIdentifier: String
+    @objc public var primaryLabelTextColor: UIColor
+    @objc public var secondaryLabelTextColor: UIColor
+    @objc public var headerButtonTintColor: UIColor
+    @objc public var headerTintColor: UIColor
+    @objc public var primaryCTAButtonActiveBackgroundColor: UIColor
+    @objc public var primarySurfaceBackgroundColor: UIColor
+    @objc public var primaryCTAButtonActiveTextColor: UIColor
+    @objc public var primaryCTAButtonDisabledBackgroundColor: UIColor
+    @objc public var primaryCTAButtonDisableTextColor: UIColor
+    @objc public var secondaryCTAButtonActiveBorderColor: UIColor
+    @objc public var secondaryCTAButtonActiveTextColor: UIColor
+    @objc public var separatorColor: UIColor
+    @objc public var loadingIndicatorColor: UIColor
+    @objc public var inputElementActiveTintColor: UIColor
+    @objc public var inputFieldBackgroundColor: UIColor
+    @objc public var inputElementDefaultTintColor: UIColor
+    @objc public var inputFieldSelectedBorderColor: UIColor
+    @objc public var inputFieldDefaultBorderColor: UIColor
+    @objc public var errorTextColor: UIColor
+    @objc public var lightStyleForDefaultElements: NSNumber
+    @objc public var showBranding: NSNumber
+    @objc public var backdropViewColor: UIColor
+    @objc public var backdropViewAlpha: NSDecimalNumber
+    @objc public var analyticsExcludedFieldsIdentifier: String
+    @objc public var additionalLegalText: String?
+    @objc public var customCardDetailsNavigationTitle: String?
+    @objc public var customResultScreenTitleSuccess: String?
+    @objc public var customResultScreenTitleFail: String?
+    @objc public var customResultScreenOrderIdText: String?
+    @objc public var customResultScreenMainTextSuccess: String?
+    @objc public var customResultScreenMainTextFail: String?
+    @objc public var customResultScreenAdditionalTextSuccess: String?
+    @objc public var customResultScreenAdditionalTextFail: String?
     
     @objc
     public init(primaryLabelTextColor: UIColor? = nil,
@@ -53,11 +64,24 @@ public class DojoThemeSettings: NSObject {
                 inputFieldDefaultBorderColor: UIColor? = nil,
                 errorTextColor: UIColor? = nil,
                 lightStyleForDefaultElements: NSNumber? = nil,
-                analyticsExcludedFieldsIdentifier: String? = nil) {
+                showBranding: NSNumber? = nil,
+                analyticsExcludedFieldsIdentifier: String? = nil,
+                backdropViewColor: UIColor? = nil,
+                backdropViewAlpha: NSDecimalNumber? = nil,
+                additionalLegalText: String? = nil,
+                customCardDetailsNavigationTitle: String? = nil,
+                customResultScreenTitleSuccess: String? = nil,
+                customResultScreenTitleFail: String? = nil,
+                customResultScreenOrderIdText: String? = nil,
+                customResultScreenMainTextSuccess: String? = nil,
+                customResultScreenMainTextFail: String? = nil,
+                customResultScreenAdditionalTextSuccess: String? = nil,
+                customResultScreenAdditionalTextFail: String? = nil
+    ) {
         self.primaryLabelTextColor = primaryLabelTextColor ?? UIColor.init(hexaARGB: "#DD000000") ?? .black
         self.secondaryLabelTextColor = secondaryLabelTextColor ?? UIColor.init(hexaARGB: "#99000000") ?? .gray
         self.headerTintColor = headerTintColor ?? UIColor.init(hexaARGB: "#DD000000") ?? .black
-        self.headerButtonTintColor = headerButtonTintColor ?? UIColor.init(hexaARGB: "#99000000") ?? .gray
+        self.headerButtonTintColor = headerButtonTintColor ?? .black
         self.primaryCTAButtonActiveBackgroundColor = primaryCTAButtonActiveBackgroundColor ?? UIColor.init(hexaARGB: "#FF000000") ?? .black
         self.primarySurfaceBackgroundColor = primarySurfaceBackgroundColor ?? UIColor.init(hexaARGB: "#FFFFFFFF") ?? .white
         self.primaryCTAButtonActiveTextColor = primaryCTAButtonActiveTextColor ?? UIColor.init(hexaARGB: "#FFFFFFFF") ?? .white
@@ -74,8 +98,19 @@ public class DojoThemeSettings: NSObject {
         self.inputElementDefaultTintColor = inputElementDefaultTintColor ?? UIColor.init(hexaARGB: "#26000000") ?? .gray
         self.inputFieldDefaultBorderColor = inputFieldDefaultBorderColor ?? UIColor.init(hexaARGB: "#26000000") ?? .gray
         self.errorTextColor = errorTextColor ?? UIColor.init(hexaARGB: "#FFB34351") ?? .systemRed
-        self.showBranding = true
+        self.showBranding = showBranding ?? NSNumber(value: true)
         self.analyticsExcludedFieldsIdentifier = analyticsExcludedFieldsIdentifier ?? ""
+        self.backdropViewColor = backdropViewColor ?? UIColor.black
+        self.backdropViewAlpha = backdropViewAlpha ?? 0.3
+        self.additionalLegalText = additionalLegalText
+        self.customCardDetailsNavigationTitle = customCardDetailsNavigationTitle
+        self.customResultScreenTitleSuccess = customResultScreenTitleSuccess
+        self.customResultScreenTitleFail = customResultScreenTitleFail
+        self.customResultScreenOrderIdText = customResultScreenOrderIdText
+        self.customResultScreenMainTextSuccess = customResultScreenMainTextSuccess
+        self.customResultScreenMainTextFail = customResultScreenMainTextFail
+        self.customResultScreenAdditionalTextSuccess = customResultScreenAdditionalTextSuccess
+        self.customResultScreenAdditionalTextFail = customResultScreenAdditionalTextFail
     }
     
     @objc
@@ -100,12 +135,12 @@ public class DojoThemeSettings: NSObject {
         theme.separatorColor = UIColor.init(hexaARGB: "#33000000") ?? .lightGray
         theme.loadingIndicatorColor = UIColor.init(hexaARGB: "#FFFFFFFF") ?? .white
         theme.lightStyleForDefaultElements = false
-        theme.inputElementActiveTintColor = UIColor.init(hexaARGB: "#FFFFFFFF") ?? .systemGreen
-        theme.inputFieldSelectedBorderColor = UIColor.init(hexaARGB: "#FFFFFFFF") ?? .systemGreen
+        theme.inputElementActiveTintColor = UIColor.init(hexaARGB: "#FF3CEAC7") ?? .systemGreen
+        theme.inputFieldSelectedBorderColor = UIColor.init(hexaARGB: "#FF3CEAC7") ?? .systemGreen
         theme.inputFieldBackgroundColor = UIColor.init(hexaARGB: "#FF313131") ?? .black
         theme.inputElementDefaultTintColor = UIColor.init(hexaARGB: "#FFFFFFFF") ?? .gray
         theme.inputFieldDefaultBorderColor = UIColor.init(hexaARGB: "#26FFFFFF") ?? .gray
-        theme.errorTextColor = UIColor.init(hexaARGB: "#FFED5645") ?? .systemRed
+        theme.errorTextColor = UIColor.init(hexaARGB: "#FFFF8066") ?? .systemRed
         return theme
     }
 }

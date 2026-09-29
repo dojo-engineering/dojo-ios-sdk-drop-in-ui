@@ -25,8 +25,8 @@ class BaseUIViewController: UIViewController {
         super.viewDidLoad()
         if !(viewModel?.paymentIntent.isVirtualTerminalPayment ?? false) {
             setUpCloseButton()
-            setUpCloseButton()
         }
+        setUpBackButton()
         setUpDesign()
         setupPaymentIntent()
     }
@@ -40,6 +40,12 @@ class BaseUIViewController: UIViewController {
         if let paymentIntent = viewModel?.paymentIntent {
             footerPoweredByDojoView?.setModel(paymentIntent: paymentIntent)
         }
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        footerPoweredByDojoView?.setTheme(theme: theme)
+        footerPoweredByDojoView?.setStyle()
     }
     
     func setUpDesign() {
@@ -78,7 +84,7 @@ extension BaseUIViewController {
         if let navigationBar = self.navigationController?.navigationBar {
             let buttonClose = UIButton(frame: CGRect(x: navigationBar.frame.width - 55, y: -5, width: 50, height: 50))
             buttonClose.addTarget(self, action: #selector(onClosePress), for: .touchUpInside)
-            buttonClose.setImage(UIImage(named: "icon-button-cross-close", in: Bundle.libResourceBundle, compatibleWith: nil), for: .normal)
+            buttonClose.setImage(UIImage(named: "icon-button-cross-close", in: Bundle.libResourceBundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate), for: .normal)
             buttonClose.tintColor = theme.headerButtonTintColor
             buttonClose.tag = buttonTag
             navigationBar.addSubview(buttonClose)

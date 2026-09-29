@@ -126,6 +126,32 @@ extension DojoSDKDropInUI: CardDetailsCheckoutViewControllerDelegate,
     func navigateToPaymentResult(resultCode: Int) {
         completionCallback?(resultCode)
     }
+    public func startSetupFlow(setupIntentId: String,
+                               controller: UIViewController,
+                               themeSettings: DojoThemeSettings? = nil,
+                               debugConfig: DojoSDKDebugConfig? = nil,
+                               completion: ((Int) -> Void)?) {
+        DispatchQueue.main.async {
+            let theme = ThemeSettings(dojoTheme: themeSettings ?? DojoThemeSettings.getLightTheme())
+            self.completionCallback = completion
+            self.configurationManager = ConfigurationManager(paymentIntentId: setupIntentId,
+                                                             customerSecret: nil,
+                                                             paymentIntent: nil,
+                                                             themeSettings: theme,
+                                                             applePayConfig: nil,
+                                                             debugConfig: debugConfig,
+                                                             isDemo: false,
+                                                             isSetupIntent: true)
+            if let configurationManager = self.configurationManager {
+                self.rootCoordinator = RootCoordinator(presentationViewController: controller,
+                                                       config: configurationManager,
+                                                       delegate: self)
+                self.rootCoordinator?.beginFlow()
+            } else {
+                self.completionCallback?(DojoSDKResponseCode.sdkInternalError.rawValue)
+            }
+        }
+    }
 }
 
 @objc
@@ -140,7 +166,7 @@ public class DojoUIApplePayConfig: NSObject {
 
 extension DojoSDKDropInUI: RootCoordinatorDelegate {
     func userForceClosedFlow() {
-        completionCallback?(DojoSDKResponseCode.declined.rawValue)
+        completionCallback?(7780) // user force closed payment flow
         completionCallback = nil
     }
     

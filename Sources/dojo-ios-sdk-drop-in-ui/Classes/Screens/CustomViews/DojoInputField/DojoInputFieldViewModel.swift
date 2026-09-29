@@ -12,7 +12,6 @@ enum DojoInputFieldType {
     case cardNumber
     case expiry
     case cvv
-    
     case shippingName
     case shippingAddressLine1
     case shippingAddressLine2
@@ -20,7 +19,6 @@ enum DojoInputFieldType {
     case shippingPostcode
     case shippingCountry
     case shippingDeliveryNotes
-    
     case billingAddressLine1
     case billingAddressLine2
     case billingCity
@@ -34,212 +32,184 @@ enum DojoInputFieldState {
     case error
 }
 
-
 protocol DojoInputFieldViewModelProtocol {
     init(type: DojoInputFieldType, withSubtitle: Bool)
-    var fieldKeyboardType: UIKeyboardType {get}
-    var fieldPlaceholder: String {get}
-    var fieldName: String {get}
-    var fieldError: String {get}
-    var fieldErrorEmpty: String {get}
-    var fieldMaxLimit: Int {get}
-    var subtitle: String? {get}
-    var type: DojoInputFieldType {get}
-    var isRequired: Bool {get}
-    
+    init(type: DojoInputFieldType, supportedCardSchemas: [CardSchemes])
+    var fieldKeyboardType: UIKeyboardType { get }
+    var fieldPlaceholder: String { get }
+    var fieldName: String { get }
+    var fieldError: String { get }
+    var fieldErrorEmpty: String { get }
+    var fieldMaxLimit: Int { get }
+    var subtitle: String? { get }
+    var supportedCardSchemas: [CardSchemes] { get set }
+    var type: DojoInputFieldType { get }
+    var isRequired: Bool { get }
+
     func validateField(_ text: String?) -> DojoInputFieldState
     func getCardScheme(_ text: String?) -> CardSchemes?
-    
-    func getCountriesItems() -> Array<CountryDropdownItem>?
+    func getCountriesItems() -> [CountryDropdownItem]?
 }
 
 class DojoInputFieldViewModel: DojoInputFieldViewModelProtocol {
-    
+    var supportedCardSchemas: [CardSchemes]
     let type: DojoInputFieldType
-    let showSubtitle: Bool
-    
-    required init(type: DojoInputFieldType, withSubtitle: Bool = false) {
+    private let showSubtitle: Bool
+
+    required init(type: DojoInputFieldType, withSubtitle: Bool) {
         self.type = type
         self.showSubtitle = withSubtitle
+        self.supportedCardSchemas = []
     }
-    
+
+    required init(type: DojoInputFieldType, supportedCardSchemas: [CardSchemes]) {
+        self.type = type
+        self.showSubtitle = false
+        self.supportedCardSchemas = supportedCardSchemas
+    }
+
     var fieldKeyboardType: UIKeyboardType {
-        get {
-            switch type {
-            case .email:
-                return .emailAddress
-            case .cardNumber, .expiry, .cvv:
-                return .numberPad
-            default:
-                return .default
-            }
+        switch type {
+        case .email:
+            return .emailAddress
+        case .cardNumber, .expiry, .cvv:
+            return .numberPad
+        default:
+            return .default
         }
     }
-    
+
     var fieldPlaceholder: String {
-        get {
-            switch type {
-            case .cardNumber:
-                return LocalizedText.CardDetailsCheckout.placeholderPan
-            case .cvv:
-                return LocalizedText.CardDetailsCheckout.placeholderCVV
-            case .expiry:
-                return LocalizedText.CardDetailsCheckout.placeholderExpiry
-            default:
-                return ""
-            }
+        switch type {
+        case .cardNumber:
+            return LocalizedText.CardDetailsCheckout.placeholderPan
+        case .cvv:
+            return LocalizedText.CardDetailsCheckout.placeholderCVV
+        case .expiry:
+            return LocalizedText.CardDetailsCheckout.placeholderExpiry
+        default:
+            return ""
         }
     }
-    
+
     var fieldName: String {
-        get {
-            switch type {
-            case .email:
-                return LocalizedText.CardDetailsCheckout.fieldEmail
-            case .cardHolderName:
-                return LocalizedText.CardDetailsCheckout.fieldCardName
-            case .cardNumber:
-                return LocalizedText.CardDetailsCheckout.fieldPan
-            case .billingCountry:
-                return LocalizedText.CardDetailsCheckout.fieldBillingCountry
-            case .billingPostcode:
-                return LocalizedText.CardDetailsCheckout.fieldBillingPostcode
-            case .expiry:
-                return LocalizedText.CardDetailsCheckout.fieldExpiryDate
-            case .cvv:
-                return LocalizedText.CardDetailsCheckout.fieldCVV
-            case .shippingName:
-                return LocalizedText.CardDetailsCheckout.fieldShippingName
-            case .shippingAddressLine1, .billingAddressLine1:
-                return LocalizedText.CardDetailsCheckout.fieldShippingLine1
-            case .shippingAddressLine2, .billingAddressLine2:
-                return LocalizedText.CardDetailsCheckout.fieldShippingLine2
-            case .shippingCity, .billingCity:
-                return LocalizedText.CardDetailsCheckout.fieldShippingCity
-            case .shippingPostcode:
-                return LocalizedText.CardDetailsCheckout.fieldShippingPostcode
-            case .shippingCountry:
-                return LocalizedText.CardDetailsCheckout.fieldShippingCountry
-            case .shippingDeliveryNotes:
-                return LocalizedText.CardDetailsCheckout.fieldShippingDeliveryNotes
-            }
+        switch type {
+        case .email:
+            return LocalizedText.CardDetailsCheckout.fieldEmail
+        case .cardHolderName:
+            return LocalizedText.CardDetailsCheckout.fieldCardName
+        case .cardNumber:
+            return LocalizedText.CardDetailsCheckout.fieldPan
+        case .expiry:
+            return LocalizedText.CardDetailsCheckout.fieldExpiryDate
+        case .cvv:
+            return LocalizedText.CardDetailsCheckout.fieldCVV
+        case .billingCountry:
+            return LocalizedText.CardDetailsCheckout.fieldBillingCountry
+        case .billingPostcode:
+            return LocalizedText.CardDetailsCheckout.fieldBillingPostcode
+        case .shippingName:
+            return LocalizedText.CardDetailsCheckout.fieldShippingName
+        case .shippingAddressLine1, .billingAddressLine1:
+            return LocalizedText.CardDetailsCheckout.fieldShippingLine1
+        case .shippingAddressLine2, .billingAddressLine2:
+            return LocalizedText.CardDetailsCheckout.fieldShippingLine2
+        case .shippingCity, .billingCity:
+            return LocalizedText.CardDetailsCheckout.fieldShippingCity
+        case .shippingPostcode:
+            return LocalizedText.CardDetailsCheckout.fieldShippingPostcode
+        case .shippingCountry:
+            return LocalizedText.CardDetailsCheckout.fieldShippingCountry
+        case .shippingDeliveryNotes:
+            return LocalizedText.CardDetailsCheckout.fieldShippingDeliveryNotes
         }
     }
-    
+
     var subtitle: String? {
-        get {
-            guard showSubtitle else {
-                return nil
-            }
-            switch type {
-            case .email:
-                return LocalizedText.CardDetailsCheckout.fieldEmailSubtitleVT
-            default:
-                return nil
-            }
-        }
+        guard showSubtitle, type == .email else { return nil }
+        return LocalizedText.CardDetailsCheckout.fieldEmailSubtitleVT
     }
-    
+
     var isRequired: Bool {
-        get {
-            switch type {
-            case .shippingAddressLine2,
-                    .billingAddressLine2,
-                    .shippingDeliveryNotes:
-                return false
-            default:
-                return true
-            }
+        switch type {
+        case .shippingAddressLine2, .billingAddressLine2, .shippingDeliveryNotes:
+            return false
+        default:
+            return true
         }
     }
-    
+
     var fieldError: String {
-        get {
-            switch type {
-            case .email:
-                return LocalizedText.CardDetailsCheckout.errorInvalidEmail
-            case .cardNumber:
-                return LocalizedText.CardDetailsCheckout.errorInvalidPan
-            case .expiry:
-                return LocalizedText.CardDetailsCheckout.errorInvalidExpiry
-            case .cvv:
-                return LocalizedText.CardDetailsCheckout.errorInvalidCVV
-            default:
-                return ""
-            }
+        switch type {
+        case .email:
+            return LocalizedText.CardDetailsCheckout.errorInvalidEmail
+        case .cardNumber:
+            return LocalizedText.CardDetailsCheckout.errorInvalidPan
+        case .expiry:
+            return LocalizedText.CardDetailsCheckout.errorInvalidExpiry
+        case .cvv:
+            return LocalizedText.CardDetailsCheckout.errorInvalidCVV
+        default:
+            return ""
         }
     }
-    
+
     var fieldErrorEmpty: String {
-        get {
-            switch type {
-            case .email:
-                return LocalizedText.CardDetailsCheckout.errorEmptyEmail
-            case .cardHolderName:
-                return LocalizedText.CardDetailsCheckout.errorEmptyCardHolder
-            case .cardNumber:
-                return LocalizedText.CardDetailsCheckout.errorEmptyPan
-            case .billingPostcode:
-                return LocalizedText.CardDetailsCheckout.errorEmptyBillingPostcode
-            case .expiry:
-                return LocalizedText.CardDetailsCheckout.errorEmptyExpiry
-            case .cvv:
-                return LocalizedText.CardDetailsCheckout.errorEmptyCvv
-            case .shippingName:
-                return LocalizedText.CardDetailsCheckout.errorEmptyShippingName
-            case .shippingAddressLine1:
-                return LocalizedText.CardDetailsCheckout.errorEmptyShippingLine1
-            case .shippingCity:
-                return LocalizedText.CardDetailsCheckout.errorEmptyShippingCity
-            case .shippingPostcode:
-                return LocalizedText.CardDetailsCheckout.errorEmptyShippingPostal
-            default:
-                return "Please fill in this field"
-            }
+        switch type {
+        case .email:
+            return LocalizedText.CardDetailsCheckout.errorEmptyEmail
+        case .cardHolderName:
+            return LocalizedText.CardDetailsCheckout.errorEmptyCardHolder
+        case .cardNumber:
+            return LocalizedText.CardDetailsCheckout.errorEmptyPan
+        case .billingPostcode:
+            return LocalizedText.CardDetailsCheckout.errorEmptyBillingPostcode
+        case .expiry:
+            return LocalizedText.CardDetailsCheckout.errorEmptyExpiry
+        case .cvv:
+            return LocalizedText.CardDetailsCheckout.errorEmptyCvv
+        case .shippingName:
+            return LocalizedText.CardDetailsCheckout.errorEmptyShippingName
+        case .shippingAddressLine1:
+            return LocalizedText.CardDetailsCheckout.errorEmptyShippingLine1
+        case .shippingCity:
+            return LocalizedText.CardDetailsCheckout.errorEmptyShippingCity
+        case .shippingPostcode:
+            return LocalizedText.CardDetailsCheckout.errorEmptyShippingPostal
+        default:
+            return "Please fill in this field"
         }
     }
-    
+
     var fieldMaxLimit: Int {
-        get {
-            switch type {
-            case .cardNumber:
-                return 16 //TOOD: not relevant
-            case .cvv:
-                return 4 //TOOD: not relevant
-            case .billingPostcode:
-                return 50
-            case .shippingDeliveryNotes:
-                return 120
-            default:
-                return 120
-            }
+        switch type {
+        case .cardNumber:
+            return 16
+        case .cvv:
+            return 4
+        case .billingPostcode:
+            return 50
+        case .shippingDeliveryNotes:
+            return 120
+        default:
+            return 120
         }
     }
-    
-    func getCountriesItems() -> Array<CountryDropdownItem>? {
-        // fetch csv with countries
-        
+
+    func getCountriesItems() -> [CountryDropdownItem]? {
         guard let bundle = Bundle.libResourceBundle,
-              let countriesCSV = bundle.url(forResource: "countries", withExtension: "csv") else {
+              let countriesCSV = bundle.url(forResource: "countries", withExtension: "csv"),
+              let content = try? String(contentsOf: countriesCSV) else {
             return nil
         }
-        // convert data to string
-        guard let content = try? String(contentsOf: countriesCSV) else {
-            return nil
+        var items = content.components(separatedBy: "\n").compactMap { row -> CountryDropdownItem? in
+            let columns = row.components(separatedBy: ",")
+            guard columns.count >= 2 else { return nil }
+            return CountryDropdownItem(title: columns[0], isoCode: columns[1])
         }
-        // parse string to objects
-        var parsedCSV: [CountryDropdownItem] = content.components(
-            separatedBy: "\n"
-        ).compactMap {
-            if $0.components(separatedBy: ",").count >= 2 {
-                return CountryDropdownItem(title: $0.components(separatedBy: ",")[0],
-                                           isoCode: $0.components(separatedBy: ",")[1])
-            } else {
-                return nil
-            }
+        if !items.isEmpty {
+            items.removeFirst()
         }
-        // remove first line (name, isoCode, etc)
-        if parsedCSV.count > 0 { parsedCSV.removeFirst() }
-        return parsedCSV
+        return items
     }
 }

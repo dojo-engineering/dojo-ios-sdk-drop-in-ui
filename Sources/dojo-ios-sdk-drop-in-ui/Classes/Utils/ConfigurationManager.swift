@@ -17,6 +17,7 @@ struct ConfigurationManager {
     var applePayConfig: DojoUIApplePayConfig?
     var debugConfig: DojoSDKDebugConfig?
     var isDemo: Bool = false
+    var isSetupIntent: Bool = false
     
     var demoDelay: Double {
         isDemo ? 0 : 0

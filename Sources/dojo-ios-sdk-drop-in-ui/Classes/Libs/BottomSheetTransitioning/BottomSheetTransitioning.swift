@@ -10,6 +10,7 @@ final class BottomSheetTransitioningDelegate: NSObject, UIViewControllerTransiti
     var preferredSheetCornerRadius: CGFloat
     var preferredSheetSizingFactor: CGFloat
     var preferredSheetBackdropColor: UIColor
+    var preferredSheetBackdropAlpha: CGFloat
 
     var tapToDismissEnabled: Bool = true {
         didSet {
@@ -27,12 +28,14 @@ final class BottomSheetTransitioningDelegate: NSObject, UIViewControllerTransiti
         preferredSheetTopInset: CGFloat,
         preferredSheetCornerRadius: CGFloat,
         preferredSheetSizingFactor: CGFloat,
-        preferredSheetBackdropColor: UIColor
+        preferredSheetBackdropColor: UIColor,
+        preferredSheetBackdropAlpha: CGFloat
     ) {
         self.preferredSheetTopInset = preferredSheetTopInset
         self.preferredSheetCornerRadius = preferredSheetCornerRadius
         self.preferredSheetSizingFactor = preferredSheetSizingFactor
         self.preferredSheetBackdropColor = preferredSheetBackdropColor
+        self.preferredSheetBackdropAlpha = preferredSheetBackdropAlpha
         super.init()
     }
 
@@ -47,7 +50,8 @@ final class BottomSheetTransitioningDelegate: NSObject, UIViewControllerTransiti
             sheetTopInset: preferredSheetTopInset,
             sheetCornerRadius: preferredSheetCornerRadius,
             sheetSizingFactor: preferredSheetSizingFactor,
-            sheetBackdropColor: preferredSheetBackdropColor
+            sheetBackdropColor: preferredSheetBackdropColor,
+            backdropViewAlpha: preferredSheetBackdropAlpha
         )
 
         bottomSheetPresentationController.tapGestureRecognizer.isEnabled = tapToDismissEnabled
@@ -95,6 +99,7 @@ final class BottomSheetPresentationController: UIPresentationController {
     let sheetCornerRadius: CGFloat
     let sheetSizingFactor: CGFloat
     let sheetBackdropColor: UIColor
+    var backdropViewAlpha: CGFloat
 
     private(set) lazy var tapGestureRecognizer: UITapGestureRecognizer = {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(onTap))
@@ -102,7 +107,6 @@ final class BottomSheetPresentationController: UIPresentationController {
         return gesture
     }()
     
-    private lazy var panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(onPan))
     var panToDismissEnabled: Bool = true
 
     init(
@@ -111,12 +115,14 @@ final class BottomSheetPresentationController: UIPresentationController {
         sheetTopInset: CGFloat,
         sheetCornerRadius: CGFloat,
         sheetSizingFactor: CGFloat,
-        sheetBackdropColor: UIColor
+        sheetBackdropColor: UIColor,
+        backdropViewAlpha: CGFloat
     ) {
         self.sheetTopInset = sheetTopInset
         self.sheetCornerRadius = sheetCornerRadius
         self.sheetSizingFactor = sheetSizingFactor
         self.sheetBackdropColor = sheetBackdropColor
+        self.backdropViewAlpha = backdropViewAlpha
         super.init(presentedViewController: presentedViewController, presenting: presentingViewController)
     }
 
@@ -132,43 +138,12 @@ final class BottomSheetPresentationController: UIPresentationController {
         presentingViewController.dismiss(animated: true)
     }
 
-    @objc private func onPan(_ gestureRecognizer: UIPanGestureRecognizer) {
-        guard let presentedView = presentedView else {
-            return
-        }
-
-        let translation = gestureRecognizer.translation(in: presentedView)
-
-        let progress = translation.y / presentedView.frame.height
-
-        switch gestureRecognizer.state {
-        case .began:
-            bottomSheetInteractiveDismissalTransition.start(
-                moving: presentedView, interactiveDismissal: panToDismissEnabled
-            )
-        case .changed:
-            if panToDismissEnabled && progress > 0 && !presentedViewController.isBeingDismissed {
-                presentingViewController.dismiss(animated: true)
-            }
-            bottomSheetInteractiveDismissalTransition.move(
-                presentedView, using: translation.y
-            )
-        default:
-            let velocity = gestureRecognizer.velocity(in: presentedView)
-            bottomSheetInteractiveDismissalTransition.stop(
-                moving: presentedView, at: translation.y, with: velocity
-            )
-        }
-    }
-
     // MARK: UIPresentationController
 
     override func presentationTransitionWillBegin() {
         guard let presentedView = presentedView else {
             return
         }
-
-        presentedView.addGestureRecognizer(panGestureRecognizer)
 
         presentedView.layer.cornerRadius = sheetCornerRadius
         presentedView.layer.maskedCorners = [
@@ -248,14 +223,13 @@ final class BottomSheetPresentationController: UIPresentationController {
         }
 
         transitionCoordinator.animate { context in
-            self.backdropView.alpha = 0.3
+            self.backdropView.alpha = self.backdropViewAlpha
         }
     }
 
     override func presentationTransitionDidEnd(_ completed: Bool) {
         if !completed {
             backdropView.removeFromSuperview()
-            presentedView?.removeGestureRecognizer(panGestureRecognizer)
             containerView?.removeGestureRecognizer(tapGestureRecognizer)
         }
     }
@@ -273,16 +247,12 @@ final class BottomSheetPresentationController: UIPresentationController {
     override func dismissalTransitionDidEnd(_ completed: Bool) {
         if completed {
             backdropView.removeFromSuperview()
-            presentedView?.removeGestureRecognizer(panGestureRecognizer)
             containerView?.removeGestureRecognizer(tapGestureRecognizer)
         }
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        panGestureRecognizer.isEnabled = false // This will cancel any ongoing pan gesture
-        coordinator.animate(alongsideTransition: nil) { context in
-            self.panGestureRecognizer.isEnabled = true
-        }
+        coordinator.animate(alongsideTransition: nil) { _ in }
     }
 }
 

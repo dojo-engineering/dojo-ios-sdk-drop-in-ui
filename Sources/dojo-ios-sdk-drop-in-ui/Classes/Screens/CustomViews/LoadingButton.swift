@@ -15,7 +15,7 @@ class LoadingButton: CustomFontButton {
         var image: UIImage?
     }
 
-    private (set) var buttonStates: [ButtonState] = []
+    private(set) var buttonStates: [ButtonState] = []
     private var beforeLoadingTitle: String = ""
     
     var theme: ThemeSettings?
@@ -71,11 +71,6 @@ class LoadingButton: CustomFontButton {
     func hideLoading() {
         activityIndicator.stopAnimating()
         setTitle(beforeLoadingTitle, for: .normal)
-        
-//        for buttonState in buttonStates {
-//            setTitle(buttonState.title, for: buttonState.state)
-//            setImage(buttonState.image, for: buttonState.state)
-//        }
     }
 }
 

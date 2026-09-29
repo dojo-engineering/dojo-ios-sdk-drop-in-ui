@@ -43,9 +43,16 @@ class PaymentMethodCheckoutViewModel: BaseViewModel {
                                                                   paymentMethodId: paymentId)
         DojoSDK.executeSavedCardPayment(token: paymentIntent.clientSessionSecret,
                                         payload: savedCardPaymentPayload,
-                                        debugConfig: debugConfig,
+                                        debugConfig: debugConfig ?? DojoSDKDebugConfig(isSandboxIntent: paymentIntent.isSandbox),
                                         fromViewController: fromViewControlelr,
-                                        completion: completion)
+                                        completion: { result in
+            // map internal error as decline for the outside world
+            if result == DojoSDKResponseCode.sdkInternalError.rawValue {
+                completion?(DojoSDKResponseCode.declined.rawValue)
+            } else {
+                completion?(result)
+            }
+        })
     }
     
     func processApplePayPayment(fromViewControlelr: UIViewController, completion: ((Int) -> Void)?) {
@@ -53,11 +60,18 @@ class PaymentMethodCheckoutViewModel: BaseViewModel {
             completion?(5)
             return
         }
-        let paymentIntent = DojoPaymentIntent(id:paymentIntent.id, totalAmount: paymentIntent.amount)
+        var companyName = paymentIntent.config?.tradingName
+        if let configCompanyName = paymentIntent.config?.title,
+           !configCompanyName.isEmpty {
+            companyName = configCompanyName
+        }
+        let paymentIntent = DojoPaymentIntent(id: paymentIntent.id,
+                                              totalAmount: paymentIntent.totalAmount ?? paymentIntent.amount ?? DojoPaymentIntentAmount(value: 0, currencyCode: "GBP"))
         let applePayload = DojoApplePayPayload(applePayConfig: DojoApplePayConfig(merchantIdentifier: merchantIdentifier,
                                                                                   supportedCards: getSupportedApplePayCards(),
                                                                                   collectBillingAddress: self.paymentIntent.config?.billingAddress?.collectionRequired ?? false,
-                                                                                  collectEmail: self.paymentIntent.config?.customerEmail?.collectionRequired ?? false))
+                                                                                  collectEmail: self.paymentIntent.config?.customerEmail?.collectionRequired ?? false),
+                                               merchantName: companyName)
         DojoSDK.executeApplePayPayment(paymentIntent: paymentIntent,
                                        payload: applePayload,
                                        debugConfig: debugConfig,

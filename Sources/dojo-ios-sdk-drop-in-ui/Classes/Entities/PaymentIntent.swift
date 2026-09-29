@@ -11,7 +11,8 @@ import dojo_ios_sdk
 struct PaymentIntent: Codable {
     let id: String
     let clientSessionSecret: String
-    let amount: DojoPaymentIntentAmount
+    let amount: DojoPaymentIntentAmount? = nil
+    let totalAmount: DojoPaymentIntentAmount?
     var config: PaymentIntentConfig? = nil
     var merchantConfig: MerchantConfig? = nil
     var customer: CustomerConfig? = nil
@@ -19,9 +20,14 @@ struct PaymentIntent: Codable {
     var itemLines: [ItemLine]?
     var status: String?
     var reference: String?
+    var merchantInitiatedTransactionType: String? = nil
+    var billingAddress: BillingAddress?
     
     var isCaptured: Bool {
-        status == "Captured" || status == "Authorized"
+        if isSetupIntent {
+            return status != nil && status != "Created"
+        }
+        return status == "Captured" || status == "Authorized"
     }
     
     var isSandbox: Bool {
@@ -37,7 +43,25 @@ struct PaymentIntent: Codable {
     }
     
     var currency: Currency {
-        .init(value: amount.currencyCode)
+        .init(value: (totalAmount ?? amount)?.currencyCode ?? "GBP")
+    }
+
+    var isSetupIntent = false
+
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case clientSessionSecret
+        case amount
+        case totalAmount
+        case config
+        case merchantConfig
+        case customer
+        case paymentSource
+        case itemLines
+        case status
+        case reference
+        case merchantInitiatedTransactionType
+        case billingAddress
     }
 }
 
@@ -84,10 +108,17 @@ struct PaymentIntentConfig: Codable {
     var shippingDetails: ConfigurationRequired?
     var tradingName: String?
     var marketId: String?
+    let title: String?
+}
+
+struct BillingAddress: Codable {
+    let postcode: String?
+    let countryCode: String?
 }
 
 struct CustomerConfig: Codable {
     let id: String?
+    let emailAddress: String?
 }
 
 struct ItemLine: Codable {
@@ -107,4 +138,3 @@ struct SupportedPaymentMethods: Codable {
 struct ConfigurationRequired: Codable {
     var collectionRequired: Bool
 }
-

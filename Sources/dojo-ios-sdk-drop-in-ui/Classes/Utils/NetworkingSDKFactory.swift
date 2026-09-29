@@ -9,6 +9,7 @@ import dojo_ios_sdk
 
 protocol NetworkingSDKProtocol {
     func fetchPaymentIntent(intentId: String, debugConfig: DojoSDKDebugConfig?, completion: ((String?, Error?) -> Void)?)
+    func fetchSetupIntent(intentId: String, debugConfig: DojoSDKDebugConfig?, completion: ((String?, Error?) -> Void)?)
     func fetchCustomerPaymentMethods(customerId: String, customerSecret: String, debugConfig: DojoSDKDebugConfig?, completion: ((String?, Error?) -> Void)?)
     func refreshPaymetnIntent(intentId: String, debugConfig: DojoSDKDebugConfig?, completion: ((String?, Error?) -> Void)?)
 }
@@ -29,11 +30,15 @@ class DojoSDKMock: NetworkingSDKProtocol {
     }
     
     func fetchPaymentIntent(intentId: String, debugConfig: DojoSDKDebugConfig?, completion: ((String?, Error?) -> Void)?) {
-//        completion?(TestsUtils.savedMethodsString, nil)
+//        completion?(TestsUtils.paymentIntentWithItemLines, nil)
     }
     
     func fetchCustomerPaymentMethods(customerId: String, customerSecret: String, debugConfig: DojoSDKDebugConfig?, completion: ((String?, Error?) -> Void)?) {
-//        completion?(TestsUtils.paymentIntentWithItemLinesWithoutApplePay, nil)
+//        completion?(TestsUtils.savedMethodsString, nil)
+    }
+
+    func fetchSetupIntent(intentId: String, debugConfig: DojoSDKDebugConfig?, completion: ((String?, Error?) -> Void)?) {
+
     }
 }
 
@@ -41,12 +46,16 @@ extension DojoSDK: NetworkingSDKProtocol {
     func refreshPaymetnIntent(intentId: String, debugConfig: dojo_ios_sdk.DojoSDKDebugConfig?, completion: ((String?, Error?) -> Void)?) {
         DojoSDK.refreshPaymentIntent(intentId: intentId, debugConfig: debugConfig, completion: completion)
     }
-    
+
     func fetchPaymentIntent(intentId: String, debugConfig: DojoSDKDebugConfig?, completion: ((String?, Error?) -> Void)?) {
         DojoSDK.fetchPaymentIntent(intentId: intentId, debugConfig: debugConfig, completion: completion)
     }
-    
+
     func fetchCustomerPaymentMethods(customerId: String, customerSecret: String, debugConfig: DojoSDKDebugConfig?, completion: ((String?, Error?) -> Void)?) {
         DojoSDK.fetchCustomerPaymentMethods(customerId: customerId, customerSecret: customerSecret, debugConfig: debugConfig, completion: completion)
+    }
+
+    func fetchSetupIntent(intentId: String, debugConfig: DojoSDKDebugConfig?, completion: ((String?, Error?) -> Void)?) {
+        DojoSDK.fetchSetupIntent(intentId: intentId, debugConfig: debugConfig, completion: completion)
     }
 }
