@@ -64,6 +64,7 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
 
     override func setUpDesign() {
         super.setUpDesign()
+        labelTotalDue.text = LocalizedText.PaymentMethodCheckout.totalDueTitle
         labelTotalDue.textColor = theme.primaryLabelTextColor
         labelTotalDue.font = theme.fontHeading5Medium
 
