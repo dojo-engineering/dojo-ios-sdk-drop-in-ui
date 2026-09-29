@@ -11,7 +11,7 @@ protocol NetworkingSDKProtocol {
     func fetchPaymentIntent(intentId: String, debugConfig: DojoSDKDebugConfig?, completion: ((String?, Error?) -> Void)?)
     func fetchSetupIntent(intentId: String, debugConfig: DojoSDKDebugConfig?, completion: ((String?, Error?) -> Void)?)
     func fetchCustomerPaymentMethods(customerId: String, customerSecret: String, debugConfig: DojoSDKDebugConfig?, completion: ((String?, Error?) -> Void)?)
-    func refreshPaymetnIntent(intentId: String, debugConfig: DojoSDKDebugConfig?, completion: ((String?, Error?) -> Void)?)
+    func refreshPaymentIntent(intentId: String, debugConfig: DojoSDKDebugConfig?, completion: ((String?, Error?) -> Void)?)
 }
 
 class NetworkingSDKFactory {
@@ -25,7 +25,7 @@ class NetworkingSDKFactory {
 }
 
 class DojoSDKMock: NetworkingSDKProtocol {
-    func refreshPaymetnIntent(intentId: String, debugConfig: dojo_ios_sdk.DojoSDKDebugConfig?, completion: ((String?, Error?) -> Void)?) {
+    func refreshPaymentIntent(intentId: String, debugConfig: dojo_ios_sdk.DojoSDKDebugConfig?, completion: ((String?, Error?) -> Void)?) {
         
     }
     
@@ -43,7 +43,7 @@ class DojoSDKMock: NetworkingSDKProtocol {
 }
 
 extension DojoSDK: NetworkingSDKProtocol {
-    func refreshPaymetnIntent(intentId: String, debugConfig: dojo_ios_sdk.DojoSDKDebugConfig?, completion: ((String?, Error?) -> Void)?) {
+    func refreshPaymentIntent(intentId: String, debugConfig: dojo_ios_sdk.DojoSDKDebugConfig?, completion: ((String?, Error?) -> Void)?) {
         DojoSDK.refreshPaymentIntent(intentId: intentId, debugConfig: debugConfig, completion: completion)
     }
 

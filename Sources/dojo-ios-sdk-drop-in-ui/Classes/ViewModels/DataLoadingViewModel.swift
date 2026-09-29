@@ -39,7 +39,7 @@ class DataLoadingViewModel {
                 self.parsePaymentIntent(stringData: stringData, error: error, completion: completion)
             }
         } else if refreshBeforeFetch {
-            networking.refreshPaymetnIntent(intentId: paymentIntentId, debugConfig: debugConfig) { stringData, error in
+            networking.refreshPaymentIntent(intentId: paymentIntentId, debugConfig: debugConfig) { stringData, error in
                 self.parsePaymentIntent(stringData: stringData, error: error, completion: completion)
             }
         } else {
