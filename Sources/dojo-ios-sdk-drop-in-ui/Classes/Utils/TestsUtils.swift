@@ -28,17 +28,22 @@ class TestsUtils {
                               customerId: String? = nil,
                               savedPaymentMethod: [SavedPaymentMethod] = [],
                               additionalItemsLine: [ItemLine] = []) -> ConfigurationManager {
-        var config = ConfigurationManager(paymentIntentId: "",
-                             paymentIntent: PaymentIntent(id: "",
-                                                          clientSessionSecret: "",
-                                                          totalAmount: DojoPaymentIntentAmount(value: 10, currencyCode: "GBP")),
-                             themeSettings: ThemeSettings(dojoTheme: DojoThemeSettings.getLightTheme()))
+        var config = ConfigurationManager(
+            paymentIntentId: "",
+            paymentIntent: PaymentIntent(
+                id: "",
+                clientSessionSecret: "",
+                amount: nil,
+                totalAmount: DojoPaymentIntentAmount(value: 10, currencyCode: "GBP")
+            ),
+            themeSettings: ThemeSettings(dojoTheme: DojoThemeSettings.getLightTheme())
+        )
         config.paymentIntent?.merchantConfig = MerchantConfig()
         config.paymentIntent?.merchantConfig?.supportedPaymentMethods = SupportedPaymentMethods()
         config.paymentIntent?.customer = CustomerConfig(id: customerId, emailAddress: nil)
         config.savedPaymentMethods = savedPaymentMethod
         config.paymentIntent?.itemLines = additionalItemsLine
-        
+
         if withApplePayConfig {
             config.applePayConfig = DojoUIApplePayConfig(merchantIdentifier: "metch.id.test")
         }
