@@ -33,7 +33,6 @@ class TestsUtils {
             paymentIntent: PaymentIntent(
                 id: "",
                 clientSessionSecret: "",
-                amount: nil,
                 totalAmount: DojoPaymentIntentAmount(value: 10, currencyCode: "GBP")
             ),
             themeSettings: ThemeSettings(dojoTheme: DojoThemeSettings.getLightTheme())
