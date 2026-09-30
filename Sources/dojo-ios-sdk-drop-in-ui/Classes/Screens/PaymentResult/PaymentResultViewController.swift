@@ -158,6 +158,7 @@ class PaymentResultViewController: BaseUIViewController {
                     return
                 }
                 refreshedIntent.isSetupIntent = self.getViewModel()?.paymentIntent.isSetupIntent ?? false
+                self.buttonTryAgain.hideLoading()
                 self.delegate?.onPaymentIntentRefreshSucess(paymentIntent: refreshedIntent)
             }
         }
