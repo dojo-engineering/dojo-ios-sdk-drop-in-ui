@@ -15,7 +15,7 @@ extension CardDetailsCheckoutViewController: UITextFieldDelegate {
 }
 
 extension CardDetailsCheckoutViewController: DojoInputFieldDelegate {
-    
+
     // MARK: Keyboard Buttons Actions
     func onNextField(_ from: DojoInputField) {
         if let index = inputFields.firstIndex(of: from) {
@@ -41,14 +41,15 @@ extension CardDetailsCheckoutViewController: DojoInputFieldDelegate {
         if let fieldType = from.getType() {
             switch fieldType {
             case .billingCountry:
-                if let selectedCountryCode = from.getSelectedCountry()?.isoCode,
-                   getViewModel()?.showBillingPostcode(selectedCountryCode) ?? false {
-                    fieldBillingPostcode.isHidden = false
-                    inputFields.insert(fieldBillingPostcode, at: 2) //TODO: if email is hidden, that should be a different position
-                } else {
-                    fieldBillingPostcode.isHidden = true
-                    inputFields.removeAll(where: {$0.getType() == .billingPostcode})
-                }
+                break
+//                if let selectedCountryCode = from.getSelectedCountry()?.isoCode,
+//                   getViewModel()?.showBillingPostcode(selectedCountryCode) ?? false {
+//                    fieldBillingPostcode.isHidden = false
+//                    inputFields.insert(fieldBillingPostcode, at: 2) //TODO: if email is hidden, that should be a different position
+//                } else {
+//                    fieldBillingPostcode.isHidden = true
+//                    inputFields.removeAll(where: {$0.getType() == .billingPostcode})
+//                }
             case .cardNumber:
                 inputFields.forEach({
                     if $0.getType() == .cvv {
@@ -76,7 +77,7 @@ extension CardDetailsCheckoutViewController: DojoInputFieldDelegate {
     func onTextChange(_ from: DojoInputField) {
        forceValidate()
     }
-    
+
     func forceValidate() {
         var isValid = true
         inputFields.forEach({
@@ -98,7 +99,12 @@ extension CardDetailsCheckoutViewController: DojoInputFieldDelegate {
 // MARK: Keyboard Delegate
 extension CardDetailsCheckoutViewController {
     @objc func keyboardWillHide(_ notification: Notification) {
-        constraintPayButtonBottom.constant = 52
+        movePayButtonToDefaultLocation()
+    }
+    
+    func movePayButtonToDefaultLocation() {
+        let constant: CGFloat = (getViewModel()?.paymentIntent.isVirtualTerminalPayment ?? false) ? 24 : 52
+        constraintPayButtonBottom.constant = constant
     }
     
     func setUpKeyboard() {
@@ -115,7 +121,6 @@ extension CardDetailsCheckoutViewController {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
-            
             constraintPayButtonBottom.constant = keyboardHeight - (UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0) + 12
         }
     }

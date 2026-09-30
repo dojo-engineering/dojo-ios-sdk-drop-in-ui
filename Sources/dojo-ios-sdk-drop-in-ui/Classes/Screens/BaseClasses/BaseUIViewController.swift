@@ -23,9 +23,12 @@ class BaseUIViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpCloseButton()
+        if !(viewModel?.paymentIntent.isVirtualTerminalPayment ?? false) {
+            setUpCloseButton()
+        }
         setUpBackButton()
         setUpDesign()
+        setupPaymentIntent()
     }
     
     @objc func onClosePress() {
@@ -33,6 +36,12 @@ class BaseUIViewController: UIViewController {
         baseDelegate?.onForceClosePress()
     }
     
+    private func setupPaymentIntent() {
+        if let paymentIntent = viewModel?.paymentIntent {
+            footerPoweredByDojoView?.setModel(paymentIntent: paymentIntent)
+        }
+    }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         footerPoweredByDojoView?.setTheme(theme: theme)

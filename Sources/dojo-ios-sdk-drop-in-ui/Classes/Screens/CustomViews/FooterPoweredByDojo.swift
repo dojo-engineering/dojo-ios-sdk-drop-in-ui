@@ -30,9 +30,10 @@ class FooterPoweredByDojo: UIView {
     @IBOutlet weak var stackViewLeft: UIStackView!
     @IBOutlet var constraintPoweredByCenter: NSLayoutConstraint!
     @IBOutlet var constraintPoweredByTailing: NSLayoutConstraint!
-    @IBOutlet weak var constraintButtonByCenter: NSLayoutConstraint!
-    @IBOutlet weak var constraintButtonByLeft: NSLayoutConstraint!
-    let viewModel = FooterPoweredByViewModel()
+    @IBOutlet var constraintButtonByCenter: NSLayoutConstraint!
+    @IBOutlet var constraintButtonByLeft: NSLayoutConstraint!
+    private var viewModel: FooterPoweredByViewModel?
+    private var showBranding = true
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -44,6 +45,10 @@ class FooterPoweredByDojo: UIView {
         initSubviews()
     }
     
+    func setModel(paymentIntent: PaymentIntent) {
+        viewModel = .init(paymentIntent: paymentIntent)
+    }
+
     func setTheme(theme: ThemeSettings) {
         labelPoweredBy.textColor = theme.colorPoweredByDojoText
         labelPoweredBy.font = theme.fontPoweredByDojo
@@ -51,13 +56,13 @@ class FooterPoweredByDojo: UIView {
         imageLogo.tintColor = theme.colorPoweredByDojoLogo
         viewSeparator.backgroundColor = theme.colorPoweredBySeparator
         
-        buttonTerms.tintColor = theme.colorPoweredByButtons
-        buttonPrivacy.tintColor = theme.colorPoweredByButtons
-        
         buttonTerms.titleLabel?.font = theme.fontSubtitle2
         buttonPrivacy.titleLabel?.font = theme.fontSubtitle2
         
-        viewModel.showBranding = theme.showBranding
+        buttonTerms.setTitleColor(theme.colorPoweredByButtons, for: .normal)
+        buttonPrivacy.setTitleColor(theme.colorPoweredByButtons, for: .normal)
+        
+        showBranding = theme.showBranding
     }
     
     func setStyle(_ styleItems: [FooterPoweredByDojoItems] = FooterPoweredByDojoStyle.default) {
@@ -84,11 +89,14 @@ class FooterPoweredByDojo: UIView {
             constraintPoweredByCenter.isActive = true
         }
         
-        if !viewModel.showBranding {
+        if !showBranding {
             stackViewLeft.isHidden = true
             viewSeparator.isHidden = true
             constraintButtonByCenter.isActive = true
             constraintButtonByLeft.isActive = false
+        } else {
+            constraintButtonByCenter.isActive = false
+            constraintButtonByLeft.isActive = true
         }
     }
     
@@ -111,11 +119,13 @@ class FooterPoweredByDojo: UIView {
     }
     
     @IBAction func onPrivacyButtonPress(_ sender: Any) {
-        openURL(viewModel.privacyURL)
+        guard let url = viewModel?.privacyURL else { return }
+        openURL(url)
     }
     
     @IBAction func onTermsButtonPress(_ sender: Any) {
-        openURL(viewModel.termsURL)
+        guard let url = viewModel?.termsURL else { return }
+        openURL(url)
     }
 }
 

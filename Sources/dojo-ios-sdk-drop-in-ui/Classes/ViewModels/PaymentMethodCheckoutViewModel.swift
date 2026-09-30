@@ -65,7 +65,8 @@ class PaymentMethodCheckoutViewModel: BaseViewModel {
            !configCompanyName.isEmpty {
             companyName = configCompanyName
         }
-        let paymentIntent = DojoPaymentIntent(id:paymentIntent.id, totalAmount: paymentIntent.totalAmount ?? DojoPaymentIntentAmount(value: 0, currencyCode: "GBP"))
+        let paymentIntent = DojoPaymentIntent(id: paymentIntent.id,
+                                              totalAmount: paymentIntent.totalAmount ?? paymentIntent.amount ?? DojoPaymentIntentAmount(value: 0, currencyCode: "GBP"))
         let applePayload = DojoApplePayPayload(applePayConfig: DojoApplePayConfig(merchantIdentifier: merchantIdentifier,
                                                                                   supportedCards: getSupportedApplePayCards(),
                                                                                   collectBillingAddress: self.paymentIntent.config?.billingAddress?.collectionRequired ?? false,

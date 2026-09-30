@@ -28,9 +28,13 @@ class PaymentResultViewModel: BaseViewModel {
     }
     
     func refreshToken(completion: ((String?,Error?)-> Void)?) {
-        DojoSDK.refreshPaymentIntent(intentId: paymentIntent.id, debugConfig: debugConfig, completion: completion)
+        if paymentIntent.isSetupIntent {
+            DojoSDK.refreshSetupIntent(intentId: paymentIntent.id, debugConfig: debugConfig, completion: completion)
+        } else {
+            DojoSDK.refreshPaymentIntent(intentId: paymentIntent.id, debugConfig: debugConfig, completion: completion)
+        }
     }
-    
+
     var navigationTitle: String {
         switch resultCode {
         case 0:
@@ -39,7 +43,7 @@ class PaymentResultViewModel: BaseViewModel {
             return paymentIntent.isSetupIntent ? LocalizedText.PaymentResult.titleSetupIntentFail : LocalizedText.PaymentResult.mainTitleFail
         }
     }
-    
+
     var mainText: String {
         switch resultCode {
         case 0:
@@ -48,7 +52,7 @@ class PaymentResultViewModel: BaseViewModel {
             return paymentIntent.isSetupIntent ? LocalizedText.PaymentResult.mainTitleSetupIntentFail : LocalizedText.PaymentResult.mainTitleFail
         }
     }
-    
+
     var displaySubtitle: Bool {
         paymentIntent.isSetupIntent
     }

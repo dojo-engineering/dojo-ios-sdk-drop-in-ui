@@ -20,7 +20,7 @@ extension DojoInputField: UITextFieldDelegate {
         delegate?.onTextFieldBeginEditing(self)
         guard let viewModel = viewModel else { return } 
         // Handle country selection
-        if viewModel.type == .billingCountry {
+        if viewModel.type == .billingCountry || viewModel.type == .shippingCountry  {
             self.picker = UIPickerView()
             self.picker?.delegate = self
             self.picker?.dataSource = self
@@ -85,6 +85,7 @@ extension DojoInputField: UITextFieldDelegate {
                 textField.text = newText.chunkFormatted()
             }
             delegate?.onTextChange(self)
+            
             return false
         }
         
@@ -97,21 +98,51 @@ extension DojoInputField: UITextFieldDelegate {
         if getType() == .cvv {
             let shouldChange = count <= (currentCardSchema == .amex ? 4 : 3)
             return shouldChange
-        } else {
-            let shouldChange = count <= viewModel?.fieldMaxLimit ?? 120 //Todo
-            return shouldChange
         }
+        
+        let shouldChange = count <= viewModel?.fieldMaxLimit ?? 120 //Todo
+        
+        if getType() == .shippingDeliveryNotes {
+            updateSymbolsCounter(symbols: textField.text?.count ?? 0, max: viewModel?.fieldMaxLimit ?? 120)
+        }
+        
+        return shouldChange
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         delegate?.onTextFieldDidFinishEditing(self)
         guard let viewModel = viewModel else { return } //TODO: notify about an error
-        guard viewModel.type != .billingCountry else {
+        guard viewModel.type != .billingCountry && viewModel.type != .shippingCountry else {
             // country selection is pre-defined and doesn't need to be validated
             setState(.normal)
             return
         }
         let fieldState = viewModel.validateField(textField.text)
         setState(fieldState)
+    }
+}
+
+extension DojoInputField: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        textFieldDidBeginEditing(UITextField()) //TODO
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        textFieldDidEndEditing(UITextField()) // TODO
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        
+        guard let textFieldText = textView.text,
+              let rangeOfTextToReplace = Range(range, in: textFieldText) else {
+            return false
+        }
+        let substringToReplace = textFieldText[rangeOfTextToReplace]
+        let count = textFieldText.count - substringToReplace.count + text.count
+        let shouldChange = count <= viewModel?.fieldMaxLimit ?? 120
+        if shouldChange {
+            updateSymbolsCounter(symbols: count, max: viewModel?.fieldMaxLimit ?? 120)
+        }
+        return shouldChange
     }
 }

@@ -7,17 +7,18 @@
 
 import Foundation
 
-class FooterPoweredByViewModel {
-    private let urlPrivacy: String = "https://dojo.tech/legal/privacy"
-    private let urlTerms: String = "https://pay.dojo.tech/terms"
+struct FooterPoweredByViewModel {
+    private let paymentIntent: PaymentIntent
     
+    init(paymentIntent: PaymentIntent) {
+        self.paymentIntent = paymentIntent
+    }
+
     var privacyURL: URL? {
-        URL(string: urlPrivacy)
+        URL(string: paymentIntent.market.privacyUrl)
     }
     
     var termsURL: URL? {
-        URL(string: urlTerms)
+        URL(string: paymentIntent.market.termsUrl)
     }
-    
-    var showBranding: Bool = true
 }

@@ -133,13 +133,13 @@ class BaseNavigationController: UINavigationController, UINavigationControllerDe
             bottomSheetTransitioningDelegate.preferredSheetBackdropColor = preferredSheetBackdropColor
         }
     }
-    
+
     var preferredSheetBackdropAlpha: CGFloat = 0.3 {
         didSet {
             bottomSheetTransitioningDelegate.preferredSheetBackdropAlpha = preferredSheetBackdropAlpha
         }
     }
-    
+
     var tapToDismissEnabled: Bool = true {
         didSet {
             bottomSheetTransitioningDelegate.tapToDismissEnabled = tapToDismissEnabled

@@ -32,6 +32,7 @@ public class DojoThemeSettings: NSObject {
     @objc public var showBranding: NSNumber
     @objc public var backdropViewColor: UIColor
     @objc public var backdropViewAlpha: NSDecimalNumber
+    @objc public var analyticsExcludedFieldsIdentifier: String
     @objc public var additionalLegalText: String?
     @objc public var customCardDetailsNavigationTitle: String?
     @objc public var customResultScreenTitleSuccess: String?
@@ -63,6 +64,8 @@ public class DojoThemeSettings: NSObject {
                 inputFieldDefaultBorderColor: UIColor? = nil,
                 errorTextColor: UIColor? = nil,
                 lightStyleForDefaultElements: NSNumber? = nil,
+                showBranding: NSNumber? = nil,
+                analyticsExcludedFieldsIdentifier: String? = nil,
                 backdropViewColor: UIColor? = nil,
                 backdropViewAlpha: NSDecimalNumber? = nil,
                 additionalLegalText: String? = nil,
@@ -95,7 +98,8 @@ public class DojoThemeSettings: NSObject {
         self.inputElementDefaultTintColor = inputElementDefaultTintColor ?? UIColor.init(hexaARGB: "#26000000") ?? .gray
         self.inputFieldDefaultBorderColor = inputFieldDefaultBorderColor ?? UIColor.init(hexaARGB: "#26000000") ?? .gray
         self.errorTextColor = errorTextColor ?? UIColor.init(hexaARGB: "#FFB34351") ?? .systemRed
-        self.showBranding = true
+        self.showBranding = showBranding ?? NSNumber(value: true)
+        self.analyticsExcludedFieldsIdentifier = analyticsExcludedFieldsIdentifier ?? ""
         self.backdropViewColor = backdropViewColor ?? UIColor.black
         self.backdropViewAlpha = backdropViewAlpha ?? 0.3
         self.additionalLegalText = additionalLegalText

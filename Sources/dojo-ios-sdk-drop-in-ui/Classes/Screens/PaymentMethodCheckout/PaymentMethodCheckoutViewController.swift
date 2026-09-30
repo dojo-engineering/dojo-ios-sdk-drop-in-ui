@@ -14,9 +14,9 @@ protocol PaymentMethodCheckoutViewControllerDelegate: BaseViewControllerDelegate
 }
 
 class PaymentMethodCheckoutViewController: BaseUIViewController {
-    
+
     var delegate: PaymentMethodCheckoutViewControllerDelegate?
-    
+
     @IBOutlet weak var labelTotalDue: UILabel!
     @IBOutlet weak var labelTotalAmount: UILabel!
     @IBOutlet weak var labelAdditionalLegal: UILabel!
@@ -24,7 +24,7 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
     @IBOutlet weak var buttonPayCard: LoadingButton!
     @IBOutlet weak var additionalItemsTableView: UITableView!
     @IBOutlet weak var selectedPaymentMethodView: SelectedPaymentMethodView!
-    
+
     @IBOutlet weak var constraintPayButtonCardBottom: NSLayoutConstraint!
     @IBOutlet weak var constraintPayButtonBottom: NSLayoutConstraint!
     @IBOutlet weak var constraintAdditionalItemsHeight: NSLayoutConstraint!
@@ -39,61 +39,62 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
         self.theme = theme
         self.displayBackButton = false
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupData()
         setupViews()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setUpKeyboard()
         setNavigationTitle(LocalizedText.PaymentMethodCheckout.title)
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.view.endEditing(true)
         removeKeyboardObservers()
     }
-    
+
     override func setUpDesign() {
         super.setUpDesign()
+        labelTotalDue.text = LocalizedText.PaymentMethodCheckout.totalDueTitle
         labelTotalDue.textColor = theme.primaryLabelTextColor
         labelTotalDue.font = theme.fontHeading5Medium
-        
+
         labelTotalAmount.textColor = theme.primaryLabelTextColor
         labelTotalAmount.font = theme.fontHeading5Medium
-        
+
         paymentButton.setValue(theme.applePayButtonStyle.rawValue, forKey: "style")
         paymentButton.layer.cornerRadius = theme.primaryCTAButtonCornerRadius
         paymentButton.clipsToBounds = true
-        
+
         selectedPaymentMethodView.setTheme(theme: theme)
-        
+
         buttonPayCard.setTheme(theme)
-        
+
         labelAdditionalLegal.text = theme.additionalLegalText
         labelAdditionalLegal.numberOfLines = 0
         labelAdditionalLegal.font = theme.fontSubtitle2
         labelAdditionalLegal.textColor = theme.secondaryLabelTextColor
     }
-    
+
     override func updateData(config: ConfigurationManager) {
         super.updateData(config: config)
         getViewModel()?.savedPaymentMethods = config.savedPaymentMethods
-        
+
         if !(getViewModel()?.savedPaymentMethods?.contains(where: {$0.id == selectedPaymentMethodView.paymentMethod?.id}) ?? false) {
             // if selected payment method was removed remove it from the UI
             setupViews()
         }
     }
-   
+
     @objc func keyboardWillShow(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
@@ -106,7 +107,7 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
             constraintPayButtonCardBottom.constant = constraintPayButtonBottom.constant - getHeightOfAdditionalLegalText()
         }
     }
-    
+
     @objc func keyboardWillHide(_ notification: Notification) {
         self.labelAdditionalLegal.text = theme.additionalLegalText // restore legal text as it would now be visible without the keyboard
         if let navigation = (navigationController as? BaseNavigationController) {
@@ -123,17 +124,17 @@ extension PaymentMethodCheckoutViewController {
             print("Apple pay is not available")
             return
         }
-        
+
         getViewModel()?.processApplePayPayment(fromViewControlelr: self) { result in
             self.delegate?.navigateToPaymentResult(resultCode: result)
         }
     }
-    
+
     @IBAction func onPayUsingSavedCard(_ sender: Any) {
-        
+
         guard let selectedPaymentMethodId = selectedPaymentMethodView.paymentMethod?.id else {
             print("paymentMethod is not selected")
-            
+
             if let isSavedPaymentMethodsAvailable = getViewModel()?.isSavedPaymentMethodsAvailable(),
                 isSavedPaymentMethodsAvailable == false {
                 delegate?.navigateToCardCheckout()
@@ -146,7 +147,7 @@ extension PaymentMethodCheckoutViewController {
             print("cvv is empty")
             return
         }
-        
+
         self.view.isUserInteractionEnabled = false
         buttonPayCard.showLoading(LocalizedText.CardDetailsCheckout.buttonProcessing)
         getViewModel()?.processSavedCardPayment(fromViewControlelr: self,
@@ -163,7 +164,7 @@ extension PaymentMethodCheckoutViewController {
     func getViewModel() -> PaymentMethodCheckoutViewModel? {
         viewModel as? PaymentMethodCheckoutViewModel
     }
-    
+
     func paymentMethodSelected(_ item: PaymentMethodItem) {
         selectedPaymentMethodView.setPaymentMethod(item)
         switch item.type {
@@ -182,28 +183,28 @@ extension PaymentMethodCheckoutViewController {
 }
 
 extension PaymentMethodCheckoutViewController {
-    
+
     func setUpKeyboard() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-    
+
     func removeKeyboardObservers() {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
     }
-    
+
     func setUpTableView() {
         let showAdditinalItemsLine = getViewModel()?.showAdditionalItemsLine() ?? false
         additionalItemsTableView.isHidden = !showAdditinalItemsLine
         additionalItemsTableView.delegate = self
         additionalItemsTableView.dataSource = self
         PaymentMethodCheckoutAdditonalItemCell.register(tableView: additionalItemsTableView)
-        
+
         additionalItemsTableView.rowHeight = CGFloat(getHeightOfAdditonalLineItem())
         constraintAdditionalItemsHeight.constant = getHeightOfAdditionalLineItemsTable()
     }
-    
+
     func setupData() {
         if let value = getViewModel()?.paymentIntent.totalAmount?.getFormattedAmount() {
             labelTotalAmount.text = value
@@ -211,13 +212,13 @@ extension PaymentMethodCheckoutViewController {
             print("Error - can't format amount")
         }
     }
-    
+
     func setUpViewStateApplePayNotAvailableWithSavedCards() {
         paymentButton.isHidden = true
         constraintPayButtonBottom.constant = 9
         buttonPayCard.setTheme(theme)
         setupViewHeightWithAdditionaLines(baseContentHeight: 218)
-        
+
         selectedPaymentMethodView.isHidden = true
         buttonPayCard.isHidden = false
         let buttonPayTitle = LocalizedText.PaymentMethodCheckout.payByCard
@@ -227,16 +228,16 @@ extension PaymentMethodCheckoutViewController {
         buttonPayCard.layer.borderWidth = 1
         buttonPayCard.layer.borderColor = theme.primaryCTAButtonActiveBackgroundColor.cgColor
     }
-    
+
     func setUpViewStateApplePayNotAvailableWithoutSavedCard() {
         paymentButton.isHidden = true
         constraintPayButtonBottom.constant = 9
         buttonPayCard.setTheme(theme)
         setupViewHeightWithAdditionaLines(baseContentHeight: 210)
-        
+
         selectedPaymentMethodView.isHidden = true
         buttonPayCard.isHidden = false
-        
+
         let buttonPayTitle = LocalizedText.PaymentMethodCheckout.payByCard
         buttonPayCard.setTitle(buttonPayTitle, for: .normal)
         buttonPayCard.backgroundColor = theme.primaryCTAButtonActiveBackgroundColor
@@ -244,17 +245,17 @@ extension PaymentMethodCheckoutViewController {
         buttonPayCard.layer.borderWidth = 1
         buttonPayCard.layer.borderColor = theme.primaryCTAButtonActiveBackgroundColor.cgColor
     }
-    
+
     func setUpViewStateApplePayAvailableWitoutSavedCard() {
         // ApplePay is available
         selectedPaymentMethodView.isHidden = false
         selectedPaymentMethodView.delegate = self
         selectedPaymentMethodView.setStyle(.applePay)
-        
+
         selectedPaymentMethodView.isHidden = true
         constraintPayButtonBottom.constant = 70
         buttonPayCard.isHidden = false
-        
+
         setupViewHeightWithAdditionaLines(baseContentHeight: 280)
 
         let buttonPayTitle = LocalizedText.PaymentMethodCheckout.payByCard
@@ -264,13 +265,13 @@ extension PaymentMethodCheckoutViewController {
         buttonPayCard.layer.borderWidth = 1
         buttonPayCard.layer.borderColor = theme.primaryLabelTextColor.cgColor
     }
-    
+
     func setupViewHeightWithAdditionaLines(baseContentHeight: CGFloat) {
         if let navigation = (navigationController as? BaseNavigationController) {
             navigation.defaultHeight = baseContentHeight + getHeightOfAdditionalLineItemsTable() + getHeightOfAdditionalLegalText()
         }
     }
-    
+
     func setUpViewStateDefault() {
         setUpTableView()
         selectedPaymentMethodView.paymentMethod = nil
@@ -278,7 +279,7 @@ extension PaymentMethodCheckoutViewController {
         selectedPaymentMethodView.delegate = self
         buttonPayCard.isHidden = true
     }
-    
+
     func setupViews() {
         setUpViewStateDefault()
         if getViewModel()?.isSavedPaymentMethodsAvailable() ?? false {
@@ -295,14 +296,14 @@ extension PaymentMethodCheckoutViewController {
             }
         }
     }
-    
+
 }
 
 extension PaymentMethodCheckoutViewController: SelectedPaymentMethodViewDelegate {
     func onCVVStateChange(_ isValid: Bool) {
         buttonPayCard.setEnabled(isValid)
     }
-    
+
     func onPress(_ item: PaymentMethodItem) {
         delegate?.navigateToManagePaymentMethods(item)
     }
@@ -313,20 +314,21 @@ extension PaymentMethodCheckoutViewController: UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel?.paymentIntent.itemLines?.count ?? 0
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: PaymentMethodCheckoutAdditonalItemCell.cellId) as?
             PaymentMethodCheckoutAdditonalItemCell {
             cell.setTheme(theme: theme)
             // TODO move to viewModel
             if let item = viewModel?.paymentIntent.itemLines?[indexPath.row] {
-                cell.setUp(itemLine: item)
+                cell.setUp(itemLine: item,
+                           currencySymbol: viewModel?.paymentIntent.currency.currencySymbol() ?? "")
             }
             return cell
         }
         return UITableViewCell.init(style: .default, reuseIdentifier: "")
     }
-    
+
     func getHeightOfAdditionalLineItemsTable() -> CGFloat {
         let numberOfItems = viewModel?.paymentIntent.itemLines?.count ?? 0
         let maximumNumberOfItemsBeforeScroll = 4
@@ -336,7 +338,7 @@ extension PaymentMethodCheckoutViewController: UITableViewDelegate, UITableViewD
         }
         return CGFloat(numberOfItems * getHeightOfAdditonalLineItem())
     }
-    
+
     func getHeightOfAdditionalLegalText() -> CGFloat {
         guard let text = labelAdditionalLegal.text,
               !text.isEmpty else {
@@ -345,13 +347,13 @@ extension PaymentMethodCheckoutViewController: UITableViewDelegate, UITableViewD
         // 32 = 16 x 2 which is view's padding from both sides
         return heightOf(text: text, withConstrainedWidth: self.view.frame.width - 32, font: labelAdditionalLegal.font)
     }
-    
+
     func heightOf(text: String, withConstrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
         let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
         let boundingBox = text.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
         return ceil(boundingBox.height)
     }
-    
+
     func getHeightOfAdditonalLineItem() -> Int {
         26
     }

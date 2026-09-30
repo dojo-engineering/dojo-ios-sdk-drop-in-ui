@@ -134,7 +134,7 @@ final class BottomSheetPresentationController: UIPresentationController {
         else {
             return
         }
-        
+
         presentingViewController.dismiss(animated: true)
     }
 

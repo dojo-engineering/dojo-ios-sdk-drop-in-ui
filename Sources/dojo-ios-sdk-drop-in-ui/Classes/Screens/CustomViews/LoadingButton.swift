@@ -73,3 +73,6 @@ class LoadingButton: CustomFontButton {
         setTitle(beforeLoadingTitle, for: .normal)
     }
 }
+
+
+

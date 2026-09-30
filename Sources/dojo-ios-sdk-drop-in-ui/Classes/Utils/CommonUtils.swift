@@ -75,7 +75,7 @@ struct CommonUtils {
         return DojoSDK.isApplePayAvailable(config: appleConfig)
     }
     
-    static func getFormattedAmount(value: UInt64, currencySymbol: String = "£") -> String {
-        "\(currencySymbol)\(String(format: "%.2f", Double(value)/100.0))"
+    static func getFormattedAmount(value: UInt64, currency: Currency = .gbp) -> String {
+        "\(currency.currencySymbol())\(String(format: "%.2f", Double(value)/100.0))"
     }
 }

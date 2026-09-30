@@ -29,10 +29,10 @@ class PaymentMethodCheckoutAdditonalItemCell: UITableViewCell {
         labelAmount.font = theme.fontSubtitle1
     }
     
-    func setUp(itemLine: ItemLine) {
+    func setUp(itemLine: ItemLine, currencySymbol: String) {
         labelCaption.text = itemLine.caption
         let amountText = "\(String(format: "%.2f", Double(itemLine.amountTotal.value)/100.0))"
-        labelAmount.text = "£\(amountText)"
+        labelAmount.text = "\(currencySymbol)\(amountText)"
     }
     
     override func awakeFromNib() {

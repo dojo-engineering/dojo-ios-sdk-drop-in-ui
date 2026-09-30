@@ -8,10 +8,10 @@ import Foundation
 
 extension PaymentIntent {
     var payButtonFormatted: String {
-        return "Pay \(totalAmount?.getFormattedAmount() ?? "")"
+        return "Pay \((totalAmount ?? amount)?.getFormattedAmount() ?? "")"
     }
-    
+
     var amountText: String {
-        "\(String(format: "%.2f", Double(totalAmount?.value ?? 0)/100.0))"
+        "\(String(format: "%.2f", Double((totalAmount ?? amount)?.value ?? 0)/100.0))"
     }
 }

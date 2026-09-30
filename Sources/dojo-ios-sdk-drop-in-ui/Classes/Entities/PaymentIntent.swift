@@ -11,6 +11,7 @@ import dojo_ios_sdk
 struct PaymentIntent: Codable {
     let id: String
     let clientSessionSecret: String
+    let amount: DojoPaymentIntentAmount? = nil
     let totalAmount: DojoPaymentIntentAmount?
     var config: PaymentIntentConfig? = nil
     var merchantConfig: MerchantConfig? = nil
@@ -23,7 +24,10 @@ struct PaymentIntent: Codable {
     var billingAddress: BillingAddress?
     
     var isCaptured: Bool {
-        status != "Created"
+        if isSetupIntent {
+            return status != nil && status != "Created"
+        }
+        return status == "Captured" || status == "Authorized"
     }
     
     var isSandbox: Bool {
@@ -34,8 +38,30 @@ struct PaymentIntent: Codable {
         paymentSource == "virtual-terminal"
     }
     
-    var isSetupIntent: Bool {
-        merchantInitiatedTransactionType != nil && paymentSource != nil
+    var market: Market {
+        .init(value: config?.marketId)
+    }
+    
+    var currency: Currency {
+        .init(value: (totalAmount ?? amount)?.currencyCode ?? "GBP")
+    }
+
+    var isSetupIntent = false
+
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case clientSessionSecret
+        case amount
+        case totalAmount
+        case config
+        case merchantConfig
+        case customer
+        case paymentSource
+        case itemLines
+        case status
+        case reference
+        case merchantInitiatedTransactionType
+        case billingAddress
     }
 }
 
@@ -79,7 +105,9 @@ enum Wallets: String, Codable {
 struct PaymentIntentConfig: Codable {
     var customerEmail: ConfigurationRequired?
     var billingAddress: ConfigurationRequired?
+    var shippingDetails: ConfigurationRequired?
     var tradingName: String?
+    var marketId: String?
     let title: String?
 }
 
@@ -110,4 +138,3 @@ struct SupportedPaymentMethods: Codable {
 struct ConfigurationRequired: Codable {
     var collectionRequired: Bool
 }
-

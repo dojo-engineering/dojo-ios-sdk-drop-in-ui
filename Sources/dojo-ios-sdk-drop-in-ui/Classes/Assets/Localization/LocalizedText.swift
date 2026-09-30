@@ -8,6 +8,7 @@ enum LocalizedText {
     enum PaymentMethodCheckout {
         static let title = "dojo_ui_sdk_payment_method_checkout_title".localized
         static let payByCard = "dojo_ui_sdk_pay_with_card_string".localized
+        static let totalDueTitle = "dojo_ui_sdk_payment_method_total_due_title".localized
     }
     
     enum ManagePaymentMethods {
@@ -46,6 +47,24 @@ enum LocalizedText {
         static let errorInvalidExpiry = "dojo_ui_sdk_card_details_checkout_error_invalid_expiry".localized
         static let errorInvalidCVV = "dojo_ui_sdk_card_details_checkout_error_invalid_cvv".localized
         static let saveCardForFutureUse = "dojo_ui_sdk_card_details_checkout_save_card".localized
+        static let optionalField = "dojo_ui_sdk_dojo_ui_sdk_card_details_checkout_optional".localized
+        static let fieldShippingName = "dojo_ui_sdk_card_details_checkout_field_shipping_name".localized
+        static let fieldShippingLine1 = "dojo_ui_sdk_card_details_checkout_field_shipping_line_1".localized
+        static let fieldShippingLine2 = "dojo_ui_sdk_card_details_checkout_field_shipping_line_2".localized
+        static let fieldShippingCity = "dojo_ui_sdk_card_details_checkout_field_shipping_city".localized
+        static let fieldShippingPostcode = "dojo_ui_sdk_card_details_checkout_field_shipping_postcode".localized
+        static let fieldShippingCountry = "dojo_ui_sdk_card_details_checkout_field_shipping_country".localized
+        static let fieldShippingDeliveryNotes = "dojo_ui_sdk_card_details_checkout_field_shipping_delivery_notes".localized
+        static let fieldEmailSubtitleVT = "dojo_ui_sdk_card_details_checkout_field_subtitle_email_vt".localized
+        static let titleShippingAddress = "dojo_ui_sdk_card_details_checkout_title_shipping".localized
+        static let titleBillingAddress = "dojo_ui_sdk_card_details_checkout_title_billing".localized
+        static let titleBillingSameAsShipping = "dojo_ui_sdk_card_details_checkout_billing_same_as_shipping".localized
+        static let titlePaymentDetails = "dojo_ui_sdk_card_details_checkout_title_payment_details".localized
+        static let titleTransactionsSecure = "dojo_ui_sdk_card_details_checkout_transactions_are_secure".localized
+        static let errorEmptyShippingName = "dojo_ui_sdk_card_details_checkout_error_empty_shipping_name".localized
+        static let errorEmptyShippingLine1 = "dojo_ui_sdk_card_details_checkout_error_empty_shipping_line_1".localized
+        static let errorEmptyShippingCity = "dojo_ui_sdk_card_details_checkout_error_empty_shipping_city".localized
+        static let errorEmptyShippingPostal = "dojo_ui_sdk_card_details_checkout_error_empty_shipping_postal".localized
         static let buttonPaySetupIntent = "dojo_ui_sdk_card_details_checkout_pay_button_setup_intent".localized
         static let titleSetupIntent = "dojo_ui_sdk_card_details_checkout_title_setup_intent".localized
         static let consentTerms = "dojo_ui_sdk_card_details_checkout_consent_terms".localized
