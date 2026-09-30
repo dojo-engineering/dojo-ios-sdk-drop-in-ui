@@ -139,8 +139,10 @@ extension DojoInputField: UITextViewDelegate {
         }
         let substringToReplace = textFieldText[rangeOfTextToReplace]
         let count = textFieldText.count - substringToReplace.count + text.count
-        let shouldChange = count <= viewModel?.fieldMaxLimit ?? 120 //Todo
-        updateSymbolsCounter(symbols: textView.text?.count ?? 0, max: viewModel?.fieldMaxLimit ?? 120)
+        let shouldChange = count <= viewModel?.fieldMaxLimit ?? 120
+        if shouldChange {
+            updateSymbolsCounter(symbols: count, max: viewModel?.fieldMaxLimit ?? 120)
+        }
         return shouldChange
     }
 }
