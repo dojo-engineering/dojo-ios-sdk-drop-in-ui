@@ -54,6 +54,11 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
         super.viewWillAppear(animated)
         setUpKeyboard()
         setNavigationTitle(LocalizedText.PaymentMethodCheckout.title)
+
+        if let navigation = (navigationController as? BaseNavigationController) {
+            //3DS Cardinal Fix
+            navigation.bottomSheetTransitioningDelegate.bottomSheetPresentationController?.presentationTransitionWillBegin()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {

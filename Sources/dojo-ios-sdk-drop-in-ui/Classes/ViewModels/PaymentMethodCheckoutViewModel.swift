@@ -39,20 +39,30 @@ class PaymentMethodCheckoutViewModel: BaseViewModel {
                                  paymentId: String,
                                  cvv: String,
                                  completion: ((Int) -> Void)?) {
-        let savedCardPaymentPayload = DojoSavedCardPaymentPayload(cvv: cvv,
+        DojoSDK.refreshPaymentIntent(intentId: paymentIntent.id, debugConfig: debugConfig) { stringData, fetchError in
+            CommonUtils.parseResponseToCompletion(stringData: stringData,
+                                                  fetchError: fetchError,
+                                                  objectType: PaymentIntent.self) { result, _ in
+                guard let refreshedPaymentIntent = result else {
+                    completion?(5)
+                    return
+                }
+                let token = refreshedPaymentIntent.clientSessionSecret
+            let savedCardPaymentPayload = DojoSavedCardPaymentPayload(cvv: cvv,
                                                                   paymentMethodId: paymentId)
-        DojoSDK.executeSavedCardPayment(token: paymentIntent.clientSessionSecret,
-                                        payload: savedCardPaymentPayload,
-                                        debugConfig: debugConfig ?? DojoSDKDebugConfig(isSandboxIntent: paymentIntent.isSandbox),
-                                        fromViewController: fromViewControlelr,
-                                        completion: { result in
-            // map internal error as decline for the outside world
-            if result == DojoSDKResponseCode.sdkInternalError.rawValue {
-                completion?(DojoSDKResponseCode.declined.rawValue)
-            } else {
-                completion?(result)
-            }
-        })
+            DojoSDK.executeSavedCardPayment(token: token,
+                                            payload: savedCardPaymentPayload,
+                                            debugConfig: debugConfig ?? DojoSDKDebugConfig(isSandboxIntent: paymentIntent.isSandbox),
+                                            fromViewController: fromViewControlelr,
+                                            completion: { result in
+                // map internal error as decline for the outside world
+                if result == DojoSDKResponseCode.sdkInternalError.rawValue {
+                    completion?(DojoSDKResponseCode.declined.rawValue)
+                } else {
+                    completion?(result)
+                }
+            })
+        }}
     }
     
     func processApplePayPayment(fromViewControlelr: UIViewController, completion: ((Int) -> Void)?) {
