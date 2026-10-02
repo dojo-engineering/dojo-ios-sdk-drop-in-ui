@@ -48,21 +48,23 @@ class PaymentMethodCheckoutViewModel: BaseViewModel {
                     return
                 }
                 let token = refreshedPaymentIntent.clientSessionSecret
-            let savedCardPaymentPayload = DojoSavedCardPaymentPayload(cvv: cvv,
-                                                                  paymentMethodId: paymentId)
-            DojoSDK.executeSavedCardPayment(token: token,
-                                            payload: savedCardPaymentPayload,
-                                            debugConfig: self.debugConfig ?? DojoSDKDebugConfig(isSandboxIntent: self.paymentIntent.isSandbox),
-                                            fromViewController: fromViewControlelr,
-                                            completion: { result in
-                // map internal error as decline for the outside world
-                if result == DojoSDKResponseCode.sdkInternalError.rawValue {
-                    completion?(DojoSDKResponseCode.declined.rawValue)
-                } else {
-                    completion?(result)
-                }
-            })
-        }}
+            
+                let savedCardPaymentPayload = DojoSavedCardPaymentPayload(cvv: cvv,
+                                                                          paymentMethodId: paymentId)
+                DojoSDK.executeSavedCardPayment(token: token,
+                                                payload: savedCardPaymentPayload,
+                                                debugConfig: self.debugConfig ?? DojoSDKDebugConfig(isSandboxIntent: self.paymentIntent.isSandbox),
+                                                fromViewController: fromViewControlelr,
+                                                completion: { result in
+                    // map internal error as decline for the outside world
+                    if result == DojoSDKResponseCode.sdkInternalError.rawValue {
+                        completion?(DojoSDKResponseCode.declined.rawValue)
+                    } else {
+                        completion?(result)
+                    }
+                })
+            }
+        }
     }
     
     func processApplePayPayment(fromViewControlelr: UIViewController, completion: ((Int) -> Void)?) {
