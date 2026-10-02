@@ -48,7 +48,6 @@ class PaymentMethodCheckoutViewModel: BaseViewModel {
                     return
                 }
                 let token = refreshedPaymentIntent.clientSessionSecret
-            
                 let savedCardPaymentPayload = DojoSavedCardPaymentPayload(cvv: cvv,
                                                                           paymentMethodId: paymentId)
                 DojoSDK.executeSavedCardPayment(token: token,
