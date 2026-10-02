@@ -52,7 +52,7 @@ class PaymentMethodCheckoutViewModel: BaseViewModel {
                                                                   paymentMethodId: paymentId)
             DojoSDK.executeSavedCardPayment(token: token,
                                             payload: savedCardPaymentPayload,
-                                            debugConfig: debugConfig ?? DojoSDKDebugConfig(isSandboxIntent: paymentIntent.isSandbox),
+                                            debugConfig: self.debugConfig ?? DojoSDKDebugConfig(isSandboxIntent: self.paymentIntent.isSandbox),
                                             fromViewController: fromViewControlelr,
                                             completion: { result in
                 // map internal error as decline for the outside world
