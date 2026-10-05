@@ -54,6 +54,11 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
         super.viewWillAppear(animated)
         setUpKeyboard()
         setNavigationTitle(LocalizedText.PaymentMethodCheckout.title)
+
+        if let navigation = (navigationController as? BaseNavigationController) {
+            //3DS Cardinal Fix
+            navigation.bottomSheetTransitioningDelegate.bottomSheetPresentationController?.presentationTransitionWillBegin()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -100,7 +105,7 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
             let keyboardHeight = keyboardRectangle.height
             self.labelAdditionalLegal.text = "" // will be hidden below the keyboard
             if let navigation = (navigationController as? BaseNavigationController) {
-                navigation.heightConstraint?.constant = keyboardHeight + 286 - 15 + getHeightOfAdditionalLineItemsTable()
+                navigation.heightConstraint?.constant = keyboardHeight + 305 - 15 + getHeightOfAdditionalLineItemsTable()
             }
             constraintPayButtonBottom.constant = keyboardHeight - (UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0) - 15
             constraintPayButtonCardBottom.constant = constraintPayButtonBottom.constant - getHeightOfAdditionalLegalText()
@@ -110,7 +115,7 @@ class PaymentMethodCheckoutViewController: BaseUIViewController {
     @objc func keyboardWillHide(_ notification: Notification) {
         self.labelAdditionalLegal.text = theme.additionalLegalText // restore legal text as it would now be visible without the keyboard
         if let navigation = (navigationController as? BaseNavigationController) {
-            navigation.heightConstraint?.constant = 286 + navigation.safeAreaBottomHeight + getHeightOfAdditionalLineItemsTable() + getHeightOfAdditionalLegalText()
+            navigation.heightConstraint?.constant = 305 + navigation.safeAreaBottomHeight + getHeightOfAdditionalLineItemsTable() + getHeightOfAdditionalLegalText()
         }
         constraintPayButtonBottom.constant = 9
         constraintPayButtonCardBottom.constant = constraintPayButtonBottom.constant
@@ -174,7 +179,7 @@ extension PaymentMethodCheckoutViewController {
             buttonPayCard.isHidden = false
             paymentButton.isHidden = true
             buttonPayCard.setEnabled(false)
-            setupViewHeightWithAdditionaLines(baseContentHeight: 286)
+            setupViewHeightWithAdditionaLines(baseContentHeight: 305)
             selectedPaymentMethodView.isHidden = false
         }
         buttonPayCard.setTitle(getViewModel()?.paymentIntent.payButtonFormatted, for: .normal)
@@ -285,7 +290,7 @@ extension PaymentMethodCheckoutViewController {
             if getViewModel()?.isApplePayAvailable() ?? false == false {
                 setUpViewStateApplePayNotAvailableWithSavedCards()
             } else {
-                setupViewHeightWithAdditionaLines(baseContentHeight: 286)
+                setupViewHeightWithAdditionaLines(baseContentHeight: 305)
             }
         } else {
             if getViewModel()?.isApplePayAvailable() ?? false == false {
