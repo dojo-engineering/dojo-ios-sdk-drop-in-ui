@@ -1,9 +1,9 @@
 PODS:
-  - CocoaDebug (1.7.2)
+  - CocoaDebug (1.7.7)
   - dojo-ios-sdk (1.4.5)
-  - dojo-ios-sdk-drop-in-ui (1.4.6):
+  - dojo-ios-sdk-drop-in-ui (1.4.7):
     - dojo-ios-sdk (= 1.4.5)
-  - dojo-ios-sdk-drop-in-ui/DojoSDKUI-Tests (1.4.6):
+  - dojo-ios-sdk-drop-in-ui/DojoSDKUI-Tests (1.4.7):
     - dojo-ios-sdk (= 1.4.5)
 
 DEPENDENCIES:
@@ -29,9 +29,9 @@ CHECKOUT OPTIONS:
     :tag: 1.4.5
 
 SPEC CHECKSUMS:
-  CocoaDebug: 61cf93ada6ce8f3407507dc01f9b874d91ac1d5c
+  CocoaDebug: b38d31464b91a9775928f8667d114db07b136565
   dojo-ios-sdk: 1e67c18b802f13f2bd10e087169bb9579627c60c
-  dojo-ios-sdk-drop-in-ui: fc0a3770862ebafb8faf157d6adbfac7acba4a49
+  dojo-ios-sdk-drop-in-ui: d4c9f95979201c657acb9f274889a9d67116368a
 
 PODFILE CHECKSUM: be53d6fe8a766e42fad679e458879d29344d0971
 
